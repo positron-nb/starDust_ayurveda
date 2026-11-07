@@ -1,0 +1,37 @@
+# Curated selection of what PRAMAAN indexes (v1).
+# Whole chapters are ingested at verse/prose-segment granularity so that negations, exceptions
+# and contraindications are never split from their verse. Selection rationale is recorded per
+# chapter; domain review of every indexed passage is still PENDING.
+version: "modules-2026.11.07.1"
+modules:
+  - module_id: agni-ama-ajirna
+    title: "Agni, Āma, Ajīrṇa and related assessment concepts"
+    chapters:
+      - source_id: sarit-caraka
+        prefix: "Ca.3.2."
+        name: "Caraka, Vimānasthāna 2 (Trividhakukṣīya)"
+        rationale: "Quantity of food relative to the stomach, āmapradoṣa, alasaka and viṣūcikā."
+      - source_id: sarit-caraka
+        prefix: "Ca.6.15."
+        name: "Caraka, Cikitsāsthāna 15 (Grahaṇīcikitsita)"
+        rationale: "Physiology of Agni, kinds of Agni, grahaṇī; densest Agni vocabulary in the text."
+      - source_id: sarit-caraka
+        prefix: "Ca.1.5."
+        name: "Caraka, Sūtrasthāna 5 (Mātrāśitīya)"
+        rationale: "Food quantity depends on Agni strength."
+      - source_id: sarit-ah
+        prefix: "Ah.1.8."
+        name: "Aṣṭāṅgahṛdaya, Sūtrasthāna 8 (Mātrāśitīya)"
+        rationale: "Food quantity, alasaka, viṣūcikā, āmadoṣa, kinds of ajīrṇa."
+      - source_id: sarit-ah
+        prefix: "Ah.1.13."
+        name: "Aṣṭāṅgahṛdaya, Sūtrasthāna 13 (Doṣopakramaṇīya)"
+        rationale: "Signs of sāma/nirāma, the definition of āma (13.25) and its management principles."
+  - module_id: herb-mentions
+    title: "Classical textual mentions of selected herbs"
+    note: "Textual mentions only (lists, formulations). These are NOT modern safety evidence and are never used to clear a herb."
+    term_filter:
+      - source_id: sarit-caraka
+        concept: ashwagandha
+      - source_id: sarit-ah
+        concept: ashwagandha

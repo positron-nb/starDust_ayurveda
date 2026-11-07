@@ -1,0 +1,78 @@
+{
+  "manifest_version": "2026-11-07.1",
+  "note": "Source lineage for PRAMAAN. Corpus text licences are separate from the Apache-2.0 application code. Reviewer status is 'pending' until a named human reviewer records an assessment in the app's review log.",
+  "sources": [
+    {
+      "source_id": "sarit-caraka",
+      "kind": "classical_text",
+      "title": "Carakasaṃhitā (A SARIT edition)",
+      "work": "Caraka Saṃhitā",
+      "edition": "E-text based on the 1941 Nirṇayasāgara edition of Yādavaśarman Trivikramātmaja Ācārya (Kyoto etext archive input by T. Yamashita, Y. Muroya, Y. Yamanaka, Madhu K. P.); TEI encoding by Dominik Wujastyk (SARIT).",
+      "url": "https://github.com/sarit/SARIT-corpus/blob/1eac9ee0b055c8d11147edac4a75c76008ccc363/carakasamhita.xml",
+      "download_url": "https://raw.githubusercontent.com/sarit/SARIT-corpus/1eac9ee0b055c8d11147edac4a75c76008ccc363/carakasamhita.xml",
+      "pinned_revision": "1eac9ee0b055c8d11147edac4a75c76008ccc363",
+      "last_file_commit": "1b819c4763a20e0270aba3d0e7f3cae55b37cee6",
+      "sha256": "9f8c1730ff16265b909236539eebcfaa6ddb365fb67c0e07ff4d406b1b583c71",
+      "local_path": "data/sources/raw/carakasamhita.xml",
+      "acquisition_date": "2026-11-07",
+      "license": "CC BY-SA 3.0 Unported (as declared in the TEI header <availability>)",
+      "license_evidence": "TEI header publicationStmt/availability of the pinned file; note the header also carries status=\"restricted\" and 'Copyright 2014-2018 SARIT'. Recorded as an open rights question, not resolved.",
+      "extraction_method": "pramaan.corpus.tei v1 (lxml, external entities and network disabled; <l>/<p> xml:id locators; <label> elements removed from base text)",
+      "original_language": "sa (IAST romanisation)",
+      "reviewer_status": "pending",
+      "known_limitations": [
+        "Verse numbers are those encoded in SARIT xml:id attributes (Ca.<sthāna>.<adhyāya>.<verse><pāda>); they may differ from other printed editions.",
+        "Chakrapāṇidatta's commentary is NOT included in this e-text; only mūla text.",
+        "Editorial symbols (&, +, *, ---) from the Kyoto e-text are preserved unchanged in the original text field.",
+        "No page numbers are available; none are shown."
+      ]
+    },
+    {
+      "source_id": "sarit-ah",
+      "kind": "classical_text",
+      "title": "Aṣṭāṅgahṛdayasaṃhitā (A SARIT edition)",
+      "work": "Aṣṭāṅga Hṛdaya",
+      "edition": "Base e-text by R. P. Das and R. E. Emmerick (later printed as 'Vāgbhaṭa's Aṣṭāṅgahṛdayasaṃhitā: the romanised text...', Groningen: Egbert Forsten, 1998); TEI conversion by Richard Mahoney / Patrick McAllister; maintained for SARIT by Dominik Wujastyk.",
+      "url": "https://github.com/sarit/SARIT-corpus/blob/1eac9ee0b055c8d11147edac4a75c76008ccc363/astangahrdayasamhita.xml",
+      "download_url": "https://raw.githubusercontent.com/sarit/SARIT-corpus/1eac9ee0b055c8d11147edac4a75c76008ccc363/astangahrdayasamhita.xml",
+      "pinned_revision": "1eac9ee0b055c8d11147edac4a75c76008ccc363",
+      "last_file_commit": "debcc08b41388c703762a5e6c8bfbcdefd2d628c",
+      "sha256": "21e5bff852108170f8cb6111edf2ebd2dfa3ddba2f85d97fcf88a5ae0cbda939",
+      "local_path": "data/sources/raw/astangahrdayasamhita.xml",
+      "acquisition_date": "2026-11-07",
+      "license": "CC BY-SA 3.0 Unported (as declared in the TEI header <availability>)",
+      "license_evidence": "TEI header of the pinned file; the header also records the base-text authors' permission for free distribution of the e-text.",
+      "extraction_method": "pramaan.corpus.tei v1 (variant-reading <note> elements stored separately from base text)",
+      "original_language": "sa (IAST romanisation, hyphenated compounds)",
+      "reviewer_status": "pending",
+      "known_limitations": [
+        "Verse numbers come from SARIT xml:id (Ah.<part>.<chapter>.<verse>); additional verses are encoded as e.g. 27+1 and shown that way.",
+        "Hyphens marking compound boundaries are editorial and kept in the original text.",
+        "<pb> page breaks exist but the edition they refer to is not stated; PRAMAAN does not display page numbers.",
+        "Aruṇadatta / Hemādri commentaries are not included."
+      ]
+    },
+    {
+      "source_id": "nccih-ashwagandha",
+      "kind": "modern_safety_reference",
+      "title": "Ashwagandha: Usefulness and Safety",
+      "work": "NCCIH health topic page",
+      "edition": "Page states 'Last Updated: March 2023'",
+      "url": "https://www.nccih.nih.gov/health/ashwagandha",
+      "pinned_revision": null,
+      "sha256": null,
+      "local_path": "data/sources/external/nccih_ashwagandha.json",
+      "acquisition_date": "2026-11-07",
+      "license": "Page states it is not copyrighted and is in the public domain. PRAMAAN stores short paraphrases with attribution, not a copy of the page.",
+      "license_evidence": "https://www.nccih.nih.gov/health/ashwagandha (footer statement, accessed 2026-11-07)",
+      "extraction_method": "Manual paraphrase by build assistant from a fetched copy; short quoted phrases under 15 words.",
+      "original_language": "en",
+      "reviewer_status": "pending",
+      "known_limitations": [
+        "US federal consumer-health summary; scope is ashwagandha supplements/preparations generally, not specific classical formulations, routes or doses.",
+        "Not a comprehensive interaction database. Statements must not be generalised to other herbs or to formulations containing ashwagandha without review.",
+        "No pinned hash: web page content can change; re-check before submission."
+      ]
+    }
+  ]
+}

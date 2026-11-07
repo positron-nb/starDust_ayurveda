@@ -1,0 +1,927 @@
+{
+ "eval_id": "eval_retrieval_ablation_dev_20261107_233535",
+ "created_at": "2026-11-07T23:35:35",
+ "config_name": "retrieval_ablation",
+ "description": "Retrieval-only ablation (no AyurParam): BM25 vs dense (e5-small + concept labels) vs hybrid RRF; answerability calibration grid.",
+ "split": "dev",
+ "n_cases": 22,
+ "corpus_version": "corpus-b2133da5e893e907",
+ "prompt_version": "prompts-2026.11.07.4-perpassage",
+ "model_revision": "27c69eeef492bbc9e2c0048fc1e95959ffc0820e",
+ "hardware": "AMD64 Family 25 Model 117 Stepping 2, AuthenticAMD",
+ "llm_mode": "none",
+ "n_live_inference": 0,
+ "frozen_test_split_unchanged": true,
+ "label_status": "ALL expected labels are synthetic candidate labels written by the build assistant; none reviewed by a domain expert.",
+ "metrics": {
+  "bm25_hit_at_5": {
+   "value": 0.5455,
+   "numerator": 12,
+   "denominator": 22,
+   "note": "case has >=1 candidate-relevant passage in top 5 (no AyurParam expansion)"
+  },
+  "bm25_passage_recall_at_5": {
+   "value": 0.2554,
+   "note": "mean over 22 cases"
+  },
+  "bm25_mrr": {
+   "value": 0.4129,
+   "note": "mean over 22 cases"
+  },
+  "dense_hit_at_5": {
+   "value": 0.5455,
+   "numerator": 12,
+   "denominator": 22,
+   "note": "case has >=1 candidate-relevant passage in top 5 (no AyurParam expansion)"
+  },
+  "dense_passage_recall_at_5": {
+   "value": 0.1921,
+   "note": "mean over 22 cases"
+  },
+  "dense_mrr": {
+   "value": 0.3826,
+   "note": "mean over 22 cases"
+  },
+  "hybrid_hit_at_5": {
+   "value": 0.5455,
+   "numerator": 12,
+   "denominator": 22,
+   "note": "case has >=1 candidate-relevant passage in top 5 (no AyurParam expansion)"
+  },
+  "hybrid_passage_recall_at_5": {
+   "value": 0.2327,
+   "note": "mean over 22 cases"
+  },
+  "hybrid_mrr": {
+   "value": 0.4371,
+   "note": "mean over 22 cases"
+  },
+  "answerability_calibration_grid": {
+   "value": null,
+   "note": "[{\"min_bm25\": 0.0, \"answerable_kept\": \"20/22\", \"unanswerable_abstained\": \"5/7\"}, {\"min_bm25\": 2.0, \"answerable_kept\": \"20/22\", \"unanswerable_abstained\": \"5/7\"}, {\"min_bm25\": 4.0, \"answerable_kept\": \"20/22\", \"unanswerable_abstained\": \"5/7\"}, {\"min_bm25\": 6.0, \"answerable_kept\": \"20/22\", \"unanswerable_abstained\": \"7/7\"}, {\"min_bm25\": 8.0, \"answerable_kept\": \"20/22\", \"unanswerable_abstained\": \"7/7\"}, {\"min_bm25\": 10.0, \"answerable_kept\": \"20/22\", \"unanswerable_abstained\": \"7/7\"}]",
+   "reason": "grid shown in note; threshold chosen on dev only"
+  }
+ },
+ "failures": [],
+ "per_case": [
+  {
+   "case_id": "G01a",
+   "mode": "bm25",
+   "ranked": [
+    "Ah.1.8.14",
+    "Ah.1.13.27",
+    "Ah.1.8.31",
+    "Ah.1.13.24",
+    "Ca.3.2.11",
+    "Ca.3.2.10"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G01b",
+   "mode": "bm25",
+   "ranked": [
+    "Ah.1.8.14",
+    "Ah.1.13.27",
+    "Ah.1.8.31",
+    "Ah.1.13.24",
+    "Ca.3.2.11",
+    "Ca.3.2.10"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G01hi",
+   "mode": "bm25",
+   "ranked": [
+    "Ah.1.8.14",
+    "Ah.1.13.27",
+    "Ah.1.8.31",
+    "Ah.1.13.24",
+    "Ca.3.2.11",
+    "Ca.3.2.10"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G01tr",
+   "mode": "bm25",
+   "ranked": [
+    "Ah.1.8.14",
+    "Ah.1.13.27",
+    "Ah.1.8.31",
+    "Ah.1.13.24",
+    "Ca.3.2.11",
+    "Ca.3.2.10"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G04a",
+   "mode": "bm25",
+   "ranked": [
+    "Ah.1.13.27",
+    "Ah.1.8.14",
+    "Ah.1.8.12",
+    "Ah.1.8.31",
+    "Ca.3.2.11",
+    "Ca.3.2.10"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G04b",
+   "mode": "bm25",
+   "ranked": [
+    "Ah.1.13.27",
+    "Ca.6.15.95",
+    "Ah.1.8.14",
+    "Ah.1.8.12",
+    "Ah.1.8.31",
+    "Ca.3.2.11"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G07a",
+   "mode": "bm25",
+   "ranked": [
+    "Ca.3.2.10",
+    "Ah.1.8.5",
+    "Ah.1.8.8",
+    "Ah.1.8.17",
+    "Ah.1.8.13",
+    "Ca.3.2.12"
+   ],
+   "hit@5": true,
+   "mrr": 1.0
+  },
+  {
+   "case_id": "G07b",
+   "mode": "bm25",
+   "ranked": [
+    "Ca.3.2.10",
+    "Ah.1.8.5",
+    "Ah.1.8.8",
+    "Ah.1.8.17",
+    "Ah.1.8.13",
+    "Ca.3.2.12"
+   ],
+   "hit@5": true,
+   "mrr": 1.0
+  },
+  {
+   "case_id": "G07c",
+   "mode": "bm25",
+   "ranked": [],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G07hi",
+   "mode": "bm25",
+   "ranked": [
+    "Ah.1.8.8",
+    "Ca.3.2.10",
+    "Ah.1.8.5",
+    "Ah.1.8.17",
+    "Ca.6.15.61",
+    "Ah.1.8.13"
+   ],
+   "hit@5": true,
+   "mrr": 1.0
+  },
+  {
+   "case_id": "G10a",
+   "mode": "bm25",
+   "ranked": [
+    "Ah.1.8.26",
+    "Ah.1.8.27",
+    "Ca.6.15.242",
+    "Ca.6.15.10",
+    "Ca.6.15.73",
+    "Ah.1.8.29"
+   ],
+   "hit@5": true,
+   "mrr": 1.0
+  },
+  {
+   "case_id": "G10b",
+   "mode": "bm25",
+   "ranked": [
+    "Ah.1.8.26",
+    "Ca.6.15.10",
+    "Ca.6.15.73",
+    "Ah.1.8.27",
+    "Ca.6.15.242",
+    "Ah.1.8.31"
+   ],
+   "hit@5": true,
+   "mrr": 1.0
+  },
+  {
+   "case_id": "G10c",
+   "mode": "bm25",
+   "ranked": [
+    "Ah.1.8.26",
+    "Ah.1.8.29",
+    "Ah.1.8.27",
+    "Ca.6.15.242",
+    "Ca.6.15.10",
+    "Ca.6.15.73"
+   ],
+   "hit@5": true,
+   "mrr": 1.0
+  },
+  {
+   "case_id": "G10hi",
+   "mode": "bm25",
+   "ranked": [
+    "Ah.1.8.26",
+    "Ah.1.8.27",
+    "Ca.6.15.242",
+    "Ca.6.15.10",
+    "Ca.6.15.73",
+    "Ah.1.8.29"
+   ],
+   "hit@5": true,
+   "mrr": 1.0
+  },
+  {
+   "case_id": "G10tr",
+   "mode": "bm25",
+   "ranked": [
+    "Ca.6.15.66",
+    "Ah.1.8.25",
+    "Ah.1.8.31",
+    "Ca.6.15.42",
+    "Ca.6.15.112",
+    "Ca.6.15.222"
+   ],
+   "hit@5": true,
+   "mrr": 0.5
+  },
+  {
+   "case_id": "G13a",
+   "mode": "bm25",
+   "ranked": [
+    "Ah.1.13.4",
+    "Ah.1.8.3",
+    "Ah.1.8.39",
+    "Ca.6.15.184",
+    "Ah.1.8.34",
+    "Ca.6.15.73"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G13tr",
+   "mode": "bm25",
+   "ranked": [
+    "Ca.1.5.106",
+    "Ah.1.8.21",
+    "Ca.3.2.3"
+   ],
+   "hit@5": true,
+   "mrr": 0.333
+  },
+  {
+   "case_id": "G16a",
+   "mode": "bm25",
+   "ranked": [
+    "Ca.6.15.247",
+    "Ca.6.15.56",
+    "Ca.6.15.195",
+    "Ca.6.15.1",
+    "Ca.6.15.169",
+    "Ca.6.15.249"
+   ],
+   "hit@5": true,
+   "mrr": 0.5
+  },
+  {
+   "case_id": "G16b",
+   "mode": "bm25",
+   "ranked": [
+    "Ca.6.15.247",
+    "Ca.6.15.73",
+    "Ca.6.15.1",
+    "Ca.6.15.56",
+    "Ca.6.15.151",
+    "Ca.6.15.195"
+   ],
+   "hit@5": true,
+   "mrr": 0.25
+  },
+  {
+   "case_id": "G16hi",
+   "mode": "bm25",
+   "ranked": [
+    "Ca.6.15.247",
+    "Ca.6.15.56",
+    "Ca.6.15.195",
+    "Ca.6.15.1",
+    "Ca.6.15.169",
+    "Ca.6.15.249"
+   ],
+   "hit@5": true,
+   "mrr": 0.5
+  },
+  {
+   "case_id": "G19a",
+   "mode": "bm25",
+   "ranked": [
+    "Ah.1.8.39",
+    "Ca.6.15.184",
+    "Ah.1.8.34",
+    "Ah.1.13.4",
+    "Ca.6.15.116",
+    "Ah.1.8.3"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G19b",
+   "mode": "bm25",
+   "ranked": [
+    "Ah.1.8.39",
+    "Ca.6.15.184",
+    "Ah.1.8.34",
+    "Ah.1.13.4",
+    "Ca.6.15.116",
+    "Ah.1.8.3"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G01a",
+   "mode": "dense",
+   "ranked": [
+    "Ca.6.15.25",
+    "Ca.3.2.11",
+    "Ah.1.13.24"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G01b",
+   "mode": "dense",
+   "ranked": [
+    "Ah.1.13.27+3",
+    "Ca.3.2.11",
+    "Ah.1.13.24",
+    "Ca.6.15.25"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G01hi",
+   "mode": "dense",
+   "ranked": [
+    "Ca.3.2.11",
+    "Ah.1.13.24",
+    "Ah.1.13.27+3",
+    "Ca.6.15.25"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G01tr",
+   "mode": "dense",
+   "ranked": [
+    "Ca.3.2.11",
+    "Ah.1.13.27+3",
+    "Ca.6.15.25",
+    "Ah.1.13.24"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G04a",
+   "mode": "dense",
+   "ranked": [
+    "Ah.1.13.27",
+    "Ca.3.2.11",
+    "Ah.1.13.26",
+    "Ah.1.13.28"
+   ],
+   "hit@5": true,
+   "mrr": 0.25
+  },
+  {
+   "case_id": "G04b",
+   "mode": "dense",
+   "ranked": [
+    "Ca.6.15.95",
+    "Ca.6.15.197",
+    "Ca.3.2.8"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G07a",
+   "mode": "dense",
+   "ranked": [
+    "Ca.3.2.10",
+    "Ah.1.8.5",
+    "Ca.3.2.12",
+    "Ah.1.8.13"
+   ],
+   "hit@5": true,
+   "mrr": 1.0
+  },
+  {
+   "case_id": "G07b",
+   "mode": "dense",
+   "ranked": [
+    "Ah.1.8.5",
+    "Ca.3.2.10",
+    "Ah.1.8.13",
+    "Ah.1.8.12"
+   ],
+   "hit@5": true,
+   "mrr": 1.0
+  },
+  {
+   "case_id": "G07c",
+   "mode": "dense",
+   "ranked": [
+    "Ah.1.8.12",
+    "Ca.3.2.8",
+    "Ah.1.8.25",
+    "Ah.1.8.31"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G07hi",
+   "mode": "dense",
+   "ranked": [
+    "Ah.1.8.5",
+    "Ca.3.2.10",
+    "Ah.1.8.13",
+    "Ca.3.2.12"
+   ],
+   "hit@5": true,
+   "mrr": 1.0
+  },
+  {
+   "case_id": "G10a",
+   "mode": "dense",
+   "ranked": [
+    "Ah.1.8.31",
+    "Ah.1.8.26",
+    "Ca.6.15.112",
+    "Ah.1.8.34"
+   ],
+   "hit@5": true,
+   "mrr": 0.5
+  },
+  {
+   "case_id": "G10b",
+   "mode": "dense",
+   "ranked": [
+    "Ah.1.8.30",
+    "Ah.1.8.26",
+    "Ah.1.8.31",
+    "Ah.1.8.34"
+   ],
+   "hit@5": true,
+   "mrr": 0.5
+  },
+  {
+   "case_id": "G10c",
+   "mode": "dense",
+   "ranked": [
+    "Ca.6.15.112",
+    "Ah.1.8.25",
+    "Ca.6.15.42"
+   ],
+   "hit@5": true,
+   "mrr": 0.5
+  },
+  {
+   "case_id": "G10hi",
+   "mode": "dense",
+   "ranked": [
+    "Ca.6.15.112",
+    "Ca.6.15.42",
+    "Ah.1.8.25"
+   ],
+   "hit@5": true,
+   "mrr": 0.333
+  },
+  {
+   "case_id": "G10tr",
+   "mode": "dense",
+   "ranked": [
+    "Ca.6.15.66",
+    "Ca.6.15.237",
+    "Ah.1.8.25"
+   ],
+   "hit@5": true,
+   "mrr": 0.333
+  },
+  {
+   "case_id": "G13a",
+   "mode": "dense",
+   "ranked": [
+    "Ca.3.2.8",
+    "Ca.6.15.80",
+    "Ca.6.15.203",
+    "Ah.1.8.31"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G13tr",
+   "mode": "dense",
+   "ranked": [
+    "Ca.3.2.3",
+    "Ah.1.8.21",
+    "Ca.3.2.1",
+    "Ah.1.8.2"
+   ],
+   "hit@5": true,
+   "mrr": 1.0
+  },
+  {
+   "case_id": "G16a",
+   "mode": "dense",
+   "ranked": [
+    "Ca.6.15.56",
+    "Ca.6.15.195",
+    "Ca.6.15.245"
+   ],
+   "hit@5": true,
+   "mrr": 1.0
+  },
+  {
+   "case_id": "G16b",
+   "mode": "dense",
+   "ranked": [
+    "Ca.3.2.8",
+    "Ah.1.8.31",
+    "Ah.1.8.18",
+    "Ah.1.8.25"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G16hi",
+   "mode": "dense",
+   "ranked": [
+    "Ca.6.15.56",
+    "Ca.6.15.195",
+    "Ca.6.15.245"
+   ],
+   "hit@5": true,
+   "mrr": 1.0
+  },
+  {
+   "case_id": "G19a",
+   "mode": "dense",
+   "ranked": [
+    "Ca.3.2.3",
+    "Ah.1.8.34",
+    "Ca.6.15.42",
+    "Ca.1.5.8"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G19b",
+   "mode": "dense",
+   "ranked": [
+    "Ca.3.2.8",
+    "Ah.1.8.13",
+    "Ca.6.15.112",
+    "Ca.6.15.237"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G01a",
+   "mode": "hybrid",
+   "ranked": [
+    "Ca.3.2.11",
+    "Ah.1.13.24",
+    "Ah.1.8.14",
+    "Ah.1.13.27",
+    "Ah.1.13.26",
+    "Ca.3.2.10"
+   ],
+   "hit@5": true,
+   "mrr": 0.2
+  },
+  {
+   "case_id": "G01b",
+   "mode": "hybrid",
+   "ranked": [
+    "Ca.3.2.11",
+    "Ah.1.13.24",
+    "Ah.1.13.27+3",
+    "Ah.1.8.14",
+    "Ah.1.13.27",
+    "Ca.3.2.10"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G01hi",
+   "mode": "hybrid",
+   "ranked": [
+    "Ca.3.2.11",
+    "Ah.1.13.24",
+    "Ah.1.8.14",
+    "Ah.1.13.27+3",
+    "Ah.1.13.27",
+    "Ah.1.13.26"
+   ],
+   "hit@5": false,
+   "mrr": 0.167
+  },
+  {
+   "case_id": "G01tr",
+   "mode": "hybrid",
+   "ranked": [
+    "Ca.3.2.11",
+    "Ah.1.13.24",
+    "Ah.1.13.27+3",
+    "Ah.1.8.14",
+    "Ca.3.2.10",
+    "Ah.1.13.27"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G04a",
+   "mode": "hybrid",
+   "ranked": [
+    "Ah.1.13.27",
+    "Ah.1.8.14",
+    "Ca.3.2.11",
+    "Ah.1.8.12",
+    "Ah.1.13.26",
+    "Ca.3.2.10"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G04b",
+   "mode": "hybrid",
+   "ranked": [
+    "Ca.6.15.95",
+    "Ah.1.13.26",
+    "Ah.1.8.12",
+    "Ah.1.13.27",
+    "Ah.1.8.31",
+    "Ca.3.2.8"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G07a",
+   "mode": "hybrid",
+   "ranked": [
+    "Ca.3.2.10",
+    "Ah.1.8.5",
+    "Ca.3.2.12",
+    "Ah.1.8.13",
+    "Ah.1.8.12",
+    "Ca.3.2.13"
+   ],
+   "hit@5": true,
+   "mrr": 1.0
+  },
+  {
+   "case_id": "G07b",
+   "mode": "hybrid",
+   "ranked": [
+    "Ca.3.2.10",
+    "Ah.1.8.5",
+    "Ah.1.8.13",
+    "Ca.3.2.12",
+    "Ah.1.8.12",
+    "Ca.3.2.13"
+   ],
+   "hit@5": true,
+   "mrr": 1.0
+  },
+  {
+   "case_id": "G07c",
+   "mode": "hybrid",
+   "ranked": [
+    "Ah.1.8.12",
+    "Ca.3.2.8",
+    "Ah.1.8.25",
+    "Ah.1.8.31"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G07hi",
+   "mode": "hybrid",
+   "ranked": [
+    "Ah.1.8.5",
+    "Ca.3.2.10",
+    "Ah.1.8.13",
+    "Ca.3.2.12",
+    "Ca.3.2.13",
+    "Ah.1.8.12"
+   ],
+   "hit@5": true,
+   "mrr": 1.0
+  },
+  {
+   "case_id": "G10a",
+   "mode": "hybrid",
+   "ranked": [
+    "Ah.1.8.26",
+    "Ah.1.8.31",
+    "Ah.1.8.27",
+    "Ca.6.15.73",
+    "Ca.6.15.112",
+    "Ca.6.15.42"
+   ],
+   "hit@5": true,
+   "mrr": 1.0
+  },
+  {
+   "case_id": "G10b",
+   "mode": "hybrid",
+   "ranked": [
+    "Ah.1.8.26",
+    "Ah.1.8.31",
+    "Ca.6.15.73",
+    "Ah.1.8.30",
+    "Ah.1.8.25",
+    "Ah.1.8.27"
+   ],
+   "hit@5": true,
+   "mrr": 1.0
+  },
+  {
+   "case_id": "G10c",
+   "mode": "hybrid",
+   "ranked": [
+    "Ah.1.8.31",
+    "Ah.1.8.25",
+    "Ca.6.15.112",
+    "Ca.6.15.45",
+    "Ca.6.15.42",
+    "Ah.1.8.29"
+   ],
+   "hit@5": true,
+   "mrr": 0.5
+  },
+  {
+   "case_id": "G10hi",
+   "mode": "hybrid",
+   "ranked": [
+    "Ah.1.8.31",
+    "Ca.6.15.112",
+    "Ca.6.15.42",
+    "Ah.1.8.25",
+    "Ah.1.8.26",
+    "Ca.6.15.73"
+   ],
+   "hit@5": true,
+   "mrr": 0.25
+  },
+  {
+   "case_id": "G10tr",
+   "mode": "hybrid",
+   "ranked": [
+    "Ca.6.15.66",
+    "Ah.1.8.25",
+    "Ah.1.8.31",
+    "Ca.6.15.112",
+    "Ca.6.15.42",
+    "Ca.6.15.236"
+   ],
+   "hit@5": true,
+   "mrr": 0.5
+  },
+  {
+   "case_id": "G13a",
+   "mode": "hybrid",
+   "ranked": [
+    "Ah.1.8.34",
+    "Ca.3.2.8",
+    "Ca.6.15.67",
+    "Ah.1.8.3",
+    "Ca.6.15.9",
+    "Ca.6.15.116"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G13tr",
+   "mode": "hybrid",
+   "ranked": [
+    "Ca.3.2.3",
+    "Ah.1.8.21",
+    "Ca.1.5.106",
+    "Ca.3.2.1"
+   ],
+   "hit@5": true,
+   "mrr": 1.0
+  },
+  {
+   "case_id": "G16a",
+   "mode": "hybrid",
+   "ranked": [
+    "Ca.6.15.56",
+    "Ca.6.15.195",
+    "Ca.6.15.169",
+    "Ca.6.15.71",
+    "Ca.6.15.249",
+    "Ca.6.15.119"
+   ],
+   "hit@5": true,
+   "mrr": 1.0
+  },
+  {
+   "case_id": "G16b",
+   "mode": "hybrid",
+   "ranked": [
+    "Ca.3.2.8",
+    "Ah.1.8.31",
+    "Ah.1.13.27",
+    "Ah.1.8.14",
+    "Ca.6.15.247",
+    "Ca.6.15.73"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G16hi",
+   "mode": "hybrid",
+   "ranked": [
+    "Ca.6.15.56",
+    "Ca.6.15.195",
+    "Ca.6.15.249",
+    "Ca.6.15.140",
+    "Ca.6.15.71",
+    "Ca.6.15.119"
+   ],
+   "hit@5": true,
+   "mrr": 1.0
+  },
+  {
+   "case_id": "G19a",
+   "mode": "hybrid",
+   "ranked": [
+    "Ah.1.8.34",
+    "Ca.3.2.3",
+    "Ca.6.15.42",
+    "Ca.3.2.5",
+    "Ca.1.5.8",
+    "Ca.6.15.184"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  },
+  {
+   "case_id": "G19b",
+   "mode": "hybrid",
+   "ranked": [
+    "Ah.1.8.34",
+    "Ca.6.15.42",
+    "Ca.6.15.222",
+    "Ah.1.8.3",
+    "Ca.6.15.116",
+    "Ah.1.8.13"
+   ],
+   "hit@5": false,
+   "mrr": 0.0
+  }
+ ]
+}

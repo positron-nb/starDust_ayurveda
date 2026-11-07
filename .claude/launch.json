@@ -1,0 +1,19 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "ayurparam-server",
+      "runtimeExecutable": ".venv/Scripts/python.exe",
+      "runtimeArgs": ["-X", "utf8", "-W", "ignore", "model_server/server.py"],
+      "port": 8601,
+      "url": "http://127.0.0.1:8601"
+    },
+    {
+      "name": "pramaan-api",
+      "runtimeExecutable": ".venv/Scripts/python.exe",
+      "runtimeArgs": ["-X", "utf8", "-W", "ignore", "-m", "uvicorn", "--app-dir", "backend", "pramaan.api:app", "--host", "127.0.0.1", "--port", "8600"],
+      "port": 8600,
+      "url": "http://127.0.0.1:8600"
+    }
+  ]
+}

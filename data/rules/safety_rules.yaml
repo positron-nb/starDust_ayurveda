@@ -1,0 +1,140 @@
+# PRAMAAN safety policy (structured, evaluated outside the model).
+# basis.type distinguishes:
+#   product_policy        - a conservative restriction chosen by the PRAMAAN team. NOT a classical
+#                           contraindication and NOT a clinical finding.
+#   modern_safety_source  - a statement from a modern clinical/safety reference (cited source_id).
+#   classical_source      - a statement from a classical text passage (cited passage_id).
+# review_status stays "pending" until a qualified human reviewer records an assessment.
+version: "rules-2026.11.07.1"
+review_status: pending
+
+templates:
+  T-URGENT-001:
+    review_status: pending
+    en: >-
+      Some details you entered may describe a situation that needs urgent, in-person medical
+      attention ({matched}). Please seek emergency medical care now or contact your local
+      emergency services. PRAMAAN cannot assess emergencies, so it has stopped producing
+      educational or wellness content for this input.
+    hi: >-
+      आपके द्वारा दिए गए कुछ विवरण ऐसी स्थिति का संकेत दे सकते हैं जिसमें तुरंत प्रत्यक्ष चिकित्सा
+      सहायता की आवश्यकता हो ({matched})। कृपया अभी आपातकालीन चिकित्सा सहायता लें या अपनी स्थानीय
+      आपातकालीन सेवाओं से संपर्क करें। PRAMAAN आपात स्थिति का आकलन नहीं कर सकता, इसलिए इस इनपुट के
+      लिए शैक्षिक या वेलनेस सामग्री बंद कर दी गई है।
+
+lexicons:
+  # Red-flag phrases (product policy; deliberately conservative; NOT a triage system).
+  emergency_signs:
+    en: [chest pain, difficulty breathing, shortness of breath, cannot breathe, can't breathe, unconscious, fainted, fainting, passed out, vomiting blood, blood in vomit, black stool, black stools, tarry stool, blood in stool, severe abdominal pain, seizure, convulsion, suicidal, want to die, stroke, face drooping, slurred speech, unable to keep fluids down, severe dehydration, no urine]
+    hi: [सीने में दर्द, छाती में दर्द, सांस लेने में तकलीफ, सांस नहीं, बेहोश, खून की उल्टी, उल्टी में खून, काला मल, मल में खून, पेट में तेज दर्द, दौरा, आत्महत्या, लकवा]
+  dose_request:
+    en: [dose, dosage, how much should, how many grams, how many mg, how many tablets, mg per, grams per]
+    hi: [खुराक, कितनी मात्रा में लें, कितने ग्राम, कितनी गोली]
+  stop_medication_request:
+    en: [stop my medicine, stop my medication, stop taking my, replace my medicine, instead of my medicine, quit my medication, stop insulin, stop metformin]
+    hi: [दवा बंद, दवाई बंद, दवा छोड़]
+
+rules:
+  - id: R-EMERG-001
+    title: Possible emergency language
+    scope: Any query or case text.
+    condition: {fact: emergency_signs, state: present}
+    outcome: {action: escalate, template: T-URGENT-001, severity: urgent}
+    basis: {type: product_policy, text: "Conservative red-flag lexicon chosen by the PRAMAAN team. Not a triage protocol and not comprehensive."}
+    review_status: pending
+
+  - id: R-PREG-ASHWA-001
+    title: Ashwagandha proposed and pregnancy present
+    scope: Proposed herb = aśvagandhā (any preparation; route/dose not assessed).
+    condition: {herb: ashwagandha, fact: pregnancy, state: present}
+    outcome: {action: withhold_positive_use, severity: caution, message_en: "A modern safety reference (NCCIH) states ashwagandha should be avoided during pregnancy. PRAMAAN withholds any positive-use interpretation for this case.", message_hi: "एक आधुनिक सुरक्षा स्रोत (NCCIH) के अनुसार गर्भावस्था में अश्वगंधा से बचना चाहिए। PRAMAAN इस केस के लिए उपयोग-समर्थक व्याख्या नहीं देता।"}
+    basis: {type: modern_safety_source, source_id: nccih-ashwagandha, statement_id: nccih-ashwa-preg}
+    review_status: pending
+
+  - id: R-PREG-ASHWA-002
+    title: Ashwagandha proposed and pregnancy status unknown
+    scope: Proposed herb = aśvagandhā; pregnancy status not stated.
+    condition: {herb: ashwagandha, fact: pregnancy, state: unknown}
+    outcome: {action: request_information, severity: missing_information, message_en: "Pregnancy status is unknown. A modern safety reference names pregnancy as a situation in which ashwagandha should be avoided, so positive-use interpretation is withheld until this is confirmed. An unknown status is not treated as 'not pregnant'.", message_hi: "गर्भावस्था की स्थिति अज्ञात है। एक आधुनिक सुरक्षा स्रोत गर्भावस्था में अश्वगंधा से बचने को कहता है, इसलिए पुष्टि होने तक उपयोग-समर्थक व्याख्या रोकी गई है। अज्ञात स्थिति को 'गर्भवती नहीं' नहीं माना जाता।", question_en: "Is the person pregnant or possibly pregnant?", question_hi: "क्या व्यक्ति गर्भवती है या गर्भवती हो सकती है?"}
+    basis: {type: product_policy, text: "Unknown-state handling chosen by the PRAMAAN team, motivated by nccih-ashwa-preg.", related_statement_id: nccih-ashwa-preg}
+    review_status: pending
+
+  - id: R-LACT-ASHWA-001
+    title: Ashwagandha proposed and lactation present
+    scope: Proposed herb = aśvagandhā.
+    condition: {herb: ashwagandha, fact: lactation, state: present}
+    outcome: {action: withhold_positive_use, severity: caution, message_en: "A modern safety reference (NCCIH) states ashwagandha should not be used while breastfeeding.", message_hi: "एक आधुनिक सुरक्षा स्रोत (NCCIH) के अनुसार स्तनपान के दौरान अश्वगंधा का उपयोग नहीं करना चाहिए।"}
+    basis: {type: modern_safety_source, source_id: nccih-ashwagandha, statement_id: nccih-ashwa-lact}
+    review_status: pending
+
+  - id: R-LACT-ASHWA-002
+    title: Ashwagandha proposed and lactation status unknown
+    scope: Proposed herb = aśvagandhā.
+    condition: {herb: ashwagandha, fact: lactation, state: unknown}
+    outcome: {action: request_information, severity: missing_information, message_en: "Breastfeeding status is unknown and is relevant to the cited safety reference.", message_hi: "स्तनपान की स्थिति अज्ञात है और उद्धृत सुरक्षा स्रोत के लिए प्रासंगिक है।", question_en: "Is the person breastfeeding?", question_hi: "क्या व्यक्ति स्तनपान करा रही है?"}
+    basis: {type: product_policy, text: "Unknown-state handling chosen by the PRAMAAN team, motivated by nccih-ashwa-lact.", related_statement_id: nccih-ashwa-lact}
+    review_status: pending
+
+  - id: R-MED-ASHWA-001
+    title: Ashwagandha proposed with current medications
+    scope: Proposed herb = aśvagandhā; any current medication.
+    condition: {herb: ashwagandha, fact: medications, state: present}
+    outcome: {action: not_assessed, severity: caution, message_en: "Interaction with the listed medication(s) is NOT assessed by PRAMAAN. A modern safety reference says ashwagandha might interact with some medicine classes (diabetes, blood pressure, immunosuppressant, sedative, anti-seizure, thyroid hormone). A qualified clinician must review. Do not stop or change any prescribed medicine on the basis of this tool.", message_hi: "सूचीबद्ध दवाओं के साथ परस्पर क्रिया का PRAMAAN द्वारा आकलन नहीं किया गया है। एक आधुनिक सुरक्षा स्रोत के अनुसार अश्वगंधा कुछ दवा वर्गों के साथ परस्पर क्रिया कर सकता है। योग्य चिकित्सक की समीक्षा आवश्यक है। इस टूल के आधार पर कोई निर्धारित दवा बंद या परिवर्तित न करें।"}
+    basis: {type: modern_safety_source, source_id: nccih-ashwagandha, statement_id: nccih-ashwa-meds}
+    review_status: pending
+
+  - id: R-MED-ASHWA-002
+    title: Ashwagandha proposed, medication status unknown
+    scope: Proposed herb = aśvagandhā.
+    condition: {herb: ashwagandha, fact: medications, state: unknown}
+    outcome: {action: request_information, severity: missing_information, message_en: "Current medications are unknown; interaction review cannot start.", message_hi: "वर्तमान दवाएँ अज्ञात हैं; परस्पर क्रिया की समीक्षा शुरू नहीं हो सकती।", question_en: "Is the person taking any prescribed or over-the-counter medicines or supplements?", question_hi: "क्या व्यक्ति कोई डॉक्टर द्वारा लिखी या बिना पर्चे की दवा/सप्लीमेंट ले रहा है?"}
+    basis: {type: product_policy, text: "Unknown-state handling chosen by the PRAMAAN team."}
+    review_status: pending
+
+  - id: R-COMORB-ASHWA-001
+    title: Ashwagandha proposed with thyroid/autoimmune disorder, liver disease, planned surgery or prostate cancer
+    scope: Proposed herb = aśvagandhā.
+    condition: {herb: ashwagandha, fact: serious_comorbidity, state: present, any_of: [thyroid, autoimmune, surgery, prostate cancer, liver]}
+    outcome: {action: withhold_positive_use, severity: caution, message_en: "A modern safety reference (NCCIH) says ashwagandha is not recommended before surgery or with autoimmune or thyroid disorders, should be avoided with hormone-sensitive prostate cancer, and notes rare reported liver injury. Clinician review required.", message_hi: "एक आधुनिक सुरक्षा स्रोत (NCCIH) के अनुसार सर्जरी से पहले या ऑटोइम्यून/थायरॉइड विकारों में अश्वगंधा की सलाह नहीं दी जाती; हार्मोन-संवेदनशील प्रोस्टेट कैंसर में इससे बचना चाहिए; और लिवर क्षति के दुर्लभ मामले बताए गए हैं। चिकित्सक की समीक्षा आवश्यक।"}
+    basis: {type: modern_safety_source, source_id: nccih-ashwagandha, statement_id: nccih-ashwa-surgery-thyroid-autoimmune}
+    review_status: pending
+
+  - id: R-PED-001
+    title: Possible paediatric case with a proposed herb
+    scope: Any proposed herb.
+    condition: {herb: any, fact: pediatric, state: present}
+    outcome: {action: withhold_positive_use, severity: caution, message_en: "The case appears to involve a child. PRAMAAN does not interpret herb use for children; paediatric clinical review is required.", message_hi: "यह केस किसी बच्चे से संबंधित प्रतीत होता है। PRAMAAN बच्चों के लिए जड़ी-बूटी उपयोग की व्याख्या नहीं करता; बाल-चिकित्सा समीक्षा आवश्यक है।"}
+    basis: {type: product_policy, text: "Conservative restriction chosen by the PRAMAAN team; not a classical contraindication."}
+    review_status: pending
+
+  - id: R-PED-002
+    title: Age unknown with a proposed herb
+    scope: Any proposed herb.
+    condition: {herb: any, fact: pediatric, state: unknown}
+    outcome: {action: request_information, severity: missing_information, message_en: "Age is unknown.", message_hi: "आयु अज्ञात है।", question_en: "What is the person's age?", question_hi: "व्यक्ति की आयु क्या है?"}
+    basis: {type: product_policy, text: "Unknown-state handling chosen by the PRAMAAN team."}
+    review_status: pending
+
+  - id: R-HERB-UNSUPPORTED-001
+    title: Proposed herb without a curated modern safety source
+    scope: Any proposed herb other than those with curated safety statements.
+    condition: {herb: uncurated}
+    outcome: {action: not_assessed, severity: missing_information, message_en: "No curated modern safety source exists in PRAMAAN for this herb. Safety and interactions are NOT assessed; absence of a warning here does not mean it is safe.", message_hi: "इस जड़ी-बूटी के लिए PRAMAAN में कोई आधुनिक सुरक्षा स्रोत नहीं है। सुरक्षा और परस्पर क्रिया का आकलन नहीं हुआ है; चेतावनी न होना सुरक्षित होने का प्रमाण नहीं है।"}
+    basis: {type: product_policy, text: "Scope boundary of the safety module."}
+    review_status: pending
+
+  - id: R-DOSE-001
+    title: Dose or prescription request
+    scope: Any query.
+    condition: {fact: dose_request, state: present}
+    outcome: {action: refuse_component, severity: policy, message_en: "PRAMAAN does not provide doses, prescriptions or dose calculations. Classical passages may mention quantities in their own context; these are shown only as source text and are not instructions.", message_hi: "PRAMAAN खुराक, नुस्खा या खुराक गणना नहीं देता। शास्त्रीय अंशों में संदर्भानुसार मात्रा का उल्लेख हो सकता है; वे केवल स्रोत पाठ हैं, निर्देश नहीं।"}
+    basis: {type: product_policy, text: "Scope restriction chosen by the PRAMAAN team."}
+    review_status: pending
+
+  - id: R-STOPMED-001
+    title: Request to stop or replace a medicine
+    scope: Any query.
+    condition: {fact: stop_medication_request, state: present}
+    outcome: {action: refuse_component, severity: policy, message_en: "PRAMAAN never advises stopping or replacing a prescribed medicine. Please discuss any change with the prescribing clinician.", message_hi: "PRAMAAN कभी भी निर्धारित दवा बंद करने या बदलने की सलाह नहीं देता। किसी भी बदलाव के बारे में दवा लिखने वाले चिकित्सक से चर्चा करें।"}
+    basis: {type: product_policy, text: "Scope restriction chosen by the PRAMAAN team."}
+    review_status: pending

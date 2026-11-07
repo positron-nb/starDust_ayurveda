@@ -1,0 +1,262 @@
+# PRAMAAN curated terminology (v1).
+# Purpose: query expansion, concept tagging of passages, and the *heuristic* claim-support check.
+# These are search aids, NOT clinical equivalences. English/Hindi aliases are approximate
+# glosses; none of them asserts a one-to-one mapping to a modern diagnosis.
+# Author: build assistant draft, 2026-11-07. Review status: pending (needs Ayurveda teammate).
+# passage_patterns are Python regexes applied to the lower-cased original IAST text
+# (NFC). "-?" allows the editorial compound hyphens used in the Aṣṭāṅgahṛdaya e-text.
+version: "terms-2026.11.07.5"
+review_status: pending
+concepts:
+  - id: agni
+    label: {iast: agni, deva: अग्नि, en: "Agni (digestive/metabolic fire)", hi: "अग्नि (पाचक अग्नि)"}
+    query_aliases:
+      en: [agni, digestive fire, digestion, digestive capacity, digestive power, appetite, metabolic fire, jatharagni]
+      hi: [अग्नि, जठराग्नि, पाचक अग्नि, पाचन, पाचन शक्ति, भूख, हाजमा]
+      sa: [agni, jāṭharāgni, jatharagni, anala, vahni, pāvaka, ūṣmā]
+    passage_patterns: ['[aā]gn[iaeyo]', 'anal[aoeāā]', 'vahn[iea]', 'ūṣm[aā]', 'j[āa]ṭhar', 'pāvak']
+    note: "ūṣman ('heat') is tagged as agni-related because AH Sū 13.25 uses it for digestive heat; reviewer should confirm."
+  - id: mandagni
+    label: {iast: mandāgni, deva: मन्दाग्नि, en: "Mandāgni (weak/sluggish Agni)", hi: "मन्दाग्नि"}
+    query_aliases:
+      en: [mandagni, weak digestion, weak digestive fire, sluggish digestion, low appetite, poor appetite, reduced appetite, weak digestive heat, digestive heat is weak, digestive fire is weak, low digestive fire, weak agni, agni is weak, weakened agni]
+      hi: [मन्दाग्नि, मंदाग्नि, कमजोर पाचन, भूख न लगना, भूख कम, मंद अग्नि, मंद होने, दुर्बल होने, कमजोर होने, अग्नि मंद, अग्नि दुर्बल]
+      sa: [mandāgni, mandagni, agnisāda, alpāgni]
+    passage_patterns: ['mand[aā]-?[aā]gn', 'mand[aā]-?nal', '[aā]gni-?sād', 'alp[aā]-?(?:agn|vahn|anal)', 'alpāgn', 'mandānal', 'ūṣm\S*\s+[''’]?[aā]?-?lpa', 'dur-?bal[aā]-?(?:agn|vahn|anal|sy[aā]-?lp[aā]-?vahn)', 'durbalāgn', '[aā]gni-?māndy']
+  - id: vishamagni
+    label: {iast: viṣamāgni, deva: विषमाग्नि, en: "Viṣamāgni (irregular Agni)", hi: "विषमाग्नि"}
+    query_aliases:
+      en: [vishamagni, irregular digestion, variable appetite, erratic digestion]
+      hi: [विषमाग्नि, अनियमित पाचन, अनियमित भूख]
+      sa: [viṣamāgni, vishamagni]
+    passage_patterns: ['viṣam[aā]-?[aā]?gn', 'viṣamo-?['']?gn']
+  - id: tikshnagni
+    label: {iast: tīkṣṇāgni, deva: तीक्ष्णाग्नि, en: "Tīkṣṇāgni (intense Agni)", hi: "तीक्ष्णाग्नि"}
+    query_aliases:
+      en: [tikshnagni, intense digestive fire, excessive hunger, sharp digestion]
+      hi: [तीक्ष्णाग्नि, अत्यधिक भूख, तीव्र अग्नि]
+      sa: [tīkṣṇāgni, tikshnagni, atyagni]
+    passage_patterns: ['tīkṣṇ[aā]-?[aā]?gn', 'aty-?[aā]gn', 'bhasmak']
+  - id: samagni
+    label: {iast: samāgni, deva: समाग्नि, en: "Samāgni (balanced Agni)", hi: "समाग्नि"}
+    query_aliases:
+      en: [samagni, balanced digestion, balanced agni, normal digestion]
+      hi: [समाग्नि, संतुलित पाचन, सम अग्नि]
+      sa: [samāgni, samagni]
+    passage_patterns: ['sam[aā]-?[aā]gn', 'samo-?['']?gn']
+  - id: ama
+    label: {iast: āma, deva: आम, en: "Āma (incompletely processed/undigested material)", hi: "आम"}
+    query_aliases:
+      en: [ama, undigested, undigested food, incompletely digested, sama, nirama, ama dosha]
+      hi: [आम, आमदोष, अपक्व, अपक्व रस, साम, निराम]
+      sa: [āma, ama, sāma, nirāma, āmadoṣa]
+    passage_patterns: ['(?<![a-zāīūṛṝḷṅñṭḍṇśṣṃḥ])ām(?:a|aṃ|am|āt|asya|ena|e|o|ā|ān|aḥ)(?![a-zāīūṛṝḷṅñṭḍṇśṣṃḥ])', 'ām[aā]-?(?:doṣ|pradoṣ|viṣ|j[aā]|jīrṇ|tīsār|tisār|śūl|sann|baddh|vāt)', 'nir-?ām', '(?<![a-zāīūṛṝḷṅñṭḍṇśṣṃḥ])s[aā]-?ām(?:a|ā|o|ān|aṃ|āḥ|ān)', '(?<![a-zāīūṛṝḷṅñṭḍṇśṣṃḥ])sām(?:a|ā|o|ān|aṃ|āḥ)(?![a-zāīūṛṝḷṅñṭḍṇśṣṃḥ])', 'duṣṭ[aā]-?ām', 'āmen']
+    note: "'āmāśaya' (a site, often glossed 'stomach') is deliberately excluded. The English word 'toxin' is NOT used as an equivalent."
+  - id: ajirna
+    label: {iast: ajīrṇa, deva: अजीर्ण, en: "Ajīrṇa (indigestion / food not yet digested)", hi: "अजीर्ण"}
+    query_aliases:
+      en: [ajirna, indigestion, undigested meal, food not digested]
+      hi: [अजीर्ण, अपच, बदहजमी]
+      sa: [ajīrṇa, ajirna, ajīrṇin]
+    passage_patterns: ['[aā]-?jīrṇ', 'adhyaśan']
+    note: "Pattern can over-match compounds such as anna-jīrṇa; reviewer should confirm hits."
+  - id: ajirna_types
+    label: {iast: "āmājīrṇa / vidagdha / viṣṭabdha / rasaśeṣa", deva: "आमाजीर्ण / विदग्ध / विष्टब्ध / रसशेष", en: "Types of Ajīrṇa", hi: "अजीर्ण के प्रकार"}
+    query_aliases:
+      en: [types of indigestion, types of ajirna, vidagdha, vishtabdha, rasashesha, amajirna]
+      hi: [अजीर्ण के प्रकार, विदग्धाजीर्ण, विष्टब्धाजीर्ण, रसशेषाजीर्ण, आमाजीर्ण]
+      sa: [vidagdha, viṣṭabdha, rasaśeṣa, āmājīrṇa]
+    passage_patterns: ['vidagdh', 'viṣṭabdh', 'rasa-?śeṣ', 'āmājīrṇ']
+  - id: alasaka
+    label: {iast: alasaka, deva: अलसक, en: "Alasaka", hi: "अलसक"}
+    query_aliases:
+      en: [alasaka]
+      hi: [अलसक]
+      sa: [alasaka, daṇḍālasaka]
+    passage_patterns: ['lasak', 'alasī-?bhūt', '(?<![a-zāīūṛṝḷṅñṭḍṇśṣṃḥ])['']?las(?:aḥ|o|aṃ)(?![a-zāīūṛṝḷṅñṭḍṇśṣṃḥ])']
+    note: "No modern equivalence asserted."
+  - id: vishucika
+    label: {iast: viṣūcikā, deva: विषूचिका, en: "Viṣūcikā", hi: "विषूचिका"}
+    query_aliases:
+      en: [vishuchika, visuchika, vishuchika]
+      hi: [विषूचिका]
+      sa: [viṣūcikā]
+    passage_patterns: ['viṣūc']
+    note: "Often compared with cholera-like illness in secondary literature; PRAMAAN does not assert that mapping."
+  - id: grahani
+    label: {iast: grahaṇī, deva: ग्रहणी, en: "Grahaṇī", hi: "ग्रहणी"}
+    query_aliases:
+      en: [grahani]
+      hi: [ग्रहणी]
+      sa: [grahaṇī, grahani]
+    passage_patterns: ['grahaṇ']
+    note: "Both an anatomical seat and a disease name in the texts; no one-to-one modern mapping asserted."
+  - id: langhana
+    label: {iast: laṅghana, deva: लङ्घन, en: "Laṅghana (lightening measures, incl. fasting)", hi: "लंघन"}
+    query_aliases:
+      en: [langhana, fasting, lightening therapy]
+      hi: [लंघन, लङ्घन, उपवास]
+      sa: [laṅghana, langhana, upavāsa]
+    passage_patterns: ['laṅghan', 'upavās', 'langhan']
+  - id: pachana_dipana
+    label: {iast: "pācana / dīpana", deva: "पाचन / दीपन", en: "Pācana / Dīpana (digestive / appetite-kindling measures)", hi: "पाचन / दीपन"}
+    query_aliases:
+      en: [pachana, dipana, deepana, digestive measures, appetiser]
+      hi: [पाचन औषध, दीपन, दीपन पाचन]
+      sa: [pācana, dīpana]
+    passage_patterns: ['pācan', 'dīpan']
+  - id: ahara_matra
+    label: {iast: āhāramātrā, deva: आहारमात्रा, en: "Quantity of food (āhāra-mātrā)", hi: "आहार की मात्रा"}
+    query_aliases:
+      en: [quantity of food, food quantity, portion, overeating, how much to eat, meal size, eating too much]
+      hi: [आहार की मात्रा, भोजन की मात्रा, अधिक भोजन, ज्यादा खाना]
+      sa: [mātrā, mātrāśī, atimātra, hīnamātra]
+    passage_patterns: ['mātr[aā]', 'mātrāś', 'ati-?mātr', 'hīna-?mātr', 'sauhity', 'tṛpt']
+  - id: ahara
+    label: {iast: āhāra, deva: आहार, en: "Food / diet (āhāra)", hi: "आहार"}
+    query_aliases:
+      en: [food, diet, meal, eating]
+      hi: [आहार, भोजन, खाना]
+      sa: [āhāra, anna, bhojana, aśana]
+    passage_patterns: ['āhār', '(?<![a-zāīūṛṝḷṅñṭḍṇśṣṃḥ])ann(?:a|aṃ|ena|asya|e|āt|ād|aṃ)', 'bhojan', 'aśan']
+  - id: vata
+    label: {iast: vāta, deva: वात, en: "Vāta", hi: "वात"}
+    query_aliases: {en: [vata, vaata], hi: [वात, वायु], sa: [vāta, vāyu, anila, māruta]}
+    passage_patterns: ['vāt[aāeo]', 'vāy[uv]', 'anil', 'mārut', 'pavan']
+  - id: pitta
+    label: {iast: pitta, deva: पित्त, en: "Pitta", hi: "पित्त"}
+    query_aliases: {en: [pitta], hi: [पित्त], sa: [pitta]}
+    passage_patterns: ['pitt']
+  - id: kapha
+    label: {iast: kapha, deva: कफ, en: "Kapha", hi: "कफ"}
+    query_aliases: {en: [kapha, kafa], hi: [कफ, श्लेष्मा], sa: [kapha, śleṣman]}
+    passage_patterns: ['kaph', 'śleṣm', 'balās']
+  - id: shula
+    label: {iast: śūla, deva: शूल, en: "Śūla (pain, colic)", hi: "शूल"}
+    query_aliases: {en: [abdominal pain, colic, pain, stomach ache], hi: [शूल, पेट दर्द, दर्द], sa: [śūla]}
+    passage_patterns: ['śūl']
+  - id: chardi
+    label: {iast: chardi, deva: छर्दि, en: "Chardi (vomiting)", hi: "छर्दि (उल्टी)"}
+    query_aliases: {en: [vomiting, nausea, vomit], hi: [उल्टी, वमन, मतली, छर्दि], sa: [chardi, vamana]}
+    passage_patterns: ['chard', 'vam[ai]', 'vamathu', 'hṛllās', 'utkleś']
+  - id: atisara
+    label: {iast: atisāra, deva: अतिसार, en: "Atisāra (loose stools)", hi: "अतिसार"}
+    query_aliases: {en: [diarrhoea, diarrhea, loose stools, loose motions], hi: [दस्त, अतिसार, पतले दस्त], sa: [atisāra, atīsāra]}
+    passage_patterns: ['at[iī]-?sār']
+  - id: guru_gaurava
+    label: {iast: gaurava, deva: गौरव, en: "Gaurava (heaviness)", hi: "भारीपन"}
+    query_aliases: {en: [heaviness, heavy feeling, bloating, feeling heavy], hi: [भारीपन, भारी पेट, पेट फूलना], sa: [gaurava, gurutā, ādhmāna]}
+    passage_patterns: ['gaurav', 'guru-?t[aā]', 'ādhmān', 'ānāh', 'viṣṭambh']
+  - id: aruchi
+    label: {iast: aruci, deva: अरुचि, en: "Aruci (aversion to food / loss of taste)", hi: "अरुचि"}
+    query_aliases: {en: [loss of taste, aversion to food, anorexia, no interest in food], hi: [अरुचि, खाने में रुचि नहीं], sa: [aruci, arocaka]}
+    passage_patterns: ['a-?ruc', 'arocak']
+  - id: ashwagandha
+    label: {iast: aśvagandhā, deva: अश्वगन्धा, en: "Aśvagandhā (Withania somnifera, as commonly identified)", hi: "अश्वगंधा"}
+    query_aliases:
+      en: [ashwagandha, ashvagandha, aswagandha, withania]
+      hi: [अश्वगंधा, अश्वगन्धा, असगंध]
+      sa: [aśvagandhā, ashwagandha]
+    passage_patterns: ['aśvagandh', 'āśvagandh']
+    note: "Botanical identification is the conventional one; classical references here are textual mentions, not safety evidence."
+  # ---- concepts added after the 2026-11-07 prompt probes, used mainly to detect generated
+  # sentences that introduce ideas not present in the cited passage (support heuristic).
+  - id: visha
+    label: {iast: viṣa, deva: विष, en: "Viṣa (poison) / 'toxic' wording", hi: "विष"}
+    query_aliases:
+      en: [toxic, toxin, toxins, poison, poisonous, toxicity]
+      hi: [विष, विषैला, विषाक्त]
+      sa: [viṣa, āmaviṣa]
+    passage_patterns: ['(?<![a-zāīūṛṝḷṅñṭḍṇśṣṃḥ])viṣ(?:a|aṃ|eṇa|asya|e|āt|o|ā)(?![a-zāīūṛṝḷṅñṭḍṇśṣṃḥ])', 'viṣa-?(?:rūp|lakṣaṇ|sañjñ|saṃjñ)', 'ām[aā]-?viṣ', 'annaviṣ', 'viṣarūp']
+    note: "Generated text often calls āma 'toxic'; only passages that actually use viṣa-language support that wording."
+  - id: srotas
+    label: {iast: srotas, deva: स्रोतस्, en: "Srotas (channels)", hi: "स्रोतस्"}
+    query_aliases:
+      en: [srotas, channels, channel, blocks channels, clogs]
+      hi: [स्रोत, स्रोतस, स्रोतों]
+      sa: [srotas, srotāṃsi]
+    passage_patterns: ['srot', '(?<![a-zāīūṛṝḷṅñṭḍṇśṣṃḥ])kh(?:a|e|ān|āni|aiḥ|avaiguṇy)', 'baddha-?kh']
+  - id: dosha
+    label: {iast: doṣa, deva: दोष, en: "Doṣa (general)", hi: "दोष"}
+    query_aliases:
+      en: [dosha, doshas, dosa, doṣa]
+      hi: [दोष, त्रिदोष]
+      sa: [doṣa, tridoṣa]
+    passage_patterns: ['doṣ', 'vāt[aāeo]', 'pitt', 'kaph', 'śleṣm', 'mārut', 'anil']
+  - id: dhatu
+    label: {iast: dhātu, deva: धातु, en: "Dhātu (tissues)", hi: "धातु"}
+    query_aliases:
+      en: [dhatu, dhatus, tissue, tissues, rasa dhatu]
+      hi: [धातु, धातुओं, रस धातु]
+      sa: [dhātu, rasadhātu]
+    passage_patterns: ['dhāt', 'rasa', 'rakt', 'māṃs', 'medas', 'majj', 'śukr']
+  - id: roga
+    label: {iast: roga, deva: रोग, en: "Roga (disease)", hi: "रोग"}
+    query_aliases:
+      en: [disease, diseases, disorder, disorders, illness, health problems, health issues]
+      hi: [रोग, रोगों, बीमारी, विकार]
+      sa: [roga, vyādhi, vikāra, gada]
+    passage_patterns: ['rog', 'vyādh', '(?<![a-zāīūṛṝḷṅñṭḍṇśṣṃḥ])gad', 'vikār', 'āmay']
+  - id: ojas_bala
+    label: {iast: "ojas / bala", deva: "ओजस् / बल", en: "Ojas / bala (vitality, strength)", hi: "ओज / बल"}
+    query_aliases:
+      en: [ojas, strength, vitality, immunity, longevity, complexion]
+      hi: [ओज, बल, शक्ति, आयु]
+      sa: [ojas, bala, āyus, varṇa]
+    passage_patterns: ['oja', 'bal[aāo]', '(?<![a-zāīūṛṝḷṅñṭḍṇśṣṃḥ])āyu(?!rved)', 'varṇ']
+  # ---- added 2026-11-07 after dev-split retrieval analysis (dev only; test split frozen)
+  - id: amashaya
+    label: {iast: āmāśaya, deva: आमाशय, en: "Āmāśaya (site where food is first digested)", hi: "आमाशय"}
+    query_aliases:
+      en: [amashaya, where is food digested, site of digestion, seat of digestion, stomach]
+      hi: [आमाशय, पेट, भोजन कहाँ पचता]
+      sa: [āmāśaya, amashaya]
+    passage_patterns: ['āmāśay']
+  - id: kukshi
+    label: {iast: kukṣi, deva: कुक्षि, en: "Kukṣi (stomach capacity / portions)", hi: "कुक्षि"}
+    query_aliases:
+      en: [kukshi, parts of the stomach, stomach divided, divide the stomach, fill the stomach, portion of the stomach, three parts]
+      hi: [कुक्षि, पेट के भाग]
+      sa: [kukṣi, trividhakukṣīya]
+    passage_patterns: ['kukṣ', 'avakāś', 'prapūray']
+  - id: shodhana
+    label: {iast: śodhana, deva: शोधन, en: "Śodhana / elimination measures", hi: "शोधन"}
+    query_aliases:
+      en: [shodhana, eliminate, eliminated, eliminating, elimination, evacuate, purification, purificatory, expel]
+      hi: [शोधन, निकालना, निष्कासन]
+      sa: [śodhana, nirharaṇa]
+    passage_patterns: ['śodhan', 'nirhar', 'harec', 'harej', 'vinirhar', 'vireca', 'virek', 'srāvy', 'ullikh', 'ullekh', 'unmūl']
+  # ---- question-intent markers (META): help ranking only; never used for answerability or
+  # for the claim-support heuristic.
+  - id: intent_definition
+    meta: true
+    label: {iast: "", deva: "", en: "Definition intent", hi: "परिभाषा"}
+    query_aliases:
+      en: [what is, what are, define, definition, meaning of, is called, known as, how is it formed, how is ama formed]
+      hi: [क्या है, क्या हैं, परिभाषा, किसे कहते]
+      sa: [kya hai]
+    passage_patterns: ['pracakṣ', 'ucyate', 'smṛt[aāo]', 'kathyat', 'nāma(?![a-zāīū])', 'mat[aā](?![a-zāīū])', 'vidyāt', 'sañjñ', 'saṃjñ', 'vadanti']
+  - id: intent_signs
+    meta: true
+    label: {iast: "", deva: "", en: "Signs/symptoms intent", hi: "लक्षण"}
+    query_aliases:
+      en: [signs, sign, symptoms, symptom, features, indicate, indicates, characteristics, how to recognise, how to recognize]
+      hi: [लक्षण, संकेत]
+      sa: [lakṣaṇa, liṅga, rūpa]
+    passage_patterns: ['liṅg', 'lakṣaṇ', 'rūpa', 'vijñey']
+  - id: intent_causes
+    meta: true
+    label: {iast: "", deva: "", en: "Causes intent", hi: "कारण"}
+    query_aliases:
+      en: [cause, causes, caused, why does, what leads to, reasons, etiology, aetiology]
+      hi: [कारण, क्यों होता]
+      sa: [hetu, nidāna, kāraṇa]
+    passage_patterns: ['hetu', 'nidān', 'kāraṇ', 'sevin', 'śīlin']
+  - id: intent_treatment
+    meta: true
+    label: {iast: "", deva: "", en: "Management/treatment-principle intent", hi: "उपचार सिद्धांत"}
+    query_aliases:
+      en: [treatment, treat, management, manage, what should be done, advised, approach]
+      hi: [उपचार, चिकित्सा, क्या करना चाहिए]
+      sa: [cikitsā, upakrama]
+    passage_patterns: ['cikits', 'upakram', 'upācar', 'yojayet', 'prayojayet', 'kārya', 'hitaṃ']

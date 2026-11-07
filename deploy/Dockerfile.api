@@ -1,0 +1,24 @@
+# PRAMAAN API + built UI (CPU only; talks to the model server over HTTP).
+FROM node:20.18.1-bookworm-slim AS ui
+WORKDIR /ui
+COPY frontend/package.json frontend/package-lock.json ./
+RUN npm ci --no-audit --no-fund
+COPY frontend/ ./
+RUN npm run build
+
+FROM python:3.12.8-slim-bookworm
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PYTHONUTF8=1
+WORKDIR /app
+RUN pip install --no-cache-dir torch==2.7.1 --index-url https://download.pytorch.org/whl/cpu
+COPY backend/requirements.lock.txt backend/requirements.lock.txt
+RUN grep -viE '^(torch|nvidia-|triton)' backend/requirements.lock.txt > /tmp/req.txt && pip install --no-cache-dir -r /tmp/req.txt
+COPY backend/ backend/
+COPY data/ data/
+COPY eval/ eval/
+COPY --from=ui /ui/dist frontend/dist
+# Build the corpus at image build time (verifies pinned sha256 of the SARIT files).
+RUN cd backend && python -m pramaan.corpus.build
+RUN useradd -m pramaan && mkdir -p data/runtime && chown -R pramaan /app/data
+USER pramaan
+EXPOSE 8600
+CMD ["python", "-m", "uvicorn", "--app-dir", "backend", "pramaan.api:app", "--host", "0.0.0.0", "--port", "8600"]

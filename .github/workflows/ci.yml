@@ -1,0 +1,27 @@
+name: ci
+on: [push, pull_request]
+permissions: { contents: read }
+jobs:
+  backend:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - name: Install (CPU torch)
+        run: |
+          pip install torch==2.7.1 --index-url https://download.pytorch.org/whl/cpu
+          grep -viE '^(torch|nvidia-|triton)' backend/requirements.lock.txt > /tmp/req.txt
+          pip install -r /tmp/req.txt
+      - name: Build corpus (verifies pinned sha256)
+        run: cd backend && python -m pramaan.corpus.build
+      - name: Tests (no GPU; scripted stub for model-dependent paths; tokenizer fetched from pinned HF revision)
+        env: { PRAMAAN_ENABLE_DENSE: "0" }
+        run: cd backend && python -m pytest -q
+  frontend:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "20" }
+      - run: cd frontend && npm ci && npm run build

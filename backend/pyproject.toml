@@ -1,0 +1,37 @@
+[project]
+name = "pramaan"
+version = "0.1.0"
+description = "PRAMAAN: Ayurveda Evidence & Safety Workbench (AyurParam + hybrid retrieval + evidence ledger)"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.11,<3.13"
+dependencies = [
+  "fastapi==0.115.12",
+  "uvicorn==0.34.3",
+  "pydantic==2.11.5",
+  "httpx==0.28.1",
+  "lxml==5.4.0",
+  "pyyaml==6.0.2",
+  "rank-bm25==0.2.2",
+  "numpy==2.2.6",
+  "indic-transliteration==2.3.69",
+  "qdrant-client==1.14.2",
+  "sentence-transformers==4.1.0",
+  "transformers==4.53.1",
+  "tokenizers==0.21.2",
+  "safetensors==0.5.3",
+  "accelerate==1.8.1",
+  "huggingface_hub==0.34.4",
+]
+
+[project.optional-dependencies]
+dev = ["pytest==8.4.0", "ruff==0.11.13"]
+
+[tool.setuptools.packages.find]
+include = ["pramaan*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = ["ignore::SyntaxWarning", "ignore::DeprecationWarning"]
+
+[tool.ruff]
+line-length = 140

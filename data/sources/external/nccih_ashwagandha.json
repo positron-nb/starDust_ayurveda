@@ -1,0 +1,58 @@
+{
+  "source_id": "nccih-ashwagandha",
+  "accessed": "2026-11-07",
+  "page_last_updated": "March 2023",
+  "url": "https://www.nccih.nih.gov/health/ashwagandha",
+  "evidence_label": "modern_clinical_safety_reference",
+  "statements": [
+    {
+      "id": "nccih-ashwa-preg",
+      "topic": "pregnancy",
+      "paraphrase": "NCCIH states that ashwagandha should be avoided during pregnancy.",
+      "quote": "Ashwagandha should be avoided during pregnancy.",
+      "scope": "Ashwagandha generally (supplements/preparations). Page gives no mechanism or study detail for this statement."
+    },
+    {
+      "id": "nccih-ashwa-lact",
+      "topic": "lactation",
+      "paraphrase": "NCCIH states that ashwagandha should not be used while breastfeeding.",
+      "quote": "should not be used while breastfeeding.",
+      "scope": "Ashwagandha generally. No further detail given on the page."
+    },
+    {
+      "id": "nccih-ashwa-liver",
+      "topic": "liver",
+      "paraphrase": "NCCIH notes rare reported cases linking liver injury to ashwagandha supplements.",
+      "quote": null,
+      "scope": "Supplements; described as rare case reports, not an established incidence."
+    },
+    {
+      "id": "nccih-ashwa-surgery-thyroid-autoimmune",
+      "topic": "comorbidity",
+      "paraphrase": "NCCIH says ashwagandha is not recommended for people about to have surgery or with autoimmune or thyroid disorders.",
+      "quote": null,
+      "scope": "Ashwagandha generally."
+    },
+    {
+      "id": "nccih-ashwa-prostate",
+      "topic": "comorbidity",
+      "paraphrase": "NCCIH says people with hormone-sensitive prostate cancer should avoid it because it may increase testosterone levels.",
+      "quote": null,
+      "scope": "Ashwagandha generally."
+    },
+    {
+      "id": "nccih-ashwa-meds",
+      "topic": "medications",
+      "paraphrase": "NCCIH says there is evidence ashwagandha might interact with some medications, naming diabetes, blood-pressure, immunosuppressant, sedative, anti-seizure and thyroid-hormone medicines.",
+      "quote": null,
+      "scope": "Named medication classes only; this is not an assessment of any specific drug the user lists."
+    },
+    {
+      "id": "nccih-ashwa-shortterm",
+      "topic": "general",
+      "paraphrase": "NCCIH says it may be safe short-term (up to 3 months) and that long-term safety cannot be concluded from available information; some people may have drowsiness, stomach upset, diarrhoea or vomiting.",
+      "quote": null,
+      "scope": "General population statement; not a clearance for any individual."
+    }
+  ]
+}

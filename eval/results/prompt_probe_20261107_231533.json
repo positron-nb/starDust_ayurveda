@@ -1,0 +1,123 @@
+{
+  "kind": "prompt_probe",
+  "model_revision": "27c69ee",
+  "records": [
+    {
+      "query": "What is āma and how is it formed?",
+      "variant": "V1_instr_end_labels",
+      "evidence": [
+        "Ah.1.8.14",
+        "Ah.1.13.27",
+        "Ah.1.8.31",
+        "Ca.3.2.11"
+      ],
+      "prompt_tokens": 525,
+      "ms": 8822,
+      "output": "<actual_response>Ama is undigested food or metabolic waste that accumulates due to weak digestive fire (agni), leading to toxicity and obstruction in bodily channels (srotas). It forms when nutrients fail to transform properly into tissues, resulting in sticky, harmful byproducts. This toxic state can trigger various disorders depending on where it deposits. The process begins in the gastrointestinal tract but may affect any system, especially when combined with doshas. Proper digestion and timely elimination are essential to prevent ama formation. </actual_response>"
+    },
+    {
+      "query": "What is āma and how is it formed?",
+      "variant": "V2_per_passage_prefill",
+      "evidence": [
+        "Ah.1.8.14",
+        "Ah.1.13.27",
+        "Ah.1.8.31",
+        "Ca.3.2.11"
+      ],
+      "prompt_tokens": 512,
+      "ms": 2894,
+      "output": "Āma is undigested food material that forms when agni is weak. It accumulates in the digestive tract and can spread throughout the body, causing various health problems. </actual_response>"
+    },
+    {
+      "query": "What is āma and how is it formed?",
+      "variant": "V3_fewshot_prefill",
+      "evidence": [
+        "Ah.1.8.14",
+        "Ah.1.13.27",
+        "Ah.1.8.31",
+        "Ca.3.2.11"
+      ],
+      "prompt_tokens": 534,
+      "ms": 5963,
+      "output": "Āma is undigested food material that remains after digestion due to weak digestive fire (agni). When agni is low, food is not fully transformed into nutrients and instead becomes toxic, sticky substance known as āma. This can lead to various health issues including fatigue, heaviness, indigestion, and disease manifestation over time. </actual_response>"
+    },
+    {
+      "query": "Why should food be taken in proper quantity (mātrā)?",
+      "variant": "V1_instr_end_labels",
+      "evidence": [
+        "Ca.1.5.3",
+        "Ah.1.8.1",
+        "Ah.1.8.3",
+        "Ca.3.2.5"
+      ],
+      "prompt_tokens": 418,
+      "ms": 8041,
+      "output": "<actual_response>Food must be taken in proper quantity because it supports bala (strength), varna (complexion), sukha (well-being), āyu (longevity), and ojas (vital essence). It also prevents disease by maintaining balanced doshas and optimal digestive fire. Eating beyond capacity overwhelms Agni, leading to incomplete digestion and formation of Ama, which blocks bodily channels and causes illness. Conversely, insufficient intake fails to nourish tissues and weakens immunity. Thus, appropriate portion size ensures physiological harmony and long-term health. </actual_response>"
+    },
+    {
+      "query": "Why should food be taken in proper quantity (mātrā)?",
+      "variant": "V2_per_passage_prefill",
+      "evidence": [
+        "Ca.1.5.3",
+        "Ah.1.8.1",
+        "Ah.1.8.3",
+        "Ca.3.2.5"
+      ],
+      "prompt_tokens": 405,
+      "ms": 12309,
+      "output": "Caraka Saṃhitā, Sūtrasthāna 5.3: mātrāśī syāt / sarva-kālaṃ syān mātrā hy agneḥ pravartikā // mātrāṃ dravyāṇy apekṣante gurūṇy api laghūnyapi // 1 // (one should always eat in proper measure; proper measure is what keeps Agni functioning) [E2] Aṣṭāṅga Hṛdaya, Sūtrasthāna 8.1: mātrāśī sarva-kālaṃ syān mātrā hy agneḥ"
+    },
+    {
+      "query": "Why should food be taken in proper quantity (mātrā)?",
+      "variant": "V3_fewshot_prefill",
+      "evidence": [
+        "Ca.1.5.3",
+        "Ah.1.8.1",
+        "Ah.1.8.3",
+        "Ca.3.2.5"
+      ],
+      "prompt_tokens": 427,
+      "ms": 11194,
+      "output": "Caraka Saṃhitā, Sūtrasthāna 5.3: mātrāśī syāt / [E2] Aṣṭāṅga Hṛdaya, Sūtrasthāna 8.1: mātrāśī sarva-kālaṃ syān mātrāhy avikartitāgnēḥ pravartikā // [E3] Caraka Saṃhitā, Vimānasthāna 2.5: tatrāyaṃ tāvadāhārarāśimadhikṛtya mātrāmātrābhavinirṇayaḥ / </actual_response>"
+    },
+    {
+      "query": "आम क्या है और यह कैसे बनता है?",
+      "variant": "V1_instr_end_labels",
+      "evidence": [
+        "Ah.1.8.14",
+        "Ah.1.13.27",
+        "Ah.1.8.31",
+        "Ca.3.2.11"
+      ],
+      "prompt_tokens": 525,
+      "ms": 6976,
+      "output": "<actual_response>आम अपच के कारण बना अस्थिर पदार्थ है जो शरीर में विष की तरह कार्य करता है। यह तब उत्पन्न होता है जब जठराग्नि दुर्बल होती है और भोजन का सही तरीके से पाचन नहीं हो पाता। इसके परिणामस्वरूप अधूरे पचे हुए रस धातु में आम का निर्माण होता है, जिसे 'अमाविष' कहा जाता है। </actual_response>"
+    },
+    {
+      "query": "आम क्या है और यह कैसे बनता है?",
+      "variant": "V2_per_passage_prefill",
+      "evidence": [
+        "Ah.1.8.14",
+        "Ah.1.13.27",
+        "Ah.1.8.31",
+        "Ca.3.2.11"
+      ],
+      "prompt_tokens": 512,
+      "ms": 5063,
+      "output": "आमाशय में अन्न के अपूर्ण पाचन से उत्पन्न एक विषैला पदार्थ होता है जो शरीर को नुकसान पहुँचा सकता है। इसे आम कहते हैं। जब जठराग्नि दुर्बल होती है तो भोजन सही तरह पच नहीं पाता जिससे आम का निर्माण होता है। </actual_response>"
+    },
+    {
+      "query": "आम क्या है और यह कैसे बनता है?",
+      "variant": "V3_fewshot_prefill",
+      "evidence": [
+        "Ah.1.8.14",
+        "Ah.1.13.27",
+        "Ah.1.8.31",
+        "Ca.3.2.11"
+      ],
+      "prompt_tokens": 534,
+      "ms": 5856,
+      "output": "आमाशय में अन्न के अपूर्ण पाचन से उत्पन्न एक विषैला पदार्थ। आम का निर्माण तब होता है जब जठराग्नि कमजोर होती है या भोजन की मात्रा अधिक ली जाती है। इससे अपचित रस धातुओं तक नहीं पहुँच पाता और शरीर में विकार फैलते हैं। </actual_response>"
+    }
+  ]
+}

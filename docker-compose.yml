@@ -1,0 +1,30 @@
+# Local/offline deployment. NOT tested on the build machine (Docker was not installed there).
+# GPU model server:   docker compose --profile gpu up --build
+# Retrieval-only:     docker compose up --build   (PRAMAAN_LLM_MODE=off)
+services:
+  qdrant:
+    image: qdrant/qdrant:v1.14.1
+    volumes: ["qdrant_data:/qdrant/storage"]
+    expose: ["6333"]
+  api:
+    build: { context: ., dockerfile: deploy/Dockerfile.api }
+    environment:
+      - PRAMAAN_LLM_MODE=${PRAMAAN_LLM_MODE:-http}
+      - AYURPARAM_SERVER_URL=http://model:8601
+      - QDRANT_URL=http://qdrant:6333
+      - PRAMAAN_DEPLOY_MODE=${PRAMAAN_DEPLOY_MODE:-local}
+    ports: ["127.0.0.1:8600:8600"]
+    volumes: ["runtime:/app/data/runtime"]
+    depends_on: [qdrant]
+  model:
+    profiles: ["gpu"]
+    build: { context: ., dockerfile: deploy/Dockerfile.model }
+    volumes: ["./models/AyurParam:/models/AyurParam:ro"]
+    expose: ["8601"]
+    deploy:
+      resources:
+        reservations:
+          devices: [{ driver: nvidia, count: 1, capabilities: [gpu] }]
+volumes:
+  qdrant_data: {}
+  runtime: {}

@@ -1,0 +1,149 @@
+{
+  "kind": "prompt_probe_per_passage",
+  "records": [
+    {
+      "query": "What is āma and how is it formed?",
+      "passage": "Ah.1.8.14",
+      "gloss": true,
+      "prompt_tokens": 211,
+      "ms": 9712,
+      "output": "Āma refers to undigested food particles that accumulate due to weak digestive fire (agni). It forms when agni fails to fully metabolize nutrients during digestion, resulting in a sticky, toxic substance that circulates in the body and blocks channels (srotas), leading to various diseases. This process involves impaired jatharagni and dhatvagni, often aggravated by incompatible diet and lifestyle factors. "
+    },
+    {
+      "query": "What is āma and how is it formed?",
+      "passage": "Ah.1.8.14",
+      "gloss": false,
+      "prompt_tokens": 164,
+      "ms": 9183,
+      "output": "Āma refers to undigested food particles (ama-rasa) resulting from impaired digestion due to weak jatharagni. It forms when rasa dhatu fails to undergo proper transformation into subsequent tissues because of agni dysfunction. This leads to accumulation of toxic metabolic byproducts that circulate in the body, causing various disorders. The process involves mandagni (low digestive fire), leading to incomplete metabolism and formation of a sticky, heavy substance that"
+    },
+    {
+      "query": "What is āma and how is it formed?",
+      "passage": "Ah.1.13.27",
+      "gloss": true,
+      "prompt_tokens": 198,
+      "ms": 8385,
+      "output": "Āma is a toxic substance that forms when food is not properly digested due to weak agni. It accumulates in the gastrointestinal tract and then spreads throughout the body, clogging channels and disrupting physiological functions. Āma can lead to various health issues including indigestion, fatigue, joint pain, and chronic inflammation. Its presence often indicates underlying digestive impairment and requires correction of diet and lifestyle before any therapeutic intervention can be effective. "
+    },
+    {
+      "query": "What is āma and how is it formed?",
+      "passage": "Ah.1.13.27",
+      "gloss": false,
+      "prompt_tokens": 161,
+      "ms": 7830,
+      "output": "Āma is a toxic substance that forms when food is not properly digested due to weak agni (digestive fire). It results in undigested nutrients that accumulate in the gastrointestinal tract and eventually spread throughout the body, clogging channels and disrupting physiological functions. This leads to various diseases depending on the affected system. The presence of āma is often indicated by symptoms like heaviness, lethargy, coated tongue, indigestion, and foul body odor. "
+    },
+    {
+      "query": "What is āma and how is it formed?",
+      "passage": "Ah.1.8.31",
+      "gloss": true,
+      "prompt_tokens": 170,
+      "ms": 6921,
+      "output": "Āma is undigested food material that forms when agni (digestive fire) is weak. It results from improper digestion due to factors like overeating, incompatible foods, or irregular eating habits. Āma accumulates in the gastrointestinal tract and can spread throughout the body, leading to various health issues by clogging channels and disrupting physiological functions. Its presence often manifests as heaviness, lethargy, coated tongue, and loss of appetite. "
+    },
+    {
+      "query": "Why should food be taken in proper quantity (mātrā)?",
+      "passage": "Ca.1.5.3",
+      "gloss": true,
+      "prompt_tokens": 98,
+      "ms": 6553,
+      "output": "Food should be taken in proper quantity because it supports health and prevents disease by maintaining balanced digestion and metabolism. When consumed within appropriate limits, food nourishes all body tissues without aggravating any dosha. It also ensures optimal function of Agni and prevents the formation of Ama. This principle helps maintain strength, vitality, and longevity. Hence, eating according to one’s digestive capacity is essential for overall well-being. "
+    },
+    {
+      "query": "Why should food be taken in proper quantity (mātrā)?",
+      "passage": "Ah.1.8.1",
+      "gloss": true,
+      "prompt_tokens": 198,
+      "ms": 4378,
+      "output": "Food should be taken in proper quantity because it maintains the strength of Jatharagni and prevents Ama formation. When consumed within appropriate limits — neither excessive nor insufficient — it supports balanced digestion and nourishment of Dhatus. This principle ensures optimal metabolism without overburdening the digestive system. "
+    },
+    {
+      "query": "Why should food be taken in proper quantity (mātrā)?",
+      "passage": "Ah.1.8.1",
+      "gloss": false,
+      "prompt_tokens": 163,
+      "ms": 5032,
+      "output": "Food should be taken in proper quantity because it supports Agni and prevents Ama formation. When consumed within capacity, food gets fully digested without disturbing Dosha balance. Overeating burdens digestion, while undereating weakens tissues. Thus, appropriate quantity ensures optimal nourishment of Dhatus and maintains health. "
+    },
+    {
+      "query": "Why should food be taken in proper quantity (mātrā)?",
+      "passage": "Ah.1.8.3",
+      "gloss": true,
+      "prompt_tokens": 189,
+      "ms": 6939,
+      "output": "Food should be taken in proper quantity because it supports bala (strength), varna (complexion), āyu (longevity), sukha (happiness), and ojas (vital essence). It also prevents diseases caused by vitiated Vata due to undernourishment. Eating beyond capacity overwhelms agni, leading to ama formation and srotorodha (channel blockage), which are root causes of many chronic conditions. Thus, mā"
+    },
+    {
+      "query": "Why should food be taken in proper quantity (mātrā)?",
+      "passage": "Ah.1.8.3",
+      "gloss": false,
+      "prompt_tokens": 159,
+      "ms": 4786,
+      "output": "Food should be taken in proper quantity because it supports strength and longevity, prevents disease by maintaining dosha balance, promotes healthy tissue formation, ensures timely digestion without discomfort, and enhances vitality and sensory clarity. Eating too much causes sluggishness and indigestion, while eating too little leads to weakness and depletion of tissues. "
+    },
+    {
+      "query": "आम क्या है और यह कैसे बनता है?",
+      "passage": "Ah.1.8.14",
+      "gloss": true,
+      "prompt_tokens": 211,
+      "ms": 6000,
+      "output": "आम अपच के कारण बना एक विषैला पदार्थ है जो शरीर में विभिन्न रोगों का मूल कारण बन सकता है। जब अग्नि कमजोर होती है तो भोजन पूरी तरह पच नहीं पाता और आम बन जाता है। इसके लक्षणों में भारीपन, थकान, जीभ पर श्वेत चर्बी जैसी परत शामिल हैं। "
+    },
+    {
+      "query": "आम क्या है और यह कैसे बनता है?",
+      "passage": "Ah.1.8.14",
+      "gloss": false,
+      "prompt_tokens": 164,
+      "ms": 6931,
+      "output": "आम (āma) अपच के कारण बना विषैला पदार्थ है जो शरीर में विभिन्न रोगों का मूल कारण बनता है। जब अग्नि कमजोर होती है तो भोजन पूरी तरह पच नहीं पाता और एक गाढ़ा, चिपचिपा पदार्थ बन जाता है जिसे आम कहते हैं। यह स्रोतों को अवरुद्ध करता है, दोषों को विकृत करता है"
+    },
+    {
+      "query": "आम क्या है और यह कैसे बनता है?",
+      "passage": "Ah.1.13.27",
+      "gloss": true,
+      "prompt_tokens": 198,
+      "ms": 7028,
+      "output": "आम अपचित आहार का वह रूप है जो अग्नि की कमजोरी के कारण पूर्णतः पच नहीं पाया होता। इस प्रकार उत्पन्न अपक्व पदार्थ शरीर में विषैला प्रभाव डालने लगता है तथा विभिन्न रोगों का मूल कारण बन जाता है। इसे 'अमाविष' भी कहा जाता है क्योंकि यह स्वयं एक विषाक्त पदार्थ है। "
+    },
+    {
+      "query": "आम क्या है और यह कैसे बनता है?",
+      "passage": "Ah.1.13.27",
+      "gloss": false,
+      "prompt_tokens": 161,
+      "ms": 6561,
+      "output": "आम अपचित अन्न का वह रूप है जो जठराग्नि के दुर्बल होने पर उत्पन्न होता है। जब भोजन ठीक से पच नहीं पाता, तो उसका विषैला पदार्थ में परिवर्तन हो जाता है जिसे 'आम' कहा जाता है। यह शरीर में विभिन्न रोगों का मूल कारण माना गया है क्योंकि यह स्रोतों को आवृत कर दोषों को विकृत करता है"
+    },
+    {
+      "query": "आम क्या है और यह कैसे बनता है?",
+      "passage": "Ah.1.8.31",
+      "gloss": true,
+      "prompt_tokens": 170,
+      "ms": 6667,
+      "output": "आम अपचित अन्न का वह रूप है जो जठराग्नि के दुर्बल होने पर उत्पन्न होता है। जब भोजन ठीक से पच नहीं पाता, तो उसका विषैला पदार्थ में परिवर्तन हो जाता है जिसे आम कहते हैं। यह शरीर में विभिन्न रोगों का मूल कारण माना गया है क्योंकि यह स्रोतों को आवृत कर दोषों की वृद्धि करता है। "
+    },
+    {
+      "query": "What are the signs of ajīrṇa (indigestion)?",
+      "passage": "Ca.6.15.66",
+      "gloss": true,
+      "prompt_tokens": 167,
+      "ms": 6405,
+      "output": "The signs of ajīrṇa include a feeling of heaviness and lethargy after eating, loss of appetite, nausea, bloating, flatulence, abdominal pain, indigestion, and sometimes vomiting. These symptoms arise due to impaired digestion caused by vitiated Vata, Pitta, or Kapha doshas affecting the digestive fire (jatharagni). The accumulation of undigested food leads to ama formation, which further disrupts bodily functions"
+    },
+    {
+      "query": "What are the signs of ajīrṇa (indigestion)?",
+      "passage": "Ah.1.8.25",
+      "gloss": true,
+      "prompt_tokens": 177,
+      "ms": 5918,
+      "output": "The signs of ajīrṇa include heaviness in the body and head, lethargy, loss of appetite, nausea, excessive salivation, bloating, flatulence, and malaise. These symptoms arise due to impaired digestion caused by vitiated Kapha dosha obstructing Agni. The text emphasizes immediate intervention with light food like yavāgu (thin gruel) upon experiencing these early signs. "
+    },
+    {
+      "query": "What are the signs of ajīrṇa (indigestion)?",
+      "passage": "Ah.1.8.31",
+      "gloss": true,
+      "prompt_tokens": 176,
+      "ms": 5290,
+      "output": "The signs of ajīrṇa include a feeling of heaviness and lethargy after eating, loss of appetite, nausea, bloating, and indigestion. These symptoms arise due to impaired agni function caused by undigested food particles circulating in the body. The text emphasizes that such conditions should be avoided as they lead to further dosha imbalance and ama formation. "
+    }
+  ]
+}
