@@ -1,0 +1,7 @@
+# Checksum-pinned source files must stay byte-identical (no line-ending conversion)
+data/sources/raw/*.xml -text
+# Keep LF for scripts/configs used in Linux containers and CI
+*.sh text eol=lf
+Dockerfile* text eol=lf
+deploy/* text eol=lf
+*.yml text eol=lf
