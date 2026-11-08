@@ -71,7 +71,7 @@ medicines; unsupported interactions → "not assessed", never "safe"; retrieved 
 ## 8. Evaluation plan
 120 synthetic candidate cases (40 answerable, 20 multilingual, 20 safety, 20 unanswerable,
 20 adversarial), grouped dev/test split with a frozen test hash; three configurations (raw AyurParam;
-AyurParam + dense RAG; full PRAMAAN). Metrics: Hit/Recall@5, MRR, resolved-citation rate,
+AyurParam + dense RAG; full PRAMAAN). Metrics: Hit@5 (≥1 relevant passage in top 5) and passage Recall@5 (fraction of relevant passages recovered) reported separately, MRR, resolved-citation rate,
 fabricated-citation acceptance, withheld-sentence rate, correct abstention and over-refusal,
 rule-expectation accuracy, multilingual consistency, latency p50/p95. Human-adjudicated support and
 practitioner-reviewed safety are reported as **not measured** until reviews exist. Current measured
@@ -99,8 +99,9 @@ Measured on the frozen held-out split (77 synthetic cases, unreviewed candidate 
 `docs/TECHNICAL_IMPACT_REPORT.md`): 57/57 displayed generated claims pass citation integrity; 0/2
 fabricated citations accepted; 4/4 emergency inputs escalated with 0/73 false escalations; 0/10
 positive-use and 0/7 dose wordings shown where prohibited (regex proxies); 10/13 unanswerable
-questions abstained; hybrid retrieval Hit@5 0.58–0.61 (below our 0.85 target); 85% of AyurParam's
-generated sentences were withheld by the automatic checks. Human-adjudicated support and
+questions abstained; hybrid retrieval Hit@5 0.58–0.61 but passage Recall@5 only 0.22–0.24 (our target was Recall@5 ≥ 0.85, so it is clearly not met); useful-answer coverage 23/38 answerable cases; 85% of AyurParam's
+generated sentences were withheld by the automatic checks (a cost, not a success rate: 13/38 answerable
+cases ended with no generated text shown). Human-adjudicated support and
 practitioner-reviewed safety: not measured yet. The full workflow runs locally
 with live AyurParam on an 8 GB laptop GPU (load 28 s, 5.5 GB VRAM, ~25–45 s per answered query).
 Hosting, clinical review and Suśruta / Anupāna / seasonal rules are not done.

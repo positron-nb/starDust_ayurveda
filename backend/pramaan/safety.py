@@ -39,6 +39,15 @@ NEG_EN = r"(?:not|no|never|isn't|is not|non)"
 PREG_POS = [r"\bpregnan\w*", r"\bexpecting a baby\b", r"\btrimester\b", r"गर्भवती", r"गर्भावस्था", r"गर्भ से"]
 PREG_NEG = [r"\bnot pregnant\b", r"\bnon[- ]?pregnant\b", r"\bno pregnancy\b", r"\bisn'?t pregnant\b",
             r"\bpregnancy[: ]+(?:no|negative|absent)\b", r"गर्भवती नहीं", r"\bmale\b", r"\bman\b", r"पुरुष"]
+# In the QUESTION, pregnancy/lactation become 'present' only on an explicit assertion about a
+# person ("I am pregnant", "my wife is pregnant", "मैं गर्भवती हूँ"). Topic mentions such as
+# "Is X safe in pregnancy?" keep the state 'unknown'. Text in the CASE box describes the case,
+# so plain mentions there count as present.
+PREG_ASSERT = [r"\b(?:i am|i'm|im|she is|she's|patient is|wife is|daughter is|mother is|i was recently|currently)\s+(?:\w+\s+)?pregnant\b",
+               r"\bmy pregnancy\b", r"\b\d+\s*(?:weeks?|months?)\s+pregnant\b", r"\bpregnant\s+(?:woman|patient|lady|mother),?\s+\d",
+               r"(?:मैं|वह|पत्नी|मरीज)\s+(?:\S+\s+)?गर्भवती", r"गर्भवती\s+(?:हूँ|हूं|है|हैं)", r"मेरी गर्भावस्था"]
+LACT_ASSERT = [r"\b(?:i am|i'm|she is|she's|patient is|wife is)\s+(?:currently\s+)?(?:breast-?feeding|nursing|lactating)\b",
+               r"\bi breast-?feed\b", r"(?:मैं|वह|पत्नी)\s+(?:\S+\s+)?स्तनपान\s+(?:करा|कर)"]
 LACT_POS = [r"\bbreast-?feed\w*", r"\blactat\w*", r"\bnursing\b", r"स्तनपान"]
 LACT_NEG = [r"\bnot breast-?feeding\b", r"\bnot lactating\b", r"\bnot nursing\b", r"स्तनपान नहीं", r"\bmale\b", r"\bman\b", r"पुरुष"]
 AGE_RE = re.compile(r"(\d{1,3})\s*(?:-|\s)?\s*(?:years?|yrs?|y/o|yo|year-old|वर्ष|साल)", re.I)
@@ -98,26 +107,30 @@ def load_safety_statements() -> dict[str, dict]:
             for s in d["statements"]}
 
 
-def extract_facts(text: str, terms: Terminology, policy: Policy) -> list[CaseFact]:
-    t = nfc(text)
+def extract_facts(text: str, terms: Terminology, policy: Policy, case_text: str = "") -> list[CaseFact]:
+    """`text` is the user's question; `case_text` the (synthetic) case description."""
+    q = nfc(text)
+    case = nfc(case_text or "")
+    t = (q + "\n" + case).strip()
     facts: dict[str, CaseFact] = {k: CaseFact(key=k, state="unknown") for k in FACT_KEYS}
 
     def setf(key, state, values=None, ev=None):
         facts[key] = CaseFact(key=key, state=state, values=values or [], origin="extracted", evidence_text=ev)
 
-    neg = _find(PREG_NEG, t)
-    pos = _find(PREG_POS, t)
-    if neg:
-        setf("pregnancy", "absent", ev=neg[0])
-    elif pos:
-        setf("pregnancy", "present", ev=pos[0])
+    def tri(key, neg_p, assert_p, pos_p):
+        neg = _find(neg_p, t)
+        pos = _find(assert_p, q) + _find(pos_p, case) + _find(assert_p, case)
+        topic = _find(pos_p, q)
+        if neg:
+            setf(key, "absent", ev=neg[0])
+        elif pos:
+            setf(key, "present", ev=pos[0])
+        elif topic:
+            facts[key] = CaseFact(key=key, state="unknown", values=["mentioned as a topic, not stated about this person"],
+                                  origin="extracted", evidence_text=topic[0])
 
-    neg = _find(LACT_NEG, t)
-    pos = _find(LACT_POS, t)
-    if neg:
-        setf("lactation", "absent", ev=neg[0])
-    elif pos:
-        setf("lactation", "present", ev=pos[0])
+    tri("pregnancy", PREG_NEG, PREG_ASSERT, PREG_POS)
+    tri("lactation", LACT_NEG, LACT_ASSERT, LACT_POS)
 
     ages = [int(m.group(1)) for m in AGE_RE.finditer(t)]
     if ages:

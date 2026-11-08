@@ -53,6 +53,13 @@ Acceptance for reporting "expert-reviewed" metrics: ≥80% of the test split rev
 reviewed by a practitioner, disagreements resolved and documented.
 
 ## D. Generated claims (human adjudication of semantic support)
+Ready-made sheet: `python scripts/export_claim_audit.py` → `eval/audit/claim_audit_<ts>.csv` + printable
+`.html` (all 57 shown claims + 50 withheld sentences, each with its verse in IAST and Devanagari).
+Fill `support_label` (supported / partial / unsupported / passage_misread), `exact_supporting_text`,
+`reason`, `reviewer_name`, `reviewer_role`, `review_date`, then
+`python scripts/import_claim_audit.py <filled.csv>` — this writes the labels to the review log and
+produces `eval/results/eval_claim_audit_*.json` (the first real support metric).
+
 Sample ≥50 shown claims from `eval/results/eval_full_pramaan_test_*.json` (`per_case[].shown`) and
 ≥50 withheld sentences. For each: does the cited passage actually support the sentence in context?
 (Yes / partially / no / passage misread.) This yields the "human-adjudicated claim support" metric,

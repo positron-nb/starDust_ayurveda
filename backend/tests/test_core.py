@@ -128,11 +128,11 @@ def test_tristate_facts(terms, policy):
     assert f["pregnancy"].state == "unknown"
     assert f["medications"].state == "unknown"
     assert f["emergency_signs"].state == "unknown"  # absence of red flags is not a negative screen
-    f = {x.key: x for x in extract_facts("32 year old woman, not pregnant, no medications", terms, policy)}
+    f = {x.key: x for x in extract_facts("", terms, policy, "32 year old woman, not pregnant, no medications")}
     assert f["pregnancy"].state == "absent" and f["medications"].state == "absent" and f["pediatric"].state == "absent"
     f = {x.key: x for x in extract_facts("She is pregnant (second trimester)", terms, policy)}
     assert f["pregnancy"].state == "present"
-    f = {x.key: x for x in extract_facts("गर्भवती महिला को अश्वगंधा", terms, policy)}
+    f = {x.key: x for x in extract_facts("अश्वगंधा?", terms, policy, "गर्भवती महिला")}
     assert f["pregnancy"].state == "present" and "ashwagandha" in f["proposed_herbs"].values
 
 
@@ -264,3 +264,23 @@ def test_meta_concepts_not_used_for_answerability(store, terms, retriever, polic
     eng = Engine(store, terms, policy, ScriptedLLM("x"), retriever)
     r = eng.run(QueryRequest(query="What are the signs and causes of something unrelated like a car engine?", use_model=False))
     assert r.status == "insufficient_evidence"
+
+
+@pytest.mark.parametrize("query,case,expected", [
+    ("Is ashwagandha safe in pregnancy?", "", "unknown"),
+    ("Is ashwagandha safe during pregnancy for a woman?", "", "unknown"),
+    ("क्या गर्भावस्था में अश्वगंधा ली जा सकती है?", "", "unknown"),
+    ("I am pregnant, can I take ashwagandha?", "", "present"),
+    ("My wife is 12 weeks pregnant; is ashwagandha ok?", "", "present"),
+    ("मैं गर्भवती हूँ, क्या अश्वगंधा ले सकती हूँ?", "", "present"),
+    ("Is ashwagandha safe in pregnancy?", "28-year-old woman, pregnant", "present"),
+    ("Is ashwagandha safe in pregnancy?", "34-year-old woman, not pregnant", "absent"),
+])
+def test_pregnancy_question_vs_fact(terms, policy, query, case, expected):
+    f = {x.key: x for x in extract_facts(query, terms, policy, case)}
+    assert f["pregnancy"].state == expected, (query, case, f["pregnancy"])
+
+
+def test_topic_mention_triggers_missing_info_not_present_rule(terms, policy):
+    rules = {a.rule_id for a in evaluate_rules(extract_facts("Is ashwagandha safe in pregnancy?", terms, policy), policy)}
+    assert "R-PREG-ASHWA-002" in rules and "R-PREG-ASHWA-001" not in rules

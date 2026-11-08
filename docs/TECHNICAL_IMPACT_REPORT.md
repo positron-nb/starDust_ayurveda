@@ -120,8 +120,10 @@ result file (`frozen_test_split_unchanged: true`).
 | Hybrid RRF | **0.605 (23/38)** | 0.239 | 0.426 |
 
 Dev, same retriever after dev tuning: hybrid Hit@5 0.909 (20/22) — the gap to test (0.605) shows the
-terminology additions over-fitted the dev phrasing. The engineering target (Recall@5 ≥ 0.85 on a
-*reviewed* held-out set) is **not met**.
+terminology additions over-fitted the dev phrasing. Hit@5 (≥1 candidate-relevant passage in the top 5) and passage Recall@5 (fraction of the candidate-relevant
+passages recovered) are different metrics. The engineering target was **passage Recall@5 ≥ 0.85** on a
+*reviewed* held-out set; the measured hybrid Recall@5 is **0.239**, so the target is far from met. Hit@5 0.605
+is not comparable to that target.
 
 ### 6.2 Full PRAMAAN, live AyurParam (`eval_full_pramaan_test_20261107_234858.json`, 77 test cases, 71 with live inference, RTX 5060 Laptop)
 | Metric | Value | n |
@@ -165,6 +167,12 @@ Proxies are regex checks over generated text — crude, unreviewed, and only com
 
 Raw outputs (config 1) are stored for human review and are never shown in the app.
 
+**Comparison boundary.** The three configurations differ in prompts, output budgets (160 / 220 / 90 tokens
+per call), retrieval and policy stages at the same time. This compares integrated systems; it does **not**
+isolate the causal benefit of the ledger alone. The test split has now been inspected during failure
+analysis, so later tuning must not be reported as an untouched held-out improvement; a fresh,
+reviewer-authored test set is needed for that.
+
 ### 6.4 Integrity Lab (tests `test_revalidation_detects_retraction`, `test_injection_lab`)
 Retracting the only supporting passage or altering one character makes dependent claims fail
 citation integrity and disappear, the cached result becomes invalid (corpus version changes), and the
@@ -181,7 +189,7 @@ pregnancy-safety sentence is shown.
   foul odor (durgandha), and incomplete evacuation" bound to AH Sū 8.31, which mentions viṣṭambha,
   gaurava and bhrama but not foul odour. Concept overlap is not semantic entailment → human
   adjudication is required before any claim of support accuracy.
-- **Retrieval generalisation.** Held-out Hit@5 0.58–0.61; dev-tuned aliases did not transfer. Hindi
+- **Retrieval generalisation.** Held-out Hit@5 0.58–0.61, passage Recall@5 0.22–0.24; dev-tuned aliases did not transfer. Hindi
   queries retrieve different passages from their English pairs (Jaccard 0.33).
 - **Fact extraction treats topic as state.** S17 "Is ashwagandha safe in pregnancy?" set pregnancy =
   present (the stricter caution fired instead of the expected missing-information request).

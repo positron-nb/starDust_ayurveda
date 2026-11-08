@@ -161,7 +161,7 @@ class Engine:
         timings["normalize_ms"] = (time.perf_counter() - t) * 1000
 
         # 2. facts
-        extracted = extract_facts(raw + "\n" + (req.case_text or ""), self.terms, self.policy)
+        extracted = extract_facts(raw, self.terms, self.policy, req.case_text or "")
         facts = merge_facts(extracted, req.facts)
         meta_base = {"model_id": AYURPARAM_MODEL_ID, "model_revision": AYURPARAM_REVISION,
                      "prompt_version": PROMPT_VERSION, "corpus_version": self.store.corpus_version()}

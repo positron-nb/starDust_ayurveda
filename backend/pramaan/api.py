@@ -134,7 +134,7 @@ def query(req: QueryRequest):
     eng: Engine = s["engine"]
     db: AppDB = s["db"]
     from .safety import merge_facts
-    facts = merge_facts(extract_facts(req.query + "\n" + req.case_text, s["terms"], s["policy"]), req.facts)
+    facts = merge_facts(extract_facts(req.query, s["terms"], s["policy"], req.case_text), req.facts)
     key = eng.cache_key(req, facts)
     hit = db.cached(key)
     if hit is not None:
@@ -157,7 +157,7 @@ class FactReq(BaseModel):
 @app.post("/api/facts/extract")
 def facts_extract(req: FactReq):
     s = S()
-    return [f.model_dump() for f in extract_facts(req.query + "\n" + req.case_text, s["terms"], s["policy"])]
+    return [f.model_dump() for f in extract_facts(req.query, s["terms"], s["policy"], req.case_text)]
 
 
 @app.get("/api/runs")

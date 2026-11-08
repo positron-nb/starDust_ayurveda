@@ -268,6 +268,27 @@ export function Workspace({ health, onOpenPassage, onRun }: { health: Health | n
               {result.stale && <div className="mb-3 text-xs text-alert-700">Stale: {result.stale_reasons.join("; ")}</div>}
               {interp.length > 0 ? (
                 <ul className="space-y-2">{interp.map((c) => <ClaimRow key={c.claim_id} c={c} onOpen={onOpenPassage} onReview={setReviewing} readOnly={readOnly} />)}</ul>
+              ) : (result.status === "generation_failed" || result.status === "retrieval_only") && result.evidence.some((e) => e.role === "primary") ? (
+                <div className="rounded-md border border-saffron-500/40 bg-saffron-50 p-3">
+                  <div className="font-semibold text-saffron-700 text-sm mb-1">Source-only fallback</div>
+                  <p className="text-xs text-muted mb-2">
+                    {result.status === "generation_failed"
+                      ? "No AyurParam sentence passed the evidence checks, so no interpretation is shown. Read the most relevant passages directly:"
+                      : "AyurParam is unavailable. Read the most relevant passages directly:"}
+                  </p>
+                  <ol className="space-y-2">
+                    {result.evidence.filter((e) => e.role === "primary").slice(0, 3).map((e) => (
+                      <li key={e.label} className="text-sm">
+                        <button className="font-medium text-forest-700 hover:underline" onClick={() => onOpenPassage(e.passage.passage_id)}>[{e.label}] {e.passage.work}, {e.passage.verse_label}</button>
+                        <div className="iast">{e.passage.text_iast}</div>
+                        {e.passage.gloss
+                          ? <div className="text-xs text-muted mt-0.5"><Chip tone="warn">unreviewed draft gloss</Chip> {e.passage.gloss.text}</div>
+                          : <div className="text-xs text-muted mt-0.5">No reviewed gloss available for this verse yet — needs a reader of the Sanskrit.</div>}
+                      </li>
+                    ))}
+                  </ol>
+                  <p className="text-xs text-muted mt-2">Missing evidence: a reviewed explanation of these verses for this question. {result.rejected_claims.length > 0 ? `${result.rejected_claims.length} generated sentence(s) are listed in the audit below with the reason each was withheld.` : ""}</p>
+                </div>
               ) : (
                 <p className="text-sm italic text-muted">No generated interpretation is shown for this run.</p>
               )}
