@@ -1,0 +1,4616 @@
+{
+ "git_commit": "ce3176d",
+ "cases": [
+  {
+   "split": "devA",
+   "case_id": "G01a",
+   "lang": "en",
+   "query": "What is āma according to Aṣṭāṅga Hṛdaya?",
+   "query_concepts": [
+    "ama",
+    "intent_definition"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.5,
+   "top5": [
+    "Ca.3.2.11",
+    "Ah.1.8.14",
+    "Ah.1.13.24",
+    "Ah.1.13.25",
+    "Ah.1.13.27"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.13.25",
+     "indexed": true,
+     "bm25_rank": 3,
+     "dense_rank": 13,
+     "gold_concepts": [
+      "agni",
+      "ama",
+      "amashaya",
+      "dhatu",
+      "intent_definition",
+      "mandagni",
+      "ojas_bala"
+     ],
+     "overlap": [
+      "ama",
+      "intent_definition"
+     ]
+    },
+    {
+     "id": "Ah.1.13.26",
+     "indexed": true,
+     "bm25_rank": 20,
+     "dense_rank": 6,
+     "gold_concepts": [
+      "ama",
+      "dosha"
+     ],
+     "overlap": [
+      "ama"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devA",
+   "case_id": "G01b",
+   "lang": "en",
+   "query": "How is ama formed when digestive heat is weak?",
+   "query_concepts": [
+    "mandagni",
+    "ama",
+    "intent_definition",
+    "agni"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.5,
+   "top5": [
+    "Ah.1.13.25",
+    "Ah.1.13.27+1",
+    "Ah.1.8.20",
+    "Ca.6.15.56",
+    "Ah.1.13.24"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.13.25",
+     "indexed": true,
+     "bm25_rank": 1,
+     "dense_rank": 1,
+     "gold_concepts": [
+      "agni",
+      "ama",
+      "amashaya",
+      "dhatu",
+      "intent_definition",
+      "mandagni",
+      "ojas_bala"
+     ],
+     "overlap": [
+      "agni",
+      "ama",
+      "intent_definition",
+      "mandagni"
+     ]
+    },
+    {
+     "id": "Ah.1.13.26",
+     "indexed": true,
+     "bm25_rank": 33,
+     "dense_rank": 29,
+     "gold_concepts": [
+      "ama",
+      "dosha"
+     ],
+     "overlap": [
+      "ama"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devA",
+   "case_id": "G01hi",
+   "lang": "hi",
+   "query": "आम क्या है और यह कैसे बनता है?",
+   "query_concepts": [
+    "ama",
+    "intent_definition"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.5,
+   "top5": [
+    "Ca.3.2.11",
+    "Ah.1.8.14",
+    "Ah.1.13.24",
+    "Ah.1.13.27",
+    "Ah.1.13.25"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.13.25",
+     "indexed": true,
+     "bm25_rank": 3,
+     "dense_rank": 4,
+     "gold_concepts": [
+      "agni",
+      "ama",
+      "amashaya",
+      "dhatu",
+      "intent_definition",
+      "mandagni",
+      "ojas_bala"
+     ],
+     "overlap": [
+      "ama",
+      "intent_definition"
+     ]
+    },
+    {
+     "id": "Ah.1.13.26",
+     "indexed": true,
+     "bm25_rank": 20,
+     "dense_rank": 12,
+     "gold_concepts": [
+      "ama",
+      "dosha"
+     ],
+     "overlap": [
+      "ama"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devA",
+   "case_id": "G01tr",
+   "lang": "en",
+   "query": "ama kya hai aur kaise banta hai",
+   "query_concepts": [
+    "ama",
+    "intent_definition"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.5,
+   "top5": [
+    "Ah.1.8.14",
+    "Ca.3.2.11",
+    "Ah.1.13.24",
+    "Ah.1.13.25",
+    "Ah.1.13.27"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.13.25",
+     "indexed": true,
+     "bm25_rank": 3,
+     "dense_rank": 139,
+     "gold_concepts": [
+      "agni",
+      "ama",
+      "amashaya",
+      "dhatu",
+      "intent_definition",
+      "mandagni",
+      "ojas_bala"
+     ],
+     "overlap": [
+      "ama",
+      "intent_definition"
+     ]
+    },
+    {
+     "id": "Ah.1.13.26",
+     "indexed": true,
+     "bm25_rank": 20,
+     "dense_rank": 237,
+     "gold_concepts": [
+      "ama",
+      "dosha"
+     ],
+     "overlap": [
+      "ama"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devA",
+   "case_id": "G04a",
+   "lang": "en",
+   "query": "Why should sama doshas spread through the body not be eliminated immediately?",
+   "query_concepts": [
+    "ama",
+    "dosha",
+    "shodhana"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.5,
+   "top5": [
+    "Ah.1.13.28",
+    "Ah.1.13.27",
+    "Ah.1.8.12",
+    "Ah.1.8.31",
+    "Ah.1.13.26"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.13.28",
+     "indexed": true,
+     "bm25_rank": 2,
+     "dense_rank": 8,
+     "gold_concepts": [
+      "ama",
+      "dhatu",
+      "dosha",
+      "shodhana"
+     ],
+     "overlap": [
+      "ama",
+      "dosha",
+      "shodhana"
+     ]
+    },
+    {
+     "id": "Ah.1.13.29",
+     "indexed": true,
+     "bm25_rank": 44,
+     "dense_rank": 190,
+     "gold_concepts": [
+      "pachana_dipana",
+      "shodhana"
+     ],
+     "overlap": [
+      "shodhana"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devA",
+   "case_id": "G04b",
+   "lang": "en",
+   "query": "What preparation with pachana and dipana is advised before eliminating sama doshas?",
+   "query_concepts": [
+    "ama",
+    "pachana_dipana",
+    "dosha",
+    "shodhana",
+    "intent_treatment"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 1.0,
+   "top5": [
+    "Ca.6.15.95",
+    "Ah.1.13.33",
+    "Ah.1.13.28",
+    "Ca.6.15.121",
+    "Ah.1.13.29"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.13.28",
+     "indexed": true,
+     "bm25_rank": 2,
+     "dense_rank": 30,
+     "gold_concepts": [
+      "ama",
+      "dhatu",
+      "dosha",
+      "shodhana"
+     ],
+     "overlap": [
+      "ama",
+      "dosha",
+      "shodhana"
+     ]
+    },
+    {
+     "id": "Ah.1.13.29",
+     "indexed": true,
+     "bm25_rank": 12,
+     "dense_rank": 11,
+     "gold_concepts": [
+      "pachana_dipana",
+      "shodhana"
+     ],
+     "overlap": [
+      "pachana_dipana",
+      "shodhana"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devA",
+   "case_id": "G07a",
+   "lang": "en",
+   "query": "What are alasaka and vishuchika?",
+   "query_concepts": [
+    "alasaka",
+    "vishucika",
+    "intent_definition"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.5714285714285714,
+   "top5": [
+    "Ca.3.2.10",
+    "Ah.1.8.5",
+    "Ah.1.8.7",
+    "Ah.1.8.13",
+    "Ca.3.2.12"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.5",
+     "indexed": true,
+     "bm25_rank": 2,
+     "dense_rank": 2,
+     "gold_concepts": [
+      "alasaka",
+      "ama",
+      "guru_gaurava",
+      "vishucika"
+     ],
+     "overlap": [
+      "alasaka",
+      "vishucika"
+     ]
+    },
+    {
+     "id": "Ah.1.8.6",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 369,
+     "gold_concepts": [
+      "ahara"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ah.1.8.7",
+     "indexed": true,
+     "bm25_rank": 5,
+     "dense_rank": 7,
+     "gold_concepts": [
+      "alasaka",
+      "amashaya",
+      "intent_definition",
+      "vata"
+     ],
+     "overlap": [
+      "alasaka",
+      "intent_definition"
+     ]
+    },
+    {
+     "id": "Ah.1.8.8",
+     "indexed": true,
+     "bm25_rank": 3,
+     "dense_rank": 56,
+     "gold_concepts": [
+      "guru_gaurava",
+      "shula",
+      "vishucika"
+     ],
+     "overlap": [
+      "vishucika"
+     ]
+    },
+    {
+     "id": "Ca.3.2.10",
+     "indexed": true,
+     "bm25_rank": 1,
+     "dense_rank": 1,
+     "gold_concepts": [
+      "alasaka",
+      "ama",
+      "dosha"
+     ],
+     "overlap": [
+      "alasaka"
+     ]
+    },
+    {
+     "id": "Ca.3.2.11",
+     "indexed": true,
+     "bm25_rank": 9,
+     "dense_rank": 17,
+     "gold_concepts": [
+      "ama",
+      "dosha",
+      "intent_definition"
+     ],
+     "overlap": [
+      "intent_definition"
+     ]
+    },
+    {
+     "id": "Ca.3.2.12",
+     "indexed": true,
+     "bm25_rank": 7,
+     "dense_rank": 3,
+     "gold_concepts": [
+      "agni",
+      "ahara_matra",
+      "alasaka",
+      "ama",
+      "atisara",
+      "chardi",
+      "dosha",
+      "intent_causes",
+      "intent_signs",
+      "kapha",
+      "ojas_bala",
+      "vata"
+     ],
+     "overlap": [
+      "alasaka"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devA",
+   "case_id": "G07b",
+   "lang": "en",
+   "query": "How do the texts explain the names alasaka and visuchika?",
+   "query_concepts": [
+    "alasaka",
+    "vishucika"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.42857142857142855,
+   "top5": [
+    "Ca.3.2.10",
+    "Ah.1.8.5",
+    "Ah.1.8.12",
+    "Ca.3.2.12",
+    "Ah.1.8.13"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.5",
+     "indexed": true,
+     "bm25_rank": 2,
+     "dense_rank": 2,
+     "gold_concepts": [
+      "alasaka",
+      "ama",
+      "guru_gaurava",
+      "vishucika"
+     ],
+     "overlap": [
+      "alasaka",
+      "vishucika"
+     ]
+    },
+    {
+     "id": "Ah.1.8.6",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 355,
+     "gold_concepts": [
+      "ahara"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ah.1.8.7",
+     "indexed": true,
+     "bm25_rank": 10,
+     "dense_rank": 7,
+     "gold_concepts": [
+      "alasaka",
+      "amashaya",
+      "intent_definition",
+      "vata"
+     ],
+     "overlap": [
+      "alasaka"
+     ]
+    },
+    {
+     "id": "Ah.1.8.8",
+     "indexed": true,
+     "bm25_rank": 3,
+     "dense_rank": 70,
+     "gold_concepts": [
+      "guru_gaurava",
+      "shula",
+      "vishucika"
+     ],
+     "overlap": [
+      "vishucika"
+     ]
+    },
+    {
+     "id": "Ca.3.2.10",
+     "indexed": true,
+     "bm25_rank": 1,
+     "dense_rank": 1,
+     "gold_concepts": [
+      "alasaka",
+      "ama",
+      "dosha"
+     ],
+     "overlap": [
+      "alasaka"
+     ]
+    },
+    {
+     "id": "Ca.3.2.11",
+     "indexed": true,
+     "bm25_rank": 12,
+     "dense_rank": 18,
+     "gold_concepts": [
+      "ama",
+      "dosha",
+      "intent_definition"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.3.2.12",
+     "indexed": true,
+     "bm25_rank": 5,
+     "dense_rank": 5,
+     "gold_concepts": [
+      "agni",
+      "ahara_matra",
+      "alasaka",
+      "ama",
+      "atisara",
+      "chardi",
+      "dosha",
+      "intent_causes",
+      "intent_signs",
+      "kapha",
+      "ojas_bala",
+      "vata"
+     ],
+     "overlap": [
+      "alasaka"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devA",
+   "case_id": "G07c",
+   "lang": "en",
+   "query": "What are the two kinds of amapradosha according to Charaka?",
+   "query_concepts": [
+    "intent_definition"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.14285714285714285,
+   "top5": [
+    "Ca.3.2.11",
+    "Ah.1.8.14",
+    "Ca.3.2.4",
+    "Ca.8.12.16-5"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.5",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 10,
+     "gold_concepts": [
+      "alasaka",
+      "ama",
+      "guru_gaurava",
+      "vishucika"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ah.1.8.6",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 121,
+     "gold_concepts": [
+      "ahara"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ah.1.8.7",
+     "indexed": true,
+     "bm25_rank": 16,
+     "dense_rank": 214,
+     "gold_concepts": [
+      "alasaka",
+      "amashaya",
+      "intent_definition",
+      "vata"
+     ],
+     "overlap": [
+      "intent_definition"
+     ]
+    },
+    {
+     "id": "Ah.1.8.8",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 370,
+     "gold_concepts": [
+      "guru_gaurava",
+      "shula",
+      "vishucika"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.3.2.10",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 12,
+     "gold_concepts": [
+      "alasaka",
+      "ama",
+      "dosha"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.3.2.11",
+     "indexed": true,
+     "bm25_rank": 6,
+     "dense_rank": 38,
+     "gold_concepts": [
+      "ama",
+      "dosha",
+      "intent_definition"
+     ],
+     "overlap": [
+      "intent_definition"
+     ]
+    },
+    {
+     "id": "Ca.3.2.12",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 18,
+     "gold_concepts": [
+      "agni",
+      "ahara_matra",
+      "alasaka",
+      "ama",
+      "atisara",
+      "chardi",
+      "dosha",
+      "intent_causes",
+      "intent_signs",
+      "kapha",
+      "ojas_bala",
+      "vata"
+     ],
+     "overlap": []
+    }
+   ],
+   "status": "insufficient_evidence"
+  },
+  {
+   "split": "devA",
+   "case_id": "G07hi",
+   "lang": "hi",
+   "query": "अलसक और विषूचिका क्या हैं?",
+   "query_concepts": [
+    "alasaka",
+    "vishucika",
+    "intent_definition"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.5714285714285714,
+   "top5": [
+    "Ah.1.8.13",
+    "Ah.1.8.5",
+    "Ca.3.2.10",
+    "Ah.1.8.7",
+    "Ca.3.2.12"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.5",
+     "indexed": true,
+     "bm25_rank": 3,
+     "dense_rank": 1,
+     "gold_concepts": [
+      "alasaka",
+      "ama",
+      "guru_gaurava",
+      "vishucika"
+     ],
+     "overlap": [
+      "alasaka",
+      "vishucika"
+     ]
+    },
+    {
+     "id": "Ah.1.8.6",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 408,
+     "gold_concepts": [
+      "ahara"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ah.1.8.7",
+     "indexed": true,
+     "bm25_rank": 7,
+     "dense_rank": 6,
+     "gold_concepts": [
+      "alasaka",
+      "amashaya",
+      "intent_definition",
+      "vata"
+     ],
+     "overlap": [
+      "alasaka",
+      "intent_definition"
+     ]
+    },
+    {
+     "id": "Ah.1.8.8",
+     "indexed": true,
+     "bm25_rank": 1,
+     "dense_rank": 67,
+     "gold_concepts": [
+      "guru_gaurava",
+      "shula",
+      "vishucika"
+     ],
+     "overlap": [
+      "vishucika"
+     ]
+    },
+    {
+     "id": "Ca.3.2.10",
+     "indexed": true,
+     "bm25_rank": 2,
+     "dense_rank": 2,
+     "gold_concepts": [
+      "alasaka",
+      "ama",
+      "dosha"
+     ],
+     "overlap": [
+      "alasaka"
+     ]
+    },
+    {
+     "id": "Ca.3.2.11",
+     "indexed": true,
+     "bm25_rank": 8,
+     "dense_rank": 123,
+     "gold_concepts": [
+      "ama",
+      "dosha",
+      "intent_definition"
+     ],
+     "overlap": [
+      "intent_definition"
+     ]
+    },
+    {
+     "id": "Ca.3.2.12",
+     "indexed": true,
+     "bm25_rank": 9,
+     "dense_rank": 10,
+     "gold_concepts": [
+      "agni",
+      "ahara_matra",
+      "alasaka",
+      "ama",
+      "atisara",
+      "chardi",
+      "dosha",
+      "intent_causes",
+      "intent_signs",
+      "kapha",
+      "ojas_bala",
+      "vata"
+     ],
+     "overlap": [
+      "alasaka"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devA",
+   "case_id": "G10a",
+   "lang": "en",
+   "query": "What are the types of ajirna such as amajirna, vidagdha and vishtabdha?",
+   "query_concepts": [
+    "ajirna",
+    "ajirna_types",
+    "intent_definition"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.5,
+   "top5": [
+    "Ah.1.8.26",
+    "Ah.1.8.31",
+    "Ca.6.15.45",
+    "Ah.1.8.27",
+    "Ca.6.15.73"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.25",
+     "indexed": true,
+     "bm25_rank": 12,
+     "dense_rank": 10,
+     "gold_concepts": [
+      "ajirna",
+      "ama",
+      "dosha",
+      "guru_gaurava",
+      "kapha"
+     ],
+     "overlap": [
+      "ajirna"
+     ]
+    },
+    {
+     "id": "Ah.1.8.26",
+     "indexed": true,
+     "bm25_rank": 1,
+     "dense_rank": 1,
+     "gold_concepts": [
+      "ajirna_types",
+      "dosha",
+      "guru_gaurava",
+      "pitta",
+      "vata"
+     ],
+     "overlap": [
+      "ajirna_types"
+     ]
+    },
+    {
+     "id": "Ah.1.8.27",
+     "indexed": true,
+     "bm25_rank": 3,
+     "dense_rank": 2,
+     "gold_concepts": [
+      "ajirna_types",
+      "ama",
+      "chardi",
+      "intent_treatment",
+      "langhana"
+     ],
+     "overlap": [
+      "ajirna_types"
+     ]
+    },
+    {
+     "id": "Ah.1.8.29",
+     "indexed": true,
+     "bm25_rank": 6,
+     "dense_rank": 3,
+     "gold_concepts": [
+      "ajirna_types",
+      "dhatu"
+     ],
+     "overlap": [
+      "ajirna_types"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devA",
+   "case_id": "G10b",
+   "lang": "en",
+   "query": "Which dosha is associated with vidagdha and vishtabdha ajirna?",
+   "query_concepts": [
+    "ajirna",
+    "ajirna_types",
+    "dosha"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.5,
+   "top5": [
+    "Ah.1.8.26",
+    "Ah.1.8.31",
+    "Ca.6.15.73",
+    "Ah.1.8.30",
+    "Ah.1.8.25"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.25",
+     "indexed": true,
+     "bm25_rank": 9,
+     "dense_rank": 14,
+     "gold_concepts": [
+      "ajirna",
+      "ama",
+      "dosha",
+      "guru_gaurava",
+      "kapha"
+     ],
+     "overlap": [
+      "ajirna",
+      "dosha"
+     ]
+    },
+    {
+     "id": "Ah.1.8.26",
+     "indexed": true,
+     "bm25_rank": 1,
+     "dense_rank": 1,
+     "gold_concepts": [
+      "ajirna_types",
+      "dosha",
+      "guru_gaurava",
+      "pitta",
+      "vata"
+     ],
+     "overlap": [
+      "ajirna_types",
+      "dosha"
+     ]
+    },
+    {
+     "id": "Ah.1.8.27",
+     "indexed": true,
+     "bm25_rank": 5,
+     "dense_rank": 28,
+     "gold_concepts": [
+      "ajirna_types",
+      "ama",
+      "chardi",
+      "intent_treatment",
+      "langhana"
+     ],
+     "overlap": [
+      "ajirna_types"
+     ]
+    },
+    {
+     "id": "Ah.1.8.29",
+     "indexed": true,
+     "bm25_rank": 7,
+     "dense_rank": 29,
+     "gold_concepts": [
+      "ajirna_types",
+      "dhatu"
+     ],
+     "overlap": [
+      "ajirna_types"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devA",
+   "case_id": "G10c",
+   "lang": "en",
+   "query": "What is rasashesha ajirna?",
+   "query_concepts": [
+    "ajirna",
+    "ajirna_types",
+    "intent_definition"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.25,
+   "top5": [
+    "Ah.1.8.31",
+    "Ca.6.15.45",
+    "Ah.1.8.13",
+    "Ah.1.8.25",
+    "Ca.6.15.73"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.25",
+     "indexed": true,
+     "bm25_rank": 13,
+     "dense_rank": 1,
+     "gold_concepts": [
+      "ajirna",
+      "ama",
+      "dosha",
+      "guru_gaurava",
+      "kapha"
+     ],
+     "overlap": [
+      "ajirna"
+     ]
+    },
+    {
+     "id": "Ah.1.8.26",
+     "indexed": true,
+     "bm25_rank": 1,
+     "dense_rank": 85,
+     "gold_concepts": [
+      "ajirna_types",
+      "dosha",
+      "guru_gaurava",
+      "pitta",
+      "vata"
+     ],
+     "overlap": [
+      "ajirna_types"
+     ]
+    },
+    {
+     "id": "Ah.1.8.27",
+     "indexed": true,
+     "bm25_rank": 3,
+     "dense_rank": 28,
+     "gold_concepts": [
+      "ajirna_types",
+      "ama",
+      "chardi",
+      "intent_treatment",
+      "langhana"
+     ],
+     "overlap": [
+      "ajirna_types"
+     ]
+    },
+    {
+     "id": "Ah.1.8.29",
+     "indexed": true,
+     "bm25_rank": 2,
+     "dense_rank": 4,
+     "gold_concepts": [
+      "ajirna_types",
+      "dhatu"
+     ],
+     "overlap": [
+      "ajirna_types"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devA",
+   "case_id": "G10hi",
+   "lang": "hi",
+   "query": "अजीर्ण के प्रकार कौन से हैं?",
+   "query_concepts": [
+    "ajirna",
+    "ajirna_types"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.5,
+   "top5": [
+    "Ah.1.8.31",
+    "Ca.6.15.112",
+    "Ca.6.15.42",
+    "Ah.1.8.25",
+    "Ah.1.8.26"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.25",
+     "indexed": true,
+     "bm25_rank": 11,
+     "dense_rank": 5,
+     "gold_concepts": [
+      "ajirna",
+      "ama",
+      "dosha",
+      "guru_gaurava",
+      "kapha"
+     ],
+     "overlap": [
+      "ajirna"
+     ]
+    },
+    {
+     "id": "Ah.1.8.26",
+     "indexed": true,
+     "bm25_rank": 1,
+     "dense_rank": 2,
+     "gold_concepts": [
+      "ajirna_types",
+      "dosha",
+      "guru_gaurava",
+      "pitta",
+      "vata"
+     ],
+     "overlap": [
+      "ajirna_types"
+     ]
+    },
+    {
+     "id": "Ah.1.8.27",
+     "indexed": true,
+     "bm25_rank": 2,
+     "dense_rank": 4,
+     "gold_concepts": [
+      "ajirna_types",
+      "ama",
+      "chardi",
+      "intent_treatment",
+      "langhana"
+     ],
+     "overlap": [
+      "ajirna_types"
+     ]
+    },
+    {
+     "id": "Ah.1.8.29",
+     "indexed": true,
+     "bm25_rank": 6,
+     "dense_rank": 1,
+     "gold_concepts": [
+      "ajirna_types",
+      "dhatu"
+     ],
+     "overlap": [
+      "ajirna_types"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devA",
+   "case_id": "G10tr",
+   "lang": "en",
+   "query": "ajirna ke prakar",
+   "query_concepts": [
+    "ajirna"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.25,
+   "top5": [
+    "Ca.6.15.66",
+    "Ah.1.8.25",
+    "Ca.6.15.237",
+    "Ah.1.8.31",
+    "Ca.6.15.42"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.25",
+     "indexed": true,
+     "bm25_rank": 2,
+     "dense_rank": 6,
+     "gold_concepts": [
+      "ajirna",
+      "ama",
+      "dosha",
+      "guru_gaurava",
+      "kapha"
+     ],
+     "overlap": [
+      "ajirna"
+     ]
+    },
+    {
+     "id": "Ah.1.8.26",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 308,
+     "gold_concepts": [
+      "ajirna_types",
+      "dosha",
+      "guru_gaurava",
+      "pitta",
+      "vata"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ah.1.8.27",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 101,
+     "gold_concepts": [
+      "ajirna_types",
+      "ama",
+      "chardi",
+      "intent_treatment",
+      "langhana"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ah.1.8.29",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 59,
+     "gold_concepts": [
+      "ajirna_types",
+      "dhatu"
+     ],
+     "overlap": []
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devA",
+   "case_id": "G13a",
+   "lang": "en",
+   "query": "How should the stomach be divided between solid food, liquids and the doshas?",
+   "query_concepts": [
+    "ahara",
+    "dosha",
+    "amashaya"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "top5": [
+    "Ca.3.2.18",
+    "Ca.6.15.76",
+    "Ah.1.13.30",
+    "Ah.1.8.7",
+    "Ca.3.2.17"
+   ],
+   "gold": [
+    {
+     "id": "Ca.3.2.3",
+     "indexed": true,
+     "bm25_rank": 40,
+     "dense_rank": 4,
+     "gold_concepts": [
+      "ahara",
+      "ahara_matra",
+      "dosha",
+      "kapha",
+      "kukshi",
+      "pitta",
+      "roga",
+      "vata"
+     ],
+     "overlap": [
+      "ahara",
+      "dosha"
+     ]
+    },
+    {
+     "id": "Ah.1.8.46",
+     "indexed": true,
+     "bm25_rank": 46,
+     "dense_rank": 24,
+     "gold_concepts": [
+      "ahara",
+      "kukshi"
+     ],
+     "overlap": [
+      "ahara"
+     ]
+    },
+    {
+     "id": "Ah.1.8.47",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 494,
+     "gold_concepts": [
+      "vata"
+     ],
+     "overlap": []
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devA",
+   "case_id": "G13tr",
+   "lang": "en",
+   "query": "trividha kukshi - three parts of the stomach",
+   "query_concepts": [
+    "amashaya",
+    "kukshi"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.3333333333333333,
+   "top5": [
+    "Ca.3.2.18",
+    "Ca.3.2.3",
+    "Ah.1.8.7",
+    "Ca.6.15.76",
+    "Ca.3.2.1"
+   ],
+   "gold": [
+    {
+     "id": "Ca.3.2.3",
+     "indexed": true,
+     "bm25_rank": 5,
+     "dense_rank": 1,
+     "gold_concepts": [
+      "ahara",
+      "ahara_matra",
+      "dosha",
+      "kapha",
+      "kukshi",
+      "pitta",
+      "roga",
+      "vata"
+     ],
+     "overlap": [
+      "kukshi"
+     ]
+    },
+    {
+     "id": "Ah.1.8.46",
+     "indexed": true,
+     "bm25_rank": 11,
+     "dense_rank": 4,
+     "gold_concepts": [
+      "ahara",
+      "kukshi"
+     ],
+     "overlap": [
+      "kukshi"
+     ]
+    },
+    {
+     "id": "Ah.1.8.47",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 315,
+     "gold_concepts": [
+      "vata"
+     ],
+     "overlap": []
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devA",
+   "case_id": "G16a",
+   "lang": "en",
+   "query": "Why is grahani called the seat of agni?",
+   "query_concepts": [
+    "agni",
+    "grahani"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.5,
+   "top5": [
+    "Ca.6.15.195",
+    "Ca.6.15.56",
+    "Ca.6.15.169",
+    "Ca.6.15.71",
+    "Ca.6.15.249"
+   ],
+   "gold": [
+    {
+     "id": "Ca.6.15.56",
+     "indexed": true,
+     "bm25_rank": 2,
+     "dense_rank": 8,
+     "gold_concepts": [
+      "agni",
+      "grahani",
+      "intent_definition"
+     ],
+     "overlap": [
+      "agni",
+      "grahani"
+     ]
+    },
+    {
+     "id": "Ca.6.15.57",
+     "indexed": true,
+     "bm25_rank": 71,
+     "dense_rank": 103,
+     "gold_concepts": [
+      "agni",
+      "mandagni",
+      "ojas_bala"
+     ],
+     "overlap": [
+      "agni"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devA",
+   "case_id": "G16b",
+   "lang": "en",
+   "query": "What does a weakened grahani do with undigested food?",
+   "query_concepts": [
+    "ama",
+    "grahani",
+    "ahara"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "top5": [
+    "Ca.3.2.8",
+    "Ah.1.8.31",
+    "Ah.1.13.27",
+    "Ah.1.8.14",
+    "Ca.6.15.247"
+   ],
+   "gold": [
+    {
+     "id": "Ca.6.15.56",
+     "indexed": true,
+     "bm25_rank": 4,
+     "dense_rank": 102,
+     "gold_concepts": [
+      "agni",
+      "grahani",
+      "intent_definition"
+     ],
+     "overlap": [
+      "grahani"
+     ]
+    },
+    {
+     "id": "Ca.6.15.57",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 190,
+     "gold_concepts": [
+      "agni",
+      "mandagni",
+      "ojas_bala"
+     ],
+     "overlap": []
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devA",
+   "case_id": "G16hi",
+   "lang": "hi",
+   "query": "ग्रहणी को अग्नि का अधिष्ठान क्यों कहा गया है?",
+   "query_concepts": [
+    "agni",
+    "grahani"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.5,
+   "top5": [
+    "Ca.6.15.56",
+    "Ca.6.15.195",
+    "Ca.6.15.71",
+    "Ca.6.15.140",
+    "Ca.6.15.169"
+   ],
+   "gold": [
+    {
+     "id": "Ca.6.15.56",
+     "indexed": true,
+     "bm25_rank": 2,
+     "dense_rank": 7,
+     "gold_concepts": [
+      "agni",
+      "grahani",
+      "intent_definition"
+     ],
+     "overlap": [
+      "agni",
+      "grahani"
+     ]
+    },
+    {
+     "id": "Ca.6.15.57",
+     "indexed": true,
+     "bm25_rank": 71,
+     "dense_rank": 60,
+     "gold_concepts": [
+      "agni",
+      "mandagni",
+      "ojas_bala"
+     ],
+     "overlap": [
+      "agni"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devA",
+   "case_id": "G19a",
+   "lang": "en",
+   "query": "Where is food digested according to Charaka's trividhakukshiya chapter?",
+   "query_concepts": [
+    "ahara",
+    "amashaya"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.5,
+   "top5": [
+    "Ca.3.2.18",
+    "Ah.1.8.7",
+    "Ca.6.15.76",
+    "Ah.1.13.30",
+    "Ca.3.2.17"
+   ],
+   "gold": [
+    {
+     "id": "Ca.3.2.15",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 400,
+     "gold_concepts": [],
+     "overlap": []
+    },
+    {
+     "id": "Ca.3.2.16",
+     "indexed": true,
+     "bm25_rank": 34,
+     "dense_rank": 65,
+     "gold_concepts": [
+      "agni",
+      "ahara"
+     ],
+     "overlap": [
+      "ahara"
+     ]
+    },
+    {
+     "id": "Ca.3.2.17",
+     "indexed": true,
+     "bm25_rank": 6,
+     "dense_rank": 16,
+     "gold_concepts": [
+      "amashaya",
+      "intent_definition"
+     ],
+     "overlap": [
+      "amashaya"
+     ]
+    },
+    {
+     "id": "Ca.3.2.18",
+     "indexed": true,
+     "bm25_rank": 1,
+     "dense_rank": 3,
+     "gold_concepts": [
+      "ahara",
+      "amashaya"
+     ],
+     "overlap": [
+      "ahara",
+      "amashaya"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devA",
+   "case_id": "G19b",
+   "lang": "en",
+   "query": "In which site are eaten, chewed, drunk and licked foods digested?",
+   "query_concepts": [
+    "ahara"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.25,
+   "top5": [
+    "Ah.1.8.34",
+    "Ca.6.15.42",
+    "Ca.6.15.222",
+    "Ca.3.2.18",
+    "Ca.6.15.116"
+   ],
+   "gold": [
+    {
+     "id": "Ca.3.2.15",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 197,
+     "gold_concepts": [],
+     "overlap": []
+    },
+    {
+     "id": "Ca.3.2.16",
+     "indexed": true,
+     "bm25_rank": 28,
+     "dense_rank": 20,
+     "gold_concepts": [
+      "agni",
+      "ahara"
+     ],
+     "overlap": [
+      "ahara"
+     ]
+    },
+    {
+     "id": "Ca.3.2.17",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 3,
+     "gold_concepts": [
+      "amashaya",
+      "intent_definition"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.3.2.18",
+     "indexed": true,
+     "bm25_rank": 24,
+     "dense_rank": 2,
+     "gold_concepts": [
+      "ahara",
+      "amashaya"
+     ],
+     "overlap": [
+      "ahara"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G02a",
+   "lang": "en",
+   "query": "What are the signs of malas associated with ama (sama) versus nirama?",
+   "query_concepts": [
+    "ama",
+    "intent_definition",
+    "intent_signs"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.5,
+   "top5": [
+    "Ah.1.13.24",
+    "Ah.1.8.31",
+    "Ah.1.8.14",
+    "Ca.3.2.11",
+    "Ah.1.13.27"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.13.23",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 80,
+     "gold_concepts": [
+      "guru_gaurava",
+      "ojas_bala",
+      "shodhana",
+      "srotas"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ah.1.13.24",
+     "indexed": true,
+     "bm25_rank": 2,
+     "dense_rank": 1,
+     "gold_concepts": [
+      "ama",
+      "intent_signs"
+     ],
+     "overlap": [
+      "ama",
+      "intent_signs"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G02b",
+   "lang": "en",
+   "query": "Which features indicate sama dosha such as heaviness, lassitude and loss of taste?",
+   "query_concepts": [
+    "ama",
+    "guru_gaurava",
+    "aruchi",
+    "dosha",
+    "intent_signs"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.5,
+   "top5": [
+    "Ah.1.8.31",
+    "Ah.1.8.25",
+    "Ca.3.2.8",
+    "Ah.1.13.24",
+    "Ca.6.15.45"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.13.23",
+     "indexed": true,
+     "bm25_rank": 40,
+     "dense_rank": 209,
+     "gold_concepts": [
+      "guru_gaurava",
+      "ojas_bala",
+      "shodhana",
+      "srotas"
+     ],
+     "overlap": [
+      "guru_gaurava"
+     ]
+    },
+    {
+     "id": "Ah.1.13.24",
+     "indexed": true,
+     "bm25_rank": 5,
+     "dense_rank": 57,
+     "gold_concepts": [
+      "ama",
+      "intent_signs"
+     ],
+     "overlap": [
+      "ama",
+      "intent_signs"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G02hi",
+   "lang": "hi",
+   "query": "साम और निराम मल के लक्षण क्या हैं?",
+   "query_concepts": [
+    "ama",
+    "intent_definition",
+    "intent_signs"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.5,
+   "top5": [
+    "Ah.1.13.24",
+    "Ah.1.8.31",
+    "Ah.1.8.14",
+    "Ca.3.2.11",
+    "Ah.1.13.25"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.13.23",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 187,
+     "gold_concepts": [
+      "guru_gaurava",
+      "ojas_bala",
+      "shodhana",
+      "srotas"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ah.1.13.24",
+     "indexed": true,
+     "bm25_rank": 3,
+     "dense_rank": 1,
+     "gold_concepts": [
+      "ama",
+      "intent_signs"
+     ],
+     "overlap": [
+      "ama",
+      "intent_signs"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G03a",
+   "lang": "en",
+   "query": "How do the texts describe sama vata, sama pitta and sama kapha?",
+   "query_concepts": [
+    "ama",
+    "vata",
+    "pitta",
+    "kapha"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.6,
+   "top5": [
+    "Ca.3.2.12",
+    "Ah.1.13.27+6",
+    "Ah.1.13.27",
+    "Ah.1.13.27+4",
+    "Ah.1.8.25"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.13.27",
+     "indexed": true,
+     "bm25_rank": 1,
+     "dense_rank": 125,
+     "gold_concepts": [
+      "ama",
+      "dosha",
+      "roga"
+     ],
+     "overlap": [
+      "ama"
+     ]
+    },
+    {
+     "id": "Ah.1.13.27+1",
+     "indexed": true,
+     "bm25_rank": 13,
+     "dense_rank": 68,
+     "gold_concepts": [
+      "agni",
+      "ama",
+      "mandagni",
+      "vata"
+     ],
+     "overlap": [
+      "ama",
+      "vata"
+     ]
+    },
+    {
+     "id": "Ah.1.13.27+3",
+     "indexed": true,
+     "bm25_rank": 42,
+     "dense_rank": 255,
+     "gold_concepts": [
+      "ama"
+     ],
+     "overlap": [
+      "ama"
+     ]
+    },
+    {
+     "id": "Ah.1.13.27+4",
+     "indexed": true,
+     "bm25_rank": 7,
+     "dense_rank": 33,
+     "gold_concepts": [
+      "ama",
+      "dosha",
+      "pitta"
+     ],
+     "overlap": [
+      "ama",
+      "pitta"
+     ]
+    },
+    {
+     "id": "Ah.1.13.27+6",
+     "indexed": true,
+     "bm25_rank": 9,
+     "dense_rank": 22,
+     "gold_concepts": [
+      "ama",
+      "kapha",
+      "ojas_bala"
+     ],
+     "overlap": [
+      "ama",
+      "kapha"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G03b",
+   "lang": "en",
+   "query": "What does it mean when doshas are called sama?",
+   "query_concepts": [
+    "ama",
+    "dosha"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.2,
+   "top5": [
+    "Ah.1.13.27",
+    "Ah.1.8.12",
+    "Ah.1.13.26",
+    "Ah.1.8.14",
+    "Ca.3.2.11"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.13.27",
+     "indexed": true,
+     "bm25_rank": 1,
+     "dense_rank": 1,
+     "gold_concepts": [
+      "ama",
+      "dosha",
+      "roga"
+     ],
+     "overlap": [
+      "ama",
+      "dosha"
+     ]
+    },
+    {
+     "id": "Ah.1.13.27+1",
+     "indexed": true,
+     "bm25_rank": 17,
+     "dense_rank": 95,
+     "gold_concepts": [
+      "agni",
+      "ama",
+      "mandagni",
+      "vata"
+     ],
+     "overlap": [
+      "ama"
+     ]
+    },
+    {
+     "id": "Ah.1.13.27+3",
+     "indexed": true,
+     "bm25_rank": 16,
+     "dense_rank": 227,
+     "gold_concepts": [
+      "ama"
+     ],
+     "overlap": [
+      "ama"
+     ]
+    },
+    {
+     "id": "Ah.1.13.27+4",
+     "indexed": true,
+     "bm25_rank": 8,
+     "dense_rank": 64,
+     "gold_concepts": [
+      "ama",
+      "dosha",
+      "pitta"
+     ],
+     "overlap": [
+      "ama",
+      "dosha"
+     ]
+    },
+    {
+     "id": "Ah.1.13.27+6",
+     "indexed": true,
+     "bm25_rank": 19,
+     "dense_rank": 50,
+     "gold_concepts": [
+      "ama",
+      "kapha",
+      "ojas_bala"
+     ],
+     "overlap": [
+      "ama"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G03hi",
+   "lang": "hi",
+   "query": "साम वात के लक्षण क्या बताए गए हैं?",
+   "query_concepts": [
+    "ama",
+    "vata",
+    "dosha",
+    "intent_signs"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.2,
+   "top5": [
+    "Ah.1.8.31",
+    "Ah.1.13.24",
+    "Ah.1.13.27",
+    "Ca.6.15.101",
+    "Ah.1.8.28"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.13.27",
+     "indexed": true,
+     "bm25_rank": 1,
+     "dense_rank": 57,
+     "gold_concepts": [
+      "ama",
+      "dosha",
+      "roga"
+     ],
+     "overlap": [
+      "ama",
+      "dosha"
+     ]
+    },
+    {
+     "id": "Ah.1.13.27+1",
+     "indexed": true,
+     "bm25_rank": 12,
+     "dense_rank": 5,
+     "gold_concepts": [
+      "agni",
+      "ama",
+      "mandagni",
+      "vata"
+     ],
+     "overlap": [
+      "ama",
+      "vata"
+     ]
+    },
+    {
+     "id": "Ah.1.13.27+3",
+     "indexed": true,
+     "bm25_rank": 31,
+     "dense_rank": 266,
+     "gold_concepts": [
+      "ama"
+     ],
+     "overlap": [
+      "ama"
+     ]
+    },
+    {
+     "id": "Ah.1.13.27+4",
+     "indexed": true,
+     "bm25_rank": 17,
+     "dense_rank": 92,
+     "gold_concepts": [
+      "ama",
+      "dosha",
+      "pitta"
+     ],
+     "overlap": [
+      "ama",
+      "dosha"
+     ]
+    },
+    {
+     "id": "Ah.1.13.27+6",
+     "indexed": true,
+     "bm25_rank": 46,
+     "dense_rank": 52,
+     "gold_concepts": [
+      "ama",
+      "kapha",
+      "ojas_bala"
+     ],
+     "overlap": [
+      "ama"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G05a",
+   "lang": "en",
+   "query": "Why should food be taken in proper quantity (matra)?",
+   "query_concepts": [
+    "ahara_matra",
+    "ahara"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.3333333333333333,
+   "top5": [
+    "Ca.1.5.3",
+    "Ca.1.5.8",
+    "Ca.3.2.5",
+    "Ca.1.5.5",
+    "Ah.1.8.1"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.1",
+     "indexed": true,
+     "bm25_rank": 1,
+     "dense_rank": 15,
+     "gold_concepts": [
+      "agni",
+      "ahara_matra"
+     ],
+     "overlap": [
+      "ahara_matra"
+     ]
+    },
+    {
+     "id": "Ah.1.8.2",
+     "indexed": true,
+     "bm25_rank": 16,
+     "dense_rank": 19,
+     "gold_concepts": [
+      "ahara_matra"
+     ],
+     "overlap": [
+      "ahara_matra"
+     ]
+    },
+    {
+     "id": "Ca.1.5.3",
+     "indexed": true,
+     "bm25_rank": 2,
+     "dense_rank": 1,
+     "gold_concepts": [
+      "ahara_matra"
+     ],
+     "overlap": [
+      "ahara_matra"
+     ]
+    },
+    {
+     "id": "Ca.1.5.4",
+     "indexed": true,
+     "bm25_rank": 18,
+     "dense_rank": 17,
+     "gold_concepts": [
+      "ahara_matra"
+     ],
+     "overlap": [
+      "ahara_matra"
+     ]
+    },
+    {
+     "id": "Ca.1.5.6",
+     "indexed": true,
+     "bm25_rank": 25,
+     "dense_rank": 30,
+     "gold_concepts": [
+      "agni",
+      "ahara_matra",
+      "chardi",
+      "dosha",
+      "intent_causes",
+      "ojas_bala",
+      "tikshnagni",
+      "vata"
+     ],
+     "overlap": [
+      "ahara_matra"
+     ]
+    },
+    {
+     "id": "Ca.1.5.7",
+     "indexed": true,
+     "bm25_rank": 32,
+     "dense_rank": 23,
+     "gold_concepts": [
+      "agni",
+      "ahara_matra"
+     ],
+     "overlap": [
+      "ahara_matra"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G05b",
+   "lang": "en",
+   "query": "How does the right quantity of food relate to agni?",
+   "query_concepts": [
+    "agni",
+    "ahara_matra",
+    "ahara"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.3333333333333333,
+   "top5": [
+    "Ah.1.8.1",
+    "Ca.6.15.67",
+    "Ca.1.5.3",
+    "Ca.3.2.5",
+    "Ca.1.5.8"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.1",
+     "indexed": true,
+     "bm25_rank": 1,
+     "dense_rank": 1,
+     "gold_concepts": [
+      "agni",
+      "ahara_matra"
+     ],
+     "overlap": [
+      "agni",
+      "ahara_matra"
+     ]
+    },
+    {
+     "id": "Ah.1.8.2",
+     "indexed": true,
+     "bm25_rank": 20,
+     "dense_rank": 40,
+     "gold_concepts": [
+      "ahara_matra"
+     ],
+     "overlap": [
+      "ahara_matra"
+     ]
+    },
+    {
+     "id": "Ca.1.5.3",
+     "indexed": true,
+     "bm25_rank": 2,
+     "dense_rank": 8,
+     "gold_concepts": [
+      "ahara_matra"
+     ],
+     "overlap": [
+      "ahara_matra"
+     ]
+    },
+    {
+     "id": "Ca.1.5.4",
+     "indexed": true,
+     "bm25_rank": 25,
+     "dense_rank": 51,
+     "gold_concepts": [
+      "ahara_matra"
+     ],
+     "overlap": [
+      "ahara_matra"
+     ]
+    },
+    {
+     "id": "Ca.1.5.6",
+     "indexed": true,
+     "bm25_rank": 31,
+     "dense_rank": 11,
+     "gold_concepts": [
+      "agni",
+      "ahara_matra",
+      "chardi",
+      "dosha",
+      "intent_causes",
+      "ojas_bala",
+      "tikshnagni",
+      "vata"
+     ],
+     "overlap": [
+      "agni",
+      "ahara_matra"
+     ]
+    },
+    {
+     "id": "Ca.1.5.7",
+     "indexed": true,
+     "bm25_rank": 18,
+     "dense_rank": 2,
+     "gold_concepts": [
+      "agni",
+      "ahara_matra"
+     ],
+     "overlap": [
+      "agni",
+      "ahara_matra"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G05c",
+   "lang": "en",
+   "query": "How much of heavy and light foods should be eaten according to matrashitiya?",
+   "query_concepts": [
+    "ahara"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "top5": [
+    "Ca.3.2.5",
+    "Ca.1.5.8",
+    "Ca.1.5.5",
+    "Ah.1.8.34",
+    "Ca.6.15.243"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.1",
+     "indexed": true,
+     "bm25_rank": 57,
+     "dense_rank": 13,
+     "gold_concepts": [
+      "agni",
+      "ahara_matra"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ah.1.8.2",
+     "indexed": true,
+     "bm25_rank": 53,
+     "dense_rank": 26,
+     "gold_concepts": [
+      "ahara_matra"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.1.5.3",
+     "indexed": true,
+     "bm25_rank": 45,
+     "dense_rank": 6,
+     "gold_concepts": [
+      "ahara_matra"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.1.5.4",
+     "indexed": true,
+     "bm25_rank": 54,
+     "dense_rank": 45,
+     "gold_concepts": [
+      "ahara_matra"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.1.5.6",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 33,
+     "gold_concepts": [
+      "agni",
+      "ahara_matra",
+      "chardi",
+      "dosha",
+      "intent_causes",
+      "ojas_bala",
+      "tikshnagni",
+      "vata"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.1.5.7",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 19,
+     "gold_concepts": [
+      "agni",
+      "ahara_matra"
+     ],
+     "overlap": []
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G05hi",
+   "lang": "hi",
+   "query": "आहार की मात्रा और अग्नि का क्या संबंध है?",
+   "query_concepts": [
+    "agni",
+    "ahara_matra",
+    "ahara"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.3333333333333333,
+   "top5": [
+    "Ah.1.8.1",
+    "Ca.6.15.67",
+    "Ca.1.5.3",
+    "Ca.3.2.5",
+    "Ca.1.5.8"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.1",
+     "indexed": true,
+     "bm25_rank": 1,
+     "dense_rank": 5,
+     "gold_concepts": [
+      "agni",
+      "ahara_matra"
+     ],
+     "overlap": [
+      "agni",
+      "ahara_matra"
+     ]
+    },
+    {
+     "id": "Ah.1.8.2",
+     "indexed": true,
+     "bm25_rank": 21,
+     "dense_rank": 48,
+     "gold_concepts": [
+      "ahara_matra"
+     ],
+     "overlap": [
+      "ahara_matra"
+     ]
+    },
+    {
+     "id": "Ca.1.5.3",
+     "indexed": true,
+     "bm25_rank": 2,
+     "dense_rank": 11,
+     "gold_concepts": [
+      "ahara_matra"
+     ],
+     "overlap": [
+      "ahara_matra"
+     ]
+    },
+    {
+     "id": "Ca.1.5.4",
+     "indexed": true,
+     "bm25_rank": 26,
+     "dense_rank": 69,
+     "gold_concepts": [
+      "ahara_matra"
+     ],
+     "overlap": [
+      "ahara_matra"
+     ]
+    },
+    {
+     "id": "Ca.1.5.6",
+     "indexed": true,
+     "bm25_rank": 15,
+     "dense_rank": 19,
+     "gold_concepts": [
+      "agni",
+      "ahara_matra",
+      "chardi",
+      "dosha",
+      "intent_causes",
+      "ojas_bala",
+      "tikshnagni",
+      "vata"
+     ],
+     "overlap": [
+      "agni",
+      "ahara_matra"
+     ]
+    },
+    {
+     "id": "Ca.1.5.7",
+     "indexed": true,
+     "bm25_rank": 20,
+     "dense_rank": 1,
+     "gold_concepts": [
+      "agni",
+      "ahara_matra"
+     ],
+     "overlap": [
+      "agni",
+      "ahara_matra"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G05tr",
+   "lang": "en",
+   "query": "matrashi syat - what is the measure of food",
+   "query_concepts": [
+    "ahara",
+    "intent_definition"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.16666666666666666,
+   "top5": [
+    "Ca.1.5.3",
+    "Ca.3.2.4",
+    "Ca.1.5.5",
+    "Ca.3.2.5",
+    "Ca.1.5.8"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.1",
+     "indexed": true,
+     "bm25_rank": 79,
+     "dense_rank": 11,
+     "gold_concepts": [
+      "agni",
+      "ahara_matra"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ah.1.8.2",
+     "indexed": true,
+     "bm25_rank": 75,
+     "dense_rank": 17,
+     "gold_concepts": [
+      "ahara_matra"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.1.5.3",
+     "indexed": true,
+     "bm25_rank": 4,
+     "dense_rank": 1,
+     "gold_concepts": [
+      "ahara_matra"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.1.5.4",
+     "indexed": true,
+     "bm25_rank": 76,
+     "dense_rank": 26,
+     "gold_concepts": [
+      "ahara_matra"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.1.5.6",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 20,
+     "gold_concepts": [
+      "agni",
+      "ahara_matra",
+      "chardi",
+      "dosha",
+      "intent_causes",
+      "ojas_bala",
+      "tikshnagni",
+      "vata"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.1.5.7",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 28,
+     "gold_concepts": [
+      "agni",
+      "ahara_matra"
+     ],
+     "overlap": []
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G06a",
+   "lang": "en",
+   "query": "What happens when food is eaten in deficient quantity versus excessive quantity?",
+   "query_concepts": [
+    "ahara"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "top5": [
+    "Ca.3.2.5",
+    "Ca.1.5.8",
+    "Ca.1.5.5",
+    "Ca.6.15.184",
+    "Ca.6.15.243"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.3",
+     "indexed": true,
+     "bm25_rank": 6,
+     "dense_rank": 34,
+     "gold_concepts": [
+      "ahara",
+      "ahara_matra",
+      "dosha",
+      "intent_causes",
+      "ojas_bala",
+      "roga",
+      "vata"
+     ],
+     "overlap": [
+      "ahara"
+     ]
+    },
+    {
+     "id": "Ah.1.8.4",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 13,
+     "gold_concepts": [
+      "ahara_matra",
+      "dosha",
+      "vata"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.3.2.7",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 6,
+     "gold_concepts": [
+      "ahara_matra"
+     ],
+     "overlap": []
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G06hi",
+   "lang": "hi",
+   "query": "कम मात्रा और अधिक मात्रा में भोजन करने से क्या होता है?",
+   "query_concepts": [
+    "ahara_matra",
+    "ahara",
+    "ojas_bala"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.3333333333333333,
+   "top5": [
+    "Ca.1.5.8",
+    "Ca.1.5.3",
+    "Ca.3.2.5",
+    "Ah.1.8.3",
+    "Ca.6.15.67"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.3",
+     "indexed": true,
+     "bm25_rank": 2,
+     "dense_rank": 34,
+     "gold_concepts": [
+      "ahara",
+      "ahara_matra",
+      "dosha",
+      "intent_causes",
+      "ojas_bala",
+      "roga",
+      "vata"
+     ],
+     "overlap": [
+      "ahara",
+      "ahara_matra",
+      "ojas_bala"
+     ]
+    },
+    {
+     "id": "Ah.1.8.4",
+     "indexed": true,
+     "bm25_rank": 22,
+     "dense_rank": 21,
+     "gold_concepts": [
+      "ahara_matra",
+      "dosha",
+      "vata"
+     ],
+     "overlap": [
+      "ahara_matra"
+     ]
+    },
+    {
+     "id": "Ca.3.2.7",
+     "indexed": true,
+     "bm25_rank": 38,
+     "dense_rank": 18,
+     "gold_concepts": [
+      "ahara_matra"
+     ],
+     "overlap": [
+      "ahara_matra"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G08a",
+   "lang": "en",
+   "query": "What is dandalasaka and why is it to be avoided?",
+   "query_concepts": [
+    "alasaka",
+    "intent_definition"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.6666666666666666,
+   "top5": [
+    "Ah.1.8.13",
+    "Ah.1.8.7",
+    "Ca.3.2.12",
+    "Ah.1.8.12",
+    "Ca.3.2.13"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.12",
+     "indexed": true,
+     "bm25_rank": 3,
+     "dense_rank": 4,
+     "gold_concepts": [
+      "alasaka",
+      "ama",
+      "dosha",
+      "srotas"
+     ],
+     "overlap": [
+      "alasaka"
+     ]
+    },
+    {
+     "id": "Ah.1.8.13",
+     "indexed": true,
+     "bm25_rank": 1,
+     "dense_rank": 1,
+     "gold_concepts": [
+      "ahara",
+      "ajirna",
+      "alasaka",
+      "intent_causes",
+      "intent_definition",
+      "intent_signs",
+      "visha"
+     ],
+     "overlap": [
+      "alasaka",
+      "intent_definition"
+     ]
+    },
+    {
+     "id": "Ah.1.8.14",
+     "indexed": true,
+     "bm25_rank": 22,
+     "dense_rank": 358,
+     "gold_concepts": [
+      "ama",
+      "dosha",
+      "intent_definition",
+      "visha"
+     ],
+     "overlap": [
+      "intent_definition"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G08b",
+   "lang": "en",
+   "query": "What is amavisha and why is it considered dangerous?",
+   "query_concepts": [
+    "intent_definition"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.3333333333333333,
+   "top5": [
+    "Ca.3.2.17",
+    "Ca.3.2.11",
+    "Ah.1.8.14"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.12",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 43,
+     "gold_concepts": [
+      "alasaka",
+      "ama",
+      "dosha",
+      "srotas"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ah.1.8.13",
+     "indexed": true,
+     "bm25_rank": 18,
+     "dense_rank": 8,
+     "gold_concepts": [
+      "ahara",
+      "ajirna",
+      "alasaka",
+      "intent_causes",
+      "intent_definition",
+      "intent_signs",
+      "visha"
+     ],
+     "overlap": [
+      "intent_definition"
+     ]
+    },
+    {
+     "id": "Ah.1.8.14",
+     "indexed": true,
+     "bm25_rank": 12,
+     "dense_rank": 12,
+     "gold_concepts": [
+      "ama",
+      "dosha",
+      "intent_definition",
+      "visha"
+     ],
+     "overlap": [
+      "intent_definition"
+     ]
+    }
+   ],
+   "status": "insufficient_evidence"
+  },
+  {
+   "split": "devB",
+   "case_id": "G08hi",
+   "lang": "hi",
+   "query": "आमविष क्या है?",
+   "query_concepts": [
+    "ama",
+    "visha",
+    "intent_definition"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.3333333333333333,
+   "top5": [
+    "Ah.1.8.14",
+    "Ca.3.2.11",
+    "Ah.1.8.20",
+    "Ah.1.13.27",
+    "Ah.1.8.48"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.12",
+     "indexed": true,
+     "bm25_rank": 39,
+     "dense_rank": 124,
+     "gold_concepts": [
+      "alasaka",
+      "ama",
+      "dosha",
+      "srotas"
+     ],
+     "overlap": [
+      "ama"
+     ]
+    },
+    {
+     "id": "Ah.1.8.13",
+     "indexed": true,
+     "bm25_rank": 2,
+     "dense_rank": 160,
+     "gold_concepts": [
+      "ahara",
+      "ajirna",
+      "alasaka",
+      "intent_causes",
+      "intent_definition",
+      "intent_signs",
+      "visha"
+     ],
+     "overlap": [
+      "intent_definition",
+      "visha"
+     ]
+    },
+    {
+     "id": "Ah.1.8.14",
+     "indexed": true,
+     "bm25_rank": 1,
+     "dense_rank": 8,
+     "gold_concepts": [
+      "ama",
+      "dosha",
+      "intent_definition",
+      "visha"
+     ],
+     "overlap": [
+      "ama",
+      "intent_definition",
+      "visha"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G09a",
+   "lang": "en",
+   "query": "Should a person with ajirna take pain-relieving medicine?",
+   "query_concepts": [
+    "ajirna"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "top5": [
+    "Ca.6.15.112",
+    "Ah.1.8.31",
+    "Ca.6.15.42",
+    "Ca.6.15.66",
+    "Ca.6.15.222"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.18",
+     "indexed": true,
+     "bm25_rank": 11,
+     "dense_rank": 48,
+     "gold_concepts": [
+      "ajirna",
+      "ama",
+      "dosha"
+     ],
+     "overlap": [
+      "ajirna"
+     ]
+    },
+    {
+     "id": "Ah.1.8.19",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 115,
+     "gold_concepts": [],
+     "overlap": []
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G09b",
+   "lang": "en",
+   "query": "Why can agni overwhelmed by ama not digest medicine and food together?",
+   "query_concepts": [
+    "agni",
+    "ama",
+    "ahara"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "top5": [
+    "Ca.6.15.13",
+    "Ah.1.13.25",
+    "Ca.6.15.222",
+    "Ah.1.8.20",
+    "Ca.3.2.8"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.18",
+     "indexed": true,
+     "bm25_rank": 31,
+     "dense_rank": 4,
+     "gold_concepts": [
+      "ajirna",
+      "ama",
+      "dosha"
+     ],
+     "overlap": [
+      "ama"
+     ]
+    },
+    {
+     "id": "Ah.1.8.19",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 349,
+     "gold_concepts": [],
+     "overlap": []
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G09hi",
+   "lang": "hi",
+   "query": "अजीर्ण में शूलघ्न औषध क्यों नहीं लेनी चाहिए?",
+   "query_concepts": [
+    "ajirna",
+    "shula"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.5,
+   "top5": [
+    "Ca.6.15.112",
+    "Ah.1.8.18",
+    "Ah.1.8.25",
+    "Ca.6.15.66",
+    "Ca.6.15.222"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.18",
+     "indexed": true,
+     "bm25_rank": 4,
+     "dense_rank": 5,
+     "gold_concepts": [
+      "ajirna",
+      "ama",
+      "dosha"
+     ],
+     "overlap": [
+      "ajirna"
+     ]
+    },
+    {
+     "id": "Ah.1.8.19",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 222,
+     "gold_concepts": [],
+     "overlap": []
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G11a",
+   "lang": "en",
+   "query": "What are the general signs of ajirna (indigestion)?",
+   "query_concepts": [
+    "ajirna",
+    "intent_definition",
+    "intent_signs"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.6666666666666666,
+   "top5": [
+    "Ca.6.15.45",
+    "Ah.1.8.31",
+    "Ah.1.8.13",
+    "Ca.6.15.112",
+    "Ca.6.15.42"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.31",
+     "indexed": true,
+     "bm25_rank": 2,
+     "dense_rank": 1,
+     "gold_concepts": [
+      "ahara_matra",
+      "ajirna",
+      "ama",
+      "dosha",
+      "guru_gaurava",
+      "intent_signs"
+     ],
+     "overlap": [
+      "ajirna",
+      "intent_signs"
+     ]
+    },
+    {
+     "id": "Ca.6.15.45",
+     "indexed": true,
+     "bm25_rank": 3,
+     "dense_rank": 2,
+     "gold_concepts": [
+      "ajirna",
+      "guru_gaurava",
+      "intent_signs"
+     ],
+     "overlap": [
+      "ajirna",
+      "intent_signs"
+     ]
+    },
+    {
+     "id": "Ca.6.15.46",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 58,
+     "gold_concepts": [
+      "aruchi",
+      "chardi",
+      "visha"
+     ],
+     "overlap": []
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G11b",
+   "lang": "en",
+   "query": "Which symptoms like heaviness and giddiness indicate undigested food?",
+   "query_concepts": [
+    "ama",
+    "ahara",
+    "guru_gaurava",
+    "intent_signs"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.6666666666666666,
+   "top5": [
+    "Ah.1.8.31",
+    "Ca.3.2.8",
+    "Ah.1.13.24",
+    "Ca.6.15.45",
+    "Ah.1.8.25"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.31",
+     "indexed": true,
+     "bm25_rank": 1,
+     "dense_rank": 1,
+     "gold_concepts": [
+      "ahara_matra",
+      "ajirna",
+      "ama",
+      "dosha",
+      "guru_gaurava",
+      "intent_signs"
+     ],
+     "overlap": [
+      "ama",
+      "guru_gaurava",
+      "intent_signs"
+     ]
+    },
+    {
+     "id": "Ca.6.15.45",
+     "indexed": true,
+     "bm25_rank": 5,
+     "dense_rank": 2,
+     "gold_concepts": [
+      "ajirna",
+      "guru_gaurava",
+      "intent_signs"
+     ],
+     "overlap": [
+      "guru_gaurava",
+      "intent_signs"
+     ]
+    },
+    {
+     "id": "Ca.6.15.46",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 226,
+     "gold_concepts": [
+      "aruchi",
+      "chardi",
+      "visha"
+     ],
+     "overlap": []
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G11hi",
+   "lang": "hi",
+   "query": "अजीर्ण के सामान्य लक्षण क्या हैं?",
+   "query_concepts": [
+    "ajirna",
+    "intent_definition",
+    "intent_signs"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.6666666666666666,
+   "top5": [
+    "Ah.1.8.31",
+    "Ca.6.15.45",
+    "Ah.1.8.13",
+    "Ca.6.15.112",
+    "Ca.6.15.42"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.31",
+     "indexed": true,
+     "bm25_rank": 2,
+     "dense_rank": 1,
+     "gold_concepts": [
+      "ahara_matra",
+      "ajirna",
+      "ama",
+      "dosha",
+      "guru_gaurava",
+      "intent_signs"
+     ],
+     "overlap": [
+      "ajirna",
+      "intent_signs"
+     ]
+    },
+    {
+     "id": "Ca.6.15.45",
+     "indexed": true,
+     "bm25_rank": 4,
+     "dense_rank": 2,
+     "gold_concepts": [
+      "ajirna",
+      "guru_gaurava",
+      "intent_signs"
+     ],
+     "overlap": [
+      "ajirna",
+      "intent_signs"
+     ]
+    },
+    {
+     "id": "Ca.6.15.46",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 217,
+     "gold_concepts": [
+      "aruchi",
+      "chardi",
+      "visha"
+     ],
+     "overlap": []
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G12a",
+   "lang": "en",
+   "query": "What kinds of food and eating habits cause food not to be digested?",
+   "query_concepts": [
+    "ahara",
+    "intent_causes"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.2857142857142857,
+   "top5": [
+    "Ah.1.8.3",
+    "Ah.1.8.13",
+    "Ah.1.8.34",
+    "Ca.6.15.42",
+    "Ca.6.15.184"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.32",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 137,
+     "gold_concepts": [
+      "guru_gaurava"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ah.1.8.33",
+     "indexed": true,
+     "bm25_rank": 40,
+     "dense_rank": 106,
+     "gold_concepts": [
+      "ahara"
+     ],
+     "overlap": [
+      "ahara"
+     ]
+    },
+    {
+     "id": "Ah.1.8.34",
+     "indexed": true,
+     "bm25_rank": 9,
+     "dense_rank": 4,
+     "gold_concepts": [
+      "ahara",
+      "ajirna",
+      "ojas_bala"
+     ],
+     "overlap": [
+      "ahara"
+     ]
+    },
+    {
+     "id": "Ca.3.2.8",
+     "indexed": true,
+     "bm25_rank": 56,
+     "dense_rank": 11,
+     "gold_concepts": [
+      "ahara",
+      "ahara_matra",
+      "ama",
+      "dosha",
+      "guru_gaurava",
+      "srotas"
+     ],
+     "overlap": [
+      "ahara"
+     ]
+    },
+    {
+     "id": "Ca.6.15.42",
+     "indexed": true,
+     "bm25_rank": 19,
+     "dense_rank": 5,
+     "gold_concepts": [
+      "ahara",
+      "ajirna",
+      "ojas_bala"
+     ],
+     "overlap": [
+      "ahara"
+     ]
+    },
+    {
+     "id": "Ca.6.15.43",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 96,
+     "gold_concepts": [
+      "chardi",
+      "roga",
+      "shodhana"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.6.15.44",
+     "indexed": true,
+     "bm25_rank": 54,
+     "dense_rank": 83,
+     "gold_concepts": [
+      "agni",
+      "ahara",
+      "intent_signs",
+      "tikshnagni",
+      "visha"
+     ],
+     "overlap": [
+      "ahara"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G12b",
+   "lang": "en",
+   "query": "What are samashana, adhyashana and vishamashana?",
+   "query_concepts": [
+    "intent_definition"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "top5": [
+    "Ca.8.4.4",
+    "Ca.8.12.16-5",
+    "Ca.3.2.11"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.32",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 74,
+     "gold_concepts": [
+      "guru_gaurava"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ah.1.8.33",
+     "indexed": true,
+     "bm25_rank": 27,
+     "dense_rank": 417,
+     "gold_concepts": [
+      "ahara"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ah.1.8.34",
+     "indexed": true,
+     "bm25_rank": 25,
+     "dense_rank": 13,
+     "gold_concepts": [
+      "ahara",
+      "ajirna",
+      "ojas_bala"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.3.2.8",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 113,
+     "gold_concepts": [
+      "ahara",
+      "ahara_matra",
+      "ama",
+      "dosha",
+      "guru_gaurava",
+      "srotas"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.6.15.42",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 123,
+     "gold_concepts": [
+      "ahara",
+      "ajirna",
+      "ojas_bala"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.6.15.43",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 20,
+     "gold_concepts": [
+      "chardi",
+      "roga",
+      "shodhana"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.6.15.44",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 30,
+     "gold_concepts": [
+      "agni",
+      "ahara",
+      "intent_signs",
+      "tikshnagni",
+      "visha"
+     ],
+     "overlap": []
+    }
+   ],
+   "status": "insufficient_evidence"
+  },
+  {
+   "split": "devB",
+   "case_id": "G12c",
+   "lang": "en",
+   "query": "What causes agni to become vitiated according to Charaka's grahani chapter?",
+   "query_concepts": [
+    "agni",
+    "grahani",
+    "intent_causes"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "top5": [
+    "Ca.6.15.56",
+    "Ca.6.15.195",
+    "Ca.6.15.246",
+    "Ca.6.15.249",
+    "Ca.6.15.71"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.32",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 126,
+     "gold_concepts": [
+      "guru_gaurava"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ah.1.8.33",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 481,
+     "gold_concepts": [
+      "ahara"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ah.1.8.34",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 85,
+     "gold_concepts": [
+      "ahara",
+      "ajirna",
+      "ojas_bala"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.3.2.8",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 93,
+     "gold_concepts": [
+      "ahara",
+      "ahara_matra",
+      "ama",
+      "dosha",
+      "guru_gaurava",
+      "srotas"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.6.15.42",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 291,
+     "gold_concepts": [
+      "ahara",
+      "ajirna",
+      "ojas_bala"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.6.15.43",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 45,
+     "gold_concepts": [
+      "chardi",
+      "roga",
+      "shodhana"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.6.15.44",
+     "indexed": true,
+     "bm25_rank": 99,
+     "dense_rank": 48,
+     "gold_concepts": [
+      "agni",
+      "ahara",
+      "intent_signs",
+      "tikshnagni",
+      "visha"
+     ],
+     "overlap": [
+      "agni"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G12hi",
+   "lang": "hi",
+   "query": "अध्यशन और विषमाशन क्या हैं?",
+   "query_concepts": [
+    "ajirna",
+    "ahara",
+    "intent_definition"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.2857142857142857,
+   "top5": [
+    "Ah.1.8.13",
+    "Ca.6.15.42",
+    "Ah.1.8.34",
+    "Ah.1.8.31",
+    "Ca.6.15.39"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.32",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 70,
+     "gold_concepts": [
+      "guru_gaurava"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ah.1.8.33",
+     "indexed": true,
+     "bm25_rank": 59,
+     "dense_rank": 477,
+     "gold_concepts": [
+      "ahara"
+     ],
+     "overlap": [
+      "ahara"
+     ]
+    },
+    {
+     "id": "Ah.1.8.34",
+     "indexed": true,
+     "bm25_rank": 1,
+     "dense_rank": 257,
+     "gold_concepts": [
+      "ahara",
+      "ajirna",
+      "ojas_bala"
+     ],
+     "overlap": [
+      "ahara",
+      "ajirna"
+     ]
+    },
+    {
+     "id": "Ca.3.2.8",
+     "indexed": true,
+     "bm25_rank": 74,
+     "dense_rank": 17,
+     "gold_concepts": [
+      "ahara",
+      "ahara_matra",
+      "ama",
+      "dosha",
+      "guru_gaurava",
+      "srotas"
+     ],
+     "overlap": [
+      "ahara"
+     ]
+    },
+    {
+     "id": "Ca.6.15.42",
+     "indexed": true,
+     "bm25_rank": 5,
+     "dense_rank": 129,
+     "gold_concepts": [
+      "ahara",
+      "ajirna",
+      "ojas_bala"
+     ],
+     "overlap": [
+      "ahara",
+      "ajirna"
+     ]
+    },
+    {
+     "id": "Ca.6.15.43",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 2,
+     "gold_concepts": [
+      "chardi",
+      "roga",
+      "shodhana"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.6.15.44",
+     "indexed": true,
+     "bm25_rank": 72,
+     "dense_rank": 6,
+     "gold_concepts": [
+      "agni",
+      "ahara",
+      "intent_signs",
+      "tikshnagni",
+      "visha"
+     ],
+     "overlap": [
+      "ahara"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G14a",
+   "lang": "en",
+   "query": "Why is agni called the root of life and health?",
+   "query_concepts": [
+    "agni"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "top5": [
+    "Ca.6.15.13",
+    "Ca.1.5.25",
+    "Ca.6.15.56",
+    "Ca.6.15.246",
+    "Ca.6.15.212"
+   ],
+   "gold": [
+    {
+     "id": "Ca.6.15.3",
+     "indexed": true,
+     "bm25_rank": 30,
+     "dense_rank": 30,
+     "gold_concepts": [
+      "agni",
+      "intent_causes",
+      "ojas_bala"
+     ],
+     "overlap": [
+      "agni"
+     ]
+    },
+    {
+     "id": "Ca.6.15.4",
+     "indexed": true,
+     "bm25_rank": 31,
+     "dense_rank": 15,
+     "gold_concepts": [
+      "agni",
+      "intent_definition",
+      "roga"
+     ],
+     "overlap": [
+      "agni"
+     ]
+    },
+    {
+     "id": "Ca.6.15.5",
+     "indexed": true,
+     "bm25_rank": 21,
+     "dense_rank": 2,
+     "gold_concepts": [
+      "agni",
+      "ahara",
+      "dhatu",
+      "intent_causes",
+      "ojas_bala"
+     ],
+     "overlap": [
+      "agni"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G14b",
+   "lang": "en",
+   "query": "What happens when agni is extinguished or deranged according to Charaka?",
+   "query_concepts": [
+    "agni"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "top5": [
+    "Ca.1.5.25",
+    "Ca.6.15.212",
+    "Ca.6.15.13",
+    "Ca.6.15.206",
+    "Ca.6.15.56"
+   ],
+   "gold": [
+    {
+     "id": "Ca.6.15.3",
+     "indexed": true,
+     "bm25_rank": 30,
+     "dense_rank": 58,
+     "gold_concepts": [
+      "agni",
+      "intent_causes",
+      "ojas_bala"
+     ],
+     "overlap": [
+      "agni"
+     ]
+    },
+    {
+     "id": "Ca.6.15.4",
+     "indexed": true,
+     "bm25_rank": 31,
+     "dense_rank": 40,
+     "gold_concepts": [
+      "agni",
+      "intent_definition",
+      "roga"
+     ],
+     "overlap": [
+      "agni"
+     ]
+    },
+    {
+     "id": "Ca.6.15.5",
+     "indexed": true,
+     "bm25_rank": 21,
+     "dense_rank": 24,
+     "gold_concepts": [
+      "agni",
+      "ahara",
+      "dhatu",
+      "intent_causes",
+      "ojas_bala"
+     ],
+     "overlap": [
+      "agni"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G14hi",
+   "lang": "hi",
+   "query": "अग्नि को जीवन का मूल क्यों कहा गया है?",
+   "query_concepts": [
+    "agni"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "top5": [
+    "Ca.6.15.56",
+    "Ca.6.15.13",
+    "Ca.6.15.119",
+    "Ca.1.5.25",
+    "Ca.6.15.195"
+   ],
+   "gold": [
+    {
+     "id": "Ca.6.15.3",
+     "indexed": true,
+     "bm25_rank": 30,
+     "dense_rank": 6,
+     "gold_concepts": [
+      "agni",
+      "intent_causes",
+      "ojas_bala"
+     ],
+     "overlap": [
+      "agni"
+     ]
+    },
+    {
+     "id": "Ca.6.15.4",
+     "indexed": true,
+     "bm25_rank": 31,
+     "dense_rank": 25,
+     "gold_concepts": [
+      "agni",
+      "intent_definition",
+      "roga"
+     ],
+     "overlap": [
+      "agni"
+     ]
+    },
+    {
+     "id": "Ca.6.15.5",
+     "indexed": true,
+     "bm25_rank": 21,
+     "dense_rank": 5,
+     "gold_concepts": [
+      "agni",
+      "ahara",
+      "dhatu",
+      "intent_causes",
+      "ojas_bala"
+     ],
+     "overlap": [
+      "agni"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G15a",
+   "lang": "en",
+   "query": "What are the effects of vishama, tikshna, sama and manda agni?",
+   "query_concepts": [
+    "agni",
+    "ama",
+    "intent_definition"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "top5": [
+    "Ah.1.13.25",
+    "Ah.1.13.27+1",
+    "Ah.1.8.20",
+    "Ca.3.2.12",
+    "Ca.6.15.56"
+   ],
+   "gold": [
+    {
+     "id": "Ca.6.15.50",
+     "indexed": true,
+     "bm25_rank": 74,
+     "dense_rank": 102,
+     "gold_concepts": [
+      "agni",
+      "dhatu"
+     ],
+     "overlap": [
+      "agni"
+     ]
+    },
+    {
+     "id": "Ca.6.15.51",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 323,
+     "gold_concepts": [
+      "chardi",
+      "dhatu",
+      "ojas_bala"
+     ],
+     "overlap": []
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G15b",
+   "lang": "en",
+   "query": "How does tikshnagni affect the dhatus?",
+   "query_concepts": [
+    "tikshnagni",
+    "dhatu",
+    "agni"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "top5": [
+    "Ca.6.15.8",
+    "Ca.6.15.210",
+    "Ca.6.15.246",
+    "Ca.6.15.44",
+    "Ca.6.15.230"
+   ],
+   "gold": [
+    {
+     "id": "Ca.6.15.50",
+     "indexed": true,
+     "bm25_rank": 18,
+     "dense_rank": 138,
+     "gold_concepts": [
+      "agni",
+      "dhatu"
+     ],
+     "overlap": [
+      "agni",
+      "dhatu"
+     ]
+    },
+    {
+     "id": "Ca.6.15.51",
+     "indexed": true,
+     "bm25_rank": 115,
+     "dense_rank": 170,
+     "gold_concepts": [
+      "chardi",
+      "dhatu",
+      "ojas_bala"
+     ],
+     "overlap": [
+      "dhatu"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G15hi",
+   "lang": "hi",
+   "query": "विषमाग्नि, तीक्ष्णाग्नि और मन्दाग्नि में क्या अंतर है?",
+   "query_concepts": [
+    "agni",
+    "mandagni",
+    "vishamagni",
+    "tikshnagni"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "top5": [
+    "Ca.6.15.233",
+    "Ca.6.15.221",
+    "Ca.6.15.86",
+    "Ah.1.13.27+1",
+    "Ca.6.15.230"
+   ],
+   "gold": [
+    {
+     "id": "Ca.6.15.50",
+     "indexed": true,
+     "bm25_rank": 18,
+     "dense_rank": 68,
+     "gold_concepts": [
+      "agni",
+      "dhatu"
+     ],
+     "overlap": [
+      "agni"
+     ]
+    },
+    {
+     "id": "Ca.6.15.51",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 520,
+     "gold_concepts": [
+      "chardi",
+      "dhatu",
+      "ojas_bala"
+     ],
+     "overlap": []
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G17a",
+   "lang": "en",
+   "query": "Why is the digestive fire considered the chief of all the other agnis?",
+   "query_concepts": [
+    "agni"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "top5": [
+    "Ca.1.5.25",
+    "Ca.6.15.13",
+    "Ca.6.15.212",
+    "Ca.6.15.222",
+    "Ca.6.15.56"
+   ],
+   "gold": [
+    {
+     "id": "Ca.6.15.38",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 419,
+     "gold_concepts": [
+      "dhatu",
+      "dosha"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.6.15.39",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 159,
+     "gold_concepts": [
+      "ahara",
+      "intent_definition"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.6.15.40",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 189,
+     "gold_concepts": [
+      "ojas_bala"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.6.15.15",
+     "indexed": true,
+     "bm25_rank": 33,
+     "dense_rank": 53,
+     "gold_concepts": [
+      "agni",
+      "chardi",
+      "dhatu"
+     ],
+     "overlap": [
+      "agni"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G17b",
+   "lang": "en",
+   "query": "How are the dhatus transformed by their own agnis into prasada and kitta?",
+   "query_concepts": [
+    "agni",
+    "dhatu"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "top5": [
+    "Ca.6.15.210",
+    "Ca.6.15.119",
+    "Ca.6.15.211",
+    "Ca.6.15.246",
+    "Ca.6.15.227"
+   ],
+   "gold": [
+    {
+     "id": "Ca.6.15.38",
+     "indexed": true,
+     "bm25_rank": 76,
+     "dense_rank": 63,
+     "gold_concepts": [
+      "dhatu",
+      "dosha"
+     ],
+     "overlap": [
+      "dhatu"
+     ]
+    },
+    {
+     "id": "Ca.6.15.39",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 285,
+     "gold_concepts": [
+      "ahara",
+      "intent_definition"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.6.15.40",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 134,
+     "gold_concepts": [
+      "ojas_bala"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.6.15.15",
+     "indexed": true,
+     "bm25_rank": 10,
+     "dense_rank": 49,
+     "gold_concepts": [
+      "agni",
+      "chardi",
+      "dhatu"
+     ],
+     "overlap": [
+      "agni",
+      "dhatu"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G18a",
+   "lang": "en",
+   "query": "How do the texts describe langhana and pachana for ama disorders of different severity?",
+   "query_concepts": [
+    "ama",
+    "langhana",
+    "pachana_dipana",
+    "roga"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.25,
+   "top5": [
+    "Ca.6.15.208",
+    "Ca.6.15.75",
+    "Ah.1.8.27",
+    "Ca.6.15.95",
+    "Ca.6.15.196"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.20",
+     "indexed": true,
+     "bm25_rank": 10,
+     "dense_rank": 31,
+     "gold_concepts": [
+      "agni",
+      "ama",
+      "dosha",
+      "roga"
+     ],
+     "overlap": [
+      "ama",
+      "roga"
+     ]
+    },
+    {
+     "id": "Ah.1.8.21",
+     "indexed": true,
+     "bm25_rank": 1,
+     "dense_rank": 27,
+     "gold_concepts": [
+      "dosha",
+      "intent_treatment",
+      "langhana",
+      "ojas_bala",
+      "pachana_dipana"
+     ],
+     "overlap": [
+      "langhana",
+      "pachana_dipana"
+     ]
+    },
+    {
+     "id": "Ah.1.8.22",
+     "indexed": true,
+     "bm25_rank": 78,
+     "dense_rank": 109,
+     "gold_concepts": [
+      "intent_causes",
+      "roga",
+      "shodhana"
+     ],
+     "overlap": [
+      "roga"
+     ]
+    },
+    {
+     "id": "Ah.1.8.27",
+     "indexed": true,
+     "bm25_rank": 4,
+     "dense_rank": 2,
+     "gold_concepts": [
+      "ajirna_types",
+      "ama",
+      "chardi",
+      "intent_treatment",
+      "langhana"
+     ],
+     "overlap": [
+      "ama",
+      "langhana"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G18hi",
+   "lang": "hi",
+   "query": "आम विकारों में लंघन और पाचन का क्या स्थान है?",
+   "query_concepts": [
+    "agni",
+    "ama",
+    "langhana",
+    "pachana_dipana",
+    "roga"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.25,
+   "top5": [
+    "Ca.6.15.208",
+    "Ah.1.8.20",
+    "Ca.6.15.75",
+    "Ah.1.13.27+1",
+    "Ca.6.15.196"
+   ],
+   "gold": [
+    {
+     "id": "Ah.1.8.20",
+     "indexed": true,
+     "bm25_rank": 8,
+     "dense_rank": 109,
+     "gold_concepts": [
+      "agni",
+      "ama",
+      "dosha",
+      "roga"
+     ],
+     "overlap": [
+      "agni",
+      "ama",
+      "roga"
+     ]
+    },
+    {
+     "id": "Ah.1.8.21",
+     "indexed": true,
+     "bm25_rank": 2,
+     "dense_rank": 173,
+     "gold_concepts": [
+      "dosha",
+      "intent_treatment",
+      "langhana",
+      "ojas_bala",
+      "pachana_dipana"
+     ],
+     "overlap": [
+      "langhana",
+      "pachana_dipana"
+     ]
+    },
+    {
+     "id": "Ah.1.8.22",
+     "indexed": true,
+     "bm25_rank": 86,
+     "dense_rank": 40,
+     "gold_concepts": [
+      "intent_causes",
+      "roga",
+      "shodhana"
+     ],
+     "overlap": [
+      "roga"
+     ]
+    },
+    {
+     "id": "Ah.1.8.27",
+     "indexed": true,
+     "bm25_rank": 4,
+     "dense_rank": 15,
+     "gold_concepts": [
+      "ajirna_types",
+      "ama",
+      "chardi",
+      "intent_treatment",
+      "langhana"
+     ],
+     "overlap": [
+      "ama",
+      "langhana"
+     ]
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G20a",
+   "lang": "en",
+   "query": "How do vata, pitta and kapha each derange agni in grahani dosha?",
+   "query_concepts": [
+    "agni",
+    "grahani",
+    "vata",
+    "pitta",
+    "kapha",
+    "dosha"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "top5": [
+    "Ca.6.15.119",
+    "Ca.6.15.169",
+    "Ca.6.15.155",
+    "Ah.1.8.10",
+    "Ca.6.15.192"
+   ],
+   "gold": [
+    {
+     "id": "Ca.6.15.59",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 185,
+     "gold_concepts": [
+      "ahara",
+      "ojas_bala"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.6.15.60",
+     "indexed": true,
+     "bm25_rank": 62,
+     "dense_rank": 85,
+     "gold_concepts": [
+      "agni",
+      "dosha",
+      "srotas",
+      "vata"
+     ],
+     "overlap": [
+      "agni",
+      "dosha",
+      "vata"
+     ]
+    },
+    {
+     "id": "Ca.6.15.65",
+     "indexed": true,
+     "bm25_rank": 33,
+     "dense_rank": 17,
+     "gold_concepts": [
+      "agni",
+      "ajirna",
+      "dosha",
+      "pitta"
+     ],
+     "overlap": [
+      "agni",
+      "dosha",
+      "pitta"
+     ]
+    },
+    {
+     "id": "Ca.6.15.66",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 412,
+     "gold_concepts": [
+      "ahara",
+      "ajirna"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.6.15.67",
+     "indexed": true,
+     "bm25_rank": 48,
+     "dense_rank": 24,
+     "gold_concepts": [
+      "agni",
+      "ahara",
+      "ahara_matra",
+      "dosha",
+      "kapha",
+      "ojas_bala"
+     ],
+     "overlap": [
+      "agni",
+      "dosha",
+      "kapha"
+     ]
+    },
+    {
+     "id": "Ca.6.15.68",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 419,
+     "gold_concepts": [
+      "aruchi",
+      "chardi"
+     ],
+     "overlap": []
+    }
+   ],
+   "status": "retrieval_only"
+  },
+  {
+   "split": "devB",
+   "case_id": "G20hi",
+   "lang": "hi",
+   "query": "वातज, पित्तज और कफज ग्रहणी दोष में अग्नि कैसे प्रभावित होती है?",
+   "query_concepts": [
+    "agni",
+    "grahani",
+    "vata",
+    "pitta",
+    "kapha",
+    "dosha"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.16666666666666666,
+   "top5": [
+    "Ca.6.15.119",
+    "Ca.6.15.140",
+    "Ca.6.15.195",
+    "Ca.6.15.169",
+    "Ca.6.15.65"
+   ],
+   "gold": [
+    {
+     "id": "Ca.6.15.59",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 214,
+     "gold_concepts": [
+      "ahara",
+      "ojas_bala"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.6.15.60",
+     "indexed": true,
+     "bm25_rank": 68,
+     "dense_rank": 71,
+     "gold_concepts": [
+      "agni",
+      "dosha",
+      "srotas",
+      "vata"
+     ],
+     "overlap": [
+      "agni",
+      "dosha",
+      "vata"
+     ]
+    },
+    {
+     "id": "Ca.6.15.65",
+     "indexed": true,
+     "bm25_rank": 22,
+     "dense_rank": 9,
+     "gold_concepts": [
+      "agni",
+      "ajirna",
+      "dosha",
+      "pitta"
+     ],
+     "overlap": [
+      "agni",
+      "dosha",
+      "pitta"
+     ]
+    },
+    {
+     "id": "Ca.6.15.66",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 407,
+     "gold_concepts": [
+      "ahara",
+      "ajirna"
+     ],
+     "overlap": []
+    },
+    {
+     "id": "Ca.6.15.67",
+     "indexed": true,
+     "bm25_rank": 52,
+     "dense_rank": 24,
+     "gold_concepts": [
+      "agni",
+      "ahara",
+      "ahara_matra",
+      "dosha",
+      "kapha",
+      "ojas_bala"
+     ],
+     "overlap": [
+      "agni",
+      "dosha",
+      "kapha"
+     ]
+    },
+    {
+     "id": "Ca.6.15.68",
+     "indexed": true,
+     "bm25_rank": null,
+     "dense_rank": 215,
+     "gold_concepts": [
+      "aruchi",
+      "chardi"
+     ],
+     "overlap": []
+    }
+   ],
+   "status": "retrieval_only"
+  }
+ ]
+}

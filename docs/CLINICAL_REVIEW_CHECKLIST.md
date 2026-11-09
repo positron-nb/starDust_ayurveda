@@ -55,8 +55,9 @@ reviewed by a practitioner, disagreements resolved and documented.
 ## D. Generated claims (human adjudication of semantic support)
 Ready-made sheet: `python scripts/export_claim_audit.py` → `eval/audit/claim_audit_<ts>.csv` + printable
 `.html` (all 57 shown claims + 50 withheld sentences, each with its verse in IAST and Devanagari).
-Fill `support_label` (supported / partial / unsupported / passage_misread), `exact_supporting_text`,
-`reason`, `reviewer_name`, `reviewer_role`, `review_date`, then
+Fill `human_label` (supported / partial / unsupported / passage_misread / unresolved),
+`exact_supporting_text`, `reviewer_comment`, `reviewer_name`, `reviewer_role`, `review_date`
+(definitions: `docs/CLAIM_AUDIT_REVIEW_GUIDE.md`), then
 `python scripts/import_claim_audit.py <filled.csv>` — this writes the labels to the review log and
 produces `eval/results/eval_claim_audit_*.json` (the first real support metric).
 

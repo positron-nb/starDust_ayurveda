@@ -4,3 +4,5 @@ These two result files are INVALID and excluded from reporting: the model server
 separately, so their latency/proxy numbers are meaningless. Kept only as a record of the incident.
 Fix: model_server/server.py now empties the CUDA cache after each request, returns 503 on OOM and
 marks the server unhealthy if the CUDA context breaks; the runner now records model_call_failures.
+
+retrieval_exp_20261109_154716.json: INVALID. Embedded Qdrant allows one client per storage folder; every second Retriever in the grid silently fell back to BM25-only (rows with ~6 ms p50). Fixed by sharing one client per path and failing loudly when a hybrid/dense experiment has no dense index.

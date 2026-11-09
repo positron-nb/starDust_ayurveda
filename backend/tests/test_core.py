@@ -284,3 +284,26 @@ def test_pregnancy_question_vs_fact(terms, policy, query, case, expected):
 def test_topic_mention_triggers_missing_info_not_present_rule(terms, policy):
     rules = {a.rule_id for a in evaluate_rules(extract_facts("Is ashwagandha safe in pregnancy?", terms, policy), policy)}
     assert "R-PREG-ASHWA-002" in rules and "R-PREG-ASHWA-001" not in rules
+
+
+def test_claim_audit_import_is_idempotent(tmp_path):
+    from pramaan.appdb import AppDB
+    from pramaan.audit import COLUMNS, import_rows, latest_labels, record_id, summarise
+    db = AppDB(tmp_path / "a.sqlite")
+    base = {k: "" for k in COLUMNS}
+    rows = []
+    for i, (pop, lab) in enumerate([("displayed", "supported"), ("displayed", "unresolved"), ("withheld", "supported"), ("displayed", "")]):
+        r = dict(base, record_id=record_id("f.json", f"C{i}", pop, f"s{i}", "Ah.1.13.25"), population=pop, human_label=lab,
+                 reviewer_name="R" if lab else "", reviewer_role="student_bams", sentence=f"s{i}", passage_id="Ah.1.13.25")
+        rows.append(r)
+    first = import_rows(rows, db, "2026-11-09T00:00:00Z")
+    again = import_rows(rows, db, "2026-11-09T00:00:00Z")
+    assert first["stats"] == {"imported": 3, "unlabelled_skipped": 1}
+    assert again["stats"] == {"duplicate_skipped": 3, "unlabelled_skipped": 1}
+    assert len(db.reviews("claim")) == 3
+    s = summarise(rows, latest_labels(db))
+    assert s["displayed"]["adjudicated_excluding_unresolved"] == 1  # unresolved not adjudicated
+    assert s["displayed"]["pending"] == 1 and s["withheld"]["supported"] == 1
+    rows[0]["human_label"] = "partial"  # reviewer changes their mind -> appended, latest wins
+    import_rows(rows, db, "2026-11-10T00:00:00Z")
+    assert len(db.reviews("claim")) == 4 and summarise(rows, latest_labels(db))["displayed"]["partial"] == 1
