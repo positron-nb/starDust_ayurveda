@@ -187,9 +187,58 @@ def fresh() -> dict:
     return out
 
 
+def indic(use_model: bool = False) -> dict:
+    """EN / Hindi (Devanagari) / Roman-Hinglish triplets of the same intent (eval/indic_cases.jsonl).
+    Reports retrieval per variant and agreement ACROSS variants of one intent (status, top-5 overlap)."""
+    rows = [json.loads(l) for l in (REPO_ROOT / "eval" / "indic_cases.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()]
+    store = CorpusStore(settings.corpus_db)
+    terms, policy = load_terminology(), load_policy()
+    retr = Retriever(store, terms)
+    if retr.dense is None:
+        raise SystemExit("dense index unavailable; refusing to report a degraded run")
+    from ..llm import make_adapter
+    eng = Engine(store, terms, policy, make_adapter() if use_model else LLMAdapter(), retr)
+    res = {}
+    for r in rows:
+        x = eng.run(QueryRequest(query=r["query"], lang=r["lang"], use_model=use_model))
+        ranked = [e.passage.passage_id for e in x.evidence if e.role == "primary"]
+        res[r["case_id"]] = {**r, "status": x.status, "top5": ranked[:5], "concepts": list(x.normalized_query["concepts_direct"]),
+                             "hit_at_5": (any(p in r["gold"] for p in ranked[:5]) if r["gold"] else None),
+                             "recall_at_5": (len(set(ranked[:5]) & set(r["gold"])) / len(r["gold"]) if r["gold"] else None),
+                             "shown_claims": sum(1 for c in x.claims if c.claim_type == "interpretation"),
+                             "inference_ran": x.trace.inference_ran}
+    by_v = {}
+    for v in ("en", "hi", "hinglish"):
+        xs = [c for c in res.values() if c["variant"] == v and c["gold"]]
+        un = [c for c in res.values() if c["variant"] == v and not c["gold"]]
+        by_v[v] = {"n_answerable": len(xs), "hit_at_5": f"{sum(c['hit_at_5'] for c in xs)}/{len(xs)}",
+                   "mean_recall_at_5": round(statistics.mean(c["recall_at_5"] for c in xs), 3) if xs else None,
+                   "out_of_corpus_abstained": f"{sum(c['status'] == 'insufficient_evidence' for c in un)}/{len(un)}"}
+    intents = sorted({c["intent"] for c in res.values()})
+    agree, jac_hi, jac_hl = 0, [], []
+    for i in intents:
+        e, h, l = (res[f"{i}-{v}"] for v in ("en", "hi", "hinglish"))
+        agree += (e["status"] == h["status"] == l["status"])
+        for other, acc in ((h, jac_hi), (l, jac_hl)):
+            a, b = set(e["top5"]), set(other["top5"])
+            acc.append(len(a & b) / len(a | b) if a | b else 1.0)
+    out = {"git_commit": git_commit(), "created_at": time.strftime("%Y-%m-%dT%H:%M:%S"), "use_model": use_model,
+           "n_cases": len(rows), "n_intents": len(intents), "by_variant": by_v,
+           "status_agreement_all_three": f"{agree}/{len(intents)}",
+           "top5_jaccard_en_vs_hi": round(statistics.mean(jac_hi), 3), "top5_jaccard_en_vs_hinglish": round(statistics.mean(jac_hl), 3),
+           "note": "Candidate cases written by the build assistant, not by native speakers; labels unreviewed.", "cases": list(res.values())}
+    p = REPO_ROOT / "eval" / "results" / f"indic_eval_{'model' if use_model else 'retrieval'}_{time.strftime('%Y%m%d_%H%M%S')}.json"
+    p.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
+    print("WROTE", p)
+    print(json.dumps({k: v for k, v in out.items() if k != "cases"}, ensure_ascii=False, indent=1))
+    return out
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "experiments"
-    if cmd == "fresh":
+    if cmd == "indic":
+        indic(use_model="--model" in sys.argv)
+    elif cmd == "fresh":
         fresh()
     elif cmd == "failures":
         failures()

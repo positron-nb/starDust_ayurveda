@@ -67,8 +67,45 @@ def S() -> dict:
 _hits: dict[str, deque] = defaultdict(deque)
 
 
+import hashlib as _hashlib  # noqa: E402
+import hmac as _hmac  # noqa: E402
+import os as _os  # noqa: E402
+import secrets as _secrets  # noqa: E402
+
+# Optional demo access control. Enabled only when PRAMAAN_ACCESS_PASSCODE is set (e.g. when exposed
+# through a tunnel). The passcode is typed by the visitor; the server sets an HttpOnly signed session
+# cookie. No token ever lives in frontend code.
+_PASSCODE = _os.environ.get("PRAMAAN_ACCESS_PASSCODE", "")
+_SECRET = (_os.environ.get("PRAMAAN_SESSION_SECRET") or _secrets.token_hex(32)).encode()
+_SESSION_TTL = int(_os.environ.get("PRAMAAN_SESSION_TTL_S", "28800"))
+_OPEN_PATHS = {"/api/login", "/api/auth/status"}
+_login_hits: dict[str, deque] = defaultdict(deque)
+
+
+def _sign(exp: int) -> str:
+    return f"{exp}.{_hmac.new(_SECRET, str(exp).encode(), _hashlib.sha256).hexdigest()}"
+
+
+def _valid_session(cookie: str | None) -> bool:
+    if not cookie or "." not in cookie:
+        return False
+    exp_s, _sig = cookie.split(".", 1)
+    try:
+        exp = int(exp_s)
+    except ValueError:
+        return False
+    return exp > time.time() and _hmac.compare_digest(cookie, _sign(exp))
+
+
+def auth_enabled() -> bool:
+    return bool(_PASSCODE)
+
+
 @app.middleware("http")
 async def guard(request: Request, call_next):
+    if auth_enabled() and request.url.path.startswith("/api/") and request.url.path not in _OPEN_PATHS:
+        if not _valid_session(request.cookies.get("pramaan_session")):
+            return JSONResponse({"detail": "authentication required"}, status_code=401)
     if request.url.path.startswith("/api/") and request.method == "POST":
         ip = request.client.host if request.client else "?"
         q = _hits[ip]
@@ -86,6 +123,42 @@ async def guard(request: Request, call_next):
     resp.headers["Referrer-Policy"] = "no-referrer"
     resp.headers["Content-Security-Policy"] = ("default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
                                                "font-src 'self' https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; frame-ancestors 'none'")
+    return resp
+
+
+class LoginReq(BaseModel):
+    passcode: str
+
+
+@app.get("/api/auth/status")
+def auth_status(request: Request):
+    return {"auth_required": auth_enabled(), "authenticated": (not auth_enabled()) or _valid_session(request.cookies.get("pramaan_session"))}
+
+
+@app.post("/api/login")
+def login(req: LoginReq, request: Request):
+    if not auth_enabled():
+        return {"ok": True, "auth_required": False}
+    ip = request.client.host if request.client else "?"
+    q = _login_hits[ip]
+    now = time.time()
+    while q and now - q[0] > 300:
+        q.popleft()
+    if len(q) >= 5:
+        raise HTTPException(429, "too many attempts; wait 5 minutes")
+    q.append(now)
+    if not _hmac.compare_digest(req.passcode.encode(), _PASSCODE.encode()):
+        raise HTTPException(401, "wrong passcode")
+    resp = JSONResponse({"ok": True})
+    resp.set_cookie("pramaan_session", _sign(int(now) + _SESSION_TTL), max_age=_SESSION_TTL, httponly=True,
+                    samesite="strict", secure=_os.environ.get("PRAMAAN_COOKIE_SECURE", "1") == "1")
+    return resp
+
+
+@app.post("/api/logout")
+def logout():
+    resp = JSONResponse({"ok": True})
+    resp.delete_cookie("pramaan_session")
     return resp
 
 

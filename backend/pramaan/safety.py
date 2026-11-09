@@ -169,6 +169,11 @@ def extract_facts(text: str, terms: Terminology, policy: Policy, case_text: str 
     dr = lex("dose_request")
     setf("dose_request", "present" if dr else "absent", values=dr, ev=dr[0] if dr else None)
     sm = lex("stop_medication_request")
+    # pattern form catches word-order variants the lexicon misses ("stop my metformin", "replace my BP tablets")
+    m = re.search(r"\b(?:stop|quit|discontinue|leave|replace|skip|come off)\b[^.?!]{0,30}?\b(?:medicines?|medications?|tablets?|pills?|drugs?|"
+                  r"metformin|insulin|thyroxine|levothyroxine|amlodipine|warfarin|statins?|steroids?|antidepressants?)\b", t, re.I)
+    m_hi = re.search(r"(?:दवा|दवाई|गोली|इंसुलिन)\S*\s+(?:\S+\s+){0,3}?(?:बंद|छोड़|छोड)", t)
+    sm = sm + [x.group(0) for x in (m, m_hi) if x]
     setf("stop_medication_request", "present" if sm else "absent", values=sm, ev=sm[0] if sm else None)
 
     herbs = []

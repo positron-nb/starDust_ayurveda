@@ -1,6 +1,7 @@
 import type { CaseFact, Health, RunResult } from "./types";
 
 async function j<T>(r: Response): Promise<T> {
+  if (r.status === 401) { window.dispatchEvent(new Event("pramaan-auth-required")); }
   if (!r.ok) {
     let msg = `${r.status} ${r.statusText}`;
     try { const d = await r.json(); msg = typeof d.detail === "string" ? d.detail : JSON.stringify(d.detail ?? d); } catch { /* ignore */ }
@@ -22,6 +23,9 @@ const post = (url: string, body: unknown) =>
   fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
 
 export const api = {
+  authStatus: () => fetch("/api/auth/status").then(j<{ auth_required: boolean; authenticated: boolean }>),
+  login: (passcode: string) => post("/api/login", { passcode }).then(j<any>),
+  logout: () => post("/api/logout", {}).then(j<any>),
   health: () => fetch("/api/health").then(j<Health>),
   extractFacts: (query: string, case_text: string) => post("/api/facts/extract", { query, case_text }).then(j<CaseFact[]>),
   query: (body: { query: string; lang: string; case_text: string; facts?: CaseFact[] | null; use_model: boolean; retrieval_mode?: string }) =>

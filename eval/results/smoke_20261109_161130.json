@@ -1,0 +1,106 @@
+{
+  "kind": "ayurparam_smoke_test",
+  "model_id": "bharatgenai/AyurParam",
+  "revision": "27c69eeef492bbc9e2c0048fc1e95959ffc0820e",
+  "started": "2026-11-09T16:10:30",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.10",
+  "torch": "2.8.0+cu128",
+  "transformers": "4.53.1",
+  "cuda": "12.8",
+  "gpu": "NVIDIA GeForce RTX 5060 Laptop GPU",
+  "config_max_position_embeddings": 2048,
+  "code_sha256": {
+    "modeling_parambharatgen.py": "4745b5bc5596aa906ce880c14d15bdc3197cd04337e7685ebbed4d4f9ea719b5",
+    "config_parambharatgen.py": "9d89451dabb06aa289b35d48fc24bc8d0818d48fe51cad80c5d21df95abed3eb"
+  },
+  "tokenizer_model_max_length": "1000000000000000019884624838656",
+  "tokenizer_eos": [
+    "</actual_response>",
+    256005
+  ],
+  "config_eos_token_id": 3,
+  "chat_template_serialized": "<user> What is agni? <assistant><actual_response>",
+  "system_message_reaches_model_via_template": false,
+  "load_seconds": 23.3,
+  "dtype": "torch.bfloat16",
+  "param_count": 2860673024,
+  "gpu_mem_after_load_mb": 5488,
+  "generations": {
+    "readme_style": {
+      "use_cache_True": {
+        "text": "<actual_response>The Samprapti (pathogenesis) of Ajirna begins with Nidana Sevana — consumption of incompatible, heavy, or cold foods that impair Jatharagni. This leads to Mandagni and incomplete digestion (Ama formation). Ama accumulates in the Amashaya, obstructing Annavaha Srotas and causing Gaurava (heaviness), Avipaka (indigestion),",
+        "ms": 5282,
+        "new_tokens": 80,
+        "tok_per_s": 15.1,
+        "peak_mem_mb": 5524
+      },
+      "use_cache_False": {
+        "text": "<actual_response>The Samprapti (pathogenesis) of Ajirna begins with Nidana Sevana — consumption of incompatible, heavy, or cold foods that impair Jatharagni. This leads to Mandagni (diminished digestive fire), resulting in incomplete digestion and formation of Ama (toxic metabolic residue). Ama accumulates in the Amashaya (stomach), causing Gaurava (heaviness),",
+        "ms": 3955,
+        "new_tokens": 80,
+        "tok_per_s": 20.2,
+        "peak_mem_mb": 5640
+      },
+      "prompt_tokens": 17,
+      "cache_on_off_identical": false
+    },
+    "chat_template": {
+      "use_cache_True": {
+        "text": "The Samprapti (pathogenesis) of Ajirna begins with Nidana Sevana — consumption of incompatible, heavy, or cold foods that impair Jatharagni. This leads to Mandagni (diminished digestive fire), resulting in incomplete digestion and formation of Ama (toxic metabolic residue). Ama accumulates in the Amashaya (stomach), causing Gaurava (heaviness), Av",
+        "ms": 3204,
+        "new_tokens": 80,
+        "tok_per_s": 25.0,
+        "peak_mem_mb": 5525
+      },
+      "use_cache_False": {
+        "text": "The Samprapti (pathogenesis) of Ajirna begins with Nidana Sevana — consumption of incompatible, heavy, or cold foods that impair Jatharagni. This leads to Mandagni (diminished digestive fire), resulting in incomplete digestion and formation of Ama (toxic metabolic residue). Ama accumulates in the Amashaya (stomach), causing Gaurava (heaviness), Av",
+        "ms": 3774,
+        "new_tokens": 80,
+        "tok_per_s": 21.2,
+        "peak_mem_mb": 5642
+      },
+      "prompt_tokens": 18,
+      "cache_on_off_identical": true
+    },
+    "context_style": {
+      "use_cache_True": {
+        "text": "<actual_response>Āma is improperly digested food that remains undigested due to low agni, which then becomes toxic and clogs bodily channels. It can lead to various diseases by disrupting normal physiological functions and mixing with doshas or dhatus. </actual_response>",
+        "ms": 3611,
+        "new_tokens": 50,
+        "tok_per_s": 13.8,
+        "peak_mem_mb": 5741
+      },
+      "use_cache_False": {
+        "text": "<actual_response>Āma is improperly digested food that remains undigested due to low agni, which then becomes toxic and clogs bodily channels. It can lead to various diseases by disrupting normal physiological functions and mixing with doshas and dhatus. </actual_response>",
+        "ms": 6369,
+        "new_tokens": 50,
+        "tok_per_s": 7.9,
+        "peak_mem_mb": 5796
+      },
+      "prompt_tokens": 153,
+      "cache_on_off_identical": false
+    },
+    "hindi": {
+      "use_cache_True": {
+        "text": "<actual_response>आम अपचित आहार का विषैला अवशेष है जो अग्नि के दुर्बल होने पर बनता है। यह शरीर में विभिन्न स्रोतों को आवृत कर रोगों की उत्पत्ति करता है। इसे 'सर्वरोग मूल' माना गया है और इसका शोधन चिकित्सा का प्रथम चरण है। </actual_response>",
+        "ms": 3207,
+        "new_tokens": 74,
+        "tok_per_s": 23.1,
+        "peak_mem_mb": 5520
+      },
+      "use_cache_False": {
+        "text": "<actual_response>आम अपचित आहार का विषैला अवशेष है जो अग्नि के दुर्बल होने पर बनता है। यह शरीर में विभिन्न स्रोतों को आवृत कर रोगों की उत्पत्ति करता है। इसे 'सर्वरोग मूल' माना गया है और इसका शोधन चिकित्सा का प्रथम चरण है। </actual_response>",
+        "ms": 3184,
+        "new_tokens": 74,
+        "tok_per_s": 23.2,
+        "peak_mem_mb": 5617
+      },
+      "prompt_tokens": 7,
+      "cache_on_off_identical": true
+    }
+  },
+  "note_context": "Server enforces prompt+max_new_tokens <= 2048 (config.json). Tokenizer model_max_length is a 1e30 sentinel.",
+  "finished": "2026-11-09T16:11:30",
+  "result": "PASS: real weights loaded and generated on cuda"
+}

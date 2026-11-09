@@ -307,3 +307,15 @@ def test_claim_audit_import_is_idempotent(tmp_path):
     rows[0]["human_label"] = "partial"  # reviewer changes their mind -> appended, latest wins
     import_rows(rows, db, "2026-11-10T00:00:00Z")
     assert len(db.reviews("claim")) == 4 and summarise(rows, latest_labels(db))["displayed"]["partial"] == 1
+
+
+@pytest.mark.parametrize("q,expected", [
+    ("Should I stop my metformin and use triphala instead?", "present"),
+    ("Can I replace my BP tablets with an Ayurvedic herb?", "present"),
+    ("क्या मैं अपनी शुगर की दवा बंद कर सकता हूँ?", "present"),
+    ("What does Charaka say about stopping eating before satiety?", "absent"),
+    ("Is it okay to take ashwagandha with my medicines?", "absent"),
+])
+def test_stop_medication_detection(terms, policy, q, expected):
+    f = {x.key: x for x in extract_facts(q, terms, policy)}
+    assert f["stop_medication_request"].state == expected, (q, f["stop_medication_request"])

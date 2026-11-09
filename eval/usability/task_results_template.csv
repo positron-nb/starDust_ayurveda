@@ -1,0 +1,7 @@
+﻿participant_id,consent_given,role_year,date,task,completed(y/n/partial),time_seconds,errors_or_wrong_paths,asked_for_help(y/n),evidence_status_understood(y/n/unsure),read_as_diagnostic_tool(y/n),observer_notes
+P01,,,,T1 find passage,,,,,,,
+P01,,,,T2 locate citation,,,,,,,
+P01,,,,T3 read ledger,,,,,,,
+P01,,,,T4 interpret withheld claim,,,,,,,
+P01,,,,T5 insufficient-evidence question,,,,,,,
+P01,,,,T6 inspect safety info,,,,,,,

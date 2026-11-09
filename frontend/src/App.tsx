@@ -22,6 +22,16 @@ export default function App() {
   const [passageId, setPassageId] = useState<string | null>(null);
   const [lastRun, setLastRun] = useState<RunResult | null>(null);
 
+  const [auth, setAuth] = useState<{ auth_required: boolean; authenticated: boolean } | null>(null);
+  const [pass, setPass] = useState("");
+  const [authErr, setAuthErr] = useState<string | null>(null);
+  useEffect(() => {
+    const check = () => api.authStatus().then(setAuth).catch(() => setAuth({ auth_required: false, authenticated: true }));
+    check();
+    window.addEventListener("pramaan-auth-required", check);
+    return () => window.removeEventListener("pramaan-auth-required", check);
+  }, []);
+
   const refresh = useCallback(() => {
     api.health().then((h) => { setHealth(h); setHealthErr(null); }).catch((e) => setHealthErr(e.message));
   }, []);
@@ -32,6 +42,23 @@ export default function App() {
   }, [refresh]);
 
   const openPassage = (pid: string) => { setPassageId(pid); setTab("sources"); };
+
+  if (auth && auth.auth_required && !auth.authenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center p-4">
+        <form className="panel p-6 w-full max-w-sm space-y-3" onSubmit={(e) => {
+          e.preventDefault(); setAuthErr(null);
+          api.login(pass).then(() => { setPass(""); return api.authStatus().then(setAuth); }).catch((er) => setAuthErr(er.message));
+        }}>
+          <div className="text-xl font-bold text-forest-700">PRAMAAN demo</div>
+          <p className="text-xs text-muted">Access is limited to invited reviewers. Synthetic educational inputs only — do not enter patient data.</p>
+          <label className="text-sm block">Passcode<input type="password" className="input mt-1" value={pass} onChange={(e) => setPass(e.target.value)} autoFocus /></label>
+          {authErr && <p className="text-sm text-alert-700" role="alert">{authErr}</p>}
+          <button className="btn-primary w-full justify-center" disabled={!pass}>Enter</button>
+        </form>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col">

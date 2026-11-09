@@ -1,0 +1,751 @@
+{
+ "git_commit": "5a3fd70",
+ "created_at": "2026-11-09T16:05:26",
+ "use_model": false,
+ "n_cases": 24,
+ "n_intents": 8,
+ "by_variant": {
+  "en": {
+   "n_answerable": 7,
+   "hit_at_5": "4/7",
+   "mean_recall_at_5": 0.236,
+   "out_of_corpus_abstained": "0/1"
+  },
+  "hi": {
+   "n_answerable": 7,
+   "hit_at_5": "3/7",
+   "mean_recall_at_5": 0.189,
+   "out_of_corpus_abstained": "1/1"
+  },
+  "hinglish": {
+   "n_answerable": 7,
+   "hit_at_5": "3/7",
+   "mean_recall_at_5": 0.168,
+   "out_of_corpus_abstained": "0/1"
+  }
+ },
+ "status_agreement_all_three": "6/8",
+ "top5_jaccard_en_vs_hi": 0.521,
+ "top5_jaccard_en_vs_hinglish": 0.491,
+ "note": "Candidate cases written by the build assistant, not by native speakers; labels unreviewed.",
+ "cases": [
+  {
+   "case_id": "I1-en",
+   "intent": "I1",
+   "variant": "en",
+   "query": "What exactly is ama according to Ashtanga Hridaya?",
+   "lang": "en",
+   "gold": [
+    "Ah.1.13.25"
+   ],
+   "expected_status": "answerable",
+   "label_status": "candidate_unreviewed",
+   "author": "build assistant (AI draft); phrasing not validated by native speakers",
+   "status": "retrieval_only",
+   "top5": [
+    "Ca.3.2.11",
+    "Ah.1.8.14",
+    "Ah.1.13.24",
+    "Ah.1.13.26",
+    "Ah.1.13.27+3"
+   ],
+   "concepts": [
+    "ama"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "shown_claims": 0,
+   "inference_ran": false
+  },
+  {
+   "case_id": "I1-hi",
+   "intent": "I1",
+   "variant": "hi",
+   "query": "अष्टांग हृदय के अनुसार आम असल में क्या होता है?",
+   "lang": "hi",
+   "gold": [
+    "Ah.1.13.25"
+   ],
+   "expected_status": "answerable",
+   "label_status": "candidate_unreviewed",
+   "author": "build assistant (AI draft); phrasing not validated by native speakers",
+   "status": "retrieval_only",
+   "top5": [
+    "Ah.1.13.24",
+    "Ca.3.2.11",
+    "Ah.1.13.27",
+    "Ah.1.13.27+3",
+    "Ah.1.13.26"
+   ],
+   "concepts": [
+    "ama"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "shown_claims": 0,
+   "inference_ran": false
+  },
+  {
+   "case_id": "I1-hinglish",
+   "intent": "I1",
+   "variant": "hinglish",
+   "query": "ashtang hriday ke hisaab se ama exactly kya hota hai?",
+   "lang": "hi",
+   "gold": [
+    "Ah.1.13.25"
+   ],
+   "expected_status": "answerable",
+   "label_status": "candidate_unreviewed",
+   "author": "build assistant (AI draft); phrasing not validated by native speakers",
+   "status": "retrieval_only",
+   "top5": [
+    "Ah.1.8.14",
+    "Ca.3.2.11",
+    "Ca.3.2.10",
+    "Ah.1.13.27+3",
+    "Ca.6.15.25"
+   ],
+   "concepts": [
+    "ama"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "shown_claims": 0,
+   "inference_ran": false
+  },
+  {
+   "case_id": "I2-en",
+   "intent": "I2",
+   "variant": "en",
+   "query": "If someone has indigestion with severe pain, should they take a painkiller according to Vagbhata?",
+   "lang": "en",
+   "gold": [
+    "Ah.1.8.18",
+    "Ah.1.8.19"
+   ],
+   "expected_status": "answerable",
+   "label_status": "candidate_unreviewed",
+   "author": "build assistant (AI draft); phrasing not validated by native speakers",
+   "status": "retrieval_only",
+   "top5": [
+    "Ca.6.15.112",
+    "Ca.1.5.29",
+    "Ca.6.15.222",
+    "Ah.1.8.31",
+    "Ca.6.15.237"
+   ],
+   "concepts": [
+    "ajirna",
+    "shula"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "shown_claims": 0,
+   "inference_ran": false
+  },
+  {
+   "case_id": "I2-hi",
+   "intent": "I2",
+   "variant": "hi",
+   "query": "अपच में तेज दर्द हो तो क्या दर्द की दवा लेनी चाहिए, वाग्भट क्या कहते हैं?",
+   "lang": "hi",
+   "gold": [
+    "Ah.1.8.18",
+    "Ah.1.8.19"
+   ],
+   "expected_status": "answerable",
+   "label_status": "candidate_unreviewed",
+   "author": "build assistant (AI draft); phrasing not validated by native speakers",
+   "status": "retrieval_only",
+   "top5": [
+    "Ca.6.15.112",
+    "Ca.6.15.42",
+    "Ca.6.15.222",
+    "Ca.1.5.29",
+    "Ca.6.15.237"
+   ],
+   "concepts": [
+    "ajirna",
+    "shula"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "shown_claims": 0,
+   "inference_ran": false
+  },
+  {
+   "case_id": "I2-hinglish",
+   "intent": "I2",
+   "variant": "hinglish",
+   "query": "apach me bahut dard ho to painkiller le sakte hai kya, vagbhat kya bolte hai?",
+   "lang": "hi",
+   "gold": [
+    "Ah.1.8.18",
+    "Ah.1.8.19"
+   ],
+   "expected_status": "answerable",
+   "label_status": "candidate_unreviewed",
+   "author": "build assistant (AI draft); phrasing not validated by native speakers",
+   "status": "insufficient_evidence",
+   "top5": [
+    "Ca.6.15.224",
+    "Ca.6.15.165",
+    "Ca.6.15.127"
+   ],
+   "concepts": [],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "shown_claims": 0,
+   "inference_ran": false
+  },
+  {
+   "case_id": "I3-en",
+   "intent": "I3",
+   "variant": "en",
+   "query": "How much should one eat so that digestion stays strong?",
+   "lang": "en",
+   "gold": [
+    "Ah.1.8.1",
+    "Ah.1.8.2",
+    "Ca.1.5.3",
+    "Ca.1.5.4",
+    "Ca.1.5.6"
+   ],
+   "expected_status": "answerable",
+   "label_status": "candidate_unreviewed",
+   "author": "build assistant (AI draft); phrasing not validated by native speakers",
+   "status": "retrieval_only",
+   "top5": [
+    "Ca.1.5.25",
+    "Ca.6.15.13",
+    "Ca.6.15.222",
+    "Ca.6.15.206",
+    "Ca.6.15.212"
+   ],
+   "concepts": [
+    "agni"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "shown_claims": 0,
+   "inference_ran": false
+  },
+  {
+   "case_id": "I3-hi",
+   "intent": "I3",
+   "variant": "hi",
+   "query": "पाचन अग्नि ठीक रहे इसके लिए कितना खाना चाहिए?",
+   "lang": "hi",
+   "gold": [
+    "Ah.1.8.1",
+    "Ah.1.8.2",
+    "Ca.1.5.3",
+    "Ca.1.5.4",
+    "Ca.1.5.6"
+   ],
+   "expected_status": "answerable",
+   "label_status": "candidate_unreviewed",
+   "author": "build assistant (AI draft); phrasing not validated by native speakers",
+   "status": "retrieval_only",
+   "top5": [
+    "Ca.6.15.13",
+    "Ca.6.15.124",
+    "Ca.3.2.8",
+    "Ca.6.15.222",
+    "Ca.6.15.201"
+   ],
+   "concepts": [
+    "agni",
+    "pachana_dipana",
+    "ahara",
+    "srotas"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "shown_claims": 0,
+   "inference_ran": false
+  },
+  {
+   "case_id": "I3-hinglish",
+   "intent": "I3",
+   "variant": "hinglish",
+   "query": "agni theek rahe uske liye kitna khana chahiye?",
+   "lang": "hi",
+   "gold": [
+    "Ah.1.8.1",
+    "Ah.1.8.2",
+    "Ca.1.5.3",
+    "Ca.1.5.4",
+    "Ca.1.5.6"
+   ],
+   "expected_status": "answerable",
+   "label_status": "candidate_unreviewed",
+   "author": "build assistant (AI draft); phrasing not validated by native speakers",
+   "status": "retrieval_only",
+   "top5": [
+    "Ca.1.5.25",
+    "Ca.6.15.13",
+    "Ca.6.15.206",
+    "Ca.6.15.56",
+    "Ca.6.15.212"
+   ],
+   "concepts": [
+    "agni"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "shown_claims": 0,
+   "inference_ran": false
+  },
+  {
+   "case_id": "I4-en",
+   "intent": "I4",
+   "variant": "en",
+   "query": "What is the difference between alasaka and visuchika?",
+   "lang": "en",
+   "gold": [
+    "Ah.1.8.5",
+    "Ah.1.8.6",
+    "Ah.1.8.7",
+    "Ah.1.8.8",
+    "Ca.3.2.10",
+    "Ca.3.2.11",
+    "Ca.3.2.12"
+   ],
+   "expected_status": "answerable",
+   "label_status": "candidate_unreviewed",
+   "author": "build assistant (AI draft); phrasing not validated by native speakers",
+   "status": "retrieval_only",
+   "top5": [
+    "Ca.3.2.10",
+    "Ah.1.8.5",
+    "Ah.1.8.13",
+    "Ah.1.8.7",
+    "Ca.3.2.11"
+   ],
+   "concepts": [
+    "alasaka",
+    "vishucika",
+    "intent_definition"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.5714285714285714,
+   "shown_claims": 0,
+   "inference_ran": false
+  },
+  {
+   "case_id": "I4-hi",
+   "intent": "I4",
+   "variant": "hi",
+   "query": "अलसक और विषूचिका में क्या फर्क है?",
+   "lang": "hi",
+   "gold": [
+    "Ah.1.8.5",
+    "Ah.1.8.6",
+    "Ah.1.8.7",
+    "Ah.1.8.8",
+    "Ca.3.2.10",
+    "Ca.3.2.11",
+    "Ca.3.2.12"
+   ],
+   "expected_status": "answerable",
+   "label_status": "candidate_unreviewed",
+   "author": "build assistant (AI draft); phrasing not validated by native speakers",
+   "status": "retrieval_only",
+   "top5": [
+    "Ah.1.8.5",
+    "Ca.3.2.10",
+    "Ah.1.8.13",
+    "Ca.3.2.12",
+    "Ah.1.8.7"
+   ],
+   "concepts": [
+    "alasaka",
+    "vishucika"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.5714285714285714,
+   "shown_claims": 0,
+   "inference_ran": false
+  },
+  {
+   "case_id": "I4-hinglish",
+   "intent": "I4",
+   "variant": "hinglish",
+   "query": "alasak aur vishuchika me kya farak hai?",
+   "lang": "hi",
+   "gold": [
+    "Ah.1.8.5",
+    "Ah.1.8.6",
+    "Ah.1.8.7",
+    "Ah.1.8.8",
+    "Ca.3.2.10",
+    "Ca.3.2.11",
+    "Ca.3.2.12"
+   ],
+   "expected_status": "answerable",
+   "label_status": "candidate_unreviewed",
+   "author": "build assistant (AI draft); phrasing not validated by native speakers",
+   "status": "retrieval_only",
+   "top5": [
+    "Ah.1.8.5",
+    "Ah.1.8.17",
+    "Ca.3.2.10",
+    "Ah.1.8.8",
+    "Ca.6.15.185"
+   ],
+   "concepts": [
+    "vishucika"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.42857142857142855,
+   "shown_claims": 0,
+   "inference_ran": false
+  },
+  {
+   "case_id": "I5-en",
+   "intent": "I5",
+   "variant": "en",
+   "query": "Which kinds of ajirna are described and how do they differ?",
+   "lang": "en",
+   "gold": [
+    "Ah.1.8.25",
+    "Ah.1.8.26",
+    "Ah.1.8.27",
+    "Ah.1.8.29"
+   ],
+   "expected_status": "answerable",
+   "label_status": "candidate_unreviewed",
+   "author": "build assistant (AI draft); phrasing not validated by native speakers",
+   "status": "retrieval_only",
+   "top5": [
+    "Ca.6.15.112",
+    "Ah.1.8.25",
+    "Ca.6.15.42",
+    "Ah.1.8.31",
+    "Ca.6.15.66"
+   ],
+   "concepts": [
+    "ajirna"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.25,
+   "shown_claims": 0,
+   "inference_ran": false
+  },
+  {
+   "case_id": "I5-hi",
+   "intent": "I5",
+   "variant": "hi",
+   "query": "अजीर्ण कितने प्रकार का होता है?",
+   "lang": "hi",
+   "gold": [
+    "Ah.1.8.25",
+    "Ah.1.8.26",
+    "Ah.1.8.27",
+    "Ah.1.8.29"
+   ],
+   "expected_status": "answerable",
+   "label_status": "candidate_unreviewed",
+   "author": "build assistant (AI draft); phrasing not validated by native speakers",
+   "status": "retrieval_only",
+   "top5": [
+    "Ah.1.8.25",
+    "Ah.1.8.31",
+    "Ca.6.15.112",
+    "Ca.6.15.42",
+    "Ca.6.15.66"
+   ],
+   "concepts": [
+    "ajirna"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.25,
+   "shown_claims": 0,
+   "inference_ran": false
+  },
+  {
+   "case_id": "I5-hinglish",
+   "intent": "I5",
+   "variant": "hinglish",
+   "query": "ajirna kitne type ka hota hai?",
+   "lang": "hi",
+   "gold": [
+    "Ah.1.8.25",
+    "Ah.1.8.26",
+    "Ah.1.8.27",
+    "Ah.1.8.29"
+   ],
+   "expected_status": "answerable",
+   "label_status": "candidate_unreviewed",
+   "author": "build assistant (AI draft); phrasing not validated by native speakers",
+   "status": "retrieval_only",
+   "top5": [
+    "Ca.6.15.42",
+    "Ah.1.8.25",
+    "Ah.1.8.31",
+    "Ca.6.15.66",
+    "Ca.6.15.112"
+   ],
+   "concepts": [
+    "ajirna"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.25,
+   "shown_claims": 0,
+   "inference_ran": false
+  },
+  {
+   "case_id": "I6-en",
+   "intent": "I6",
+   "variant": "en",
+   "query": "How can I tell whether malas are sama or nirama?",
+   "lang": "en",
+   "gold": [
+    "Ah.1.13.23",
+    "Ah.1.13.24"
+   ],
+   "expected_status": "answerable",
+   "label_status": "candidate_unreviewed",
+   "author": "build assistant (AI draft); phrasing not validated by native speakers",
+   "status": "retrieval_only",
+   "top5": [
+    "Ah.1.13.24",
+    "Ca.3.2.10",
+    "Ah.1.13.27+3",
+    "Ah.1.13.27",
+    "Ca.6.15.95"
+   ],
+   "concepts": [
+    "ama"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.5,
+   "shown_claims": 0,
+   "inference_ran": false
+  },
+  {
+   "case_id": "I6-hi",
+   "intent": "I6",
+   "variant": "hi",
+   "query": "मल साम है या निराम, यह कैसे पहचानें?",
+   "lang": "hi",
+   "gold": [
+    "Ah.1.13.23",
+    "Ah.1.13.24"
+   ],
+   "expected_status": "answerable",
+   "label_status": "candidate_unreviewed",
+   "author": "build assistant (AI draft); phrasing not validated by native speakers",
+   "status": "retrieval_only",
+   "top5": [
+    "Ah.1.13.24",
+    "Ah.1.8.31",
+    "Ah.1.13.27",
+    "Ca.6.15.95",
+    "Ah.1.13.27+3"
+   ],
+   "concepts": [
+    "ama"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.5,
+   "shown_claims": 0,
+   "inference_ran": false
+  },
+  {
+   "case_id": "I6-hinglish",
+   "intent": "I6",
+   "variant": "hinglish",
+   "query": "mal sama hai ya nirama kaise pehchane?",
+   "lang": "hi",
+   "gold": [
+    "Ah.1.13.23",
+    "Ah.1.13.24"
+   ],
+   "expected_status": "answerable",
+   "label_status": "candidate_unreviewed",
+   "author": "build assistant (AI draft); phrasing not validated by native speakers",
+   "status": "retrieval_only",
+   "top5": [
+    "Ah.1.13.27+3",
+    "Ah.1.13.24",
+    "Ca.3.2.11",
+    "Ah.1.13.27",
+    "Ca.3.2.10"
+   ],
+   "concepts": [
+    "ama"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.5,
+   "shown_claims": 0,
+   "inference_ran": false
+  },
+  {
+   "case_id": "I7-en",
+   "intent": "I7",
+   "variant": "en",
+   "query": "Why does Charaka say life depends on agni?",
+   "lang": "en",
+   "gold": [
+    "Ca.6.15.3",
+    "Ca.6.15.4",
+    "Ca.6.15.5"
+   ],
+   "expected_status": "answerable",
+   "label_status": "candidate_unreviewed",
+   "author": "build assistant (AI draft); phrasing not validated by native speakers",
+   "status": "retrieval_only",
+   "top5": [
+    "Ca.6.15.246",
+    "Ca.6.15.5",
+    "Ca.6.15.56",
+    "Ca.6.15.13",
+    "Ca.1.5.25"
+   ],
+   "concepts": [
+    "agni",
+    "intent_causes"
+   ],
+   "hit_at_5": true,
+   "recall_at_5": 0.3333333333333333,
+   "shown_claims": 0,
+   "inference_ran": false
+  },
+  {
+   "case_id": "I7-hi",
+   "intent": "I7",
+   "variant": "hi",
+   "query": "चरक के अनुसार जीवन अग्नि पर क्यों निर्भर है?",
+   "lang": "hi",
+   "gold": [
+    "Ca.6.15.3",
+    "Ca.6.15.4",
+    "Ca.6.15.5"
+   ],
+   "expected_status": "answerable",
+   "label_status": "candidate_unreviewed",
+   "author": "build assistant (AI draft); phrasing not validated by native speakers",
+   "status": "retrieval_only",
+   "top5": [
+    "Ca.1.5.25",
+    "Ca.6.15.13",
+    "Ca.6.15.212",
+    "Ca.6.15.195",
+    "Ca.6.15.206"
+   ],
+   "concepts": [
+    "agni"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "shown_claims": 0,
+   "inference_ran": false
+  },
+  {
+   "case_id": "I7-hinglish",
+   "intent": "I7",
+   "variant": "hinglish",
+   "query": "charak ke hisaab se zindagi agni pe kyu depend karti hai?",
+   "lang": "hi",
+   "gold": [
+    "Ca.6.15.3",
+    "Ca.6.15.4",
+    "Ca.6.15.5"
+   ],
+   "expected_status": "answerable",
+   "label_status": "candidate_unreviewed",
+   "author": "build assistant (AI draft); phrasing not validated by native speakers",
+   "status": "retrieval_only",
+   "top5": [
+    "Ca.1.5.25",
+    "Ca.6.15.13",
+    "Ca.6.15.206",
+    "Ca.6.15.212",
+    "Ca.6.15.195"
+   ],
+   "concepts": [
+    "agni"
+   ],
+   "hit_at_5": false,
+   "recall_at_5": 0.0,
+   "shown_claims": 0,
+   "inference_ran": false
+  },
+  {
+   "case_id": "I8-en",
+   "intent": "I8",
+   "variant": "en",
+   "query": "Does Ayurveda recommend intermittent fasting apps?",
+   "lang": "en",
+   "gold": [],
+   "expected_status": "insufficient_evidence",
+   "label_status": "candidate_unreviewed",
+   "author": "build assistant (AI draft); phrasing not validated by native speakers",
+   "status": "retrieval_only",
+   "top5": [
+    "Ah.1.8.27",
+    "Ca.6.15.75",
+    "Ca.6.15.208",
+    "Ca.3.2.13",
+    "Ca.6.15.196"
+   ],
+   "concepts": [
+    "langhana"
+   ],
+   "hit_at_5": null,
+   "recall_at_5": null,
+   "shown_claims": 0,
+   "inference_ran": false
+  },
+  {
+   "case_id": "I8-hi",
+   "intent": "I8",
+   "variant": "hi",
+   "query": "क्या आयुर्वेद इंटरमिटेंट फास्टिंग ऐप्स की सलाह देता है?",
+   "lang": "hi",
+   "gold": [],
+   "expected_status": "insufficient_evidence",
+   "label_status": "candidate_unreviewed",
+   "author": "build assistant (AI draft); phrasing not validated by native speakers",
+   "status": "insufficient_evidence",
+   "top5": [
+    "Ca.6.15.3",
+    "Ca.6.3.267",
+    "Ca.3.8.136"
+   ],
+   "concepts": [],
+   "hit_at_5": null,
+   "recall_at_5": null,
+   "shown_claims": 0,
+   "inference_ran": false
+  },
+  {
+   "case_id": "I8-hinglish",
+   "intent": "I8",
+   "variant": "hinglish",
+   "query": "kya ayurveda intermittent fasting apps recommend karta hai?",
+   "lang": "hi",
+   "gold": [],
+   "expected_status": "insufficient_evidence",
+   "label_status": "candidate_unreviewed",
+   "author": "build assistant (AI draft); phrasing not validated by native speakers",
+   "status": "retrieval_only",
+   "top5": [
+    "Ah.1.8.27",
+    "Ca.6.15.75",
+    "Ca.3.2.13",
+    "Ah.1.8.50",
+    "Ca.6.15.208"
+   ],
+   "concepts": [
+    "langhana"
+   ],
+   "hit_at_5": null,
+   "recall_at_5": null,
+   "shown_claims": 0,
+   "inference_ran": false
+  }
+ ]
+}
