@@ -80,6 +80,14 @@ def rank_metrics(ranked: list[str], rel: list[str], k: int = 5):
     return hit, rec, rr
 
 
+def _git(*args) -> str:
+    import subprocess
+    try:
+        return subprocess.check_output(["git", *args], cwd=REPO_ROOT, text=True).strip()
+    except Exception:
+        return ""
+
+
 def save(config: str, split: str, description: str, metrics: dict, per_case: list, failures: list, extra: dict) -> Path:
     RESULTS.mkdir(parents=True, exist_ok=True)
     eid = f"eval_{config}_{split}_{time.strftime('%Y%m%d_%H%M%S')}"
@@ -89,6 +97,8 @@ def save(config: str, split: str, description: str, metrics: dict, per_case: lis
                "model_revision": AYURPARAM_REVISION, "hardware": extra.get("hardware") or platform.processor() or platform.platform(),
                "llm_mode": extra.get("llm_mode", "none"), "n_live_inference": extra.get("n_live_inference", 0),
                "frozen_test_split_unchanged": frozen_ok(),
+               "git_commit": _git("rev-parse", "--short", "HEAD"), "git_dirty": bool(_git("status", "--porcelain", "--", "backend", "data", "model_server")),
+               "test_split_status": "inspected on 2026-11-07; treat as development data, not held-out",
                "label_status": "ALL expected labels are synthetic candidate labels written by the build assistant; none reviewed by a domain expert.",
                "metrics": metrics, "failures": failures, "per_case": per_case}
     f = RESULTS / f"{eid}.json"
