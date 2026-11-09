@@ -130,6 +130,16 @@ class LoginReq(BaseModel):
     passcode: str
 
 
+def _cookie_secure(request: Request) -> bool:
+    """Secure cookies are never sent over plain http, so a fixed Secure flag locks out a local
+    http://127.0.0.1 demo. Default: Secure when the request arrived over HTTPS (directly or via a tunnel
+    setting X-Forwarded-Proto). PRAMAAN_COOKIE_SECURE=1/0 forces it."""
+    forced = _os.environ.get("PRAMAAN_COOKIE_SECURE", "")
+    if forced in ("0", "1"):
+        return forced == "1"
+    return request.url.scheme == "https" or request.headers.get("x-forwarded-proto", "").lower() == "https"
+
+
 @app.get("/api/auth/status")
 def auth_status(request: Request):
     return {"auth_required": auth_enabled(), "authenticated": (not auth_enabled()) or _valid_session(request.cookies.get("pramaan_session"))}
@@ -151,7 +161,7 @@ def login(req: LoginReq, request: Request):
         raise HTTPException(401, "wrong passcode")
     resp = JSONResponse({"ok": True})
     resp.set_cookie("pramaan_session", _sign(int(now) + _SESSION_TTL), max_age=_SESSION_TTL, httponly=True,
-                    samesite="strict", secure=_os.environ.get("PRAMAAN_COOKIE_SECURE", "1") == "1")
+                    samesite="strict", secure=_cookie_secure(request))
     return resp
 
 

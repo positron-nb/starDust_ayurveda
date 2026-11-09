@@ -319,3 +319,20 @@ def test_claim_audit_import_is_idempotent(tmp_path):
 def test_stop_medication_detection(terms, policy, q, expected):
     f = {x.key: x for x in extract_facts(q, terms, policy)}
     assert f["stop_medication_request"].state == expected, (q, f["stop_medication_request"])
+
+
+@pytest.mark.parametrize("q,lang", [
+    ("Does Ayurveda recommend intermittent fasting apps?", "en"),
+    ("kya ayurveda intermittent fasting apps recommend karta hai?", "hi"),
+    ("क्या आयुर्वेद इंटरमिटेंट फास्टिंग ऐप्स की सलाह देता है?", "hi"),
+    ("Which fasting app is best for weight loss?", "en"),
+])
+def test_generic_alias_does_not_make_out_of_corpus_answerable(store, terms, retriever, policy, q, lang):
+    """Regression for the 'fasting' alias leak (INDIC_LANGUAGE_EVALUATION.md, 2026-11-09)."""
+    r = Engine(store, terms, policy, ScriptedLLM("x"), retriever).run(QueryRequest(query=q, lang=lang, use_model=False))
+    assert r.status == "insufficient_evidence", (q, r.normalized_query["concepts_direct"])
+
+
+def test_langhana_still_reachable_with_context(terms):
+    assert "langhana" in terms.concepts_in_query("What do the texts say about langhana for ama?")
+    assert "langhana" in terms.concepts_in_query("आम में लंघन क्यों करते हैं?")

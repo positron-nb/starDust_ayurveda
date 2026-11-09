@@ -1,0 +1,27 @@
+# Roman-script Hindi (Hinglish) surface forms → curated concept ids. EXPERIMENTAL (Experiment 1).
+# Drafted by the build assistant on 2026-11-09; reviewer_status: pending for every entry.
+# Used only when the 'roman_lexicon' query view is enabled; production default is OFF until the
+# Ayurveda reviewer approves entries and the locked benchmark shows a benefit.
+# requires_any: the entry fires only if at least one of these words/concepts is also in the query
+#   (context restriction, to stop everyday words creating domain concepts — cf. the 'fasting' bug).
+# negative_examples: queries that must NOT trigger the entry (checked by tests).
+version: "roman-lex-2026.11.09.1"
+reviewer_status: pending
+entries:
+  - {surface: [apach, apaach, badhazmi, badhajmi, badahazmi], concept: ajirna, source_ref: Ah.1.8.31, negative_examples: []}
+  - {surface: [ajeerna, ajeern, ajirn, ajeerana], concept: ajirna, source_ref: Ah.1.8.31, negative_examples: []}
+  - {surface: [hajma, hazma, pachan shakti, pachan agni, jatharagni, jathar agni], concept: agni, source_ref: Ca.6.15.3, negative_examples: []}
+  - {surface: [agni kamzor, agni kamjor, kamzor agni, kamjor agni, bhookh kam, bhukh kam, bhookh nahi, bhukh nahi, manda agni, mand agni], concept: mandagni, source_ref: Ah.1.13.25, negative_examples: []}
+  - {surface: [kitna khana, kitna khaye, kitna khaana, khane ki matra, khane ki maatra, bhojan ki matra, aahar ki matra], concept: ahara_matra, source_ref: Ah.1.8.1, negative_examples: []}
+  - {surface: [prakar, prakaar, kism, types], concept: ajirna_types, requires_any: [ajirna], source_ref: Ah.1.8.25, negative_examples: ["agni ke prakar"]}
+  - {surface: [aam], concept: ama, requires_any: [agni, ajirna, mandagni, pachan, hajma, apach, banta, bante, dosh, mal], source_ref: Ah.1.13.25, negative_examples: ["aam ka juice peena chahiye kya", "aam khane ke fayde"]}
+  - {surface: [alasak, alsak], concept: alasaka, source_ref: Ah.1.8.7, negative_examples: []}
+  - {surface: [vishuchika, visuchika, vishuchi, vishoochika], concept: vishucika, source_ref: Ah.1.8.8, negative_examples: []}
+  - {surface: [grahni, grahini], concept: grahani, source_ref: Ca.6.15.56, negative_examples: []}
+  - {surface: [pet dard, pet me dard, pet mein dard, painkiller, dard ki dawa, dard ki dawai], concept: shula, requires_any: [ajirna, apach, agni, ama, khana, bhojan], source_ref: Ah.1.8.18, negative_examples: ["sar dard ke liye painkiller"]}
+  - {surface: [ulti, ultee, jee machalna], concept: chardi, source_ref: Ah.1.8.9, negative_examples: []}
+  - {surface: [dast, patle dast, loose motion], concept: atisara, source_ref: Ah.1.8.9, negative_examples: []}
+  - {surface: [bharipan, bhaaripan, pet bhari, bhari pet], concept: guru_gaurava, source_ref: Ah.1.8.31, negative_examples: []}
+  - {surface: [langhan, upvas], concept: langhana, source_ref: Ah.1.8.21, negative_examples: ["intermittent fasting app"]}
+  - {surface: [sama, saam], concept: ama, requires_any: [mal, dosh, nirama, niram, vata, pitta, kapha], source_ref: Ah.1.13.24, negative_examples: ["sama agni kya hai"]}
+  - {surface: [nirama, niram], concept: ama, source_ref: Ah.1.13.24, negative_examples: []}

@@ -1,0 +1,21 @@
+{
+ "git_commit": "96efc57",
+ "dataset_hash": "9d3a8ba39d4a4926",
+ "corpus_version": "corpus-1d4075a35bad8150",
+ "devA": {
+  "n": 22,
+  "recall_at_5_final": 0.4226,
+  "candidate_recall_pool30": 0.7489,
+  "candidate_recall_pool60": 0.835,
+  "mean_pool_size30": 43.9,
+  "mean_pool_size60": 77.1
+ },
+ "devB": {
+  "n": 38,
+  "recall_at_5_final": 0.2387,
+  "candidate_recall_pool30": 0.64,
+  "candidate_recall_pool60": 0.7231,
+  "mean_pool_size30": 43.9,
+  "mean_pool_size60": 79.9
+ }
+}

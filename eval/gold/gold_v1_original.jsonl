@@ -1,0 +1,60 @@
+{"case_id": "G01a", "query": "What is āma according to Aṣṭāṅga Hṛdaya?", "relevant_passages": ["Ah.1.13.25", "Ah.1.13.26"], "split": "dev"}
+{"case_id": "G01b", "query": "How is ama formed when digestive heat is weak?", "relevant_passages": ["Ah.1.13.25", "Ah.1.13.26"], "split": "dev"}
+{"case_id": "G01hi", "query": "आम क्या है और यह कैसे बनता है?", "relevant_passages": ["Ah.1.13.25", "Ah.1.13.26"], "split": "dev"}
+{"case_id": "G01tr", "query": "ama kya hai aur kaise banta hai", "relevant_passages": ["Ah.1.13.25", "Ah.1.13.26"], "split": "dev"}
+{"case_id": "G02a", "query": "What are the signs of malas associated with ama (sama) versus nirama?", "relevant_passages": ["Ah.1.13.23", "Ah.1.13.24"], "split": "test"}
+{"case_id": "G02b", "query": "Which features indicate sama dosha such as heaviness, lassitude and loss of taste?", "relevant_passages": ["Ah.1.13.23", "Ah.1.13.24"], "split": "test"}
+{"case_id": "G02hi", "query": "साम और निराम मल के लक्षण क्या हैं?", "relevant_passages": ["Ah.1.13.23", "Ah.1.13.24"], "split": "test"}
+{"case_id": "G03a", "query": "How do the texts describe sama vata, sama pitta and sama kapha?", "relevant_passages": ["Ah.1.13.27", "Ah.1.13.27+1", "Ah.1.13.27+3", "Ah.1.13.27+4", "Ah.1.13.27+6"], "split": "test"}
+{"case_id": "G03b", "query": "What does it mean when doshas are called sama?", "relevant_passages": ["Ah.1.13.27", "Ah.1.13.27+1", "Ah.1.13.27+3", "Ah.1.13.27+4", "Ah.1.13.27+6"], "split": "test"}
+{"case_id": "G03hi", "query": "साम वात के लक्षण क्या बताए गए हैं?", "relevant_passages": ["Ah.1.13.27", "Ah.1.13.27+1", "Ah.1.13.27+3", "Ah.1.13.27+4", "Ah.1.13.27+6"], "split": "test"}
+{"case_id": "G04a", "query": "Why should sama doshas spread through the body not be eliminated immediately?", "relevant_passages": ["Ah.1.13.28", "Ah.1.13.29"], "split": "dev"}
+{"case_id": "G04b", "query": "What preparation with pachana and dipana is advised before eliminating sama doshas?", "relevant_passages": ["Ah.1.13.28", "Ah.1.13.29"], "split": "dev"}
+{"case_id": "G05a", "query": "Why should food be taken in proper quantity (matra)?", "relevant_passages": ["Ah.1.8.1", "Ah.1.8.2", "Ca.1.5.3", "Ca.1.5.4", "Ca.1.5.6", "Ca.1.5.7"], "split": "test"}
+{"case_id": "G05b", "query": "How does the right quantity of food relate to agni?", "relevant_passages": ["Ah.1.8.1", "Ah.1.8.2", "Ca.1.5.3", "Ca.1.5.4", "Ca.1.5.6", "Ca.1.5.7"], "split": "test"}
+{"case_id": "G05c", "query": "How much of heavy and light foods should be eaten according to matrashitiya?", "relevant_passages": ["Ah.1.8.1", "Ah.1.8.2", "Ca.1.5.3", "Ca.1.5.4", "Ca.1.5.6", "Ca.1.5.7"], "split": "test"}
+{"case_id": "G05hi", "query": "आहार की मात्रा और अग्नि का क्या संबंध है?", "relevant_passages": ["Ah.1.8.1", "Ah.1.8.2", "Ca.1.5.3", "Ca.1.5.4", "Ca.1.5.6", "Ca.1.5.7"], "split": "test"}
+{"case_id": "G05tr", "query": "matrashi syat - what is the measure of food", "relevant_passages": ["Ah.1.8.1", "Ah.1.8.2", "Ca.1.5.3", "Ca.1.5.4", "Ca.1.5.6", "Ca.1.5.7"], "split": "test"}
+{"case_id": "G06a", "query": "What happens when food is eaten in deficient quantity versus excessive quantity?", "relevant_passages": ["Ah.1.8.3", "Ah.1.8.4", "Ca.3.2.7"], "split": "test"}
+{"case_id": "G06hi", "query": "कम मात्रा और अधिक मात्रा में भोजन करने से क्या होता है?", "relevant_passages": ["Ah.1.8.3", "Ah.1.8.4", "Ca.3.2.7"], "split": "test"}
+{"case_id": "G07a", "query": "What are alasaka and vishuchika?", "relevant_passages": ["Ah.1.8.5", "Ah.1.8.6", "Ah.1.8.7", "Ah.1.8.8", "Ca.3.2.10", "Ca.3.2.11", "Ca.3.2.12"], "split": "dev"}
+{"case_id": "G07b", "query": "How do the texts explain the names alasaka and visuchika?", "relevant_passages": ["Ah.1.8.5", "Ah.1.8.6", "Ah.1.8.7", "Ah.1.8.8", "Ca.3.2.10", "Ca.3.2.11", "Ca.3.2.12"], "split": "dev"}
+{"case_id": "G07c", "query": "What are the two kinds of amapradosha according to Charaka?", "relevant_passages": ["Ah.1.8.5", "Ah.1.8.6", "Ah.1.8.7", "Ah.1.8.8", "Ca.3.2.10", "Ca.3.2.11", "Ca.3.2.12"], "split": "dev"}
+{"case_id": "G07hi", "query": "अलसक और विषूचिका क्या हैं?", "relevant_passages": ["Ah.1.8.5", "Ah.1.8.6", "Ah.1.8.7", "Ah.1.8.8", "Ca.3.2.10", "Ca.3.2.11", "Ca.3.2.12"], "split": "dev"}
+{"case_id": "G08a", "query": "What is dandalasaka and why is it to be avoided?", "relevant_passages": ["Ah.1.8.12", "Ah.1.8.13", "Ah.1.8.14"], "split": "test"}
+{"case_id": "G08b", "query": "What is amavisha and why is it considered dangerous?", "relevant_passages": ["Ah.1.8.12", "Ah.1.8.13", "Ah.1.8.14"], "split": "test"}
+{"case_id": "G08hi", "query": "आमविष क्या है?", "relevant_passages": ["Ah.1.8.12", "Ah.1.8.13", "Ah.1.8.14"], "split": "test"}
+{"case_id": "G09a", "query": "Should a person with ajirna take pain-relieving medicine?", "relevant_passages": ["Ah.1.8.18", "Ah.1.8.19"], "split": "test"}
+{"case_id": "G09b", "query": "Why can agni overwhelmed by ama not digest medicine and food together?", "relevant_passages": ["Ah.1.8.18", "Ah.1.8.19"], "split": "test"}
+{"case_id": "G09hi", "query": "अजीर्ण में शूलघ्न औषध क्यों नहीं लेनी चाहिए?", "relevant_passages": ["Ah.1.8.18", "Ah.1.8.19"], "split": "test"}
+{"case_id": "G10a", "query": "What are the types of ajirna such as amajirna, vidagdha and vishtabdha?", "relevant_passages": ["Ah.1.8.25", "Ah.1.8.26", "Ah.1.8.27", "Ah.1.8.29"], "split": "dev"}
+{"case_id": "G10b", "query": "Which dosha is associated with vidagdha and vishtabdha ajirna?", "relevant_passages": ["Ah.1.8.25", "Ah.1.8.26", "Ah.1.8.27", "Ah.1.8.29"], "split": "dev"}
+{"case_id": "G10c", "query": "What is rasashesha ajirna?", "relevant_passages": ["Ah.1.8.25", "Ah.1.8.26", "Ah.1.8.27", "Ah.1.8.29"], "split": "dev"}
+{"case_id": "G10hi", "query": "अजीर्ण के प्रकार कौन से हैं?", "relevant_passages": ["Ah.1.8.25", "Ah.1.8.26", "Ah.1.8.27", "Ah.1.8.29"], "split": "dev"}
+{"case_id": "G10tr", "query": "ajirna ke prakar", "relevant_passages": ["Ah.1.8.25", "Ah.1.8.26", "Ah.1.8.27", "Ah.1.8.29"], "split": "dev"}
+{"case_id": "G11a", "query": "What are the general signs of ajirna (indigestion)?", "relevant_passages": ["Ah.1.8.31", "Ca.6.15.45", "Ca.6.15.46"], "split": "test"}
+{"case_id": "G11b", "query": "Which symptoms like heaviness and giddiness indicate undigested food?", "relevant_passages": ["Ah.1.8.31", "Ca.6.15.45", "Ca.6.15.46"], "split": "test"}
+{"case_id": "G11hi", "query": "अजीर्ण के सामान्य लक्षण क्या हैं?", "relevant_passages": ["Ah.1.8.31", "Ca.6.15.45", "Ca.6.15.46"], "split": "test"}
+{"case_id": "G12a", "query": "What kinds of food and eating habits cause food not to be digested?", "relevant_passages": ["Ah.1.8.32", "Ah.1.8.33", "Ah.1.8.34", "Ca.3.2.8", "Ca.6.15.42", "Ca.6.15.43", "Ca.6.15.44"], "split": "test"}
+{"case_id": "G12b", "query": "What are samashana, adhyashana and vishamashana?", "relevant_passages": ["Ah.1.8.32", "Ah.1.8.33", "Ah.1.8.34", "Ca.3.2.8", "Ca.6.15.42", "Ca.6.15.43", "Ca.6.15.44"], "split": "test"}
+{"case_id": "G12c", "query": "What causes agni to become vitiated according to Charaka's grahani chapter?", "relevant_passages": ["Ah.1.8.32", "Ah.1.8.33", "Ah.1.8.34", "Ca.3.2.8", "Ca.6.15.42", "Ca.6.15.43", "Ca.6.15.44"], "split": "test"}
+{"case_id": "G12hi", "query": "अध्यशन और विषमाशन क्या हैं?", "relevant_passages": ["Ah.1.8.32", "Ah.1.8.33", "Ah.1.8.34", "Ca.3.2.8", "Ca.6.15.42", "Ca.6.15.43", "Ca.6.15.44"], "split": "test"}
+{"case_id": "G13a", "query": "How should the stomach be divided between solid food, liquids and the doshas?", "relevant_passages": ["Ca.3.2.3", "Ah.1.8.46", "Ah.1.8.47"], "split": "dev"}
+{"case_id": "G13tr", "query": "trividha kukshi - three parts of the stomach", "relevant_passages": ["Ca.3.2.3", "Ah.1.8.46", "Ah.1.8.47"], "split": "dev"}
+{"case_id": "G14a", "query": "Why is agni called the root of life and health?", "relevant_passages": ["Ca.6.15.3", "Ca.6.15.4", "Ca.6.15.5"], "split": "test"}
+{"case_id": "G14b", "query": "What happens when agni is extinguished or deranged according to Charaka?", "relevant_passages": ["Ca.6.15.3", "Ca.6.15.4", "Ca.6.15.5"], "split": "test"}
+{"case_id": "G14hi", "query": "अग्नि को जीवन का मूल क्यों कहा गया है?", "relevant_passages": ["Ca.6.15.3", "Ca.6.15.4", "Ca.6.15.5"], "split": "test"}
+{"case_id": "G15a", "query": "What are the effects of vishama, tikshna, sama and manda agni?", "relevant_passages": ["Ca.6.15.50", "Ca.6.15.51"], "split": "test"}
+{"case_id": "G15b", "query": "How does tikshnagni affect the dhatus?", "relevant_passages": ["Ca.6.15.50", "Ca.6.15.51"], "split": "test"}
+{"case_id": "G15hi", "query": "विषमाग्नि, तीक्ष्णाग्नि और मन्दाग्नि में क्या अंतर है?", "relevant_passages": ["Ca.6.15.50", "Ca.6.15.51"], "split": "test"}
+{"case_id": "G16a", "query": "Why is grahani called the seat of agni?", "relevant_passages": ["Ca.6.15.56", "Ca.6.15.57"], "split": "dev"}
+{"case_id": "G16b", "query": "What does a weakened grahani do with undigested food?", "relevant_passages": ["Ca.6.15.56", "Ca.6.15.57"], "split": "dev"}
+{"case_id": "G16hi", "query": "ग्रहणी को अग्नि का अधिष्ठान क्यों कहा गया है?", "relevant_passages": ["Ca.6.15.56", "Ca.6.15.57"], "split": "dev"}
+{"case_id": "G17a", "query": "Why is the digestive fire considered the chief of all the other agnis?", "relevant_passages": ["Ca.6.15.38", "Ca.6.15.39", "Ca.6.15.40", "Ca.6.15.15"], "split": "test"}
+{"case_id": "G17b", "query": "How are the dhatus transformed by their own agnis into prasada and kitta?", "relevant_passages": ["Ca.6.15.38", "Ca.6.15.39", "Ca.6.15.40", "Ca.6.15.15"], "split": "test"}
+{"case_id": "G18a", "query": "How do the texts describe langhana and pachana for ama disorders of different severity?", "relevant_passages": ["Ah.1.8.20", "Ah.1.8.21", "Ah.1.8.22", "Ah.1.8.27"], "split": "test"}
+{"case_id": "G18hi", "query": "आम विकारों में लंघन और पाचन का क्या स्थान है?", "relevant_passages": ["Ah.1.8.20", "Ah.1.8.21", "Ah.1.8.22", "Ah.1.8.27"], "split": "test"}
+{"case_id": "G19a", "query": "Where is food digested according to Charaka's trividhakukshiya chapter?", "relevant_passages": ["Ca.3.2.15", "Ca.3.2.16", "Ca.3.2.17", "Ca.3.2.18"], "split": "dev"}
+{"case_id": "G19b", "query": "In which site are eaten, chewed, drunk and licked foods digested?", "relevant_passages": ["Ca.3.2.15", "Ca.3.2.16", "Ca.3.2.17", "Ca.3.2.18"], "split": "dev"}
+{"case_id": "G20a", "query": "How do vata, pitta and kapha each derange agni in grahani dosha?", "relevant_passages": ["Ca.6.15.59", "Ca.6.15.60", "Ca.6.15.65", "Ca.6.15.66", "Ca.6.15.67", "Ca.6.15.68"], "split": "test"}
+{"case_id": "G20hi", "query": "वातज, पित्तज और कफज ग्रहणी दोष में अग्नि कैसे प्रभावित होती है?", "relevant_passages": ["Ca.6.15.59", "Ca.6.15.60", "Ca.6.15.65", "Ca.6.15.66", "Ca.6.15.67", "Ca.6.15.68"], "split": "test"}

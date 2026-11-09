@@ -26,6 +26,19 @@ Stable inputs are the six Workspace example buttons (A-en, A-hi, B, D1, D2, E); 
 | 2:35–3:00 | Evaluation & Review | Scroll the measured runs | "Every number is from a logged run: 81/81 displayed citations intact, 0 forged citations accepted — and our weakness, passage Recall@5 0.24. Human review is next and shown as pending." | review coverage 0/…; smoke test PASS |
 Closing line: **"PRAMAAN does not ask practitioners to trust an AI-generated answer. It enables them to inspect the evidence, challenge the claim and retain control over clinical interpretation."**
 
+## Most dangerous failure points (found by inspecting the running code, 2026-11-09)
+| # | Failure point | Why it happens | Prevention / check |
+|---|---|---|---|
+| 1 | First query after API start is slow (~30–60 s) | dense index is (re)built when the corpus version changed; e5 model loads on first use | start the API ≥10 min before; run demo A once |
+| 2 | Retrieval silently BM25-only | embedded Qdrant allows ONE process per folder: if an eval/lab script is running, the API's dense index fails | run nothing else; `/api/health` must show `dense.enabled: true` |
+| 3 | Banner says LIVE but generation fails | CUDA error after OOM — fixed: server now reports `loaded:false` and returns 503 | check `/health` right before; fixture terminal ready |
+| 4 | Login loop on the laptop | (fixed today) Secure cookie over http://127.0.0.1; cookie flag now follows the request scheme | for a local demo leave `PRAMAAN_ACCESS_PASSCODE` unset |
+| 5 | Integrity Lab dropdown empty | the Lab lists only runs **from this browser session** that have AyurParam claims | run demo A in the same browser tab first |
+| 6 | Fixture replay returns "no recorded output" | replay needs byte-identical prompts; any change to corpus text, retrieval or prompts breaks it | re-run `scripts/record_demo_fixtures.py` after the release freeze (verified OK on 9 Nov) |
+| 7 | Demo A ends in "generation failed" | all sentences withheld; deterministic (greedy) so it did not happen in rehearsals | if it happens, show the Source-only fallback as designed |
+| 8 | Corpus rebuild fails | Windows file lock while the API is running | never rebuild during the slot; stop API first |
+| 9 | GPU memory | AyurParam 5.5 GB + reranker would exceed 8 GB | reranker is OFF in production; do not enable it for the demo |
+
 ## Failure recovery
 | Failure | Recovery (≤10 s) |
 |---|---|

@@ -59,6 +59,10 @@ class Concept:
 class Terminology:
     version: str
     concepts: list[Concept]
+    # EXPERIMENTAL query views (Experiment 1); empty = production behaviour.
+    #   "translit": Roman words -> Devanagari (ITRANS) matched against the Hindi aliases
+    #   "roman_lexicon": data/terminology/roman_hindi_lexicon.yaml (pending review, context-restricted)
+    query_views: frozenset = frozenset()
 
     @property
     def meta_ids(self) -> set[str]:
@@ -124,6 +128,9 @@ class Terminology:
                         break
             if matched:
                 hits[c.id] = sorted(set(matched))
+        if use_patterns and self.query_views:
+            for cid, al in self.view_concepts(text, hits).items():
+                hits.setdefault(cid, []).extend(al)
         # 'mandagni' etc. imply 'agni'
         for sub in ("mandagni", "vishamagni", "tikshnagni", "samagni"):
             if sub in hits and "agni" not in hits:
@@ -144,6 +151,37 @@ class Terminology:
 
 
 @lru_cache(maxsize=1)
+def _roman_tokens(text: str) -> list[str]:
+    return re.findall(r"[a-z]+", fold_ascii(nfc(text)))
+
+
+@lru_cache(maxsize=1)
+def load_roman_lexicon() -> list[dict]:
+    p = settings.data_dir / "terminology" / "roman_hindi_lexicon.yaml"
+    return yaml.safe_load(p.read_text(encoding="utf-8"))["entries"] if p.exists() else []
+
+
+def _view_concepts(self: "Terminology", text: str, base_hits: dict) -> dict[str, list[str]]:
+    out: dict[str, list[str]] = {}
+    toks = _roman_tokens(text)
+    joined = " " + " ".join(toks) + " "
+    if "translit" in self.query_views and toks:
+        deva = sanscript.transliterate(" ".join(toks), sanscript.ITRANS, sanscript.DEVANAGARI)
+        for cid, al in Terminology(self.version, self.concepts).concepts_in_query(deva, use_patterns=False).items():
+            out.setdefault(cid, []).extend(f"translit:{a}" for a in al)
+    if "roman_lexicon" in self.query_views:
+        present = set(base_hits) | set(out)
+        for e in load_roman_lexicon():
+            matched = [sf for sf in e["surface"] if f" {sf} " in joined]
+            if not matched:
+                continue
+            req = e.get("requires_any")
+            if req and not (set(req) & present) and not any(f" {w} " in joined for w in req):
+                continue
+            out.setdefault(e["concept"], []).extend(f"roman:{m}" for m in matched)
+    return out
+
+
 def load_terminology(path: str | None = None) -> Terminology:
     p = Path(path) if path else settings.data_dir / "terminology" / "terminology.yaml"
     data = yaml.safe_load(p.read_text(encoding="utf-8"))
@@ -175,3 +213,12 @@ def tokenize_for_bm25(text: str) -> list[str]:
         if len(w) > 6:
             toks.append("p:" + w[:5])
     return toks
+
+
+Terminology.view_concepts = _view_concepts
+
+
+def with_views(t: Terminology, views) -> Terminology:
+    """A copy of the terminology with experimental query views enabled (shares concepts)."""
+    return Terminology(version=t.version + ("+" + "+".join(sorted(views)) if views else ""), concepts=t.concepts,
+                       query_views=frozenset(views))

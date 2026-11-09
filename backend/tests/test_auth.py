@@ -6,7 +6,7 @@ from fastapi.testclient import TestClient
 
 def test_passcode_gate(monkeypatch, tmp_path):
     monkeypatch.setenv("PRAMAAN_ACCESS_PASSCODE", "synthetic-test-passcode")
-    monkeypatch.setenv("PRAMAAN_COOKIE_SECURE", "0")
+    monkeypatch.delenv("PRAMAAN_COOKIE_SECURE", raising=False)  # automatic: http test client -> not Secure
     from pramaan import api as api_mod
     from pramaan.config import settings
     api = importlib.reload(api_mod)

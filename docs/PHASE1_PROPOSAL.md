@@ -12,7 +12,8 @@ Repository: https://github.com/positron-nb/starDust_ayurveda (branch `pramaan-pr
 ## 1. Executive summary
 AI answers about Ayurveda are fluent but hard to verify: a reader cannot tell which sentence comes from
 Caraka or Vāgbhaṭa, which is the model's own background, and what was assumed about the person.
-PRAMAAN is **not a chatbot**. It is a workbench in which AyurParam explains **one retrieved classical
+PRAMAAN is **not a chatbot**; its contribution is **evidence-governed generation and auditable
+abstention**, not retrieval-augmented generation alone. It is a workbench in which AyurParam explains **one retrieved classical
 verse at a time**, the backend attaches the citation, every sentence passes citation-integrity and
 support checks, unsupported sentences are **withheld with a visible reason**, and a model-independent
 safety layer handles pregnancy, medication, emergencies and missing information. When generation fails,
@@ -77,6 +78,11 @@ requiring a queried domain concept with lexical support (threshold chosen on the
 A 20-configuration controlled study found no parameter setting that beats the default on the selection
 set; the failure analysis attributes misses mainly to terminology coverage, ranking among many passages
 sharing generic concepts, and over-broad gold labels (§15, docs/RETRIEVAL_FAILURE_ANALYSIS.md).
+Two targeted follow-up experiments (docs/RETRIEVAL_EXPERIMENTS.md, round 2): 64–75% of gold passages are
+already in the BM25∪dense candidate pool of ~44, so ordering is the main loss. A multilingual
+cross-encoder reranker (bge-reranker-v2-m3) improved one inspected subset but worsened the selection
+subset, and Roman-Hindi normalization gave only marginal gains; **neither is adopted** until a fresh,
+reviewer-authored locked benchmark is evaluated.
 
 ## 9. Evidence ledger (Implemented & tested)
 Each claim stores id, text, type, evidence ids, exact support spans, source locations, interpretation
@@ -88,11 +94,25 @@ Passage exists and is not revoked; source file hash equals the manifest pin; tex
 answer time; locator resolves; quoted spans match. Invented references ("Charaka Sūtrasthāna 45.12") and
 labels the model was not shown are rejected. **Integrity is structural, not semantic correctness.**
 
+## 10a. Three evaluation layers (kept separate everywhere)
+| Layer | Question | Status |
+|---|---|---|
+| A. Citation integrity | Does the cited source exist, unchanged, at that locator? | **Measured** (57/57; 81/81) |
+| B. Semantic claim support | Does this verse actually support this sentence? | **Not measured** — 107-record human audit prepared, labels pending |
+| C. Clinical validity | Is the interpretation clinically appropriate? | **Not completed** — needs qualified practitioner review |
+A pass in A says nothing about B or C. Automatic support checks are a filter, not validation.
+
 ## 11. Claim withholding (Implemented & tested; heuristic)
 A sentence is shown only if its citation passes and every curated concept it mentions is present in the
 cited verse; dose wording, pregnancy-safety assertions and (when a safety rule is active) positive-use
 wording are always withheld. The check is lexical: it misses relations, negation and qualifiers, so a
-shown sentence can still overstate the verse — hence the human audit (§14).
+shown sentence can still overstate the verse — hence the human audit (§14). Withholding is a **cost** as
+well as a safeguard: 476/557 generated sentences were withheld and 22/60 answerable cases showed no
+generated sentence (the source-only fallback still shows the verses). The goal is reliable answers where
+evidence suffices and correct abstention where it does not — not a high withholding rate. Whether gating
+actually removes more unsupported than supported sentences will be measured by an **evidence-ledger
+ablation** on the same run (all generated sentences vs displayed ones, scored with the same human
+rubric) once the audit is complete; no causal benefit is claimed before that.
 
 ## 12. Source-only fallback (Implemented, browser-checked)
 If AyurParam is unavailable or every sentence is withheld, the top verses, their gloss status and an
@@ -136,9 +156,11 @@ Regression run on 2026-11-09, all 120 cases (dev + inspected; a different popula
 claim): citation integrity 81/81, withheld 476/557, useful answers 35/60, fabricated citations accepted
 0/4, escalation 6/6 with 0/114 false alarms, abstention 17/20, p50 8.5 s; safety-rule expectations 23/23
 after a stop-medication fix. Hindi/Hinglish: Devanagari close to English on a small set, Roman Hinglish
-clearly worse (2/7 vs 6/7 Hit@5 with the model) — **parity not established**.
+clearly worse (2/7 vs 6/7 Hit@5 with the model). **Hindi and Hinglish input support is implemented
+experimentally, but retrieval parity has not been established.**
 
 ## 16. Limitations
+Corpus scope: two texts, 522 passages, one theme (Agni / Āma / Ajīrṇa) — no claim of broad coverage.
 Weak retrieval recall; automatic support check is lexical; zero human or clinical review so far; labels
 synthetic; Hindi parity unproven; Suśruta, Anupāna and seasonal rules not covered; single-GPU,
 single-request inference; Docker untested; public hosting not yet live; licence questions above.

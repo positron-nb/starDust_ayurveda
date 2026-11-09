@@ -15,7 +15,7 @@ depends on people other than the engineers. Nothing is marked COMPLETED without 
 | 16 Nov | Resolve labels; compute human support metrics | NOT STARTED | `import_claim_audit.py` + `claim_audit_summary.py` ready | engineer + teammate |
 | 17 Nov | Create fresh retrieval benchmark (40–50 Qs, ≥20 locked) | NOT STARTED | template + `benchmark_lock.py` ready | **BAMS teammate** |
 | 18 Nov | Retrieval failure analysis | COMPLETED (on inspected data) | RETRIEVAL_FAILURE_ANALYSIS.md; repeat on fresh dev rows | engineer |
-| 19 Nov | Retrieval experiments | COMPLETED (round 1) | RETRIEVAL_EXPERIMENTS.md — no knob beats default; next: reviewed terminology/glosses, sama/sāma alias fix, fasting alias | engineer + teammate |
+| 19 Nov | Retrieval experiments | COMPLETED (rounds 1–2: grid, normalization, reranker — none adopted) | RETRIEVAL_EXPERIMENTS.md — no knob beats default; next: reviewed terminology/glosses, sama/sāma alias fix, fasting alias | engineer + teammate |
 | 20 Nov | New held-out retrieval evaluation | NOT STARTED | blocked on 17 Nov benchmark | engineer |
 | 21 Nov | Proposal final review | IN PROGRESS | PHASE1_PROPOSAL.md updated 9 Nov; team names/IDs missing | team |
 | 22 Nov | **Phase 1 submission** | NOT STARTED | Team Leader submits via portal | **Team Leader** |

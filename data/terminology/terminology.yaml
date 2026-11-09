@@ -5,7 +5,7 @@
 # Author: build assistant draft, 2026-11-07. Review status: pending (needs Ayurveda teammate).
 # passage_patterns are Python regexes applied to the lower-cased original IAST text
 # (NFC). "-?" allows the editorial compound hyphens used in the Aṣṭāṅgahṛdaya e-text.
-version: "terms-2026.11.07.5"
+version: "terms-2026.11.09.1"
 review_status: pending
 concepts:
   - id: agni
@@ -94,7 +94,7 @@ concepts:
   - id: langhana
     label: {iast: laṅghana, deva: लङ्घन, en: "Laṅghana (lightening measures, incl. fasting)", hi: "लंघन"}
     query_aliases:
-      en: [langhana, fasting, lightening therapy]
+      en: [langhana, lightening therapy, therapeutic fasting, fasting therapy]  # bare "fasting" removed 2026-11-09: it made modern fasting-app questions answerable
       hi: [लंघन, लङ्घन, उपवास]
       sa: [laṅghana, langhana, upavāsa]
     passage_patterns: ['laṅghan', 'upavās', 'langhan']

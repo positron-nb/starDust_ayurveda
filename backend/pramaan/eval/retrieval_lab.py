@@ -187,6 +187,140 @@ def fresh() -> dict:
     return out
 
 
+MATRIX = [
+    # name, query views, rerank
+    ("E1-A baseline", (), False),
+    ("E1-B transliteration only", ("translit",), False),
+    ("E1-C roman lexicon only", ("roman_lexicon",), False),
+    ("E1-D translit + roman lexicon", ("translit", "roman_lexicon"), False),
+    ("E2-C rerank only", (), True),
+    ("E2-D normalization + rerank", ("translit", "roman_lexicon"), True),
+]
+
+
+def _lang_of(c: dict) -> str:
+    if c.get("variant"):
+        return {"en": "en", "hi": "hi", "hinglish": "hinglish"}[c["variant"]]
+    if c["case_id"].endswith("tr"):
+        return "hinglish"
+    return "hi" if c["lang"] == "hi" else "en"
+
+
+def _metrics(rows: list[dict]) -> dict:
+    import math
+    if not rows:
+        return {"n": 0}
+    hit = sum(r["hit"] for r in rows)
+    ndcg = []
+    for r in rows:
+        dcg = sum(1 / math.log2(i + 2) for i, p in enumerate(r["top5"]) if p in r["gold"])
+        ideal = sum(1 / math.log2(i + 2) for i in range(min(5, len(r["gold"]))))
+        ndcg.append(dcg / ideal)
+    return {"n": len(rows), "hit_at_5": f"{hit}/{len(rows)}", "hit_rate": round(hit / len(rows), 4),
+            "recall_at_5": round(statistics.mean(r["recall"] for r in rows), 4),
+            "mrr_at_5": round(statistics.mean(r["rr5"] for r in rows), 4), "ndcg_at_5": round(statistics.mean(ndcg), 4)}
+
+
+def matrix(only: list[str] | None = None) -> dict:
+    from ..terms import with_views
+    store = CorpusStore(settings.corpus_db)
+    base_terms, policy = load_terminology(), load_policy()
+    sets, dhash = load_sets()
+    indic_rows = [json.loads(l) for l in (REPO_ROOT / "eval" / "indic_cases.jsonl").read_text(encoding="utf-8").splitlines() if l.strip()]
+    unans = [json.loads(l) for l in CASES.read_text(encoding="utf-8").splitlines() if l.strip()]
+    unans = [c for c in unans if c["category"] == "unanswerable"]
+    pops = {"devA": sets["devA"], "devB": sets["devB"],
+            "indic": [{"case_id": r["case_id"], "query": r["query"], "lang": r["lang"], "variant": r["variant"],
+                       "expected": {"relevant_passages": r["gold"]}} for r in indic_rows if r["gold"]]}
+    ooc = [{"case_id": c["case_id"], "query": c["query"], "lang": c["lang"]} for c in unans] + \
+          [{"case_id": r["case_id"], "query": r["query"], "lang": r["lang"], "variant": r["variant"]} for r in indic_rows if not r["gold"]]
+    results = []
+    for name, views, rerank in MATRIX:
+        if only and not any(name.startswith(o) for o in only):
+            continue
+        terms = with_views(base_terms, views)
+        cfg = RetrievalConfig(**{**DEFAULT_CONFIG.as_dict(), "rerank": rerank})
+        retr = Retriever(store, terms, config=cfg)
+        if retr.dense is None:
+            raise SystemExit(f"{name}: dense index unavailable ({retr.dense_error})")
+        eng = Engine(store, terms, policy, LLMAdapter(), retr)
+        per, lat = {}, []
+        for pop, cases in pops.items():
+            rows = []
+            for c in cases:
+                t = time.perf_counter()
+                r = eng.run(QueryRequest(query=c["query"], lang=c["lang"], use_model=False))
+                lat.append((time.perf_counter() - t) * 1000)
+                ranked = [e.passage.passage_id for e in r.evidence if e.role == "primary"]
+                gold = c["expected"]["relevant_passages"]
+                rows.append({"case_id": c["case_id"], "lang": _lang_of(c), "gold": gold, "top5": ranked[:5],
+                             "hit": any(p in gold for p in ranked[:5]), "recall": len(set(ranked[:5]) & set(gold)) / len(gold),
+                             "rr5": next((1 / (i + 1) for i, p in enumerate(ranked[:5]) if p in gold), 0.0), "status": r.status})
+            per[pop] = {"all": _metrics(rows), **{f"lang_{l}": _metrics([x for x in rows if x["lang"] == l]) for l in ("en", "hi", "hinglish")},
+                        "cases": rows}
+        fa = []
+        for c in ooc:
+            r = eng.run(QueryRequest(query=c["query"], lang=c["lang"], use_model=False))
+            fa.append({"case_id": c["case_id"], "status": r.status, "concepts": list(r.normalized_query["concepts_direct"])})
+        n_fa = sum(x["status"] != "insufficient_evidence" for x in fa)
+        lat.sort()
+        res = {"experiment": name, "views": list(views), "rerank": rerank, "populations": per,
+               "out_of_corpus_false_answerable": f"{n_fa}/{len(fa)}", "out_of_corpus": fa,
+               "latency_p50_ms": round(lat[len(lat) // 2], 1), "latency_p95_ms": round(lat[int(0.95 * (len(lat) - 1))], 1)}
+        results.append(res)
+        a, b, ind = per["devA"]["all"], per["devB"]["all"], per["indic"]
+        print(f"{name:32s} devA {a['hit_at_5']} R@5 {a['recall_at_5']} | devB {b['hit_at_5']} R@5 {b['recall_at_5']} nDCG {b['ndcg_at_5']} | "
+              f"indic en {ind['lang_en']['hit_at_5']} hi {ind['lang_hi']['hit_at_5']} hinglish {ind['lang_hinglish']['hit_at_5']} | "
+              f"OOC false-ans {res['out_of_corpus_false_answerable']} | p50 {res['latency_p50_ms']} p95 {res['latency_p95_ms']} ms", flush=True)
+    import torch
+    out = {"kind": "retrieval_matrix", "created_at": time.strftime("%Y-%m-%dT%H:%M:%S"), "git_commit": git_commit(),
+           "corpus_version": store.corpus_version(), "terms_version": base_terms.version, "dataset_hash": dhash,
+           "reranker": "BAAI/bge-reranker-v2-m3 @ 953dc6f, fp16 on " + ("cuda" if torch.cuda.is_available() else "cpu"),
+           "note": "All populations inspected/development data; roman lexicon is unreviewed (pending). Not held-out results.",
+           "results": results}
+    p = REPO_ROOT / "eval" / "results" / f"retrieval_matrix_{time.strftime('%Y%m%d_%H%M%S')}.json"
+    p.write_text(json.dumps(out, ensure_ascii=False, indent=1), encoding="utf-8")
+    print("WROTE", p)
+    return out
+
+
+def candidate_pool_recall(depths=(30, 60)) -> dict:
+    """Is the gold passage even in the candidate pool? (upper bound for any reranker)
+    Pool@k = union of BM25 top-k and dense top-k (deduplicated), using the production query views."""
+    store = CorpusStore(settings.corpus_db)
+    terms, policy = load_terminology(), load_policy()
+    retr = Retriever(store, terms)
+    if retr.dense is None:
+        raise SystemExit("dense index unavailable")
+    eng = Engine(store, terms, policy, LLMAdapter(), retr)
+    sets, dhash = load_sets()
+    out = {"git_commit": git_commit(), "dataset_hash": dhash, "corpus_version": store.corpus_version()}
+    for split, cases in sets.items():
+        rec = {k: [] for k in depths}
+        rec5 = []
+        sizes = {k: [] for k in depths}
+        for c in cases:
+            r = eng.run(QueryRequest(query=c["query"], lang=c["lang"], use_model=False))
+            direct = list(r.normalized_query["concepts_direct"])
+            q = c["query"] + " " + (r.normalized_query.get("iast_transliteration") or "") + " " + " ".join(terms.expansion_terms(direct))
+            dq = c["query"] + " " + " ".join(terms.by_id(x).label.get("en", "") for x in direct if terms.by_id(x))
+            gold = c["expected"]["relevant_passages"]
+            top5 = [e.passage.passage_id for e in r.evidence if e.role == "primary"][:5]
+            rec5.append(len(set(top5) & set(gold)) / len(gold))
+            for k in depths:
+                pool = {p for p, _ in retr.bm25_search(q, direct, k)} | {p for p, _ in retr.dense.search(dq, k)}
+                sizes[k].append(len(pool))
+                rec[k].append(len(pool & set(gold)) / len(gold))
+        out[split] = {"n": len(cases), "recall_at_5_final": round(statistics.mean(rec5), 4),
+                      **{f"candidate_recall_pool{k}": round(statistics.mean(rec[k]), 4) for k in depths},
+                      **{f"mean_pool_size{k}": round(statistics.mean(sizes[k]), 1) for k in depths}}
+    p = REPO_ROOT / "eval" / "results" / f"retrieval_pool_{time.strftime('%Y%m%d_%H%M%S')}.json"
+    p.write_text(json.dumps(out, indent=1), encoding="utf-8")
+    print("WROTE", p)
+    print(json.dumps(out, indent=1))
+    return out
+
+
 def indic(use_model: bool = False) -> dict:
     """EN / Hindi (Devanagari) / Roman-Hinglish triplets of the same intent (eval/indic_cases.jsonl).
     Reports retrieval per variant and agreement ACROSS variants of one intent (status, top-5 overlap)."""
@@ -236,7 +370,11 @@ def indic(use_model: bool = False) -> dict:
 
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "experiments"
-    if cmd == "indic":
+    if cmd == "matrix":
+        matrix(sys.argv[2:] or None)
+    elif cmd == "pool":
+        candidate_pool_recall()
+    elif cmd == "indic":
         indic(use_model="--model" in sys.argv)
     elif cmd == "fresh":
         fresh()

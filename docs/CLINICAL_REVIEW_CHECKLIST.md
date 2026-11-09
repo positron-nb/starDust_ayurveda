@@ -70,3 +70,10 @@ currently **not measured**.
 - Any place the UI could be read as diagnosis, prescription, dose or safety clearance.
 - Context-limiting candidates labelled "potential difference; review needed" — are any genuine contradictions?
 - Whether classical aśvagandhā mentions are displayed in a way that could be read as endorsement.
+
+## F. Gold-label adjudication (retrieval benchmark v2)
+`eval/gold/gold_v2_adjudication_sheet.csv` (460 rows; do the `split = test` rows first). For each
+(question, verse): `relevance_label` = `direct` (the verse answers the question), `contextual` (needed
+context but does not answer alone) or `not_relevant`; one-line `reason`; name/role/date. Rows marked
+`retrieved_not_in_v1` are verses PRAMAAN retrieved that the original labels missed. Import:
+`python scripts/gold_labels.py import-v2 <filled.csv>`. v1 (`gold_v1_original.jsonl`, sha256 frozen) is never edited.

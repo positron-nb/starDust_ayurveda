@@ -49,3 +49,39 @@ configuration silently BM25-only) and is kept in `eval/results/invalid/` with an
   and a cross-encoder adds a dependency and latency (see failure analysis §3).
 - None of these numbers is a held-out result. The next comparable measurement must use the fresh,
   locked, reviewer-authored benchmark (`eval/fresh_benchmark/README.md`).
+
+## Round 2 (2026-11-09): normalization views and cross-encoder reranking
+Result files: `eval/results/retrieval_pool_20261109_164014.json`, `eval/results/retrieval_matrix_20261109_164430.json`.
+Code: commit `96efc57` + working tree (views and reranker are opt-in; production defaults unchanged).
+Corpus `corpus-1d4075a35bad8150`, terms `terms-2026.11.09.1` (bare "fasting" alias removed).
+Reranker: BAAI/bge-reranker-v2-m3 @ 953dc6f (Apache-2.0, ~568 M params), fp16 on the RTX 5060 with the
+AyurParam server stopped (not tested concurrently with AyurParam). Roman lexicon: `data/terminology/roman_hindi_lexicon.yaml`, **unreviewed**.
+
+### Candidate-pool ceiling (is the gold passage in the pool at all?)
+| Population | Final R@5 | Candidate recall, pool@30 (BM25∪dense, ~44 passages) | pool@60 (~78) |
+|---|---:|---:|---:|
+| devA (22) | 0.423 | 0.749 | 0.835 |
+| devB (38) | 0.239 | 0.640 | 0.723 |
+Most gold passages are already in the pool; ordering, not candidate generation, is the larger loss.
+
+### Matrix (same corpus, same RRF defaults, same cases; Indic = 7 answerable per variant)
+| Config | Views | Rerank | devA Hit@5 | devA R@5 | devB Hit@5 | devB R@5 | devB nDCG@5 | Indic EN / HI / Hinglish Hit@5 | OOC false-answerable | p50 / p95 ms |
+|---|---|---|---|---:|---|---:|---:|---|---|---|
+| E1-A baseline | — | no | 20/22 | 0.423 | 23/38 | 0.239 | 0.258 | 4/7 · 3/7 · 3/7 | 3/23 | 30 / 39 |
+| E1-B | translit | no | 20/22 | 0.411 | 24/38 | 0.252 | 0.279 | 4/7 · 3/7 · 3/7 | 3/23 | 34 / 43 |
+| E1-C | roman lexicon | no | 20/22 | 0.423 | 23/38 | 0.239 | 0.258 | 4/7 · 3/7 · 4/7 | 3/23 | 31 / 38 |
+| E1-D | translit + lexicon | no | 20/22 | 0.411 | 24/38 | 0.252 | 0.279 | 4/7 · 3/7 · 4/7 | 3/23 | 35 / 43 |
+| E2-C | — | yes | 16/22 | 0.326 | 26/38 | 0.266 | 0.304 | 6/7 · 4/7 · 2/7 | 3/23 | 332 / 522 |
+| E2-D | translit + lexicon | yes | 17/22 | 0.371 | 26/38 | 0.266 | 0.300 | 6/7 · 4/7 · 3/7 | 3/23 | 326 / 496 |
+OOC = 20 unanswerable cases + 3 out-of-corpus Indic questions. The 3 leaks in every config are U06
+("digestion" → agni), U14 and U20 ("diet" → ahara); excluding `ahara` from answerability would fix two but
+make four answerable cases (G05c, G06a, G12a, G19b) refuse — not done.
+
+### Decisions (pre-registered rule: select on devA, report devB as a check)
+- **Normalization (E1)**: no devA change; +1 Hinglish hit (I3) and +1 devB hit. Too small to call an
+  improvement; kept **opt-in** until the reviewer approves the lexicon and the locked benchmark is measured.
+- **Reranking (E2)**: helps devB (+3 hits, nDCG +0.046) and Indic English (+2) but **hurts devA (−4 hits)**
+  and adds ~300 ms. Conflicting evidence on inspected data → **not adopted**; re-test on the fresh locked set.
+  Possible cause (unverified): the reranker scores IAST + English concept labels, which favours passages
+  with many labels over the exact definitional verse.
+- Hinglish stays weak (best 4/7 retrieval-only): I1, I2, I7 still miss.

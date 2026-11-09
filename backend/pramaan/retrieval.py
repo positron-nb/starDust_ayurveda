@@ -36,6 +36,8 @@ class RetrievalConfig:
     neighbour_expand: int = 0        # >0: after fusion, pull the next verse of the top-N hits into the list
     neighbour_top: int = 2
     embed_concept_labels: bool = True  # dense passage text = IAST + curated English concept labels
+    rerank: bool = False               # EXPERIMENT 2: cross-encoder rerank of the fused candidate pool
+    rerank_model: str = "models/bge-reranker-v2-m3"   # BAAI/bge-reranker-v2-m3 @ 953dc6f (Apache-2.0)
     inherit_prev_concepts: int = 0     # >0: a verse with NO domain concept inherits the previous verse's concepts (×weight)
 
     def as_dict(self) -> dict:
@@ -72,6 +74,7 @@ class Hit:
     dense_rank: int | None = None
     dense_score: float = 0.0
     fused: float = 0.0
+    rerank_score: float | None = None
     matched_concepts: list[str] = field(default_factory=list)
 
     def as_dict(self) -> dict:
@@ -102,6 +105,29 @@ class Embedder:
 
 
 _LOCAL_CLIENTS: dict[str, object] = {}
+
+
+class Reranker:
+    _instances: dict = {}
+
+    def __init__(self, path: str):
+        import torch
+        from sentence_transformers import CrossEncoder
+
+        from .config import REPO_ROOT
+        full = Path(path) if Path(path).is_absolute() else REPO_ROOT / path
+        self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        self.model = CrossEncoder(str(full), device=self.device, max_length=512,
+                                  model_kwargs={"torch_dtype": torch.float16} if self.device == "cuda" else {})
+
+    @classmethod
+    def get(cls, path: str) -> "Reranker":
+        if path not in cls._instances:
+            cls._instances[path] = Reranker(path)
+        return cls._instances[path]
+
+    def score(self, query: str, docs: list[str]) -> list[float]:
+        return [float(x) for x in self.model.predict([(query, d) for d in docs], batch_size=16, show_progress_bar=False)]
 
 
 class DenseIndex:
@@ -212,6 +238,14 @@ class Retriever:
                 continue
             seen.add(h.passage.text_hash)
             dedup.append(h)
+        if cfg.rerank and dedup:
+            t_r = time.perf_counter()
+            rr = Reranker.get(cfg.rerank_model)
+            scores = rr.score(dense_query, [passage_embed_text(h.passage, self.terms).removeprefix("passage: ") for h in dedup])
+            for h, sc in zip(dedup, scores):
+                h.rerank_score = sc
+            dedup.sort(key=lambda h: -h.rerank_score)
+            self._last_rerank_ms = (time.perf_counter() - t_r) * 1000
         if cfg.neighbour_expand:
             # passage-aware context: verses on one topic are often consecutive; pull the following verse
             # of the top-N hits right after its predecessor (same chapter only, indexed passages only).
@@ -236,6 +270,7 @@ class Retriever:
             "bm25_candidates": len(bm), "dense_candidates": len(dn),
             "bm25_ms": round((t1 - t0) * 1000, 1), "dense_ms": round((t2 - t1) * 1000, 1),
             "dense_error": self.dense_error,
+            **({"rerank": True, "rerank_ms": round(getattr(self, "_last_rerank_ms", 0.0), 1)} if cfg.rerank else {}),
         }
         return dedup[:limit], info
 
