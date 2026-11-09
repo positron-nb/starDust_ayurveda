@@ -10,3 +10,4 @@ frontend/dist/
 .env
 *.log
 .claude/settings.local.json
+.venv-pt28/

@@ -153,9 +153,45 @@ def failures() -> dict:
     return {"cases": out}
 
 
+def fresh() -> dict:
+    """Evaluate the default configuration on the reviewer-authored locked benchmark."""
+    d = REPO_ROOT / "eval" / "fresh_benchmark"
+    qf, lock = d / "questions.jsonl", d / "LOCK"
+    if not qf.exists() or not lock.exists():
+        raise SystemExit("no locked benchmark yet: the reviewer must write questions.csv, then run scripts/benchmark_lock.py")
+    rows = [json.loads(l) for l in qf.read_text(encoding="utf-8").splitlines() if l.strip()]
+    blob = "".join(json.dumps(r, ensure_ascii=False, sort_keys=True) for r in rows if r["split"] == "test")
+    if hashlib.sha256(blob.encode("utf-8")).hexdigest() != json.loads(lock.read_text())["test_sha256"]:
+        raise SystemExit("locked test split was modified after locking — refusing to report")
+    store = CorpusStore(settings.corpus_db)
+    terms, policy = load_terminology(), load_policy()
+    retr = Retriever(store, terms)
+    if retr.dense is None:
+        raise SystemExit("dense index unavailable; refusing to report a degraded run")
+    eng = Engine(store, terms, policy, LLMAdapter(), retr)
+    out = {}
+    for split in ("dev", "test"):
+        cases = [{"case_id": r["question_id"], "query": r["question"], "lang": "hi" if r["language"] == "hi" else "en",
+                  "expected": {"relevant_passages": r["gold"] + r["acceptable"]}} for r in rows
+                 if r["split"] == split and r["coverage"] == "indexed" and r["gold"]]
+        if cases:
+            res = evaluate(eng, cases, "hybrid")
+            # Hit@5 counts gold OR acceptable; Recall@5 is reported against the strict gold list too
+            strict = [len(set(pc["ranked"][:5]) & set(r["gold"])) / len(r["gold"])
+                      for pc, r in zip(res["per_case"], [x for x in rows if x["split"] == split and x["coverage"] == "indexed" and x["gold"]])]
+            res["strict_gold_recall_at_5"] = round(statistics.mean(strict), 4)
+            out[split] = res
+    p = REPO_ROOT / "eval" / "results" / f"retrieval_fresh_{time.strftime('%Y%m%d_%H%M%S')}.json"
+    p.write_text(json.dumps({"git_commit": git_commit(), "lock": json.loads(lock.read_text()), "results": out}, ensure_ascii=False, indent=1), encoding="utf-8")
+    print("WROTE", p, {k: (v["hit_at_5"], v["strict_gold_recall_at_5"], v["n"]) for k, v in out.items()})
+    return out
+
+
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "experiments"
-    if cmd == "failures":
+    if cmd == "fresh":
+        fresh()
+    elif cmd == "failures":
         failures()
     else:
         run_experiments(sys.argv[2:] or None)
