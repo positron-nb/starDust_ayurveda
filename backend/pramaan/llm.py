@@ -283,8 +283,54 @@ class FixtureAdapter(LLMAdapter):
                          hardware=f"recorded on {r.get('hardware')} at {r.get('recorded_at')}")
 
 
+class ZeroGPUAdapter(LLMAdapter):
+    """EXPERIMENT: calls the inference-only Gradio Space (deploy/zerogpu_space) via gradio_client.
+    Same contract as HTTPAdapter. Token (if the Space is private) is read server-side from HF_TOKEN
+    and never sent to the frontend. On any failure the caller degrades exactly as with HTTPAdapter."""
+    mode = "live"
+
+    def __init__(self, space: str | None = None, fallback: LLMAdapter | None = None):
+        self.space = space or os.environ.get("AYURPARAM_SPACE", "")
+        self.fallback = fallback
+        self._client = None
+
+    def _c(self):
+        if self._client is None:
+            from gradio_client import Client  # optional dependency, experiment only
+            self._client = Client(self.space, hf_token=os.environ.get("HF_TOKEN") or None, verbose=False)
+        return self._client
+
+    def health(self) -> dict:
+        try:
+            self._c()
+            return {"mode": "live", "available": True, "backend": "zerogpu_space", "space": self.space}
+        except Exception as e:
+            fb = self.fallback.health() if self.fallback else {}
+            return {"mode": "live", "available": bool(fb.get("available")), "backend": "zerogpu_space",
+                    "error": f"space unreachable: {type(e).__name__}", "fallback": fb}
+
+    def generate(self, prompt: str, stage: str, max_new_tokens: int = 256, **kw) -> GenResult:
+        t0 = time.perf_counter()
+        try:
+            d = json.loads(self._c().predict(prompt, max_new_tokens, kw.get("repetition_penalty", 1.15), api_name="/generate"))
+            if d.get("error"):
+                raise RuntimeError(d["error"])
+            return GenResult(ok=True, text=d["text"], mode="live", model_id=d["model_id"], model_revision=d["revision"],
+                             prompt_tokens=d["prompt_tokens"], completion_tokens=d["completion_tokens"], ms=d["ms"],
+                             hardware=f"zerogpu:{d.get('device')}")
+        except Exception as e:
+            if self.fallback is not None:
+                r = self.fallback.generate(prompt, stage, max_new_tokens, **kw)
+                r.hardware = (r.hardware or "") + f" (fallback after ZeroGPU error: {type(e).__name__})"
+                return r
+            return GenResult(ok=False, text="", mode="unavailable", error=f"ZeroGPU: {type(e).__name__}: {e}"[:300],
+                             ms=(time.perf_counter() - t0) * 1000)
+
+
 def make_adapter(mode: str | None = None) -> LLMAdapter:
     m = mode or settings.llm_mode
+    if m == "zerogpu":
+        return ZeroGPUAdapter(fallback=HTTPAdapter())
     if m == "http":
         return HTTPAdapter()
     if m == "fixture":
