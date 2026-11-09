@@ -56,7 +56,26 @@ python -m uvicorn --app-dir backend pramaan.api:app --port 8600   # open http://
 Code: Apache-2.0 (`LICENSE`). Classical text and derived corpus: CC BY-SA 3.0 (`DATA_NOTICE.md`).
 Third-party components: `THIRD_PARTY_NOTICES.md`. No institutional affiliation or endorsement is implied.
 
-## Status
-Prototype. Clinical/domain review: **0 items reviewed**. Hosting: **not set up**. See
-[docs/TECHNICAL_IMPACT_REPORT.md](docs/TECHNICAL_IMPACT_REPORT.md) for measured results and limitations
-and [BUILD_STATE.md](BUILD_STATE.md) for the current build state.
+## Documentation
+| Topic | Document |
+|---|---|
+| Current architecture and feature status (from code) | [docs/REPOSITORY_AUDIT.md](docs/REPOSITORY_AUDIT.md) |
+| Phase 1 proposal | [docs/PHASE1_PROPOSAL.md](docs/PHASE1_PROPOSAL.md) |
+| Technical & impact report (architecture, model/data cards, results) | [docs/TECHNICAL_IMPACT_REPORT.md](docs/TECHNICAL_IMPACT_REPORT.md) |
+| Latest evaluation & regression | [docs/evaluation_report.md](docs/evaluation_report.md) |
+| Retrieval failures / experiments | [docs/RETRIEVAL_FAILURE_ANALYSIS.md](docs/RETRIEVAL_FAILURE_ANALYSIS.md), [docs/RETRIEVAL_EXPERIMENTS.md](docs/RETRIEVAL_EXPERIMENTS.md) |
+| Hindi / Hinglish | [docs/INDIC_LANGUAGE_EVALUATION.md](docs/INDIC_LANGUAGE_EVALUATION.md) |
+| Clinical safety & human review | [docs/CLINICAL_REVIEW_CHECKLIST.md](docs/CLINICAL_REVIEW_CHECKLIST.md), [docs/CLAIM_AUDIT_REVIEW_GUIDE.md](docs/CLAIM_AUDIT_REVIEW_GUIDE.md), `data/rules/safety_rules.yaml` |
+| Dataset lineage & licences | [DATA_NOTICE.md](DATA_NOTICE.md), `data/sources/manifest.json`, [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) |
+| Deployment / demo hosting / Docker / ZeroGPU | [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md), [docs/DEMO_HOSTING.md](docs/DEMO_HOSTING.md), [docs/DOCKER_VALIDATION.md](docs/DOCKER_VALIDATION.md), [docs/ZEROGPU_COMPATIBILITY_REPORT.md](docs/ZEROGPU_COMPATIBILITY_REPORT.md) |
+| Usability pilot | [docs/USABILITY_STUDY_PROTOCOL.md](docs/USABILITY_STUDY_PROTOCOL.md) |
+| Finale demo / roadmap / competition | [docs/FINAL_DEMO_SCRIPT.md](docs/FINAL_DEMO_SCRIPT.md), [docs/EXECUTION_ROADMAP.md](docs/EXECUTION_ROADMAP.md), [docs/COMPETITION_CHECKLIST.md](docs/COMPETITION_CHECKLIST.md) |
+
+## Testing
+`cd backend && python -m pytest -q` (43 tests; no GPU needed). Live evaluation: `python -m pramaan.eval.run full --split all`
+with the model server running. Retrieval experiments: `python -m pramaan.eval.retrieval_lab experiments`.
+
+## Status (9 Nov 2026)
+Prototype; not clinically validated; not hallucination-free. Human claim-support review: **0 records labelled**.
+Retrieval passage Recall@5 0.24 on inspected cases (target 0.85 not met). Public hosting: **not live**.
+Docker: **not validated**. PyTorch 2.8 / ZeroGPU: verified locally on branch `experiment/zerogpu-pt28`, not yet on Hugging Face.

@@ -1,6 +1,6 @@
 # BUILD_STATE — PRAMAAN (living file; update after each milestone)
 
-Last update: 2026-11-08 ~00:30 local.
+Last update: 2026-11-09 ~16:30 local (round 2: audit, retrieval study, auth, ZeroGPU experiment).
 
 ## Environment (build machine)
 - Windows 11, Ryzen 9 270, 15.3 GB RAM, RTX 5060 Laptop 8 GB (sm_120).
@@ -46,3 +46,13 @@ abstention 10/13; latency p50 8.2 s. Baselines in docs/TECHNICAL_IMPACT_REPORT.m
 1. Ayurveda teammate: review glosses, labelled passages, safety cases (Evaluation & Review screen).
 2. Practitioner: review safety_rules.yaml + urgent template.
 3. Team Leader: register (by 15 Nov), push repo, choose hosting option (DEPLOYMENT.md §4), submit Phase 1 by 22 Nov.
+
+## Round 2 (2026-11-09)
+- Stable branch `pramaan-prototype`; experiment branch `experiment/zerogpu-pt28` (Gradio Space + ZeroGPUAdapter).
+- `.venv-pt28` (torch 2.8.0+cu128, gradio 5.50.0, spaces 0.51.3) is separate; production `.venv` unchanged.
+- Tests: 43 passed. Live regression: eval/results/eval_full_pramaan_all_20261109_160413.json.
+- New commands: `python scripts/export_claim_audit.py`, `import_claim_audit.py`, `claim_audit_summary.py`,
+  `scripts/benchmark_lock.py`, `python -m pramaan.eval.retrieval_lab {experiments|failures|indic [--model]|fresh}`.
+- Known: embedded Qdrant allows one client per folder per process (now shared); a second PROCESS opening it
+  fails — stop the API before running retrieval_lab, or use Qdrant server.
+- Blocked on people: claim audit labels, fresh benchmark, practitioner rule review, HF account, cloudflared install, Docker host.

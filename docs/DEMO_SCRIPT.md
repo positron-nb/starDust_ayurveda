@@ -1,3 +1,5 @@
+> **Superseded for the run-of-show by [FINAL_DEMO_SCRIPT.md](FINAL_DEMO_SCRIPT.md).** The judge Q&A table below is still current.
+
 # Three-minute demo script
 
 Setup (before the slot): model server loaded (banner **LIVE AyurParam**), API at http://127.0.0.1:8600,
