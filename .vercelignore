@@ -1,0 +1,13 @@
+models/
+.venv/
+.venv-pt28/
+data/build/
+data/runtime/
+data/sources/raw/
+eval/audit/
+eval/gold/
+eval/fixtures/
+model_server/
+deploy/zerogpu_space/
+frontend/node_modules/
+frontend/dist/

@@ -42,6 +42,9 @@ export function ModeBanner({ health, error }: { health: Health | null; error: st
   } else if (llm.mode === "fixture_replay") {
     tone = "bg-saffron-600 text-white";
     text = `FIXTURE REPLAY — recorded AyurParam outputs for demo prompts only (${llm.records ?? 0} records). This is NOT live inference.`;
+  } else if (llm.mode === "off" && health.deploy_mode === "public_demo") {
+    tone = "bg-saffron-600 text-white";
+    text = "HOSTED RETRIEVAL-ONLY DEMO — AyurParam (2.9B, GPU) runs on the team's local machine and is not loaded here. Original passages, citation checks, safety rules, source-only fallback and the Integrity Lab are live.";
   } else if (llm.mode === "live") {
     text += llm.error ? ` (${llm.error})` : "";
   }
