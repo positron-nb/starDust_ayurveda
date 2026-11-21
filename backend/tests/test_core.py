@@ -336,3 +336,20 @@ def test_generic_alias_does_not_make_out_of_corpus_answerable(store, terms, retr
 def test_langhana_still_reachable_with_context(terms):
     assert "langhana" in terms.concepts_in_query("What do the texts say about langhana for ama?")
     assert "langhana" in terms.concepts_in_query("आम में लंघन क्यों करते हैं?")
+
+
+def test_prakriti_question_retrieves_prakriti_verses(store, terms, retriever, policy):
+    """Reviewer feedback 2026-11-21: 'What is Prakriti, how does it form?' must return Prakṛti verses."""
+    r = Engine(store, terms, policy, ScriptedLLM("x"), retriever).run(
+        QueryRequest(query="What is Prakriti, and how does it form? factors responsible for formation of Prakriti", use_model=False))
+    top = [c.passage.passage_id for c in r.evidence if c.role == "primary"][:5]
+    assert "prakriti" in r.normalized_query["concepts_direct"]
+    assert {"Ah.2.3.83", "Ah.1.1.10"} & set(top), top
+    assert "Ca.3.2.4" not in top[:3] and "Ca.1.5.8" not in top  # generic-sense prakṛti must not lead
+
+
+def test_out_of_scope_shows_no_unrelated_passages(store, terms, retriever, policy):
+    r = Engine(store, terms, policy, ScriptedLLM("x"), retriever).run(
+        QueryRequest(query="What does Ayurveda say about smartphone addiction?", use_model=False))
+    assert r.status == "insufficient_evidence" and r.evidence == []
+    assert "currently covers" in r.answer_notice

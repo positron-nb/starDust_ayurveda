@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 import urllib.request
 from pathlib import Path
@@ -63,12 +64,13 @@ def build(out: Path, do_fetch: bool = False) -> dict:
     store.put_meta("terms_version", terms.version)
     store.put_meta("modules_version", modules["version"])
 
-    chapter_prefixes: dict[str, list[tuple[str, str]]] = {}
+    chapter_prefixes: dict[str, list[tuple[str, str, tuple | None]]] = {}
     herb_filters: dict[str, list[tuple[str, str]]] = {}
     chapter_display: dict[str, str] = {}
     for m in modules["modules"]:
         for ch in m.get("chapters", []):
-            chapter_prefixes.setdefault(ch["source_id"], []).append((ch["prefix"], m["module_id"]))
+            rng = tuple(ch["verses"]) if ch.get("verses") else None  # optional [from, to] by leading verse number
+            chapter_prefixes.setdefault(ch["source_id"], []).append((ch["prefix"], m["module_id"], rng))
             chapter_display[ch["prefix"].rstrip(".")] = ch["name"]
         for tf in m.get("term_filter", []):
             herb_filters.setdefault(tf["source_id"], []).append((tf["concept"], m["module_id"]))
@@ -89,7 +91,14 @@ def build(out: Path, do_fetch: bool = False) -> dict:
         n_idx = 0
         for pos, s in enumerate(segs):
             tags = terms.tag_passage(s.text)
-            mods = [mid for (pref, mid) in chapter_prefixes.get(src["source_id"], []) if (s.passage_id + ".").startswith(pref) or s.passage_id.startswith(pref)]
+            def _in_range(rng):
+                if not rng:
+                    return True
+                m_ = re.match(r"\d+", s.verse)
+                return bool(m_) and rng[0] <= int(m_.group(0)) <= rng[1]
+            mods = [mid for (pref, mid, rng) in chapter_prefixes.get(src["source_id"], [])
+                    if s.passage_id.startswith(pref) and _in_range(rng)]
+            mods = list(dict.fromkeys(mods))
             for concept, mid in herb_filters.get(src["source_id"], []):
                 if concept in tags and mid not in mods:
                     mods.append(mid)

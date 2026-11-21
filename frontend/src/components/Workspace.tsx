@@ -341,7 +341,13 @@ export function Workspace({ health, onOpenPassage, onRun }: { health: Health | n
         )}
         <Section title={`Evidence${result ? ` · ${result.evidence.length} passage(s)` : ""}`} right={result ? <Chip>original text unchanged · Devanagari derived</Chip> : undefined}>
           {!result && <p className="text-sm text-muted">Run a question to see original passages with edition-specific locators. Try example A.</p>}
-          {result && result.evidence.length === 0 && <p className="text-sm text-muted">No passages displayed for this run.</p>}
+          {result && result.evidence.length === 0 && (
+            <p className="text-sm text-muted">
+              {result.status === "insufficient_evidence"
+                ? "No relevant passage was found in the indexed texts, so none is shown (showing unrelated verses would look like an answer)."
+                : "No passages displayed for this run."}
+            </p>
+          )}
           <div className="space-y-3">
             {result?.evidence.map((c) => <EvidenceCardView key={c.label + c.passage.passage_id} card={c} onOpen={onOpenPassage} />)}
           </div>

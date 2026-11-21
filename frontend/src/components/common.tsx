@@ -33,7 +33,10 @@ export function ModeBanner({ health, error }: { health: Health | null; error: st
   const llm = health.llm || {};
   let tone = "bg-alert-600 text-white";
   let text = "RETRIEVAL-ONLY MODE — AyurParam unavailable. Showing source passages only; no generated explanations.";
-  if (llm.mode === "live" && llm.available) {
+  if (llm.mode === "live" && llm.available && llm.backend === "zerogpu_space") {
+    tone = "bg-forest-700 text-white";
+    text = `LIVE AyurParam via Hugging Face ZeroGPU · ${health.model.id} @ ${health.model.revision.slice(0, 7)} · shared GPU: the first answer can take a minute, and daily GPU quota is limited`;
+  } else if (llm.mode === "live" && llm.available) {
     tone = "bg-forest-700 text-white";
     text = `LIVE AyurParam · ${health.model.id} @ ${health.model.revision.slice(0, 7)} · ${llm.device ?? ""} ${llm.dtype ?? ""} · context ${health.model.context_limit}`;
   } else if (llm.mode === "live" && llm.loading) {

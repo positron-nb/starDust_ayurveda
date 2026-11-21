@@ -39,10 +39,45 @@ def sanitize(text: str) -> str:
     return re.sub(r"<\s*/?\s*(context|user|assistant|system_prompt|actual_response)\s*>", "‹blocked›", out, flags=re.I)
 
 
+
+
+class _FastTokenizer:
+    """Minimal stand-in for AutoTokenizer used on hosted deployments without transformers: wraps the
+    same pinned tokenizer.json via the `tokenizers` library. Only plain encoding without special tokens
+    is needed (token budgeting)."""
+
+    def __init__(self, path: str):
+        from tokenizers import Tokenizer
+
+        self.tok = Tokenizer.from_file(path)
+
+    def __call__(self, text: str, add_special_tokens: bool = False):
+        return {"input_ids": self.tok.encode(text, add_special_tokens=add_special_tokens).ids}
+
+
+def _tokenizer_json_path() -> str:
+    local = settings.model_dir / "tokenizer.json"
+    if local.exists():
+        return str(local)
+    import tempfile
+    import urllib.request
+
+    dest = Path(tempfile.gettempdir()) / f"ayurparam_tokenizer_{AYURPARAM_REVISION[:12]}.json"
+    if not dest.exists():  # public file at the pinned revision (no token needed)
+        url = f"https://huggingface.co/{AYURPARAM_MODEL_ID}/resolve/{AYURPARAM_REVISION}/tokenizer.json"
+        tmp = dest.with_suffix(".part")
+        with urllib.request.urlopen(url, timeout=60) as r, open(tmp, "wb") as f:  # noqa: S310 (fixed HF URL)
+            f.write(r.read())
+        tmp.replace(dest)
+    return str(dest)
+
+
 @lru_cache(maxsize=1)
 def get_tokenizer():
-    from transformers import AutoTokenizer
-
+    try:
+        from transformers import AutoTokenizer
+    except ImportError:  # hosted retrieval/ZeroGPU backend: lightweight tokenizer, same tokenizer.json
+        return _FastTokenizer(_tokenizer_json_path())
     local = settings.model_dir
     if (local / "tokenizer.json").exists():
         return AutoTokenizer.from_pretrained(str(local), trust_remote_code=False)
@@ -303,7 +338,8 @@ class ZeroGPUAdapter(LLMAdapter):
     def health(self) -> dict:
         try:
             self._c()
-            return {"mode": "live", "available": True, "backend": "zerogpu_space", "space": self.space}
+            return {"mode": "live", "available": True, "backend": "zerogpu_space", "space": self.space,
+                    "device": "Hugging Face ZeroGPU", "dtype": "bfloat16"}
         except Exception as e:
             fb = self.fallback.health() if self.fallback else {}
             return {"mode": "live", "available": bool(fb.get("available")), "backend": "zerogpu_space",
@@ -330,7 +366,9 @@ class ZeroGPUAdapter(LLMAdapter):
 def make_adapter(mode: str | None = None) -> LLMAdapter:
     m = mode or settings.llm_mode
     if m == "zerogpu":
-        return ZeroGPUAdapter(fallback=HTTPAdapter())
+        # On hosted deployments there is no local model server; AYURPARAM_LOCAL_FALLBACK=0 disables it.
+        fb = HTTPAdapter() if os.environ.get("AYURPARAM_LOCAL_FALLBACK", "1") == "1" else None
+        return ZeroGPUAdapter(fallback=fb)
     if m == "http":
         return HTTPAdapter()
     if m == "fixture":

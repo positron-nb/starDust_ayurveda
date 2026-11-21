@@ -8,3 +8,5 @@ pyyaml==6.0.2
 rank-bm25==0.2.2
 numpy==2.2.6
 indic-transliteration==2.3.69
+gradio_client==1.14.0
+tokenizers==0.21.2

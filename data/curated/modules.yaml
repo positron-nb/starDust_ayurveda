@@ -35,3 +35,22 @@ modules:
         concept: ashwagandha
       - source_id: sarit-ah
         concept: ashwagandha
+  - module_id: prakriti
+    title: "Prakṛti (constitution): formation and types"
+    note: "Added 2026-11-21 after reviewer feedback (Dr. Kirti): Prakṛti is a basic first question. Verse ranges chosen by the build assistant from the texts; domain review pending."
+    chapters:
+      - source_id: sarit-ah
+        prefix: "Ah.1.1."
+        verses: [6, 12]
+        name: "Aṣṭāṅgahṛdaya, Sūtrasthāna 1 (Āyuṣkāmīya)"
+        rationale: "Three doṣas; Prakṛti arises from the doṣas present in śukra and ārtava at conception (1.9–10); types and their relative merit."
+      - source_id: sarit-ah
+        prefix: "Ah.2.3."
+        verses: [83, 104]
+        name: "Aṣṭāṅgahṛdaya, Śārīrasthāna 3 (Aṅgavibhāga)"
+        rationale: "Factors forming Prakṛti (śukra, asṛk, mother's food and conduct, garbhāśaya, season) and the features of vāta, pitta, kapha and mixed Prakṛti."
+      - source_id: sarit-caraka
+        prefix: "Ca.3.8."
+        verses: [95, 100]
+        name: "Caraka, Vimānasthāna 8 (Rogabhiṣagjitīya)"
+        rationale: "Prakṛti section: qualities of kapha, pitta and vāta that characterise each constitution; mixed and sama-dhātu."

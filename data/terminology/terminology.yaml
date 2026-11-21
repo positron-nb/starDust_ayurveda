@@ -5,7 +5,7 @@
 # Author: build assistant draft, 2026-11-07. Review status: pending (needs Ayurveda teammate).
 # passage_patterns are Python regexes applied to the lower-cased original IAST text
 # (NFC). "-?" allows the editorial compound hyphens used in the Aṣṭāṅgahṛdaya e-text.
-version: "terms-2026.11.09.1"
+version: "terms-2026.11.21.2"
 review_status: pending
 concepts:
   - id: agni
@@ -226,6 +226,15 @@ concepts:
       hi: [शोधन, निकालना, निष्कासन]
       sa: [śodhana, nirharaṇa]
     passage_patterns: ['śodhan', 'nirhar', 'harec', 'harej', 'vinirhar', 'vireca', 'virek', 'srāvy', 'ullikh', 'ullekh', 'unmūl']
+  # ---- added 2026-11-21 (Prakṛti module, reviewer feedback)
+  - id: prakriti
+    label: {iast: prakṛti, deva: प्रकृति, en: "Prakṛti (constitution)", hi: "प्रकृति (देह प्रकृति)"}
+    query_aliases:
+      en: [prakriti, prakruti, prakrti, constitution, body constitution, body type, deha prakriti, vata prakriti, pitta prakriti, kapha prakriti]
+      hi: [प्रकृति, देह प्रकृति, शरीर प्रकृति, प्रकृति परीक्षा]
+      sa: [prakṛti, dehaprakṛti]
+    passage_patterns: ['prakṛtay', 'prakṛtīr', 'prakṛtiḥ', 'prakṛtikā', 'śukr[aā]-?rtava-?sth', '(?:śleṣm|kaph|pitt|vāt)[aā]?-?prakṛt', 'sama-?dhātav', 'sama-?dhātuḥ']
+    note: "Bare 'prakṛti' also means 'natural state' (e.g. Ca Sū 5.8 prakṛtiṃ) or 'the factors beginning with prakṛti' (Ca Vi 2.4); those forms are deliberately not matched. Review pending."
   # ---- question-intent markers (META): help ranking only; never used for answerability or
   # for the claim-support heuristic.
   - id: intent_definition

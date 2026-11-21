@@ -12,7 +12,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "backend"))
 
+# "off" unless the Vercel project sets PRAMAAN_LLM_MODE=zerogpu + AYURPARAM_SPACE (+ HF_TOKEN for a private Space)
 os.environ.setdefault("PRAMAAN_LLM_MODE", "off")
+os.environ.setdefault("AYURPARAM_LOCAL_FALLBACK", "0")
 os.environ.setdefault("PRAMAAN_ENABLE_DENSE", "0")         # no torch / e5 on serverless
 os.environ.setdefault("PRAMAAN_DEPLOY_MODE", "public_demo")
 os.environ.setdefault("PRAMAAN_BUILD_DIR", "/tmp/pramaan_build")
