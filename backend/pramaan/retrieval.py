@@ -5,6 +5,8 @@ Scores are ranking signals, not clinical confidence probabilities.
 """
 from __future__ import annotations
 
+import json
+
 import logging
 import math
 import time
@@ -39,6 +41,7 @@ class RetrievalConfig:
     rerank: bool = False               # EXPERIMENT 2: cross-encoder rerank of the fused candidate pool
     rerank_model: str = "models/bge-reranker-v2-m3"   # BAAI/bge-reranker-v2-m3 @ 953dc6f (Apache-2.0)
     inherit_prev_concepts: int = 0     # >0: a verse with NO domain concept inherits the previous verse's concepts (×weight)
+    topic_query_boost: int = 2         # query-side multiplier for curated chapter-topic concepts (modules.yaml `concepts`), added 2026-11-21
 
     def as_dict(self) -> dict:
         return dict(self.__dict__)
@@ -172,6 +175,10 @@ class Retriever:
         self.cfg = config
         self.passages = store.indexed_passages()
         self.by_id = {p.passage_id: p for p in self.passages}
+        try:
+            self.topic_concepts = frozenset(json.loads(store.meta("topic_concepts", "[]")))
+        except ValueError:
+            self.topic_concepts = frozenset()
         docs = [passage_doc_tokens(p, config.concept_weight) for p in self.passages]
         if config.inherit_prev_concepts:
             # passage-aware context: continuation verses (no curated concept of their own) borrow the
@@ -198,7 +205,9 @@ class Retriever:
     def bm25_search(self, query_text: str, concept_ids: list[str], limit: int) -> list[tuple[str, float]]:
         if not self.bm25:
             return []
-        toks = tokenize_for_bm25(query_text) + [f"c:{c}" for c in concept_ids for _ in range(self.cfg.concept_weight)]
+        toks = tokenize_for_bm25(query_text) + [
+            f"c:{c}" for c in concept_ids
+            for _ in range(self.cfg.concept_weight * (self.cfg.topic_query_boost if c in self.topic_concepts else 1))]
         if not toks:
             return []
         scores = self.bm25.get_scores(toks)

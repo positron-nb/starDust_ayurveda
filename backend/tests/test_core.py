@@ -366,3 +366,21 @@ def test_svasthavritta_topics_retrieve_their_chapters(store, terms, retriever, p
     r = Engine(store, terms, policy, ScriptedLLM("x"), retriever).run(QueryRequest(query=q, use_model=False))
     top = [c.passage.passage_id for c in r.evidence if c.role == "primary"][:k]
     assert expect_any & set(top), (q, top)
+
+
+@pytest.mark.parametrize("q,expect_any,k", [
+    ("What is koshtha?", {"Ca.1.13.65", "Ca.1.13.68", "Ah.1.1.9", "Ah.1.18.34"}, 3),
+    ("What is srotas?", {"Ca.3.5.3", "Ca.3.5.8", "Ca.3.5.9", "Ca.3.5.25"}, 3),
+    ("What is panchamahabhuta?", {"Ca.4.1.27", "Ca.4.1.28", "Ah.1.9.1"}, 5),
+    ("What is tridosha?", {"Ah.1.1.6", "Ca.1.1.57", "Ah.1.11.1", "Ah.1.11.3", "Ah.1.12.1"}, 5),
+    ("What are the seven dhatus?", {"Ah.1.1.13", "Ca.6.15.16", "Ah.2.3.62"}, 3),
+    ("What is ahara?", {"Ca.1.25.31", "Ca.1.25.33", "Ca.1.25.36", "Ca.1.27.3", "Ca.1.28.4"}, 3),
+    ("How should one eat food?", {"Ca.3.1.24", "Ca.3.1.25-1", "Ca.3.1.25-7", "Ca.3.1.25-5"}, 3),
+    ("What are the ashtavidha ahara vishesh ayatan?", {"Ca.3.1.21", "Ca.3.1.22-1", "Ca.3.1.28"}, 5),
+    ("What is ahara mala?", {"Ca.1.28.4", "Ah.2.3.61", "Ca.6.15.18"}, 3),
+    ("What are dhatumala?", {"Ca.6.15.18", "Ca.6.15.19", "Ah.2.3.63", "Ah.2.3.64"}, 3),
+])
+def test_foundational_topics_retrieve_their_chapters(store, terms, retriever, policy, q, expect_any, k):
+    r = Engine(store, terms, policy, ScriptedLLM("x"), retriever).run(QueryRequest(query=q, use_model=False))
+    top = [c.passage.passage_id for c in r.evidence if c.role == "primary"][:k]
+    assert expect_any & set(top), (q, top)

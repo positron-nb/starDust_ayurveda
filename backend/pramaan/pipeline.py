@@ -42,10 +42,12 @@ STHANA_NUM = {
 EXPANSION_ALLOWED = {"agni", "mandagni", "vishamagni", "tikshnagni", "samagni", "ama", "ajirna", "ajirna_types", "alasaka",
                      "vishucika", "grahani", "langhana", "pachana_dipana", "ahara_matra", "aruchi", "chardi", "atisara",
                      "shula", "guru_gaurava", "ashwagandha", "amashaya", "kukshi", "shodhana", "prakriti",
-                     "dinacharya", "ritucharya", "nidra", "divaswapna", "vyayama"}
+                     "dinacharya", "ritucharya", "nidra", "divaswapna", "vyayama",
+                     "tridosha", "panchamahabhuta", "saptadhatu", "ahara_tattva", "aharavidhi_vidhana",
+                     "ahara_ayatana", "ahara_mala", "dhatumala", "srotas_vimana", "koshtha"}
 
-COVERAGE = {"en": "PRAMAAN currently covers: Agni, Āma, Ajīrṇa (food quantity, indigestion, grahaṇī), Prakṛti (constitution) and Svasthavṛtta (Dinacaryā, Ṛtucaryā, Nidrā, Divāsvapna, Vyāyāma), from selected chapters of Caraka Saṃhitā and Aṣṭāṅga Hṛdaya.",
-            "hi": "PRAMAAN अभी इन विषयों को कवर करता है: अग्नि, आम, अजीर्ण (आहार मात्रा, अपच, ग्रहणी), प्रकृति और स्वस्थवृत्त (दिनचर्या, ऋतुचर्या, निद्रा, दिवास्वप्न, व्यायाम) — चरक संहिता और अष्टांग हृदय के चुने हुए अध्यायों से।"}
+COVERAGE = {"en": "PRAMAAN currently covers: Agni, Āma, Ajīrṇa (food quantity, indigestion, grahaṇī), Prakṛti (constitution) and Svasthavṛtta (Dinacaryā, Ṛtucaryā, Nidrā, Divāsvapna, Vyāyāma) and foundational concepts (Tridoṣa, Pañcamahābhūta, Saptadhātu, Āhāra, Āhāravidhividhāna, the eight Āhāravidhiviśeṣāyatanas, Āhāra-mala, Dhātumala, Srotas, Koṣṭha), from selected chapters of Caraka Saṃhitā and Aṣṭāṅga Hṛdaya.",
+            "hi": "PRAMAAN अभी इन विषयों को कवर करता है: अग्नि, आम, अजीर्ण (आहार मात्रा, अपच, ग्रहणी), प्रकृति और स्वस्थवृत्त (दिनचर्या, ऋतुचर्या, निद्रा, दिवास्वप्न, व्यायाम) और मूल सिद्धांत (त्रिदोष, पंचमहाभूत, सप्तधातु, आहार, आहारविधि विधान, अष्टविध आहार विधि विशेष आयतन, आहार मल, धातुमल, स्रोतस, कोष्ठ) — चरक संहिता और अष्टांग हृदय के चुने हुए अध्यायों से।"}
 
 NOTICES = {
     "en": {

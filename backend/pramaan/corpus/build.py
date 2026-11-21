@@ -25,6 +25,7 @@ from .store import CorpusStore, sha256_file, sha256_text
 from .tei import STHANA_NAMES, WORK_NAMES, parse_tei
 
 ALLOWED_HOSTS = {"raw.githubusercontent.com"}
+FILLER_RE = re.compile(r"^(?:bhavat[iy] cātra|bhavanti cātra|tatra ślok\S*|\(absence\?\)|iti ha smāha bhagavān\S*)\W*$")
 
 
 def load_manifest() -> dict:
@@ -63,6 +64,7 @@ def build(out: Path, do_fetch: bool = False) -> dict:
     store.put_meta("manifest_version", manifest["manifest_version"])
     store.put_meta("terms_version", terms.version)
     store.put_meta("modules_version", modules["version"])
+    store.put_meta("topic_concepts", json.dumps(sorted({c for m in modules["modules"] for ch in m.get("chapters", []) for c in ch.get("concepts", [])})))
 
     chapter_prefixes: dict[str, list[tuple[str, str, tuple | None]]] = {}
     chapter_topics: dict[str, list[tuple[str, tuple | None, list[str]]]] = {}
@@ -128,7 +130,9 @@ def build(out: Path, do_fetch: bool = False) -> dict:
                 concepts=sorted(set(tags.keys()) | set(topic_tags)),
                 position=pos,
             )
-            indexed = bool(mods)
+            # editorial connectives ("bhavati cātra", "tatra ślokāḥ") carry no content but, being
+            # very short, would win BM25 length normalisation; kept in the store, never retrieved.
+            indexed = bool(mods) and not FILLER_RE.match(s.text.strip())
             n_idx += indexed
             store.put_passage(p, indexed)
         stats[src["source_id"]] = {"segments": len(segs), "indexed": n_idx}

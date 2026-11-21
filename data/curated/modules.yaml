@@ -4,7 +4,7 @@
 # Whole chapters are ingested at verse/prose-segment granularity so that negations, exceptions
 # and contraindications are never split from their verse. Selection rationale is recorded per
 # chapter; domain review of every indexed passage is still PENDING.
-version: "modules-2026.11.07.1"
+version: "modules-2026.11.21.2"
 modules:
   - module_id: agni-ama-ajirna
     title: "Agni, Āma, Ajīrṇa and related assessment concepts"
@@ -43,9 +43,9 @@ modules:
     chapters:
       - source_id: sarit-ah
         prefix: "Ah.1.1."
-        verses: [6, 12]
+        verses: [6, 13]
         name: "Aṣṭāṅgahṛdaya, Sūtrasthāna 1 (Āyuṣkāmīya)"
-        rationale: "Three doṣas, agni types (1.8), koṣṭha and Prakṛti (1.9–10)."
+        rationale: "Three doṣas, agni types (1.8), koṣṭha and Prakṛti (1.9–10), qualities of the doṣas (1.11–12), seven dhātus and malas (1.13)."
       - source_id: sarit-ah
         prefix: "Ah.1.1."
         verses: [9, 10]
@@ -74,3 +74,32 @@ modules:
       - {source_id: sarit-caraka, prefix: "Ca.1.6.", name: "Caraka, Sūtrasthāna 6 (Tasyāśitīya)", rationale: "Seasonal regimen (ṛtucaryā) and ṛtusātmya.", concepts: [ritucharya]}
       - {source_id: sarit-caraka, prefix: "Ca.1.7.", verses: [31, 36], name: "Caraka, Sūtrasthāna 7 (Navegāndhāraṇīya) — vyāyāma", rationale: "Definition, benefits and harms of excess exercise.", concepts: [vyayama]}
       - {source_id: sarit-caraka, prefix: "Ca.1.21.", verses: [33, 59], name: "Caraka, Sūtrasthāna 21 (Aṣṭauninditīya) — nidrā", rationale: "How sleep arises, its effects, divāsvapna (who may / may not), types of sleep.", concepts: [nidra]}
+  - module_id: mula-siddhanta
+    title: "Foundational concepts: Tridoṣa, Pañcamahābhūta, Saptadhātu, Mala, Srotas, Koṣṭha, Āhāra"
+    note: "Added 2026-11-21 at the request of the Ayurveda team member. Ranges chosen by the build assistant from the texts; domain review pending."
+    chapters:
+      - {source_id: sarit-ah, prefix: "Ah.1.1.", verses: [6, 7], name: "Aṣṭāṅgahṛdaya, Sūtrasthāna 1 (Āyuṣkāmīya)", rationale: "The three doṣas and their seats.", concepts: [tridosha]}
+      - {source_id: sarit-ah, prefix: "Ah.1.1.", verses: [11, 12], name: "Aṣṭāṅgahṛdaya, Sūtrasthāna 1 (Āyuṣkāmīya)", rationale: "Qualities (guṇa) of vāta, pitta and kapha.", concepts: [tridosha]}
+      - {source_id: sarit-ah, prefix: "Ah.1.1.", verses: [9, 9], name: "Aṣṭāṅgahṛdaya, Sūtrasthāna 1 (Āyuṣkāmīya)", rationale: "Krūra, mṛdu and madhya koṣṭha.", concepts: [koshtha]}
+      - {source_id: sarit-ah, prefix: "Ah.1.1.", verses: [13, 13], name: "Aṣṭāṅgahṛdaya, Sūtrasthāna 1 (Āyuṣkāmīya)", rationale: "Seven dhātus and the malas (mūtra, śakṛt, sveda).", concepts: [saptadhatu, ahara_mala]}
+      - {source_id: sarit-caraka, prefix: "Ca.1.1.", verses: [57, 61], name: "Caraka, Sūtrasthāna 1 (Dīrghañjīvitīya)", rationale: "Śārīra and mānasa doṣas; qualities of vāta, pitta, kapha and their pacification by opposite qualities.", concepts: [tridosha]}
+      - {source_id: sarit-ah, prefix: "Ah.1.11.", verses: [1, 3], name: "Aṣṭāṅgahṛdaya, Sūtrasthāna 11 (Doṣādivijñānīya)", rationale: "Doṣa, dhātu and mala as the root of the body; normal functions of the doṣas.", concepts: [tridosha]}
+      - {source_id: sarit-ah, prefix: "Ah.1.11.", verses: [4, 4], name: "Aṣṭāṅgahṛdaya, Sūtrasthāna 11 (Doṣādivijñānīya)", rationale: "Functions of the seven dhātus.", concepts: [saptadhatu]}
+      - {source_id: sarit-ah, prefix: "Ah.1.11.", verses: [5, 5], name: "Aṣṭāṅgahṛdaya, Sūtrasthāna 11 (Doṣādivijñānīya)", rationale: "Functions of purīṣa, mūtra and sveda.", concepts: [ahara_mala]}
+      - {source_id: sarit-ah, prefix: "Ah.1.12.", verses: [1, 18], name: "Aṣṭāṅgahṛdaya, Sūtrasthāna 12 (Doṣabhedīya)", rationale: "Seats of the doṣas and the five subtypes of each.", concepts: [tridosha]}
+      - {source_id: sarit-caraka, prefix: "Ca.4.1.", verses: [27, 30], name: "Caraka, Śārīrasthāna 1 (Katidhāpuruṣīya)", rationale: "The five mahābhūtas, their qualities (śabda…gandha) and characteristic marks.", concepts: [panchamahabhuta]}
+      - {source_id: sarit-caraka, prefix: "Ca.1.26.", verses: [10, 11], name: "Caraka, Sūtrasthāna 26 (Ātreyabhadrakāpyīya)", rationale: "Classification of dravya as pārthiva, āpya, āgneya, vāyavya and ākāśīya.", concepts: [panchamahabhuta]}
+      - {source_id: sarit-ah, prefix: "Ah.1.9.", verses: [1, 9], name: "Aṣṭāṅgahṛdaya, Sūtrasthāna 9 (Dravyādivijñānīya)", rationale: "Every dravya is pañcabhautika; features of each bhūta-predominant dravya.", concepts: [panchamahabhuta]}
+      - {source_id: sarit-caraka, prefix: "Ca.6.15.", verses: [15, 17], name: "Caraka, Cikitsāsthāna 15 (Grahaṇīcikitsita)", rationale: "Sequential formation of the seven dhātus and upadhātus by the dhātvagnis.", concepts: [saptadhatu]}
+      - {source_id: sarit-caraka, prefix: "Ca.6.15.", verses: [18, 19], name: "Caraka, Cikitsāsthāna 15 (Grahaṇīcikitsita)", rationale: "Mala of food (viṇ-mūtra) and the mala of each dhātu.", concepts: [dhatumala, ahara_mala]}
+      - {source_id: sarit-ah, prefix: "Ah.2.3.", verses: [61, 61], name: "Aṣṭāṅgahṛdaya, Śārīrasthāna 3 (Aṅgavibhāga)", rationale: "Digested food divides into sāra and kiṭṭa (mūtra, śakṛt).", concepts: [ahara_mala]}
+      - {source_id: sarit-ah, prefix: "Ah.2.3.", verses: [62, 63], name: "Aṣṭāṅgahṛdaya, Śārīrasthāna 3 (Aṅgavibhāga)", rationale: "Sāra is digested by seven agnis into rasa → śukra.", concepts: [saptadhatu]}
+      - {source_id: sarit-ah, prefix: "Ah.2.3.", verses: [63, 65], name: "Aṣṭāṅgahṛdaya, Śārīrasthāna 3 (Aṅgavibhāga)", rationale: "Malas of the dhātus in sequence; prasāda and kiṭṭa.", concepts: [dhatumala]}
+      - {source_id: sarit-caraka, prefix: "Ca.1.28.", verses: [3, 5], name: "Caraka, Sūtrasthāna 28 (Vividhāśitapītīya)", rationale: "Food digested by agni yields prasāda (rasa) and kiṭṭa (mala); channels of the dhātus.", concepts: [ahara_mala, ahara_tattva]}
+      - {source_id: sarit-caraka, prefix: "Ca.3.5.", name: "Caraka, Vimānasthāna 5 (Srotovimāna)", rationale: "Srotas: types, roots (mūla), causes and signs of vitiation, treatment principles.", concepts: [srotas_vimana]}
+      - {source_id: sarit-caraka, prefix: "Ca.1.13.", verses: [65, 69], name: "Caraka, Sūtrasthāna 13 (Snehādhyāya)", rationale: "Mṛdu and krūra koṣṭha: how quickly each responds to sneha and purgation, and why.", concepts: [koshtha]}
+      - {source_id: sarit-ah, prefix: "Ah.1.18.", verses: [34, 34], name: "Aṣṭāṅgahṛdaya, Sūtrasthāna 18 (Vamanavirecanavidhi)", rationale: "Mṛdu koṣṭha (bahu-pitta) vs krūra koṣṭha (prabhūta-māruta).", concepts: [koshtha]}
+      - {source_id: sarit-caraka, prefix: "Ca.1.25.", verses: [31, 39], name: "Caraka, Sūtrasthāna 25 (Yajjaḥpuruṣīya)", rationale: "Hita and ahita āhāra; definition of wholesome food; classification of food; most and least wholesome items.", concepts: [ahara_tattva]}
+      - {source_id: sarit-caraka, prefix: "Ca.1.27.", verses: [3, 4], name: "Caraka, Sūtrasthāna 27 (Annapānavidhi)", rationale: "Food as the life of living beings (anna = prāṇa).", concepts: [ahara_tattva]}
+      - {source_id: sarit-caraka, prefix: "Ca.3.1.", verses: [20, 23], name: "Caraka, Vimānasthāna 1 (Rasavimāna)", rationale: "Sātmya and the eight āhāravidhiviśeṣāyatanas (prakṛti, karaṇa, saṃyoga, rāśi, deśa, kāla, upayogasaṃsthā, upayoktā).", concepts: [ahara_ayatana]}
+      - {source_id: sarit-caraka, prefix: "Ca.3.1.", verses: [24, 25], name: "Caraka, Vimānasthāna 1 (Rasavimāna)", rationale: "Āhāravidhividhāna: rules of eating (uṣṇa, snigdha, mātrāvat, jīrṇe …).", concepts: [aharavidhi_vidhana]}

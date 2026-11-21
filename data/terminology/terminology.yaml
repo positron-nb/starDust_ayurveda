@@ -5,7 +5,7 @@
 # Author: build assistant draft, 2026-11-07. Review status: pending (needs Ayurveda teammate).
 # passage_patterns are Python regexes applied to the lower-cased original IAST text
 # (NFC). "-?" allows the editorial compound hyphens used in the Aṣṭāṅgahṛdaya e-text.
-version: "terms-2026.11.21.4"
+version: "terms-2026.11.21.7"
 review_status: pending
 concepts:
   - id: agni
@@ -271,6 +271,78 @@ concepts:
       hi: [व्यायाम, कसरत, योगासन]
       sa: [vyāyāma]
     passage_patterns: ['vyāyām']
+  # ---- added 2026-11-21 (foundational concepts module). Topic concepts are kept narrow on purpose;
+  # the chapter-level `concepts` in modules.yaml do most of the tagging.
+  - id: tridosha
+    label: {iast: tridoṣa, deva: त्रिदोष, en: "Tridoṣa (vāta, pitta, kapha)", hi: "त्रिदोष"}
+    query_aliases:
+      en: [tridosha, tridosh, tri dosha, three doshas, three dosha, vata pitta kapha, vata pitta and kapha, doshas, types of vata, types of pitta, types of kapha, qualities of vata, qualities of pitta, qualities of kapha, gunas of vata, gunas of pitta, gunas of kapha, properties of vata, properties of pitta, properties of kapha, seat of vata, seats of doshas, subtypes of vata, subtypes of pitta, subtypes of kapha]
+      hi: [त्रिदोष, तीन दोष, वात पित्त कफ]
+      sa: [tridoṣa, doṣatraya]
+    passage_patterns: ['trayo doṣ', 'doṣa-?saṃgrah', 'doṣa-?dhātu-?mal']
+  - id: panchamahabhuta
+    label: {iast: pañcamahābhūta, deva: पञ्चमहाभूत, en: "Pañcamahābhūta (five elements)", hi: "पंचमहाभूत"}
+    query_aliases:
+      en: [panchamahabhuta, pancha mahabhuta, panchmahabhut, panchamahabhoot, mahabhuta, mahabhutas, five elements, five great elements, panchabhautika, pancha bhuta, prithvi, akasha]
+      hi: [पंचमहाभूत, पञ्चमहाभूत, महाभूत, पांच तत्व, पंचतत्व, पञ्चभौतिक]
+      sa: [pañcamahābhūta, mahābhūta, pañcabhautika]
+    passage_patterns: ['mahābhūt', 'pañca-?bhūt', 'bhūta-?saṅghāt', 'pārthiv', 'vāyavy', 'nābhas', 'ākāśīy']
+  - id: saptadhatu
+    label: {iast: saptadhātu, deva: सप्तधातु, en: "Saptadhātu (seven tissues)", hi: "सप्तधातु"}
+    query_aliases:
+      en: [saptadhatu, sapta dhatu, seven dhatus, seven dhatu, seven tissues, dhatus, formation of dhatus, dhatu formation]
+      hi: [सप्तधातु, सप्त धातु, सात धातु, धातुएँ]
+      sa: [saptadhātu, sapta dhātavaḥ]
+    passage_patterns: ['sapta-?dhāt', 'rasāsṛṅ-?māṃs', 'rasād ?raktaṃ', 'dehadhātār']
+  - id: ahara_tattva
+    label: {iast: āhāra, deva: आहार, en: "Āhāra (food): nature and wholesome food", hi: "आहार (हिताहार)"}
+    query_aliases:
+      en: [ahara, ahar, aahar, aahara, what is food, wholesome food, unwholesome food, hitahara, ahitahara, pathya ahara, healthy diet]
+      hi: [आहार, हिताहार, अहिताहार, पथ्य आहार]
+      sa: [āhāra, hitāhāra, annapāna]
+    passage_patterns: ['hitāhār', 'āhāratattv', 'āhāratv', 'prāṇāḥ prāṇabhṛt']
+  - id: aharavidhi_vidhana
+    label: {iast: āhāravidhividhāna, deva: आहारविधिविधान, en: "Āhāravidhividhāna (rules of eating)", hi: "आहारविधि विधान"}
+    query_aliases:
+      en: [aharavidhi vidhana, aharvidhividhan, aharavidhividhana, ahar vidhi vidhan, ahara vidhi vidhana, ahara vidhi, rules of eating, eating rules, how to eat, how should one eat, method of eating, dietary rules, manner of eating]
+      hi: [आहारविधि विधान, आहारविधिविधान, आहार विधि, भोजन के नियम, कैसे खाना चाहिए, भोजन विधि]
+      sa: [āhāravidhividhāna, āhāravidhi]
+    passage_patterns: ['āhāravidhividhān', 'bhojyasādguṇy']
+  - id: ahara_ayatana
+    label: {iast: aṣṭāhāravidhiviśeṣāyatana, deva: अष्टाहारविधिविशेषायतन, en: "Aṣṭa āhāravidhiviśeṣāyatana (eight factors of diet)", hi: "अष्टविध आहार विधि विशेष आयतन"}
+    query_aliases:
+      en: [ashtavidha ahar vishesh ayatan, ashtavidha ahara vishesha ayatana, ashtavidha ahara vidhi vishesha ayatana, ahara vidhi vishesha ayatana, ahar vidhi vishesh ayatan, vishesh ayatan, vishesha ayatana, ayatan, ayatana, eight factors of food, eight factors of diet, eight factors of ahara, ashta ahara vidhi]
+      hi: [अष्टविध आहार विधि विशेष आयतन, अष्टविध आहार विशेष आयतन, आहार विधि विशेष आयतन, विशेष आयतन, आहार के आठ नियम, आहार के आठ कारक]
+      sa: [āhāravidhiviśeṣāyatana, āhārāyatana]
+    passage_patterns: ['āhāravidhiviśeṣāyatan', 'āhārāyatan', 'prakṛtikaraṇasaṃyog', 'upayogasaṃsth', 'upayoktā']
+  - id: ahara_mala
+    label: {iast: āhāramala, deva: आहारमल, en: "Āhāra-mala (waste of digested food: purīṣa, mūtra, sveda)", hi: "आहार मल"}
+    query_aliases:
+      en: [ahara mala, ahar mala, aharmala, aharamala, mala of food, waste of food, food waste, kitta, mala, malas, excreta, purisha, mutra, sweda]
+      hi: [आहार मल, आहारमल, मल, किट्ट, पुरीष, मूत्र, स्वेद]
+      sa: [āhāramala, kiṭṭa, mala]
+    passage_patterns: ['kiṭṭ', 'malākhy', 'mūtra-?śakṛt', 'viṇ-?mūtr', 'viṇmūtr', 'avaṣṭambhaḥ purīṣ']
+  - id: dhatumala
+    label: {iast: dhātumala, deva: धातुमल, en: "Dhātumala (by-products/waste of the dhātus)", hi: "धातुमल"}
+    query_aliases:
+      en: [dhatumala, dhatu mala, dhatu malas, mala of dhatus, malas of dhatus, waste of dhatus, waste of tissues, tissue waste, by-products of dhatus]
+      hi: [धातुमल, धातु मल, धातुओं के मल]
+      sa: [dhātumala]
+    passage_patterns: ['dhātūnāṃ krama-?śo mal', 'prasāda-?kiṭṭ', 'prasādakiṭṭ', 'khamal', 'malāḥ kheṣu']
+  - id: srotas_vimana
+    label: {iast: srotas, deva: स्रोतस्, en: "Srotas: types, roots and vitiation", hi: "स्रोतस् (प्रकार, मूल, दुष्टि)"}
+    query_aliases:
+      en: [srotas, strotas, shrotas, srota, srotamsi, srotovimana, types of srotas, channels of the body, body channels, pranavaha, annavaha, rasavaha]
+      hi: [स्रोतस, स्रोतस्, स्त्रोतस, स्रोत, स्रोतोविमान]
+      sa: [srotas, srotāṃsi, srotovimāna]
+    passage_patterns: ['vahīni duṣyanti', 'vahānāṃ srotas', 'srotasāṃ (?:duṣṭ|mūl|vimān)', 'srotovimān']
+  - id: koshtha
+    label: {iast: koṣṭha, deva: कोष्ठ, en: "Koṣṭha (bowel nature: krūra, mṛdu, madhya)", hi: "कोष्ठ"}
+    query_aliases:
+      en: [koshtha, koshta, kostha, kosta, koshth, krura koshtha, mridu koshtha, madhya koshtha, bowel nature, bowel type, nature of bowel]
+      hi: [कोष्ठ, क्रूर कोष्ठ, मृदु कोष्ठ, मध्य कोष्ठ]
+      sa: [koṣṭha, krūrakoṣṭha, mṛdukoṣṭha]
+    passage_patterns: ['(?:krūr|mṛdu|madhy)[aā]?-?koṣṭh', 'krūrakroṣṭh', 'koṣṭhaḥ krūr', 'mṛduḥ koṣṭh', 'a-?parijñāta-?koṣṭh']
   # ---- question-intent markers (META): help ranking only; never used for answerability or
   # for the claim-support heuristic.
   - id: intent_definition
