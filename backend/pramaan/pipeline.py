@@ -41,10 +41,11 @@ STHANA_NUM = {
 # concepts such as visha/srotas/dosha are excluded).
 EXPANSION_ALLOWED = {"agni", "mandagni", "vishamagni", "tikshnagni", "samagni", "ama", "ajirna", "ajirna_types", "alasaka",
                      "vishucika", "grahani", "langhana", "pachana_dipana", "ahara_matra", "aruchi", "chardi", "atisara",
-                     "shula", "guru_gaurava", "ashwagandha", "amashaya", "kukshi", "shodhana", "prakriti"}
+                     "shula", "guru_gaurava", "ashwagandha", "amashaya", "kukshi", "shodhana", "prakriti",
+                     "dinacharya", "ritucharya", "nidra", "divaswapna", "vyayama"}
 
-COVERAGE = {"en": "PRAMAAN currently covers: Agni, Āma, Ajīrṇa (food quantity, indigestion, grahaṇī) and Prakṛti (constitution), from selected chapters of Caraka Saṃhitā and Aṣṭāṅga Hṛdaya.",
-            "hi": "PRAMAAN अभी इन विषयों को कवर करता है: अग्नि, आम, अजीर्ण (आहार मात्रा, अपच, ग्रहणी) और प्रकृति — चरक संहिता और अष्टांग हृदय के चुने हुए अध्यायों से।"}
+COVERAGE = {"en": "PRAMAAN currently covers: Agni, Āma, Ajīrṇa (food quantity, indigestion, grahaṇī), Prakṛti (constitution) and Svasthavṛtta (Dinacaryā, Ṛtucaryā, Nidrā, Divāsvapna, Vyāyāma), from selected chapters of Caraka Saṃhitā and Aṣṭāṅga Hṛdaya.",
+            "hi": "PRAMAAN अभी इन विषयों को कवर करता है: अग्नि, आम, अजीर्ण (आहार मात्रा, अपच, ग्रहणी), प्रकृति और स्वस्थवृत्त (दिनचर्या, ऋतुचर्या, निद्रा, दिवास्वप्न, व्यायाम) — चरक संहिता और अष्टांग हृदय के चुने हुए अध्यायों से।"}
 
 NOTICES = {
     "en": {

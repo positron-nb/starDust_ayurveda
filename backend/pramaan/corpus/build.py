@@ -65,12 +65,15 @@ def build(out: Path, do_fetch: bool = False) -> dict:
     store.put_meta("modules_version", modules["version"])
 
     chapter_prefixes: dict[str, list[tuple[str, str, tuple | None]]] = {}
+    chapter_topics: dict[str, list[tuple[str, tuple | None, list[str]]]] = {}
     herb_filters: dict[str, list[tuple[str, str]]] = {}
     chapter_display: dict[str, str] = {}
     for m in modules["modules"]:
         for ch in m.get("chapters", []):
             rng = tuple(ch["verses"]) if ch.get("verses") else None  # optional [from, to] by leading verse number
             chapter_prefixes.setdefault(ch["source_id"], []).append((ch["prefix"], m["module_id"], rng))
+            if ch.get("concepts"):
+                chapter_topics.setdefault(ch["source_id"], []).append((ch["prefix"], rng, list(ch["concepts"])))
             chapter_display[ch["prefix"].rstrip(".")] = ch["name"]
         for tf in m.get("term_filter", []):
             herb_filters.setdefault(tf["source_id"], []).append((tf["concept"], m["module_id"]))
@@ -99,6 +102,8 @@ def build(out: Path, do_fetch: bool = False) -> dict:
             mods = [mid for (pref, mid, rng) in chapter_prefixes.get(src["source_id"], [])
                     if s.passage_id.startswith(pref) and _in_range(rng)]
             mods = list(dict.fromkeys(mods))
+            topic_tags = [c for (pref, rng, cs) in chapter_topics.get(src["source_id"], [])
+                          if s.passage_id.startswith(pref) and _in_range(rng) for c in cs]
             for concept, mid in herb_filters.get(src["source_id"], []):
                 if concept in tags and mid not in mods:
                     mods.append(mid)
@@ -120,7 +125,7 @@ def build(out: Path, do_fetch: bool = False) -> dict:
                 text_hash=sha256_text(s.text),
                 variants=[Variant(locator=a, text=b) for a, b in s.variants],
                 modules=mods,
-                concepts=sorted(tags.keys()),
+                concepts=sorted(set(tags.keys()) | set(topic_tags)),
                 position=pos,
             )
             indexed = bool(mods)

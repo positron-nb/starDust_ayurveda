@@ -5,7 +5,7 @@
 # Author: build assistant draft, 2026-11-07. Review status: pending (needs Ayurveda teammate).
 # passage_patterns are Python regexes applied to the lower-cased original IAST text
 # (NFC). "-?" allows the editorial compound hyphens used in the Aṣṭāṅgahṛdaya e-text.
-version: "terms-2026.11.21.2"
+version: "terms-2026.11.21.4"
 review_status: pending
 concepts:
   - id: agni
@@ -235,6 +235,42 @@ concepts:
       sa: [prakṛti, dehaprakṛti]
     passage_patterns: ['prakṛtay', 'prakṛtīr', 'prakṛtiḥ', 'prakṛtikā', 'śukr[aā]-?rtava-?sth', '(?:śleṣm|kaph|pitt|vāt)[aā]?-?prakṛt', 'sama-?dhātav', 'sama-?dhātuḥ']
     note: "Bare 'prakṛti' also means 'natural state' (e.g. Ca Sū 5.8 prakṛtiṃ) or 'the factors beginning with prakṛti' (Ca Vi 2.4); those forms are deliberately not matched. Review pending."
+  # ---- added 2026-11-21 (Svasthavṛtta module)
+  - id: dinacharya
+    label: {iast: dinacaryā, deva: दिनचर्या, en: "Dinacaryā (daily regimen)", hi: "दिनचर्या"}
+    query_aliases:
+      en: [dinacharya, dincharya, dinacarya, daily routine, daily regimen, morning routine, brahma muhurta]
+      hi: [दिनचर्या, दैनिक दिनचर्या, ब्रह्म मुहूर्त]
+      sa: [dinacaryā]
+    passage_patterns: ['brāhme muhūrt', 'danta-?dhāv', 'dantakāṣṭh', 'añjan', 'nasy[aā]', 'gaṇḍūṣ', 'abhyaṅg', 'udvartan', 'snān[aā]', 'sad-?vṛtt', 'ācār']
+  - id: ritucharya
+    label: {iast: ṛtucaryā, deva: ऋतुचर्या, en: "Ṛtucaryā (seasonal regimen)", hi: "ऋतुचर्या"}
+    query_aliases:
+      en: [ritucharya, rutucharya, rtucarya, seasonal regimen, seasonal routine, seasons, season, winter, summer, monsoon, spring, autumn]
+      hi: [ऋतुचर्या, ऋतु, मौसम, सर्दी, गर्मी, बरसात, वसंत]
+      sa: [ṛtucaryā, ṛtu, hemanta, śiśira, vasanta, grīṣma, varṣā, śarad]
+    passage_patterns: ['ṛtu', 'hemant', 'śiśir', 'vasant', 'grīṣm', 'varṣā', 'śarad', 'ādān', 'visarg']
+  - id: nidra
+    label: {iast: nidrā, deva: निद्रा, en: "Nidrā (sleep)", hi: "निद्रा (नींद)"}
+    query_aliases:
+      en: [nidra, sleep, sleeping, insomnia, sleeplessness, night waking, staying awake at night]
+      hi: [निद्रा, नींद, अनिद्रा, रात्रि जागरण]
+      sa: [nidrā, svapna, jāgaraṇa]
+    passage_patterns: ['nidr', 'svapi', 'svapan', 'jāgar', 'prajāgar']
+  - id: divaswapna
+    label: {iast: divāsvapna, deva: दिवास्वप्न, en: "Divāsvapna (day sleep)", hi: "दिवास्वप्न (दिन में सोना)"}
+    query_aliases:
+      en: [divaswapna, diwaswap, divasvapna, divaswap, day sleep, daytime sleep, day time sleep, sleeping during the day, afternoon nap, nap]
+      hi: [दिवास्वप्न, दिन में सोना, दोपहर की नींद, दिवा स्वप्न]
+      sa: [divāsvapna, divāsvāpa]
+    passage_patterns: ['divā-?svap', 'divāsvap', 'svapanaṃ divā', 'divā-?śay']
+  - id: vyayama
+    label: {iast: vyāyāma, deva: व्यायाम, en: "Vyāyāma (physical exercise)", hi: "व्यायाम"}
+    query_aliases:
+      en: [vyayama, vyayam, exercise, physical exercise, workout, physical activity]
+      hi: [व्यायाम, कसरत, योगासन]
+      sa: [vyāyāma]
+    passage_patterns: ['vyāyām']
   # ---- question-intent markers (META): help ranking only; never used for answerability or
   # for the claim-support heuristic.
   - id: intent_definition

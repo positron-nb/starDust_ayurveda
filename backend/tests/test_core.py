@@ -353,3 +353,16 @@ def test_out_of_scope_shows_no_unrelated_passages(store, terms, retriever, polic
         QueryRequest(query="What does Ayurveda say about smartphone addiction?", use_model=False))
     assert r.status == "insufficient_evidence" and r.evidence == []
     assert "currently covers" in r.answer_notice
+
+
+@pytest.mark.parametrize("q,expect_any,k", [
+    ("What should one do after waking up in brahma muhurta?", {"Ah.1.2.1"}, 3),
+    ("What is the regimen for the winter season?", {"Ah.1.3.1", "Ah.1.3.58", "Ca.1.6.9"}, 5),
+    ("Who can sleep during the day (divaswapna)?", {"Ca.1.21.41", "Ca.1.21.44", "Ah.1.7.57"}, 5),
+    ("What happens with excessive exercise (vyayama)?", {"Ca.1.7.33", "Ca.1.7.34", "Ah.1.2.13", "Ah.1.2.14"}, 5),
+    ("What is nidra?", {"Ca.1.21.35", "Ca.1.21.36", "Ca.1.21.37", "Ca.1.21.58", "Ca.1.21.59", "Ah.1.7.53", "Ah.1.7.54"}, 5),
+])
+def test_svasthavritta_topics_retrieve_their_chapters(store, terms, retriever, policy, q, expect_any, k):
+    r = Engine(store, terms, policy, ScriptedLLM("x"), retriever).run(QueryRequest(query=q, use_model=False))
+    top = [c.passage.passage_id for c in r.evidence if c.role == "primary"][:k]
+    assert expect_any & set(top), (q, top)

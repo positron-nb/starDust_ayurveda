@@ -195,6 +195,10 @@ export function Workspace({ health, onOpenPassage, onRun }: { health: Health | n
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<RunResult | null>(null);
   const [reviewing, setReviewing] = useState<Claim | null>(null);
+  const [evOrder, setEvOrder] = useState<"relevance" | "text">("relevance");
+  const workRank = (w: string) => (w.startsWith("Caraka") ? 0 : 1);
+  const orderedEvidence = !result ? [] : evOrder === "relevance" ? result.evidence
+    : [...result.evidence].sort((a, b) => workRank(a.passage.work) - workRank(b.passage.work) || a.passage.position - b.passage.position);
   const readOnly = health?.deploy_mode === "public_demo";
 
   const extract = async () => {
@@ -339,7 +343,15 @@ export function Workspace({ health, onOpenPassage, onRun }: { health: Health | n
             </ul>
           </Section>
         )}
-        <Section title={`Evidence${result ? ` · ${result.evidence.length} passage(s)` : ""}`} right={result ? <Chip>original text unchanged · Devanagari derived</Chip> : undefined}>
+        <Section title={`Evidence${result ? ` · ${result.evidence.length} passage(s)` : ""}`} right={result && result.evidence.length > 1 ? (
+          <div className="flex rounded-md border border-line overflow-hidden text-xs" role="radiogroup" aria-label="Order passages by">
+            {(["relevance", "text"] as const).map((o) => (
+              <button key={o} role="radio" aria-checked={evOrder === o} onClick={() => setEvOrder(o)}
+                className={`px-2 py-1 ${evOrder === o ? "bg-forest-700 text-white" : "bg-white text-forest-700"}`}>
+                {o === "relevance" ? "By relevance" : "In text order"}
+              </button>
+            ))}
+          </div>) : undefined}>
           {!result && <p className="text-sm text-muted">Run a question to see original passages with edition-specific locators. Try example A.</p>}
           {result && result.evidence.length === 0 && (
             <p className="text-sm text-muted">
@@ -349,7 +361,15 @@ export function Workspace({ health, onOpenPassage, onRun }: { health: Health | n
             </p>
           )}
           <div className="space-y-3">
-            {result?.evidence.map((c) => <EvidenceCardView key={c.label + c.passage.passage_id} card={c} onOpen={onOpenPassage} />)}
+            {result && result.evidence.length > 0 && (
+              <p className="text-[11px] text-muted">
+                {evOrder === "relevance"
+                  ? "Ordered by retrieval relevance (keyword + meaning match to your question) — not by importance or authority of the verse."
+                  : "Ordered as they appear in the texts (Caraka Saṃhitā first, then Aṣṭāṅga Hṛdaya; sthāna → chapter → verse)."}
+                {" "}Original text unchanged · Devanagari is a derived transliteration.
+              </p>
+            )}
+            {orderedEvidence.map((c) => <EvidenceCardView key={c.label + c.passage.passage_id} card={c} onOpen={onOpenPassage} />)}
           </div>
         </Section>
         {result && (result.unresolved_questions.length > 0) && (
