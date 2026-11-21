@@ -384,3 +384,33 @@ def test_foundational_topics_retrieve_their_chapters(store, terms, retriever, po
     r = Engine(store, terms, policy, ScriptedLLM("x"), retriever).run(QueryRequest(query=q, use_model=False))
     top = [c.passage.passage_id for c in r.evidence if c.role == "primary"][:k]
     assert expect_any & set(top), (q, top)
+
+
+def test_definition_verses_exist_and_are_indexed(store, terms, retriever):
+    for c in terms.concepts:
+        for pid in c.definition_verses:
+            assert pid in retriever.by_id, (c.id, pid)
+
+
+@pytest.mark.parametrize("q,first", [
+    ("What is tridosha?", "Ah.1.1.6"),
+    ("What is prakriti?", "Ah.1.1.9"),
+    ("What is srotas?", "Ca.1.30.12"),
+    ("What is ahara mala?", "Ca.1.28.4"),
+    ("What are dhatumala?", "Ca.6.15.18"),
+    ("What is aharavidhi vidhana?", "Ca.3.1.24"),
+    ("What are the ashtavidha ahara vishesh ayatan?", "Ca.3.1.21"),
+    ("What is ama?", "Ah.1.13.25"),
+    ("grahani?", "Ca.6.15.56"),
+    ("त्रिदोष क्या है?", "Ah.1.1.6"),
+])
+def test_definition_question_shows_definition_verse_first(store, terms, retriever, policy, q, first):
+    r = Engine(store, terms, policy, ScriptedLLM("x"), retriever).run(QueryRequest(query=q, use_model=False))
+    assert r.evidence and r.evidence[0].passage.passage_id == first, (q, [c.passage.passage_id for c in r.evidence])
+    assert "curated definition" in r.evidence[0].retrieval.get("search", "")
+
+
+def test_non_definition_question_is_not_pinned(store, terms, retriever, policy):
+    r = Engine(store, terms, policy, ScriptedLLM("x"), retriever).run(
+        QueryRequest(query="What are the causes of vitiation of annavaha srotas?", use_model=False))
+    assert all("curated definition" not in c.retrieval.get("search", "") for c in r.evidence)

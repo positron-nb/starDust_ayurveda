@@ -133,6 +133,32 @@ class Engine:
                 out.append((m.group(0), None))
         return out
 
+    def definition_pins(self, direct: dict[str, list[str]], raw: str, max_pins: int = 3) -> list[tuple]:
+        """Curated definition verses (terminology `definition_verses`) for a definition-type question.
+
+        Applies when the question asks what something is (definition intent), or is a bare term
+        ("grahani?"), and not when it asks for signs / causes / treatment. Only the most specific
+        queried concept(s) are used (longest matched alias), so "ahara mala" pins Āhāra-mala, not Āhāra."""
+        intents = set(direct) & set(self.terms.meta_ids)
+        bare = len(re.findall(r"\w+", raw)) <= 3
+        if intents - {"intent_definition"} or not ("intent_definition" in intents or bare):
+            return []
+        cands = []
+        for cid, aliases in direct.items():
+            c = self.terms.by_id(cid)
+            if c and not c.meta and c.definition_verses:
+                cands.append((max((len(a) for a in aliases), default=0), cid))
+        if not cands:
+            return []
+        best = max(n for n, _ in cands)
+        out = []
+        for _, cid in [x for x in cands if x[0] == best]:
+            for pid in self.terms.by_id(cid).definition_verses:
+                p = self.retriever.by_id.get(pid)
+                if p and all(p.passage_id != q.passage_id for q, _ in out):
+                    out.append((p, cid))
+        return out[:max_pins]
+
     def context_limiting(self, concept_ids: list[str], exclude: set[str], k: int = 1) -> list[Hit]:
         if not concept_ids:
             return []
@@ -258,6 +284,14 @@ class Engine:
         for c in requested_cards:
             cards.append(c)
             seen.add(c.passage.passage_id)
+        for p, cid in (self.definition_pins(direct, raw) if ok and not requested_cards else []):
+            if p.passage_id in seen:
+                continue
+            seen.add(p.passage_id)
+            label = self.terms.by_id(cid).label.get("en", cid)
+            cards.append(EvidenceCard(label="", passage=p, retrieval={"search": f"curated definition verse: {cid}"}, role="primary",
+                                      matched_concepts=[c for c in direct if c in p.concepts] or [cid],
+                                      role_note=f"Definition verse for {label}, shown first for a definition question. Curated selection, review pending."))
         for h in hits:
             if h.passage.passage_id in seen:
                 continue

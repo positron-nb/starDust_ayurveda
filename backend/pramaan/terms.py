@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import re
 import unicodedata
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from functools import lru_cache
 from pathlib import Path
 
@@ -53,6 +53,7 @@ class Concept:
     patterns: list[re.Pattern]
     note: str = ""
     meta: bool = False
+    definition_verses: list[str] = field(default_factory=list)  # curated, ordered; shown first for 'what is X'
 
 
 @dataclass
@@ -195,6 +196,7 @@ def load_terminology(path: str | None = None) -> Terminology:
                 patterns=[re.compile(nfc(x)) for x in c.get("passage_patterns", [])],
                 note=c.get("note", ""),
                 meta=bool(c.get("meta", False)),
+                definition_verses=list(c.get("definition_verses", []) or []),
             )
         )
     return Terminology(version=data["version"], concepts=concepts)

@@ -4,7 +4,7 @@
 # Whole chapters are ingested at verse/prose-segment granularity so that negations, exceptions
 # and contraindications are never split from their verse. Selection rationale is recorded per
 # chapter; domain review of every indexed passage is still PENDING.
-version: "modules-2026.11.21.2"
+version: "modules-2026.11.22.1"
 modules:
   - module_id: agni-ama-ajirna
     title: "Agni, Āma, Ajīrṇa and related assessment concepts"
@@ -103,3 +103,4 @@ modules:
       - {source_id: sarit-caraka, prefix: "Ca.1.27.", verses: [3, 4], name: "Caraka, Sūtrasthāna 27 (Annapānavidhi)", rationale: "Food as the life of living beings (anna = prāṇa).", concepts: [ahara_tattva]}
       - {source_id: sarit-caraka, prefix: "Ca.3.1.", verses: [20, 23], name: "Caraka, Vimānasthāna 1 (Rasavimāna)", rationale: "Sātmya and the eight āhāravidhiviśeṣāyatanas (prakṛti, karaṇa, saṃyoga, rāśi, deśa, kāla, upayogasaṃsthā, upayoktā).", concepts: [ahara_ayatana]}
       - {source_id: sarit-caraka, prefix: "Ca.3.1.", verses: [24, 25], name: "Caraka, Vimānasthāna 1 (Rasavimāna)", rationale: "Āhāravidhividhāna: rules of eating (uṣṇa, snigdha, mātrāvat, jīrṇe …).", concepts: [aharavidhi_vidhana]}
+      - {source_id: sarit-caraka, prefix: "Ca.1.30.", verses: [12, 12], name: "Caraka, Sūtrasthāna 30 (Arthedaśamahāmūlīya)", rationale: "Etymological definition: dhamanī from dhmāna, srotas from sravaṇa, sirā from saraṇa.", concepts: [srotas_vimana]}

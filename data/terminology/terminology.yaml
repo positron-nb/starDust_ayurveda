@@ -5,7 +5,9 @@
 # Author: build assistant draft, 2026-11-07. Review status: pending (needs Ayurveda teammate).
 # passage_patterns are Python regexes applied to the lower-cased original IAST text
 # (NFC). "-?" allows the editorial compound hyphens used in the Aṣṭāṅgahṛdaya e-text.
-version: "terms-2026.11.21.7"
+# definition_verses: curated, ordered passage ids shown FIRST for a definition-type question about
+# that concept ("what is X"). Chosen by the build assistant from the texts; domain review pending.
+version: "terms-2026.11.22.1"
 review_status: pending
 concepts:
   - id: agni
@@ -15,6 +17,7 @@ concepts:
       hi: [अग्नि, जठराग्नि, पाचक अग्नि, पाचन, पाचन शक्ति, भूख, हाजमा]
       sa: [agni, jāṭharāgni, jatharagni, anala, vahni, pāvaka, ūṣmā]
     passage_patterns: ['[aā]gn[iaeyo]', 'anal[aoeāā]', 'vahn[iea]', 'ūṣm[aā]', 'j[āa]ṭhar', 'pāvak']
+    definition_verses: [Ca.6.15.3, Ca.6.15.4, Ah.1.1.8]
     note: "ūṣman ('heat') is tagged as agni-related because AH Sū 13.25 uses it for digestive heat; reviewer should confirm."
   - id: mandagni
     label: {iast: mandāgni, deva: मन्दाग्नि, en: "Mandāgni (weak/sluggish Agni)", hi: "मन्दाग्नि"}
@@ -23,6 +26,7 @@ concepts:
       hi: [मन्दाग्नि, मंदाग्नि, कमजोर पाचन, भूख न लगना, भूख कम, मंद अग्नि, मंद होने, दुर्बल होने, कमजोर होने, अग्नि मंद, अग्नि दुर्बल]
       sa: [mandāgni, mandagni, agnisāda, alpāgni]
     passage_patterns: ['mand[aā]-?[aā]gn', 'mand[aā]-?nal', '[aā]gni-?sād', 'alp[aā]-?(?:agn|vahn|anal)', 'alpāgn', 'mandānal', 'ūṣm\S*\s+[''’]?[aā]?-?lpa', 'dur-?bal[aā]-?(?:agn|vahn|anal|sy[aā]-?lp[aā]-?vahn)', 'durbalāgn', '[aā]gni-?māndy']
+    definition_verses: [Ah.1.1.8]
   - id: vishamagni
     label: {iast: viṣamāgni, deva: विषमाग्नि, en: "Viṣamāgni (irregular Agni)", hi: "विषमाग्नि"}
     query_aliases:
@@ -30,6 +34,7 @@ concepts:
       hi: [विषमाग्नि, अनियमित पाचन, अनियमित भूख]
       sa: [viṣamāgni, vishamagni]
     passage_patterns: ['viṣam[aā]-?[aā]?gn', 'viṣamo-?['']?gn']
+    definition_verses: [Ah.1.1.8]
   - id: tikshnagni
     label: {iast: tīkṣṇāgni, deva: तीक्ष्णाग्नि, en: "Tīkṣṇāgni (intense Agni)", hi: "तीक्ष्णाग्नि"}
     query_aliases:
@@ -37,6 +42,7 @@ concepts:
       hi: [तीक्ष्णाग्नि, अत्यधिक भूख, तीव्र अग्नि]
       sa: [tīkṣṇāgni, tikshnagni, atyagni]
     passage_patterns: ['tīkṣṇ[aā]-?[aā]?gn', 'aty-?[aā]gn', 'bhasmak']
+    definition_verses: [Ah.1.1.8]
   - id: samagni
     label: {iast: samāgni, deva: समाग्नि, en: "Samāgni (balanced Agni)", hi: "समाग्नि"}
     query_aliases:
@@ -44,6 +50,7 @@ concepts:
       hi: [समाग्नि, संतुलित पाचन, सम अग्नि]
       sa: [samāgni, samagni]
     passage_patterns: ['sam[aā]-?[aā]gn', 'samo-?['']?gn']
+    definition_verses: [Ah.1.1.8]
   - id: ama
     label: {iast: āma, deva: आम, en: "Āma (incompletely processed/undigested material)", hi: "आम"}
     query_aliases:
@@ -51,6 +58,7 @@ concepts:
       hi: [आम, आमदोष, अपक्व, अपक्व रस, साम, निराम]
       sa: [āma, ama, sāma, nirāma, āmadoṣa]
     passage_patterns: ['(?<![a-zāīūṛṝḷṅñṭḍṇśṣṃḥ])ām(?:a|aṃ|am|āt|asya|ena|e|o|ā|ān|aḥ)(?![a-zāīūṛṝḷṅñṭḍṇśṣṃḥ])', 'ām[aā]-?(?:doṣ|pradoṣ|viṣ|j[aā]|jīrṇ|tīsār|tisār|śūl|sann|baddh|vāt)', 'nir-?ām', '(?<![a-zāīūṛṝḷṅñṭḍṇśṣṃḥ])s[aā]-?ām(?:a|ā|o|ān|aṃ|āḥ|ān)', '(?<![a-zāīūṛṝḷṅñṭḍṇśṣṃḥ])sām(?:a|ā|o|ān|aṃ|āḥ)(?![a-zāīūṛṝḷṅñṭḍṇśṣṃḥ])', 'duṣṭ[aā]-?ām', 'āmen']
+    definition_verses: [Ah.1.13.25, Ah.1.13.26]
     note: "'āmāśaya' (a site, often glossed 'stomach') is deliberately excluded. The English word 'toxin' is NOT used as an equivalent."
   - id: ajirna
     label: {iast: ajīrṇa, deva: अजीर्ण, en: "Ajīrṇa (indigestion / food not yet digested)", hi: "अजीर्ण"}
@@ -59,6 +67,7 @@ concepts:
       hi: [अजीर्ण, अपच, बदहजमी]
       sa: [ajīrṇa, ajirna, ajīrṇin]
     passage_patterns: ['[aā]-?jīrṇ', 'adhyaśan']
+    definition_verses: [Ah.1.8.25, Ah.1.8.26]
     note: "Pattern can over-match compounds such as anna-jīrṇa; reviewer should confirm hits."
   - id: ajirna_types
     label: {iast: "āmājīrṇa / vidagdha / viṣṭabdha / rasaśeṣa", deva: "आमाजीर्ण / विदग्ध / विष्टब्ध / रसशेष", en: "Types of Ajīrṇa", hi: "अजीर्ण के प्रकार"}
@@ -90,6 +99,7 @@ concepts:
       hi: [ग्रहणी]
       sa: [grahaṇī, grahani]
     passage_patterns: ['grahaṇ']
+    definition_verses: [Ca.6.15.56, Ca.6.15.51, Ca.6.15.52]
     note: "Both an anatomical seat and a disease name in the texts; no one-to-one modern mapping asserted."
   - id: langhana
     label: {iast: laṅghana, deva: लङ्घन, en: "Laṅghana (lightening measures, incl. fasting)", hi: "लंघन"}
@@ -234,6 +244,7 @@ concepts:
       hi: [प्रकृति, देह प्रकृति, शरीर प्रकृति, प्रकृति परीक्षा]
       sa: [prakṛti, dehaprakṛti]
     passage_patterns: ['prakṛtay', 'prakṛtīr', 'prakṛtiḥ', 'prakṛtikā', 'śukr[aā]-?rtava-?sth', '(?:śleṣm|kaph|pitt|vāt)[aā]?-?prakṛt', 'sama-?dhātav', 'sama-?dhātuḥ']
+    definition_verses: [Ah.1.1.9, Ah.1.1.10]
     note: "Bare 'prakṛti' also means 'natural state' (e.g. Ca Sū 5.8 prakṛtiṃ) or 'the factors beginning with prakṛti' (Ca Vi 2.4); those forms are deliberately not matched. Review pending."
   # ---- added 2026-11-21 (Svasthavṛtta module)
   - id: dinacharya
@@ -243,6 +254,7 @@ concepts:
       hi: [दिनचर्या, दैनिक दिनचर्या, ब्रह्म मुहूर्त]
       sa: [dinacaryā]
     passage_patterns: ['brāhme muhūrt', 'danta-?dhāv', 'dantakāṣṭh', 'añjan', 'nasy[aā]', 'gaṇḍūṣ', 'abhyaṅg', 'udvartan', 'snān[aā]', 'sad-?vṛtt', 'ācār']
+    definition_verses: [Ah.1.2.1]
   - id: ritucharya
     label: {iast: ṛtucaryā, deva: ऋतुचर्या, en: "Ṛtucaryā (seasonal regimen)", hi: "ऋतुचर्या"}
     query_aliases:
@@ -250,6 +262,7 @@ concepts:
       hi: [ऋतुचर्या, ऋतु, मौसम, सर्दी, गर्मी, बरसात, वसंत]
       sa: [ṛtucaryā, ṛtu, hemanta, śiśira, vasanta, grīṣma, varṣā, śarad]
     passage_patterns: ['ṛtu', 'hemant', 'śiśir', 'vasant', 'grīṣm', 'varṣā', 'śarad', 'ādān', 'visarg']
+    definition_verses: [Ah.1.3.1]
   - id: nidra
     label: {iast: nidrā, deva: निद्रा, en: "Nidrā (sleep)", hi: "निद्रा (नींद)"}
     query_aliases:
@@ -257,6 +270,7 @@ concepts:
       hi: [निद्रा, नींद, अनिद्रा, रात्रि जागरण]
       sa: [nidrā, svapna, jāgaraṇa]
     passage_patterns: ['nidr', 'svapi', 'svapan', 'jāgar', 'prajāgar']
+    definition_verses: [Ca.1.21.35, Ca.1.21.36]
   - id: divaswapna
     label: {iast: divāsvapna, deva: दिवास्वप्न, en: "Divāsvapna (day sleep)", hi: "दिवास्वप्न (दिन में सोना)"}
     query_aliases:
@@ -264,6 +278,7 @@ concepts:
       hi: [दिवास्वप्न, दिन में सोना, दोपहर की नींद, दिवा स्वप्न]
       sa: [divāsvapna, divāsvāpa]
     passage_patterns: ['divā-?svap', 'divāsvap', 'svapanaṃ divā', 'divā-?śay']
+    definition_verses: [Ca.1.21.41, Ca.1.21.44]
   - id: vyayama
     label: {iast: vyāyāma, deva: व्यायाम, en: "Vyāyāma (physical exercise)", hi: "व्यायाम"}
     query_aliases:
@@ -271,6 +286,7 @@ concepts:
       hi: [व्यायाम, कसरत, योगासन]
       sa: [vyāyāma]
     passage_patterns: ['vyāyām']
+    definition_verses: [Ca.1.7.31, Ca.1.7.32]
   # ---- added 2026-11-21 (foundational concepts module). Topic concepts are kept narrow on purpose;
   # the chapter-level `concepts` in modules.yaml do most of the tagging.
   - id: tridosha
@@ -280,6 +296,7 @@ concepts:
       hi: [त्रिदोष, तीन दोष, वात पित्त कफ]
       sa: [tridoṣa, doṣatraya]
     passage_patterns: ['trayo doṣ', 'doṣa-?saṃgrah', 'doṣa-?dhātu-?mal']
+    definition_verses: [Ah.1.1.6, Ah.1.1.7, Ca.1.1.57]
   - id: panchamahabhuta
     label: {iast: pañcamahābhūta, deva: पञ्चमहाभूत, en: "Pañcamahābhūta (five elements)", hi: "पंचमहाभूत"}
     query_aliases:
@@ -287,6 +304,7 @@ concepts:
       hi: [पंचमहाभूत, पञ्चमहाभूत, महाभूत, पांच तत्व, पंचतत्व, पञ्चभौतिक]
       sa: [pañcamahābhūta, mahābhūta, pañcabhautika]
     passage_patterns: ['mahābhūt', 'pañca-?bhūt', 'bhūta-?saṅghāt', 'pārthiv', 'vāyavy', 'nābhas', 'ākāśīy']
+    definition_verses: [Ca.4.1.27, Ca.4.1.28, Ah.1.9.1]
   - id: saptadhatu
     label: {iast: saptadhātu, deva: सप्तधातु, en: "Saptadhātu (seven tissues)", hi: "सप्तधातु"}
     query_aliases:
@@ -294,6 +312,7 @@ concepts:
       hi: [सप्तधातु, सप्त धातु, सात धातु, धातुएँ]
       sa: [saptadhātu, sapta dhātavaḥ]
     passage_patterns: ['sapta-?dhāt', 'rasāsṛṅ-?māṃs', 'rasād ?raktaṃ', 'dehadhātār']
+    definition_verses: [Ah.1.1.13, Ca.6.15.16, Ah.1.11.4]
   - id: ahara_tattva
     label: {iast: āhāra, deva: आहार, en: "Āhāra (food): nature and wholesome food", hi: "आहार (हिताहार)"}
     query_aliases:
@@ -301,6 +320,7 @@ concepts:
       hi: [आहार, हिताहार, अहिताहार, पथ्य आहार]
       sa: [āhāra, hitāhāra, annapāna]
     passage_patterns: ['hitāhār', 'āhāratattv', 'āhāratv', 'prāṇāḥ prāṇabhṛt']
+    definition_verses: [Ca.1.27.3, Ca.1.25.33]
   - id: aharavidhi_vidhana
     label: {iast: āhāravidhividhāna, deva: आहारविधिविधान, en: "Āhāravidhividhāna (rules of eating)", hi: "आहारविधि विधान"}
     query_aliases:
@@ -308,6 +328,7 @@ concepts:
       hi: [आहारविधि विधान, आहारविधिविधान, आहार विधि, भोजन के नियम, कैसे खाना चाहिए, भोजन विधि]
       sa: [āhāravidhividhāna, āhāravidhi]
     passage_patterns: ['āhāravidhividhān', 'bhojyasādguṇy']
+    definition_verses: [Ca.3.1.24, Ca.3.1.25-1]
   - id: ahara_ayatana
     label: {iast: aṣṭāhāravidhiviśeṣāyatana, deva: अष्टाहारविधिविशेषायतन, en: "Aṣṭa āhāravidhiviśeṣāyatana (eight factors of diet)", hi: "अष्टविध आहार विधि विशेष आयतन"}
     query_aliases:
@@ -315,6 +336,7 @@ concepts:
       hi: [अष्टविध आहार विधि विशेष आयतन, अष्टविध आहार विशेष आयतन, आहार विधि विशेष आयतन, विशेष आयतन, आहार के आठ नियम, आहार के आठ कारक]
       sa: [āhāravidhiviśeṣāyatana, āhārāyatana]
     passage_patterns: ['āhāravidhiviśeṣāyatan', 'āhārāyatan', 'prakṛtikaraṇasaṃyog', 'upayogasaṃsth', 'upayoktā']
+    definition_verses: [Ca.3.1.21, Ca.3.1.22-1]
   - id: ahara_mala
     label: {iast: āhāramala, deva: आहारमल, en: "Āhāra-mala (waste of digested food: purīṣa, mūtra, sveda)", hi: "आहार मल"}
     query_aliases:
@@ -322,6 +344,7 @@ concepts:
       hi: [आहार मल, आहारमल, मल, किट्ट, पुरीष, मूत्र, स्वेद]
       sa: [āhāramala, kiṭṭa, mala]
     passage_patterns: ['kiṭṭ', 'malākhy', 'mūtra-?śakṛt', 'viṇ-?mūtr', 'viṇmūtr', 'avaṣṭambhaḥ purīṣ']
+    definition_verses: [Ca.1.28.4, Ah.2.3.61]
   - id: dhatumala
     label: {iast: dhātumala, deva: धातुमल, en: "Dhātumala (by-products/waste of the dhātus)", hi: "धातुमल"}
     query_aliases:
@@ -329,6 +352,7 @@ concepts:
       hi: [धातुमल, धातु मल, धातुओं के मल]
       sa: [dhātumala]
     passage_patterns: ['dhātūnāṃ krama-?śo mal', 'prasāda-?kiṭṭ', 'prasādakiṭṭ', 'khamal', 'malāḥ kheṣu']
+    definition_verses: [Ca.6.15.18, Ca.6.15.19, Ah.2.3.64]
   - id: srotas_vimana
     label: {iast: srotas, deva: स्रोतस्, en: "Srotas: types, roots and vitiation", hi: "स्रोतस् (प्रकार, मूल, दुष्टि)"}
     query_aliases:
@@ -336,6 +360,7 @@ concepts:
       hi: [स्रोतस, स्रोतस्, स्त्रोतस, स्रोत, स्रोतोविमान]
       sa: [srotas, srotāṃsi, srotovimāna]
     passage_patterns: ['vahīni duṣyanti', 'vahānāṃ srotas', 'srotasāṃ (?:duṣṭ|mūl|vimān)', 'srotovimān']
+    definition_verses: [Ca.1.30.12, Ca.3.5.3, Ca.3.5.25]
   - id: koshtha
     label: {iast: koṣṭha, deva: कोष्ठ, en: "Koṣṭha (bowel nature: krūra, mṛdu, madhya)", hi: "कोष्ठ"}
     query_aliases:
@@ -343,13 +368,14 @@ concepts:
       hi: [कोष्ठ, क्रूर कोष्ठ, मृदु कोष्ठ, मध्य कोष्ठ]
       sa: [koṣṭha, krūrakoṣṭha, mṛdukoṣṭha]
     passage_patterns: ['(?:krūr|mṛdu|madhy)[aā]?-?koṣṭh', 'krūrakroṣṭh', 'koṣṭhaḥ krūr', 'mṛduḥ koṣṭh', 'a-?parijñāta-?koṣṭh']
+    definition_verses: [Ah.1.1.9, Ca.1.13.68, Ca.1.13.69]
   # ---- question-intent markers (META): help ranking only; never used for answerability or
   # for the claim-support heuristic.
   - id: intent_definition
     meta: true
     label: {iast: "", deva: "", en: "Definition intent", hi: "परिभाषा"}
     query_aliases:
-      en: [what is, what are, define, definition, meaning of, is called, known as, how is it formed, how is ama formed]
+      en: [what is, what are, define, definition, meaning of, is called, known as, how is it formed, how is ama formed, explain, concept of, tell me about]
       hi: [क्या है, क्या हैं, परिभाषा, किसे कहते]
       sa: [kya hai]
     passage_patterns: ['pracakṣ', 'ucyate', 'smṛt[aāo]', 'kathyat', 'nāma(?![a-zāīū])', 'mat[aā](?![a-zāīū])', 'vidyāt', 'sañjñ', 'saṃjñ', 'vadanti']

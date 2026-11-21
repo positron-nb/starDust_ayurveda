@@ -364,7 +364,7 @@ export function Workspace({ health, onOpenPassage, onRun }: { health: Health | n
             {result && result.evidence.length > 0 && (
               <p className="text-[11px] text-muted">
                 {evOrder === "relevance"
-                  ? "Ordered by retrieval relevance (keyword + meaning match to your question) — not by importance or authority of the verse."
+                  ? "For a “what is” question the curated definition verse comes first; the rest are ordered by retrieval relevance (keyword + meaning match), not by importance or authority of the verse."
                   : "Ordered as they appear in the texts (Caraka Saṃhitā first, then Aṣṭāṅga Hṛdaya; sthāna → chapter → verse)."}
                 {" "}Original text unchanged · Devanagari is a derived transliteration.
               </p>
