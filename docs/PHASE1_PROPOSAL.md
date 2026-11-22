@@ -1,7 +1,7 @@
 # PRAMAAN: An AyurParam-Powered Ayurveda Evidence and Safety Workbench for Classical Text Exploration and Practitioner-Assisted Review
 
 **AyushTech Innovate: National Open Ayurveda AI Challenge — Techfest, IIT Bombay 2026–27 · Phase 1 proposal**
-Team ID: _[to fill]_ · Team Leader: _[name]_ · Ayurveda member (BAMS / MD (Ayu) / PhD (Ayu), NCISM-recognised institution): _[name, institution, enrolment proof uploaded? yes/no]_ · Engineering members: _[names]_
+Team: **StarDust** · Team ID: **TM-FAD5308E454** · Team Leader: Abhishek Kumar Singh · Members: Abhinav Rai, Naman Singh, Kirti Gaikwad (Ayurveda member)
 Repository: https://github.com/positron-nb/starDust_ayurveda (branch `pramaan-prototype`) · Licence: Apache-2.0 (code); CC BY-SA 3.0 (classical corpus, separate notice)
 
 > Status labels used throughout: **Implemented & tested** · **Implemented, not yet validated** · **Planned**.
@@ -29,8 +29,9 @@ most sentences (85% of 557 generated sentences failed our automatic support chec
 therefore has to be enforced by the system, not assumed from the model.
 
 ## 3. Intended users and use cases
-Primary (first release): **BAMS/MD students and faculty** reviewing classical evidence on Agni, Āma and
-Ajīrṇa. Secondary, bounded: **Vaidyas** checking what the texts say and which safety facts are missing
+Primary (first release): **BAMS/MD students and faculty** reviewing classical evidence on 21 foundational
+topics (Agni, Āma, Ajīrṇa, Grahaṇī, Prakṛti, Tridoṣa, Pañcamahābhūta, Saptadhātu, Āhāra and its rules,
+Mala, Srotas, Koṣṭha, Dinacaryā, Ṛtucaryā, Nidrā, Divāsvapna, Vyāyāma). Secondary, bounded: **Vaidyas** checking what the texts say and which safety facts are missing
 for an educational case. Out of scope: patients, diagnosis, prescription, dosing, safety clearance.
 
 ## 4. Proposed solution — workflow (Implemented & tested)
@@ -55,7 +56,9 @@ None of this guarantees factual correctness.
 ## 6. Corpus and dataset provenance (Implemented & tested)
 SARIT TEI editions of the Carakasaṃhitā (Trikamji 1941 e-text) and Aṣṭāṅgahṛdayasaṃhitā (Das &
 Emmerick base text), pinned commit and sha256-verified; CC BY-SA 3.0 with attribution. 16,980 segments
-parsed; **522 indexed** for the module (Caraka Vi 2, Ci 15, Sū 5; AH Sū 8, Sū 13; + aśvagandhā mentions).
+parsed; **882 indexed** (Caraka 551, Aṣṭāṅgahṛdaya 331) in four curated modules: Agni–Āma–Ajīrṇa,
+Prakṛti, Svasthavṛtta and foundational concepts (+ aśvagandhā mentions). Every chapter range and its
+topic tag is recorded with a rationale in `data/curated/modules.yaml`.
 Locators are the encoded `xml:id`s (e.g. AH Sūtrasthāna 13.25 = `Ah.1.13.025a–c`); no verse or page
 number is invented; variant readings are kept separate. Modern safety example: NCCIH aśvagandhā page
 (public domain), paraphrased with scope and access date. 15 English gists are unreviewed AI drafts and
@@ -83,6 +86,12 @@ already in the BM25∪dense candidate pool of ~44, so ordering is the main loss.
 cross-encoder reranker (bge-reranker-v2-m3) improved one inspected subset but worsened the selection
 subset, and Roman-Hindi normalization gave only marginal gains; **neither is adopted** until a fresh,
 reviewer-authored locked benchmark is evaluated.
+
+**Definition-first ordering (Implemented & tested, added 21 Nov after Ayurveda-member feedback).** For a
+“what is X” question, 1–3 curated definition verses per topic are shown first (e.g. Tridoṣa → AH Sū 1.6;
+Srotas → Ca Sū 30.12 *sravaṇāt srotāṃsi*; Grahaṇī → Ca Ci 15.56), labelled “curated selection, review
+pending”; cause/sign/treatment questions keep relevance order, and a text-order toggle shows verses in
+their textual sequence. Editorial connectives (“bhavati cātra”) are never retrieved. 77 automated tests pass.
 
 ## 9. Evidence ledger (Implemented & tested)
 Each claim stores id, text, type, evidence ids, exact support spans, source locations, interpretation
@@ -135,7 +144,8 @@ retrieval benchmark** (40–50 questions, ≥20 locked test); (3) a 5–8 studen
 all three is implemented (import is idempotent; the locked set refuses evaluation if altered).
 
 ## 15. Actual measured results (synthetic, unreviewed labels; not held-out)
-Baseline reported on 2026-11-07 (77 former-test cases, live AyurParam, RTX 5060 Laptop):
+These numbers predate the 21 Nov corpus expansion (522 → 882 passages); they will be re-measured on the
+expanded corpus. Baseline reported on 2026-11-07 (77 former-test cases, live AyurParam, RTX 5060 Laptop):
 
 | Metric | Result |
 |---|---|
@@ -160,14 +170,16 @@ clearly worse (2/7 vs 6/7 Hit@5 with the model). **Hindi and Hinglish input supp
 experimentally, but retrieval parity has not been established.**
 
 ## 16. Limitations
-Corpus scope: two texts, 522 passages, one theme (Agni / Āma / Ajīrṇa) — no claim of broad coverage.
+Corpus scope: two texts, 882 passages, 21 topics — no claim of broad coverage. Definition verses and
+chapter ranges were chosen by the engineering team from the texts; formal review by our Ayurveda member is pending.
 Weak retrieval recall; automatic support check is lexical; zero human or clinical review so far; labels
 synthetic; Hindi parity unproven; Suśruta, Anupāna and seasonal rules not covered; single-GPU,
 single-request inference; Docker untested; public hosting not yet live; licence questions above.
 
 ## 17. Deployment plan
-(a) **Primary demo**: team laptop (RTX 5060) + passcode-protected Cloudflare tunnel exposing only the API
-— application controls implemented and tested, tunnel to be set up (Planned). (b) **Experiment**:
+(a) **Primary demo (live)**: team laptop (RTX 5060) running AyurParam + Cloudflare tunnel in read-only
+public-demo mode; available while the laptop is on. (a2) **Always-on retrieval-only demo (live)**:
+https://stardustayurveda-kappa.vercel.app/ — shows verses and safety rules, no generation, clearly labelled. (b) **Experiment**:
 inference-only Gradio Space on Hugging Face ZeroGPU behind an interchangeable adapter with automatic
 local fallback — PyTorch 2.8 compatibility and the Space code verified locally; a real ZeroGPU run is
 Planned (requires the team's eligible HF account). (c) Docker Compose files exist; validation Planned.
@@ -185,12 +197,12 @@ is claimed. Business hypothesis: free self-hostable core; optional institutional
 reviewed modules and support — subject to CC BY-SA terms.
 
 ## 20. Roadmap (dates in docs/EXECUTION_ROADMAP.md)
-By 22 Nov: complete the human claim audit, terminology review, fresh benchmark authored and locked.
+Done by 22 Nov: corpus expanded to 21 topics, definition-first ordering, live demo links. Next: our Ayurveda
+member reviews the definition verses, terminology and the human claim audit; fresh benchmark authored and locked.
 By 1 Dec: retrieval improvements measured on the locked set, hosted demo link, usability pilot, Docker
 validation, updated report. After: more chapters with reviewed glosses, Suśruta, Anupāna/seasonal rules,
 reranking only if measured benefit.
 
-## Eligibility checklist (team to confirm — software cannot)
-☐ 2–4 members · ☐ ≥1 actively enrolled BAMS / MD (Ayurveda) / PhD (Ayurveda) student from an
-NCISM-recognised institution · ☐ enrolment proof uploaded at registration · ☐ Team Leader designated
-(only they submit) · ☐ registration completed by 15 Nov.
+## Eligibility
+☑ 4 members · ☑ Ayurveda member: Kirti Gaikwad (enrolment proof as uploaded at registration) · ☑ Team
+Leader designated (Abhishek Kumar Singh; only he submits) · ☑ registration complete (Team ID TM-FAD5308E454).
