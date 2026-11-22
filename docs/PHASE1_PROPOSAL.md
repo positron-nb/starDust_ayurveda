@@ -10,7 +10,7 @@
 
 ## 1. PRAMAAN at a glance
 
-PRAMAAN turns AyurParam into a study and practice companion that can be trusted: **every sentence it shows is tied to an original verse** from the Caraka (Charaka) Saṃhitā or the Aṣṭāṅga Hṛdaya, sentences the verse does not support are blocked before anyone sees them, and a model-independent safety layer handles emergencies, pregnancy, children, medicines and dosing. It is not a chatbot that "knows" Ayurveda; it is a workbench that **shows its evidence**.
+PRAMAAN turns AyurParam into a study and practice companion that can be trusted: **every sentence it shows is tied to an original verse** from the Caraka (Charaka) Saṃhitā or the Aṣṭāṅga Hṛdaya, sentences the verse does not support are blocked before anyone sees them, and a model-independent safety layer handles emergencies, pregnancy, children, medicines and dosing. It is not a chatbot that "knows" Ayurveda; it is a workbench that **shows its evidence**. The name reflects *pramāṇa* (means of valid knowledge): like *āptopadeśa*, the authoritative classical word, every answer stands on the verse it shows.
 
 <!-- FIGURE:cards -->
 
@@ -140,7 +140,7 @@ The single rule miss (a request to stop a medicine) has since been fixed and is 
 
 | By | Milestone |
 | --- | --- |
-| 1 Dec 2026 (Phase 2) | Suśruta Saṃhitā ingestion · Anupāna and Ṛtu (seasonal) contraindication rules · Marathi questions · clinical-lead sign-off on every definition verse and safety rule · retrieval tuned on a locked benchmark · permanent hosted link |
+| 1 Dec 2026 (Phase 2) | Suśruta Saṃhitā ingestion · Anupāna and Ṛtu (seasonal) contraindication rules · Marathi questions · clinical-lead sign-off on every definition verse and safety rule · expert validation: 50 answers rated independently by our clinical lead and an external Ayurveda expert, with agreement reported · retrieval tuned on a locked benchmark · permanent hosted link |
 | 15–18 Dec 2026 (Finale) | Classical commentaries · semantic support check validated against clinical-lead labels · Saṃprāpti view linking nidāna → doṣa → dhātu → srotas · Dravya (herb) module · pilot with one BAMS batch |
 
 <!-- FIGURE:screenshot -->
