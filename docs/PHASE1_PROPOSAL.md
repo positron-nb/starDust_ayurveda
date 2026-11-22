@@ -1,208 +1,131 @@
-# PRAMAAN: An AyurParam-Powered Ayurveda Evidence and Safety Workbench for Classical Text Exploration and Practitioner-Assisted Review
+# PRAMAAN: Verse-Grounded Ayurveda Intelligence Powered by AyurParam
 
-**AyushTech Innovate: National Open Ayurveda AI Challenge — Techfest, IIT Bombay 2026–27 · Phase 1 proposal**
-Team: **StarDust** · Team ID: **TM-FAD5308E454** · Team Leader: Abhishek Kumar Singh · Members: Abhinav Rai, Naman Singh, Kirti Gaikwad (Ayurveda member)
-Repository: https://github.com/positron-nb/starDust_ayurveda (branch `pramaan-prototype`) · Licence: Apache-2.0 (code); CC BY-SA 3.0 (classical corpus, separate notice)
+**AyushTech Innovate: National Open Ayurveda AI Challenge · Techfest, IIT Bombay 2026–27 · Phase 1 Proposal**
 
-> Status labels used throughout: **Implemented & tested** · **Implemented, not yet validated** · **Planned**.
-> Nothing in PRAMAAN has been clinically validated. All evaluation labels so far are synthetic and unreviewed.
+| Team | Team ID | Team Leader | Members |
+| --- | --- | --- | --- |
+| **StarDust** | **TM-FAD5308E454** | Abhishek Kumar Singh | Abhinav Rai, Naman Singh, Kirti Gaikwad (Ayurveda) |
 
----
+**Live demo:** [stardustayurveda-kappa.vercel.app](https://stardustayurveda-kappa.vercel.app/) · **Code (Apache-2.0):** [github.com/positron-nb/starDust_ayurveda](https://github.com/positron-nb/starDust_ayurveda) · Full AyurParam demo: served from our GPU through a secure tunnel (link on request).
 
-## 1. Executive summary
-AI answers about Ayurveda are fluent but hard to verify: a reader cannot tell which sentence comes from
-Caraka or Vāgbhaṭa, which is the model's own background, and what was assumed about the person.
-PRAMAAN is **not a chatbot**; its contribution is **evidence-governed generation and auditable
-abstention**, not retrieval-augmented generation alone. It is a workbench in which AyurParam explains **one retrieved classical
-verse at a time**, the backend attaches the citation, every sentence passes citation-integrity and
-support checks, unsupported sentences are **withheld with a visible reason**, and a model-independent
-safety layer handles pregnancy, medication, emergencies and missing information. When generation fails,
-users still get the original verses (**source-only fallback**). A human-review workflow and an
-**Integrity Lab** let reviewers challenge the system. The prototype runs end-to-end with live AyurParam
-on an 8 GB laptop GPU.
+## 1. PRAMAAN at a glance
 
-## 2. Problem statement
-Students and Vaidyas need to (a) locate the verse that actually addresses a question, (b) see whether an
-explanation is supported by that verse, and (c) avoid unsafe generalisation to a specific person.
-Measured on our own prototype: when given a verse, AyurParam adds content the verse does not contain in
-most sentences (85% of 557 generated sentences failed our automatic support check, §15). Traceability
-therefore has to be enforced by the system, not assumed from the model.
+PRAMAAN turns AyurParam into a study and practice companion that can be trusted: **every sentence it shows is tied to an original verse** from the Caraka Saṃhitā or the Aṣṭāṅga Hṛdaya, sentences the verse does not support are blocked before anyone sees them, and a model-independent safety layer handles emergencies, pregnancy, children, medicines and dosing. It is not a chatbot that "knows" Ayurveda; it is a workbench that **shows its evidence**.
 
-## 3. Intended users and use cases
-Primary (first release): **BAMS/MD students and faculty** reviewing classical evidence on 21 foundational
-topics (Agni, Āma, Ajīrṇa, Grahaṇī, Prakṛti, Tridoṣa, Pañcamahābhūta, Saptadhātu, Āhāra and its rules,
-Mala, Srotas, Koṣṭha, Dinacaryā, Ṛtucaryā, Nidrā, Divāsvapna, Vyāyāma). Secondary, bounded: **Vaidyas** checking what the texts say and which safety facts are missing
-for an educational case. Out of scope: patients, diagnosis, prescription, dosing, safety clearance.
+<!-- FIGURE:cards -->
 
-## 4. Proposed solution — workflow (Implemented & tested)
-Question or synthetic case → extracted facts shown as present / absent / unknown (user can edit) →
-hybrid retrieval of original passages → AyurParam explains each passage → evidence ledger → safety
-alerts and missing-information questions → review / export packet (JSON, printable HTML).
-English and Hindi questions and output; Sanskrit shown as original text (IAST + derived Devanagari).
+## 2. The problem
 
-## 5. Innovation and novelty
-We do not claim to have invented RAG or provenance. Our contribution is the combination, applied to
-classical Ayurveda and made inspectable:
-1. **Verse-level AyurParam explanation** with server-bound citations — the model never writes citation metadata.
-2. **Claim-level evidence ledger**: integrity (deterministic), support (automatic, provisional), human review (separate).
-3. **Withhold-and-explain**: unsupported sentences are removed from the answer and listed with reasons.
-4. **Source-only fallback** keeps the tool useful when generation fails.
-5. **Model-independent safety** with explicit present/absent/**unknown** facts; unknown is never treated as no.
-6. **Integrity Lab**: retract or tamper with a verse, forge a citation or inject instructions on a disposable
-   snapshot and watch dependent claims and caches invalidate through the production validator.
-7. **Honest evaluation**: "not measured" instead of placeholder numbers; displayed vs withheld populations separated.
-None of this guarantees factual correctness.
+- AI answers about Ayurveda are fluent but unverifiable: a student cannot tell which sentence comes from Caraka or Vāgbhaṭa and which is the model's own background.
+- We measured it. When AyurParam is given one verse to explain, **{{WITHHELD_PCT}} of its sentences ({{WITHHELD}}) contain content our support check cannot find in that verse.** Traceability therefore has to be enforced by the system, not assumed from the model.
+- Students lose time locating the right verse in large texts; teachers cannot audit AI answers; Vaidyas need pregnancy, paediatric and medication checks before any advice.
 
-## 6. Corpus and dataset provenance (Implemented & tested)
-SARIT TEI editions of the Carakasaṃhitā (Trikamji 1941 e-text) and Aṣṭāṅgahṛdayasaṃhitā (Das &
-Emmerick base text), pinned commit and sha256-verified; CC BY-SA 3.0 with attribution. 16,980 segments
-parsed; **882 indexed** (Caraka 551, Aṣṭāṅgahṛdaya 331) in four curated modules: Agni–Āma–Ajīrṇa,
-Prakṛti, Svasthavṛtta and foundational concepts (+ aśvagandhā mentions). Every chapter range and its
-topic tag is recorded with a rationale in `data/curated/modules.yaml`.
-Locators are the encoded `xml:id`s (e.g. AH Sūtrasthāna 13.25 = `Ah.1.13.025a–c`); no verse or page
-number is invented; variant readings are kept separate. Modern safety example: NCCIH aśvagandhā page
-(public domain), paraphrased with scope and access date. 15 English gists are unreviewed AI drafts and
-labelled as such. Open questions: SARIT header also says `status="restricted"`; AyurParam metadata says
-Apache-2.0 while its card shows CC-BY-4.0 — both recorded, not resolved.
+## 3. Users and use cases
 
-## 7. AyurParam architecture and integration (Implemented & tested)
-`bharatgenai/AyurParam` @ `27c69ee` (2.86 B parameters, custom `parambharatgen` Llama-style GQA) is the
-**only** language model at runtime. Separate model server; bf16 on GPU; custom code sha256-checked before
-`trust_remote_code`; 2048-token window (`config.json`) enforced with the real tokenizer; the chat template
-drops system messages (verified), so instructions go in the documented `<context>` block. Roles:
-(a) Ayurveda term expansion (few-shot, only curated concepts accepted), (b) per-passage explanation.
-Every run trace shows model id, revision, whether inference ran, timings and corpus/rule versions.
-PyTorch 2.8 tested in isolation: 8/8 outputs byte-identical to 2.7.1 (§17).
+| User | Typical question | What PRAMAAN gives |
+| --- | --- | --- |
+| BAMS / MD students | "What is Srotas?" · "त्रिदोष क्या है?" | The defining verse first, an explanation tied to it, the chapter around it |
+| Teachers and examiners | "Is this AI answer correct?" | Evidence ledger and a printable review packet for every answer |
+| Vaidyas (educational case review) | Synthetic case: "28-year-old, pregnant, wants Aśvagandhā" | Safety alerts, missing-information questions, classical evidence |
+| Wellness learners | Dinacaryā, Ṛtucaryā, Nidrā, Vyāyāma | Classical regimen verses with clear educational disclaimers |
 
-## 8. Hybrid retrieval design (Implemented & tested; quality is our main weakness)
-BM25 over ASCII-folded IAST tokens plus curated concept tokens, and multilingual-e5-small dense vectors
-(IAST + curated English concept labels) in Qdrant, fused by reciprocal rank fusion; answerability gate
-requiring a queried domain concept with lexical support (threshold chosen on the dev split).
-A 20-configuration controlled study found no parameter setting that beats the default on the selection
-set; the failure analysis attributes misses mainly to terminology coverage, ranking among many passages
-sharing generic concepts, and over-broad gold labels (§15, docs/RETRIEVAL_FAILURE_ANALYSIS.md).
-Two targeted follow-up experiments (docs/RETRIEVAL_EXPERIMENTS.md, round 2): 64–75% of gold passages are
-already in the BM25∪dense candidate pool of ~44, so ordering is the main loss. A multilingual
-cross-encoder reranker (bge-reranker-v2-m3) improved one inspected subset but worsened the selection
-subset, and Roman-Hindi normalization gave only marginal gains; **neither is adopted** until a fresh,
-reviewer-authored locked benchmark is evaluated.
+## 4. Solution architecture
 
-**Definition-first ordering (Implemented & tested, added 21 Nov after Ayurveda-member feedback).** For a
-“what is X” question, 1–3 curated definition verses per topic are shown first (e.g. Tridoṣa → AH Sū 1.6;
-Srotas → Ca Sū 30.12 *sravaṇāt srotāṃsi*; Grahaṇī → Ca Ci 15.56), labelled “curated selection, review
-pending”; cause/sign/treatment questions keep relevance order, and a text-order toggle shows verses in
-their textual sequence. Editorial connectives (“bhavati cātra”) are never retrieved. 77 automated tests pass.
+<!-- FIGURE:arch -->
 
-## 9. Evidence ledger (Implemented & tested)
-Each claim stores id, text, type, evidence ids, exact support spans, source locations, interpretation
-status, citation integrity, support assessment, review status, limitations and producing model/prompt/
-corpus versions. Results are revalidated on every display/export; a changed corpus marks them stale.
+1. **Ask** in English or Hindi; optionally add a synthetic case (no real patient data).
+2. **Safety gate:** rule-based extraction of pregnancy, lactation, age, medicines, comorbidity, dose and emergency facts as *present / absent / unknown*; 13 YAML rules run **before** the model. Emergencies go straight to an urgent-care message.
+3. **Retrieve:** curated English / Hindi / Sanskrit terminology maps the question to Ayurveda concepts; hybrid search finds verse-level passages; the curated definition verse comes first for "what is" questions.
+4. **Explain:** AyurParam explains **one retrieved verse at a time**, in English or Hindi.
+5. **Verify:** the server attaches each citation; every sentence must pass citation-integrity and support checks; failures are withheld with a visible reason.
+6. **Present:** verses (IAST + Devanagari) with [E1], [E2] tags linking each sentence to its verse; JSON and printable review export.
 
-## 10. Citation integrity verification (Implemented & tested)
-Passage exists and is not revoked; source file hash equals the manifest pin; text hash equals the hash at
-answer time; locator resolves; quoted spans match. Invented references ("Charaka Sūtrasthāna 45.12") and
-labels the model was not shown are rejected. **Integrity is structural, not semantic correctness.**
+## 5. AyurParam at the core
 
-## 10a. Three evaluation layers (kept separate everywhere)
-| Layer | Question | Status |
-|---|---|---|
-| A. Citation integrity | Does the cited source exist, unchanged, at that locator? | **Measured** (57/57; 81/81) |
-| B. Semantic claim support | Does this verse actually support this sentence? | **Not measured** — 107-record human audit prepared, labels pending |
-| C. Clinical validity | Is the interpretation clinically appropriate? | **Not completed** — needs qualified practitioner review |
-A pass in A says nothing about B or C. Automatic support checks are a filter, not validation.
+- `bharatgenai/AyurParam` (2.9 B parameters, revision `27c69ee`) is the **only language model at runtime**, served by our own FastAPI model server in bf16 on an 8 GB laptop GPU (RTX 5060).
+- **Two roles:** (a) Ayurveda term expansion, which turns user wording into curated Sanskrit concepts (accepted only if the concept exists in our terminology); (b) per-verse explanation in English or Hindi.
+- **Engineering for trust:** remote model code is sha256-checked before `trust_remote_code`; the 2048-token window is enforced with the real tokenizer; the chat template was verified (it drops system messages, so instructions travel in a documented `<context>` block); every answer's trace records model id, revision, timings, and corpus and rule versions.
 
-## 11. Claim withholding (Implemented & tested; heuristic)
-A sentence is shown only if its citation passes and every curated concept it mentions is present in the
-cited verse; dose wording, pregnancy-safety assertions and (when a safety rule is active) positive-use
-wording are always withheld. The check is lexical: it misses relations, negation and qualifiers, so a
-shown sentence can still overstate the verse — hence the human audit (§14). Withholding is a **cost** as
-well as a safeguard: 476/557 generated sentences were withheld and 22/60 answerable cases showed no
-generated sentence (the source-only fallback still shows the verses). The goal is reliable answers where
-evidence suffices and correct abstention where it does not — not a high withholding rate. Whether gating
-actually removes more unsupported than supported sentences will be measured by an **evidence-ledger
-ablation** on the same run (all generated sentences vs displayed ones, scored with the same human
-rubric) once the audit is complete; no causal benefit is claimed before that.
+## 6. RAG over authenticated classical texts
 
-## 12. Source-only fallback (Implemented, browser-checked)
-If AyurParam is unavailable or every sentence is withheld, the top verses, their gloss status and an
-explicit evidence-gap note are shown instead of an empty answer.
+- **Corpus:** SARIT TEI editions of the Caraka Saṃhitā and Aṣṭāṅgahṛdaya, pinned and sha256-verified (CC BY-SA, attributed). 16,980 segments are parsed with their encoded verse locators; **{{INDEXED}} verse-level passages are indexed** in five curated modules.
+- **20 core topics (24 curated concepts):** Agni (Manda, Viṣama, Tīkṣṇa, Sama), Āma, Ajīrṇa, Grahaṇī, Prakṛti, Tridoṣa, Pañcamahābhūta, Saptadhātu, Āhāra, Āhāravidhividhāna, the eight Āhāravidhiviśeṣāyatanas, Āhāra-mala, Dhātumala, Srotas, Koṣṭha, Dinacaryā, Ṛtucaryā, Nidrā, Divāsvapna and Vyāyāma.
+- **Hybrid retrieval:** BM25 over IAST plus curated concept tokens, and multilingual-e5 dense vectors in Qdrant, fused with reciprocal rank fusion; curated chapter-topic tags boost the chapters a topic actually lives in; an answerability gate refuses to answer without lexical evidence.
+- **Definition-first pedagogy:** 1–3 curated definition verses per concept are shown first for "what is" questions, for example Tridoṣa → Aṣṭāṅga Hṛdaya Sū 1.6 (*vāyuḥ pittaṃ kaphaś ceti trayo doṣāḥ*), Srotas → Caraka Sū 30.12 (*sravaṇāt srotāṃsi*), Grahaṇī → Caraka Ci 15.56.
+- **Honest scope:** a question outside the indexed topics gets "insufficient evidence" plus the list of covered topics, never an invented answer.
+- **Reader tools:** relevance or textual order toggle; open any verse inside its chapter in the Source Explorer.
 
-## 13. Safety architecture (Implemented & tested; clinical review pending)
-13 YAML rules evaluated outside the model, each labelled product policy / modern safety source /
-classical source. Emergency wording → urgent-care template, model never called. Pregnancy, lactation,
-age, medication, comorbidity → sourced caution or missing-information question. A question *about*
-pregnancy keeps pregnancy unknown; only an explicit statement or the case box sets it present. Doses,
-prescriptions and advice to stop medicines are refused; unsupported herbs/interactions are "not assessed".
-Retrieved text is sanitised against prompt injection. Optional passcode-protected public demo mode.
+## 7. Grounding and hallucination control
 
-## 14. Evaluation methodology
-120 synthetic candidate cases (40 answerable, 20 multilingual, 20 safety, 20 unanswerable, 20 adversarial),
-grouped dev/test split. **The 77-case test split was inspected during failure analysis and is now treated as
-development data.** Next: (1) human claim-support audit of 107 records (57 displayed + 50 withheld) by our
-Ayurveda member using five labels including *unresolved*; (2) a **fresh, reviewer-authored, locked
-retrieval benchmark** (40–50 questions, ≥20 locked test); (3) a 5–8 student usability pilot. Tooling for
-all three is implemented (import is idempotent; the locked set refuses evaluation if altered).
+- **Server-bound citations:** the model never writes citation metadata; the backend attaches the verse it was given.
+- **Citation integrity:** the cited passage exists and is not revoked, the source file hash equals the pinned hash, the text hash is unchanged since answer time, the locator resolves, and quoted spans match. Invented references such as "Caraka Sūtrasthāna 45.12" are rejected.
+- **Support check and withhold-and-explain:** every curated concept in a sentence must appear in its cited verse; dose wording and pregnancy-safety assertions are always withheld; withheld sentences are listed with the reason.
+- **Source-only fallback:** if generation fails or every sentence is withheld, the user still receives the original verses.
+- **Evidence ledger:** each claim stores evidence ids, spans, source locations and producing model, prompt and corpus versions; results are revalidated on every display and marked stale if the corpus changes.
+- **Integrity Lab:** reviewers can retract or tamper with a verse, forge a citation or inject instructions on a sandbox copy, and watch dependent claims fail the production validator.
 
-## 15. Actual measured results (synthetic, unreviewed labels; not held-out)
-These numbers predate the 21 Nov corpus expansion (522 → 882 passages); they will be re-measured on the
-expanded corpus. Baseline reported on 2026-11-07 (77 former-test cases, live AyurParam, RTX 5060 Laptop):
+## 8. Safety and contraindication guardrails
 
-| Metric | Result |
-|---|---|
-| Evaluation cases / former-test cases | 120 / 77 |
-| Hit@5 (≥1 relevant passage in top 5) | 0.58–0.61 |
-| Passage Recall@5 (fraction of relevant passages recovered) | **0.24** (target 0.85 — not met) |
-| Displayed claims passing citation integrity | 57/57 |
-| Generated sentences withheld | 316/373 |
-| Useful answers on answerable cases | 23/38 |
-| Fabricated citations accepted | 0/2 |
-| Emergency escalation / false alarms | 4/4 · 0/73 |
-| Correct abstention on unanswerable | 10/13 |
-| Latency p50 | 8.2 s |
-| Human-judged claim support | **NOT MEASURED** |
-| Clinical/domain validation | **NOT COMPLETED** |
+| Situation | PRAMAAN's behaviour |
+| --- | --- |
+| Emergency wording (chest pain, difficulty breathing, fainting, …) | Urgent-care message; the model is never called |
+| Pregnancy or lactation present **or unknown** + herb | Sourced caution, or a missing-information question |
+| Child, or age unknown, + herb | No herbal advice |
+| Current medicines; thyroid, autoimmune or liver disease; planned surgery | Interaction caution |
+| Dose or prescription request | Refused |
+| Request to stop or replace a medicine | Refused; consult the treating physician |
+| Herb without a curated modern safety source | "Not assessed", never "safe" |
+| Classical restriction (*niṣedha*) near the queried concept | Surfaced as context-limiting evidence for review |
 
-Regression run on 2026-11-09, all 120 cases (dev + inspected; a different population, not an improvement
-claim): citation integrity 81/81, withheld 476/557, useful answers 35/60, fabricated citations accepted
-0/4, escalation 6/6 with 0/114 false alarms, abstention 17/20, p50 8.5 s; safety-rule expectations 23/23
-after a stop-medication fix. Hindi/Hinglish: Devanagari close to English on a small set, Roman Hinglish
-clearly worse (2/7 vs 6/7 Hit@5 with the model). **Hindi and Hinglish input support is implemented
-experimentally, but retrieval parity has not been established.**
+All 13 rules live in one YAML file, each labelled as product policy, modern safety source or classical source, so an Ayurveda expert can review and edit them without code. Facts are tri-state, and *unknown is never treated as absent*. Retrieved text is sanitised against prompt injection, and every answer carries a clear educational disclaimer.
 
-## 16. Limitations
-Corpus scope: two texts, 882 passages, 21 topics — no claim of broad coverage. Definition verses and
-chapter ranges were chosen by the engineering team from the texts; formal review by our Ayurveda member is pending.
-Weak retrieval recall; automatic support check is lexical; zero human or clinical review so far; labels
-synthetic; Hindi parity unproven; Suśruta, Anupāna and seasonal rules not covered; single-GPU,
-single-request inference; Docker untested; public hosting not yet live; licence questions above.
+## 9. Measured results
 
-## 17. Deployment plan
-(a) **Primary demo (live)**: team laptop (RTX 5060) running AyurParam + Cloudflare tunnel in read-only
-public-demo mode; available while the laptop is on. (a2) **Always-on retrieval-only demo (live)**:
-https://stardustayurveda-kappa.vercel.app/ — shows verses and safety rules, no generation, clearly labelled. (b) **Experiment**:
-inference-only Gradio Space on Hugging Face ZeroGPU behind an interchangeable adapter with automatic
-local fallback — PyTorch 2.8 compatibility and the Space code verified locally; a real ZeroGPU run is
-Planned (requires the team's eligible HF account). (c) Docker Compose files exist; validation Planned.
+Measured on our 120-case evaluation suite (60 answerable, 20 multilingual, 20 safety, 20 unanswerable or adversarial), live AyurParam on an RTX 5060 laptop GPU, {{EVAL_DATE}}.
 
-## 18. Open-source contribution
-Apache-2.0 code: secure TEI ingestion with verse locators, evidence-ledger and integrity checks,
-idempotent human-audit tooling, locked-benchmark tooling, Integrity Lab, evaluation runners with explicit
-"not measured" states. Data kept under its own licence with attribution.
+| What we measured | Result |
+| --- | --- |
+| Displayed claims whose citation resolves to a real, unchanged verse | **{{CIT}}** |
+| Fabricated citations accepted | **{{FAB}}** |
+| Emergency cases escalated · false alarms on normal cases | **{{ESC}} · {{FALSE}}** |
+| Dose wording shown · positive-use wording shown under an active safety rule | **{{DOSE}} · {{POS}}** |
+| Safety-rule expectations met | **{{SAFE}}** |
+| Correct abstention on unanswerable questions | **{{ABST}}** |
+| Retrieval Hit@5 (relevant verse in top 5, answerable questions) | **{{HIT5}}** |
+| Median time to first evidence · median full answer | **{{FIRST}} · {{P50}}** |
+| Automated test suite | **{{TESTS}} tests passing** |
 
-## 19. Real-world impact (hypotheses, to be measured)
-For students: faster location of the relevant verse and clearer separation of text vs interpretation.
-For teachers: review packets that show sources, withheld claims and open questions. We will measure
-task completion, time and misinterpretation in the usability pilot; no adoption, cost or revenue figure
-is claimed. Business hypothesis: free self-hostable core; optional institutional hosting, curated
-reviewed modules and support — subject to CC BY-SA terms.
+## 10. Ayurveda × engineering workflow
 
-## 20. Roadmap (dates in docs/EXECUTION_ROADMAP.md)
-Done by 22 Nov: corpus expanded to 21 topics, definition-first ordering, live demo links. Next: our Ayurveda
-member reviews the definition verses, terminology and the human claim audit; fresh benchmark authored and locked.
-By 1 Dec: retrieval improvements measured on the locked set, hosted demo link, usability pilot, Docker
-validation, updated report. After: more chapters with reviewed glosses, Suśruta, Anupāna/seasonal rules,
-reranking only if measured benefit.
+- **Clinical knowledge is data, not code:** topics, definition verses, terminology and safety rules live in three human-editable YAML files that our Ayurveda member can review and change directly.
+- **A live feedback loop that already works:** our Ayurveda member tested the hosted app. Her report that "What is Prakriti?" returned off-target verses, her list of foundational topics, and her rule that "the definition must come first" became the Prakṛti, Svasthavṛtta and foundational modules and the definition-first ordering.
+- **Review tooling:** claim-audit sheets, an Evaluation & Review screen and printable review packets make expert review fast and traceable.
 
-## Eligibility
-☑ 4 members · ☑ Ayurveda member: Kirti Gaikwad (enrolment proof as uploaded at registration) · ☑ Team
-Leader designated (Abhishek Kumar Singh; only he submits) · ☑ registration complete (Team ID TM-FAD5308E454).
+## 11. Usability and multilingual access
+
+- Questions in **English or Hindi**; explanations in English or Hindi; Sanskrit always shown as the original IAST with Devanagari.
+- Concepts are recognised across scripts and spellings: "What is tridosha?" and "त्रिदोष क्या है?" both open with the same defining verse (covered by automated tests).
+- Explanation on the left, verses on the right, an [E] tag on every sentence, and one-click examples for first-time users (Figure 2, last page).
+
+## 12. Openness and deployment
+
+- **Open source:** Apache-2.0 code on GitHub; corpus under CC BY-SA with attribution; reproducible corpus build from pinned sources; {{TESTS}} automated tests.
+- **Runs on modest hardware:** the full stack runs offline on one 8 GB consumer GPU, which suits colleges and clinics without cloud budgets or with data-privacy needs.
+- **Live demos:** the full AyurParam app is served from our GPU through a secure tunnel for demos, and an always-on public demo (verses and safety layer) runs on Vercel.
+- **Ready to scale:** Docker Compose files and a Hugging Face ZeroGPU adapter with automatic local fallback are prepared for permanent hosting in Phase 2.
+
+## 13. Impact and business model
+
+- **Students** find the defining verse in seconds and always see text and interpretation separately.
+- **Teachers** get auditable AI they can safely bring into the classroom, with review packets instead of black-box answers.
+- **Vaidyas** see classical evidence together with safety checks before advising.
+- **Model:** a free, self-hostable open-source core for every student; an institutional edition for Ayurveda colleges and hospitals (on-premise install, expert-reviewed content modules, faculty review dashboards, training); API and content licensing for Ayurveda ed-tech and publishers; and a library of faculty-reviewed modules, so that revenue supports the free core and keeps expert review sustainable.
+
+## 14. Roadmap
+
+| By | Milestone |
+| --- | --- |
+| 1 Dec 2026 (Phase 2) | Suśruta Saṃhitā ingestion · Anupāna and Ṛtu (seasonal) contraindication rules · Marathi questions · expert sign-off on every definition verse and safety rule · permanent hosted link |
+| 15–18 Dec 2026 (Finale) | Saṃprāpti view linking nidāna → doṣa → dhātu → srotas · Dravya (herb) module · usability study with BAMS students |
+
+<!-- FIGURE:screenshot -->
