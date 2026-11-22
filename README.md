@@ -14,6 +14,8 @@ while keeping five things visibly separate:
 
 It is **not** a diagnosis, prescribing, dosing or safety-clearance tool.
 
+**Live demo (always on, verses + safety layer):** https://stardustayurveda-kappa.vercel.app/ · Team **StarDust** (TM-FAD5308E454). The full AyurParam demo is served from the team GPU through a tunnel on request.
+
 ## What is real in this repository
 - **Live AyurParam** (`bharatgenai/AyurParam` @ `27c69ee`, 2.9B) running on a local GPU through a
   separate model server; used for query/concept expansion and per-passage explanations. Verified by
@@ -60,7 +62,8 @@ Third-party components: `THIRD_PARTY_NOTICES.md`. No institutional affiliation o
 | Topic | Document |
 |---|---|
 | Current architecture and feature status (from code) | [docs/REPOSITORY_AUDIT.md](docs/REPOSITORY_AUDIT.md) |
-| Phase 1 proposal | [docs/PHASE1_PROPOSAL.md](docs/PHASE1_PROPOSAL.md) |
+| Phase 1 proposal | [docs/PHASE1_PROPOSAL.md](docs/PHASE1_PROPOSAL.md) · PDF: [docs/submission/PHASE1_PROPOSAL.pdf](docs/submission/PHASE1_PROPOSAL.pdf) (rebuild: `python scripts/build_proposal.py`) |
+| User guide for testers (Hinglish) | [docs/PRAMAAN_Project_Guide.pdf](docs/PRAMAAN_Project_Guide.pdf) |
 | Technical & impact report (architecture, model/data cards, results) | [docs/TECHNICAL_IMPACT_REPORT.md](docs/TECHNICAL_IMPACT_REPORT.md) |
 | Latest evaluation & regression | [docs/evaluation_report.md](docs/evaluation_report.md) |
 | Retrieval failures / experiments | [docs/RETRIEVAL_FAILURE_ANALYSIS.md](docs/RETRIEVAL_FAILURE_ANALYSIS.md), [docs/RETRIEVAL_EXPERIMENTS.md](docs/RETRIEVAL_EXPERIMENTS.md) |
