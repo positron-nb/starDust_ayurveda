@@ -4,13 +4,13 @@
 
 | Team | Team ID | Team Leader | Members |
 | --- | --- | --- | --- |
-| **StarDust** | **TM-FAD5308E454** | Abhishek Kumar Singh | Abhinav Rai, Naman Singh, Kirti Gaikwad (Ayurveda) |
+| **StarDust** | **TM-FAD5308E454** | Abhishek Kumar Singh | Abhinav Rai, Naman Singh, Kirti Gaikwad (Clinical Lead · PhD Scholar, Ayurveda) |
 
-**Live demo:** [stardustayurveda-kappa.vercel.app](https://stardustayurveda-kappa.vercel.app/) · **Code (Apache-2.0):** [github.com/positron-nb/starDust_ayurveda](https://github.com/positron-nb/starDust_ayurveda) · Full AyurParam demo: served from our GPU through a secure tunnel (link on request).
+**Live demo:** [stardustayurveda-kappa.vercel.app](https://stardustayurveda-kappa.vercel.app/) · **Code:** Apache-2.0, [github.com/positron-nb/starDust_ayurveda](https://github.com/positron-nb/starDust_ayurveda) · **Corpus:** third-party SARIT data under its original CC BY-SA 3.0 licence · Full AyurParam demo: served from our GPU through a secure tunnel (link on request).
 
 ## 1. PRAMAAN at a glance
 
-PRAMAAN turns AyurParam into a study and practice companion that can be trusted: **every sentence it shows is tied to an original verse** from the Caraka Saṃhitā or the Aṣṭāṅga Hṛdaya, sentences the verse does not support are blocked before anyone sees them, and a model-independent safety layer handles emergencies, pregnancy, children, medicines and dosing. It is not a chatbot that "knows" Ayurveda; it is a workbench that **shows its evidence**.
+PRAMAAN turns AyurParam into a study and practice companion that can be trusted: **every sentence it shows is tied to an original verse** from the Caraka (Charaka) Saṃhitā or the Aṣṭāṅga Hṛdaya, sentences the verse does not support are blocked before anyone sees them, and a model-independent safety layer handles emergencies, pregnancy, children, medicines and dosing. It is not a chatbot that "knows" Ayurveda; it is a workbench that **shows its evidence**.
 
 <!-- FIGURE:cards -->
 
@@ -22,9 +22,11 @@ PRAMAAN turns AyurParam into a study and practice companion that can be trusted:
 
 ## 3. Users and use cases
 
+The primary users are **BAMS / MD students**; teachers, Vaidyas and wellness learners are secondary users.
+
 | User | Typical question | What PRAMAAN gives |
 | --- | --- | --- |
-| BAMS / MD students | "What is Srotas?" · "त्रिदोष क्या है?" | The defining verse first, an explanation tied to it, the chapter around it |
+| **BAMS / MD students (primary)** | "What is Srotas?" · "त्रिदोष क्या है?" | The defining verse first, an explanation tied to it, the chapter around it |
 | Teachers and examiners | "Is this AI answer correct?" | Evidence ledger and a printable review packet for every answer |
 | Vaidyas (educational case review) | Synthetic case: "28-year-old, pregnant, wants Aśvagandhā" | Safety alerts, missing-information questions, classical evidence |
 | Wellness learners | Dinacaryā, Ṛtucaryā, Nidrā, Vyāyāma | Classical regimen verses with clear educational disclaimers |
@@ -48,7 +50,7 @@ PRAMAAN turns AyurParam into a study and practice companion that can be trusted:
 
 ## 6. RAG over authenticated classical texts
 
-- **Corpus:** SARIT TEI editions of the Caraka Saṃhitā and Aṣṭāṅgahṛdaya, pinned and sha256-verified (CC BY-SA, attributed). 16,980 segments are parsed with their encoded verse locators; **{{INDEXED}} verse-level passages are indexed** in five curated modules.
+- **Corpus:** SARIT TEI editions of the Caraka Saṃhitā and Aṣṭāṅga Hṛdaya, pinned and sha256-verified (third-party data under its original CC BY-SA 3.0 licence, attributed). 16,980 segments are parsed with their encoded verse locators; **{{INDEXED}} verse-level passages are indexed** in five curated modules: Agni–Āma–Ajīrṇa, Prakṛti, Svasthavṛtta, foundational concepts (Mūla-siddhānta) and classical herb mentions.
 - **20 core topics (24 curated concepts):** Agni (Manda, Viṣama, Tīkṣṇa, Sama), Āma, Ajīrṇa, Grahaṇī, Prakṛti, Tridoṣa, Pañcamahābhūta, Saptadhātu, Āhāra, Āhāravidhividhāna, the eight Āhāravidhiviśeṣāyatanas, Āhāra-mala, Dhātumala, Srotas, Koṣṭha, Dinacaryā, Ṛtucaryā, Nidrā, Divāsvapna and Vyāyāma.
 - **Hybrid retrieval:** BM25 over IAST plus curated concept tokens, and multilingual-e5 dense vectors in Qdrant, fused with reciprocal rank fusion; curated chapter-topic tags boost the chapters a topic actually lives in; an answerability gate refuses to answer without lexical evidence.
 - **Definition-first pedagogy:** 1–3 curated definition verses per concept are shown first for "what is" questions, for example Tridoṣa → Aṣṭāṅga Hṛdaya Sū 1.6 (*vāyuḥ pittaṃ kaphaś ceti trayo doṣāḥ*), Srotas → Caraka Sū 30.12 (*sravaṇāt srotāṃsi*), Grahaṇī → Caraka Ci 15.56.
@@ -70,35 +72,38 @@ PRAMAAN turns AyurParam into a study and practice companion that can be trusted:
 | --- | --- |
 | Emergency wording (chest pain, difficulty breathing, fainting, …) | Urgent-care message; the model is never called |
 | Pregnancy or lactation present **or unknown** + herb | Sourced caution, or a missing-information question |
-| Child, or age unknown, + herb | No herbal advice |
+| Child + herb | No herb-use interpretation; paediatric review required |
+| Age unknown + herb | Asks the age first; herb-use interpretation waits for the answer |
 | Current medicines; thyroid, autoimmune or liver disease; planned surgery | Interaction caution |
 | Dose or prescription request | Refused |
 | Request to stop or replace a medicine | Refused; consult the treating physician |
 | Herb without a curated modern safety source | "Not assessed", never "safe" |
 | Classical restriction (*niṣedha*) near the queried concept | Surfaced as context-limiting evidence for review |
 
-All 13 rules live in one YAML file, each labelled as product policy, modern safety source or classical source, so an Ayurveda expert can review and edit them without code. Facts are tri-state, and *unknown is never treated as absent*. Retrieved text is sanitised against prompt injection, and every answer carries a clear educational disclaimer.
+Herb rules fire only when a herb is proposed, so ordinary study questions are never blocked. All 13 rules live in one YAML file, each labelled as product policy, modern safety source or classical source, so an Ayurveda expert can review and edit them without code. Facts are tri-state, and *unknown is never treated as absent*. Retrieved text is sanitised against prompt injection, and every answer carries a clear educational disclaimer.
 
 ## 9. Measured results
 
-Measured on our 120-case evaluation suite (60 answerable, 20 multilingual, 20 safety, 20 unanswerable or adversarial), live AyurParam on an RTX 5060 laptop GPU, {{EVAL_DATE}}.
+Measured on our 120-case evaluation suite (40 answerable, 20 multilingual, 20 safety, 20 unanswerable, 20 adversarial), live AyurParam on an RTX 5060 laptop GPU, {{EVAL_DATE}}.
 
 | What we measured | Result |
 | --- | --- |
 | Displayed claims whose citation resolves to a real, unchanged verse | **{{CIT}}** |
 | Fabricated citations accepted | **{{FAB}}** |
-| Emergency cases escalated · false alarms on normal cases | **{{ESC}} · {{FALSE}}** |
+| Emergency cases escalated · false alarms on non-emergency cases | **{{ESC}} · {{FALSE}}** |
 | Dose wording shown · positive-use wording shown under an active safety rule | **{{DOSE}} · {{POS}}** |
-| Safety-rule expectations met | **{{SAFE}}** |
+| Safety-rule expectations met (23 cases: 20 safety + 3 adversarial) | **{{SAFE}}** |
 | Correct abstention on unanswerable questions | **{{ABST}}** |
-| Retrieval Hit@5 (relevant verse in top 5, answerable questions) | **{{HIT5}}** |
+| Retrieval Hit@5 (relevant verse in top 5; 60 answerable questions incl. 20 multilingual) | **{{HIT5}}** |
 | Median time to first evidence · median full answer | **{{FIRST}} · {{P50}}** |
 | Automated test suite | **{{TESTS}} tests passing** |
 
+The single rule miss (a request to stop a medicine) has since been fixed and is covered by automated tests.
+
 ## 10. Ayurveda × engineering workflow
 
-- **Clinical knowledge is data, not code:** topics, definition verses, terminology and safety rules live in three human-editable YAML files that our Ayurveda member can review and change directly.
-- **A live feedback loop that already works:** our Ayurveda member tested the hosted app. Her report that "What is Prakriti?" returned off-target verses, her list of foundational topics, and her rule that "the definition must come first" became the Prakṛti, Svasthavṛtta and foundational modules and the definition-first ordering.
+- **Clinical knowledge is data, not code:** topics, definition verses, terminology and safety rules live in three human-editable YAML files that our clinical lead can review and change directly.
+- **A live feedback loop that already works:** our clinical lead tested the hosted app. Her report that "What is Prakriti?" returned off-target verses, her list of foundational topics, and her rule that "the definition must come first" became the Prakṛti, Svasthavṛtta and foundational modules and the definition-first ordering.
 - **Review tooling:** claim-audit sheets, an Evaluation & Review screen and printable review packets make expert review fast and traceable.
 
 ## 11. Usability and multilingual access
@@ -109,7 +114,7 @@ Measured on our 120-case evaluation suite (60 answerable, 20 multilingual, 20 sa
 
 ## 12. Openness and deployment
 
-- **Open source:** Apache-2.0 code on GitHub; corpus under CC BY-SA with attribution; reproducible corpus build from pinned sources; {{TESTS}} automated tests.
+- **Open source:** Apache-2.0 code on GitHub; the classical corpus is third-party SARIT data under its original CC BY-SA 3.0 licence, with attribution; reproducible corpus build from pinned sources; {{TESTS}} automated tests.
 - **Runs on modest hardware:** the full stack runs offline on one 8 GB consumer GPU, which suits colleges and clinics without cloud budgets or with data-privacy needs.
 - **Live demos:** the full AyurParam app is served from our GPU through a secure tunnel for demos, and an always-on public demo (verses and safety layer) runs on Vercel.
 - **Ready to scale:** Docker Compose files and a Hugging Face ZeroGPU adapter with automatic local fallback are prepared for permanent hosting in Phase 2.
@@ -119,13 +124,23 @@ Measured on our 120-case evaluation suite (60 answerable, 20 multilingual, 20 sa
 - **Students** find the defining verse in seconds and always see text and interpretation separately.
 - **Teachers** get auditable AI they can safely bring into the classroom, with review packets instead of black-box answers.
 - **Vaidyas** see classical evidence together with safety checks before advising.
-- **Model:** a free, self-hostable open-source core for every student; an institutional edition for Ayurveda colleges and hospitals (on-premise install, expert-reviewed content modules, faculty review dashboards, training); API and content licensing for Ayurveda ed-tech and publishers; and a library of faculty-reviewed modules, so that revenue supports the free core and keeps expert review sustainable.
+
+**Model: free core, paid trust.** The open-source core stays free for every student and Vaidya. Revenue pays for expert review, the costly part of trustworthy Ayurveda AI:
+
+- **College edition (annual licence):** runs on-premise on one 8 GB GPU, with faculty dashboards and modules mapped to the NCISM BAMS syllabus. NCISM permitted 31 new Ayurveda colleges with 2,620 BAMS seats for 2025–26 alone ([NCISM LOP list, 19 Nov 2025](https://ncismindia.org/assets/pdf/List%20of%20Colleges%20Granted%20LOP%20to%20establish%20new%20Ayurveda%20Colleges%20for%20the%20A.Y.%202025-26%20as%20on%2019.11.2025.pdf)).
+- **Clinic edition:** offline evidence and safety checks for Vaidyas; patient data stays on-premise, which eases obligations under India's DPDP Act, 2023.
+- **Verified-content API** for Ayurveda ed-tech and publishers.
+- **Faculty-reviewed modules:** experts are paid per verified module, and each module returns to the free core.
+
+**Go-to-market:** validation through our clinical lead's academic network, a pilot with one BAMS batch, then colleges nationwide.
 
 ## 14. Roadmap
 
+**Where we stand today:** the support check is lexical; Suśruta and the classical commentaries are not yet indexed; retrieval Hit@5 is {{HIT5_V}}. The milestones below close these gaps.
+
 | By | Milestone |
 | --- | --- |
-| 1 Dec 2026 (Phase 2) | Suśruta Saṃhitā ingestion · Anupāna and Ṛtu (seasonal) contraindication rules · Marathi questions · expert sign-off on every definition verse and safety rule · permanent hosted link |
-| 15–18 Dec 2026 (Finale) | Saṃprāpti view linking nidāna → doṣa → dhātu → srotas · Dravya (herb) module · usability study with BAMS students |
+| 1 Dec 2026 (Phase 2) | Suśruta Saṃhitā ingestion · Anupāna and Ṛtu (seasonal) contraindication rules · Marathi questions · clinical-lead sign-off on every definition verse and safety rule · retrieval tuned on a locked benchmark · permanent hosted link |
+| 15–18 Dec 2026 (Finale) | Classical commentaries · semantic support check validated against clinical-lead labels · Saṃprāpti view linking nidāna → doṣa → dhātu → srotas · Dravya (herb) module · pilot with one BAMS batch |
 
 <!-- FIGURE:screenshot -->

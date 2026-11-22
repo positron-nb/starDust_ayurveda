@@ -142,8 +142,8 @@ def cards(n: dict[str, str]) -> str:
     data = [
         (n["CIT_PCT"], "of displayed claims cite a real, unchanged verse", n["CIT"].split(" ")[0]),
         (n["FAB_N"], "fabricated citations accepted", f"{n['FAB']} attempts"),
-        (n["ESC"], "emergencies escalated, model never called", f"{n['FALSE_N']} false alarms in {n['FALSE_D']} normal cases"),
-        (n["INDEXED"], "verse-level passages from Caraka and Aṣṭāṅgahṛdaya", "20 core topics · 24 curated concepts"),
+        (n["ESC"], "emergencies escalated, model never called", f"{n['FALSE_N']} false alarms in {n['FALSE_D']} non-emergency cases"),
+        (n["INDEXED"], "verse-level passages from Caraka and Aṣṭāṅga Hṛdaya", "20 core topics · 24 curated concepts"),
         (n["HIT5_V"], "retrieval Hit@5 on answerable questions", n["HIT5"].split(" ")[0] + " questions"),
         (n["P50"], "median full answer on an 8 GB laptop GPU", f"first evidence in {n['FIRST']}"),
     ]
@@ -185,7 +185,7 @@ def arch(n: dict[str, str]) -> str:
     right_r = x0 + 5 * (w + gap) + w
     bands = [
         (x0, left_r, "#2f7d4f", "#f4faf6", "Knowledge base (expert-editable YAML)",
-         ["Caraka + Aṣṭāṅgahṛdaya · SARIT TEI, sha256-pinned",
+         ["Caraka + Aṣṭāṅga Hṛdaya · SARIT TEI, sha256-pinned",
           f"{n['INDEXED']} passages · 20 topics · EN/HI/SA terms · 13 rules"]),
         (right_l, right_r, "#2f5fa8", "#f3f6fc", "AyurParam 2.9B · the only LLM",
          ["bharatgenai/AyurParam @ 27c69ee · bf16",
@@ -245,6 +245,8 @@ figure{margin:8px 0;break-inside:avoid}
 figcaption{font-size:8.4pt;color:#5f6b62;margin-top:4px;text-align:center}
 .shot img{display:block;width:86%;margin:0 auto;border:1px solid #d6d0c2;border-radius:6px}
 h1+p+table{margin-top:0}
+h1+p+table td:nth-child(-n+3),h1+p+table th:nth-child(-n+3){white-space:nowrap}
+p:has(+table){break-after:avoid}
 """
 
 
