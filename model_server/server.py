@@ -62,6 +62,8 @@ def load():
                 if expected and _sha256(LOCAL_DIR / fname) != expected:
                     raise RuntimeError(f"{fname} hash differs from reviewed hash; refusing trust_remote_code")
         device, dtype = pick_device_dtype()
+        if device == "cpu" and os.environ.get("AYURPARAM_CPU_THREADS"):
+            torch.set_num_threads(int(os.environ["AYURPARAM_CPU_THREADS"]))
         tok = AutoTokenizer.from_pretrained(src, trust_remote_code=False, **kw)
         model = AutoModelForCausalLM.from_pretrained(src, trust_remote_code=True, torch_dtype=dtype,
                                                      low_cpu_mem_usage=True, **kw)

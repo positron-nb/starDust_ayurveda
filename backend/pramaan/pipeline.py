@@ -14,7 +14,7 @@ import time
 import uuid
 from datetime import datetime, timezone
 
-from .config import (AYURPARAM_MODEL_ID, AYURPARAM_REVISION, EMBED_MODEL_ID, PROMPT_VERSION)
+from .config import (AYURPARAM_MODEL_ID, AYURPARAM_REVISION, EMBED_MODEL_ID, PROMPT_VERSION, settings)
 from .corpus.store import CorpusStore
 from .ledger import build_claims
 from .llm import (BudgetError, LLMAdapter, build_expand_prompt, build_passage_prompt, clean_output,
@@ -244,7 +244,7 @@ class Engine:
 
         # 5. AyurParam stage 1: concept/query expansion
         expanded: dict[str, list[str]] = {}
-        if req.use_model and self.llm.mode != "off":
+        if req.use_model and self.llm.mode != "off" and settings.ayurparam_expand:
             t = time.perf_counter()
             g = self.llm.generate(build_expand_prompt(raw), stage="expand", max_new_tokens=32)
             timings["expand_ms"] = (time.perf_counter() - t) * 1000
@@ -351,7 +351,7 @@ class Engine:
 
         # 8. AyurParam stage 2: per-passage, evidence-bounded explanation (citation bound server-side)
         notes = [a.message for a in alerts if a.action in ("refuse_component",)]
-        targets = [c for c in cards if c.role == "primary"][:3]
+        targets = [c for c in cards if c.role == "primary"][:max(1, settings.explain_passages)]
         attempts: list[dict] = []
         shown: list[Claim] = []
         rejected: list[Claim] = []
@@ -359,12 +359,12 @@ class Engine:
         any_ok = False
         for card in targets:
             try:
-                prompt, budget = build_passage_prompt(raw, lang, card, notes, max_new_tokens=90)
+                prompt, budget = build_passage_prompt(raw, lang, card, notes, max_new_tokens=settings.explain_tokens)
             except BudgetError as e:
                 attempts.append({"evidence": card.label, "passage_id": card.passage.passage_id, "budget_error": str(e)})
                 continue
             t = time.perf_counter()
-            g = self.llm.generate(prompt, stage="explain", max_new_tokens=90, repetition_penalty=1.15)
+            g = self.llm.generate(prompt, stage="explain", max_new_tokens=settings.explain_tokens, repetition_penalty=1.15)
             timings[f"explain_ms_{card.label}"] = (time.perf_counter() - t) * 1000
             att = {"evidence": card.label, "passage_id": card.passage.passage_id, "mode": g.mode, "ok": g.ok, "error": g.error,
                    "ms": round(g.ms, 1), "prompt_tokens": g.prompt_tokens, "completion_tokens": g.completion_tokens,

@@ -5,3 +5,5 @@ data/sources/raw/*.xml -text
 Dockerfile* text eol=lf
 deploy/* text eol=lf
 *.yml text eol=lf
+*.sh text eol=lf
+deploy/hf_cpu_space/* text eol=lf

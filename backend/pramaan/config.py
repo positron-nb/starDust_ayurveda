@@ -49,6 +49,10 @@ class Settings:
     max_case_chars: int = 4000
     rate_limit_per_min: int = field(default_factory=lambda: int(_env("PRAMAAN_RATE_LIMIT", "30")))
     enable_dense: bool = field(default_factory=lambda: _env("PRAMAAN_ENABLE_DENSE", "1") == "1")
+    # AyurParam workload per answer (defaults = GPU behaviour; a CPU-only host lowers them).
+    explain_passages: int = field(default_factory=lambda: int(_env("PRAMAAN_EXPLAIN_PASSAGES", "3")))
+    explain_tokens: int = field(default_factory=lambda: int(_env("PRAMAAN_EXPLAIN_TOKENS", "90")))
+    ayurparam_expand: bool = field(default_factory=lambda: _env("PRAMAAN_AYURPARAM_EXPAND", "1") == "1")
 
     @property
     def corpus_db(self) -> Path:
