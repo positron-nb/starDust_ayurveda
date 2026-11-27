@@ -193,6 +193,36 @@ def health():
     }
 
 
+LIVE_LINK_SOURCE = _os.environ.get(
+    "PRAMAAN_LIVE_LINK_SOURCE",
+    "https://raw.githubusercontent.com/positron-nb/starDust_ayurveda/pramaan-prototype/deploy/live_link.json")
+_live_cache: dict = {"t": 0.0, "v": {"url": None, "live": False}}
+
+
+@app.get("/api/live-link")
+def live_link():
+    """For the hosted retrieval-only demo: the team's current full-AyurParam link, shown only if it is up.
+
+    The link file is written by scripts/start_live_demo.ps1 when the team machine starts the tunnel; the
+    server checks that the linked app answers and has AyurParam live before offering it."""
+    if settings.llm_mode != "off":
+        return {"url": None, "live": False}
+    if time.time() - _live_cache["t"] < 60:
+        return _live_cache["v"]
+    v = {"url": None, "live": False}
+    try:
+        import httpx
+        url = (httpx.get(LIVE_LINK_SOURCE, timeout=4).json() or {}).get("url")
+        if url and url.startswith("https://"):
+            h = httpx.get(url.rstrip("/") + "/api/health", timeout=4).json()
+            llm = h.get("llm") or {}
+            v = {"url": url, "live": bool(llm.get("mode") == "live" and llm.get("available"))}
+    except Exception:  # link file missing or team machine off: simply no link
+        pass
+    _live_cache.update(t=time.time(), v=v)
+    return v
+
+
 def _validated(run: RunResult) -> RunResult:
     s = S()
     st: CorpusStore = s["store"]

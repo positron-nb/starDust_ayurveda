@@ -1,5 +1,6 @@
 import React from "react";
 import type { Health } from "../types";
+import { api } from "../api";
 
 export function Chip({ tone = "neutral", children, title }: { tone?: "ok" | "warn" | "bad" | "neutral" | "info" | "saffron"; children: React.ReactNode; title?: string }) {
   const cls = {
@@ -54,8 +55,20 @@ export function ModeBanner({ health, error }: { health: Health | null; error: st
   return (
     <div className={`${tone} text-sm px-4 py-2 flex flex-wrap gap-x-4 gap-y-1 items-center`} role="status" aria-live="polite">
       <strong>{text}</strong>
+      {llm.mode === "off" && health.deploy_mode === "public_demo" && <LiveLink />}
       <span className="opacity-90">corpus {health.corpus_version} · rules {health.rules_version} · {health.indexed_passages} indexed passages · dense {health.dense.enabled ? "on" : "off"}{health.deploy_mode === "public_demo" ? " · read-only public demo" : ""}</span>
     </div>
+  );
+}
+
+function LiveLink() {
+  const [link, setLink] = React.useState<{ url: string | null; live: boolean } | null>(null);
+  React.useEffect(() => { api.liveLink().then(setLink).catch(() => setLink(null)); }, []);
+  if (!link?.url || !link.live) return null;
+  return (
+    <a href={link.url} className="rounded bg-white text-forest-700 font-semibold px-2 py-0.5 hover:underline">
+      Live AyurParam demo is up now → open it
+    </a>
   );
 }
 

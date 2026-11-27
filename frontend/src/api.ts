@@ -27,6 +27,7 @@ export const api = {
   login: (passcode: string) => post("/api/login", { passcode }).then(j<any>),
   logout: () => post("/api/logout", {}).then(j<any>),
   health: () => fetch("/api/health").then(j<Health>),
+  liveLink: () => fetch("/api/live-link").then(j<{ url: string | null; live: boolean }>),
   extractFacts: (query: string, case_text: string) => post("/api/facts/extract", { query, case_text }).then(j<CaseFact[]>),
   query: (body: { query: string; lang: string; case_text: string; facts?: CaseFact[] | null; use_model: boolean; retrieval_mode?: string }) =>
     post("/api/query", { ...body, session_id: SESSION_ID }).then(j<RunResult>),
