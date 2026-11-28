@@ -74,6 +74,43 @@ def load_numbers() -> dict[str, str]:
     }
 
 
+# generic placeholders: {{source.metric|format}}, e.g. {{full.hit_at_5|frac}}, {{raw.latency_p50_ms|s}}, {{ret.@date}}
+SOURCES = {"full": "eval_full_pramaan_all_*.json", "fulltest": "eval_full_pramaan_test_*.json",
+           "ret": "eval_retrieval_ablation_all_*.json", "raw": "eval_raw_ayurparam_test_*.json",
+           "rag": "eval_dense_rag_test_*.json"}
+
+
+def fill_generic(text: str) -> tuple[str, list[str]]:
+    cache: dict[str, tuple[dict, str]] = {}
+    used: list[str] = []
+
+    def src(name):
+        if name not in cache:
+            runs = sorted((ROOT / "eval" / "results").glob(SOURCES[name]))
+            if not runs:
+                sys.exit(f"no result file for {name}")
+            stamp = re.search(r"(\d{8})_\d{6}", runs[-1].name).group(1)
+            cache[name] = (json.loads(runs[-1].read_text(encoding="utf-8")),
+                           dt.datetime.strptime(stamp, "%Y%m%d").strftime("%d %b %Y").lstrip("0"))
+            used.append(runs[-1].name)
+        return cache[name]
+
+    def one(mt):
+        name, key, fmt = mt.group(1), mt.group(2), mt.group(3) or "frac"
+        if name not in SOURCES:
+            return mt.group(0)
+        d, date = src(name)
+        if key == "@date":
+            return date
+        m = d["metrics"][key]
+        v = m.get("value")
+        return {"frac": lambda: f"{m['numerator']}/{m['denominator']}", "v2": lambda: f"{v:.2f}",
+                "pct": lambda: f"{round(100 * v)}%", "s": lambda: f"{v / 1000:.1f} s",
+                "n": lambda: str(m["numerator"]), "d": lambda: str(m["denominator"])}[fmt]()
+
+    return re.sub(r"\{\{(\w+)\.([@\w]+)(?:\|(\w+))?\}\}", one, text), used
+
+
 # --------------------------------------------------------------------------- markdown
 def inline(t: str) -> str:
     codes: list[str] = []
@@ -253,20 +290,23 @@ p:has(+table){break-after:avoid}
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--no-pdf", action="store_true")
+    ap.add_argument("--src", default=str(SRC), help="markdown source (default: the Phase 1 proposal)")
+    ap.add_argument("--name", default="PHASE1_PROPOSAL", help="output basename in docs/submission/")
     a = ap.parse_args()
     n = load_numbers()
-    src = SRC.read_text(encoding="utf-8")
+    src = Path(a.src).read_text(encoding="utf-8")
+    src, used = fill_generic(src)
     for k, v in n.items():
         src = src.replace("{{" + k + "}}", v)
     left = re.findall(r"\{\{\w+\}\}", src)
     if left:
         sys.exit(f"unfilled placeholders: {left}")
     body = md_to_html(src, {"cards": cards(n), "arch": arch(n), "screenshot": screenshot()})
-    page = (f"<!doctype html><html><head><meta charset='utf-8'><title>PRAMAAN Phase 1 proposal (StarDust)</title>"
+    page = (f"<!doctype html><html><head><meta charset='utf-8'><title>{html.escape(re.search(r'^# (.+)$', src, re.M).group(1))}</title>"
             f"<style>{CSS}</style></head><body>{body}</body></html>")
-    out_html = OUT_DIR / "PHASE1_PROPOSAL.html"
+    out_html = OUT_DIR / f"{a.name}.html"
     out_html.write_text(page, encoding="utf-8")
-    print("html:", out_html, "| numbers from", n["RUN_FILE"])
+    print("html:", out_html, "| numbers from", n["RUN_FILE"], *used)
     if a.no_pdf:
         return
     with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
@@ -284,8 +324,8 @@ def main() -> None:
             time.sleep(0.5)
         else:
             sys.exit("Edge did not produce the PDF")
-        (OUT_DIR / "PHASE1_PROPOSAL.pdf").write_bytes(pdf_tmp.read_bytes())
-    print("pdf:", OUT_DIR / "PHASE1_PROPOSAL.pdf")
+        (OUT_DIR / f"{a.name}.pdf").write_bytes(pdf_tmp.read_bytes())
+    print("pdf:", OUT_DIR / f"{a.name}.pdf")
 
 
 if __name__ == "__main__":
