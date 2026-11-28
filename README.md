@@ -14,14 +14,26 @@ while keeping five things visibly separate:
 
 It is **not** a diagnosis, prescribing, dosing or safety-clearance tool.
 
-**Live demo (always on, verses + safety layer):** https://stardustayurveda-kappa.vercel.app/ · Team **StarDust** (TM-FAD5308E454). The full AyurParam demo is served from the team GPU through a tunnel on request.
+## Phase 2 submission (team StarDust, TM-FAD5308E454)
+| Deliverable | Link |
+|---|---|
+| Live hosted app (always on) | https://stardustayurveda-kappa.vercel.app/ — verses, citations, safety layer, Integrity Lab; shows a **"Live AyurParam demo"** button whenever the team GPU demo is running |
+| Technical-clinical report | [docs/submission/TECHNICAL_CLINICAL_REPORT.pdf](docs/submission/TECHNICAL_CLINICAL_REPORT.pdf) (source: [docs/TECHNICAL_CLINICAL_REPORT.md](docs/TECHNICAL_CLINICAL_REPORT.md)) |
+| Open-source repository | this repository, Apache-2.0 |
+
+Start the full live AyurParam demo on the team machine with one command (`-Stop` to stop):
+```
+powershell -ExecutionPolicy Bypass -File scripts\start_live_demo.ps1
+```
 
 ## What is real in this repository
 - **Live AyurParam** (`bharatgenai/AyurParam` @ `27c69ee`, 2.9B) running on a local GPU through a
   separate model server; used for query/concept expansion and per-passage explanations. Verified by
   `model_server/smoke_test.py` (results in `eval/results/smoke_*.json`).
 - **Real classical sources**: 16,980 TEI segments parsed from pinned, checksum-verified SARIT files;
-  522 passages indexed for the Agni / Āma / Ajīrṇa module + aśvagandhā mentions.
+  882 verse-level passages indexed in five curated modules (Agni–Āma–Ajīrṇa, Prakṛti, Svasthavṛtta,
+  foundational concepts, aśvagandhā mentions): 20 core topics, with a curated definition verse shown
+  first for "what is X" questions.
 - **Evidence ledger**: every displayed generated sentence carries server-built citations, citation-integrity
   checks, an automatic (heuristic) support assessment and a pending review status; failing sentences
   are withheld and listed with reasons.
@@ -64,7 +76,9 @@ Third-party components: `THIRD_PARTY_NOTICES.md`. No institutional affiliation o
 | Current architecture and feature status (from code) | [docs/REPOSITORY_AUDIT.md](docs/REPOSITORY_AUDIT.md) |
 | Phase 1 proposal | [docs/PHASE1_PROPOSAL.md](docs/PHASE1_PROPOSAL.md) · PDF: [docs/submission/PHASE1_PROPOSAL.pdf](docs/submission/PHASE1_PROPOSAL.pdf) (rebuild: `python scripts/build_proposal.py`) |
 | User guide for testers (Hinglish) | [docs/PRAMAAN_Project_Guide.pdf](docs/PRAMAAN_Project_Guide.pdf) |
-| Technical & impact report (architecture, model/data cards, results) | [docs/TECHNICAL_IMPACT_REPORT.md](docs/TECHNICAL_IMPACT_REPORT.md) |
+| **Phase 2 technical-clinical report** | [docs/TECHNICAL_CLINICAL_REPORT.md](docs/TECHNICAL_CLINICAL_REPORT.md) · PDF: [docs/submission/TECHNICAL_CLINICAL_REPORT.pdf](docs/submission/TECHNICAL_CLINICAL_REPORT.pdf) (rebuild: `python scripts/build_proposal.py --src docs/TECHNICAL_CLINICAL_REPORT.md --name TECHNICAL_CLINICAL_REPORT`) |
+| Expert validation (50 live answers, two independent raters) | `eval/expert_validation/`, `scripts/expert_validation.py`, reviewer workbooks in `docs/review/` |
+| Earlier technical & impact report (v0.1, 7 Nov) | [docs/TECHNICAL_IMPACT_REPORT.md](docs/TECHNICAL_IMPACT_REPORT.md) |
 | Latest evaluation & regression | [docs/evaluation_report.md](docs/evaluation_report.md) |
 | Retrieval failures / experiments | [docs/RETRIEVAL_FAILURE_ANALYSIS.md](docs/RETRIEVAL_FAILURE_ANALYSIS.md), [docs/RETRIEVAL_EXPERIMENTS.md](docs/RETRIEVAL_EXPERIMENTS.md) |
 | Hindi / Hinglish | [docs/INDIC_LANGUAGE_EVALUATION.md](docs/INDIC_LANGUAGE_EVALUATION.md) |
@@ -75,10 +89,12 @@ Third-party components: `THIRD_PARTY_NOTICES.md`. No institutional affiliation o
 | Finale demo / roadmap / competition | [docs/FINAL_DEMO_SCRIPT.md](docs/FINAL_DEMO_SCRIPT.md), [docs/EXECUTION_ROADMAP.md](docs/EXECUTION_ROADMAP.md), [docs/COMPETITION_CHECKLIST.md](docs/COMPETITION_CHECKLIST.md) |
 
 ## Testing
-`cd backend && python -m pytest -q` (43 tests; no GPU needed). Live evaluation: `python -m pramaan.eval.run full --split all`
+`cd backend && python -m pytest -q` (77 tests; no GPU needed). Live evaluation: `python -m pramaan.eval.run full --split all`
 with the model server running. Retrieval experiments: `python -m pramaan.eval.retrieval_lab experiments`.
 
-## Status (9 Nov 2026)
-Prototype; not clinically validated; not hallucination-free. Human claim-support review: **0 records labelled**.
-Retrieval passage Recall@5 0.24 on inspected cases (target 0.85 not met). Public hosting: **not live**.
-Docker: **not validated**. PyTorch 2.8 / ZeroGPU: verified locally on branch `experiment/zerogpu-pt28`, not yet on Hugging Face.
+## Status (28 Nov 2026)
+Latest full evaluation with live AyurParam (`eval/results/eval_full_pramaan_all_20261128_144035.json`, 120 cases):
+displayed claims with a resolvable citation 78/78, fabricated citations accepted 0/4, emergency escalation 6/6
+with 0/114 false alarms, safety-rule expectations 23/23, retrieval Hit@5 0.62 (37/60). Expert validation of
+50 answers by our clinical lead and an external Ayurveda expert is underway; results go into §7 of the report.
+Educational tool only: not a diagnosis, prescription or safety clearance.

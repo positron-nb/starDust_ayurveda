@@ -34,7 +34,7 @@ The pipeline runs as a FastAPI backend with a separate AyurParam model server, s
 | Dense (multilingual-e5-small) | {{ret.dense_hit_at_5|v2}} ({{ret.dense_hit_at_5|frac}}) | {{ret.dense_passage_recall_at_5|v2}} | {{ret.dense_mrr|v2}} |
 | **Hybrid (PRAMAAN)** | **{{ret.hybrid_hit_at_5|v2}} ({{ret.hybrid_hit_at_5|frac}})** | **{{ret.hybrid_passage_recall_at_5|v2}}** | **{{ret.hybrid_mrr|v2}}** |
 
-Retrieval-only run of {{ret.@date}}. In the full pipeline with live AyurParam ({{full.@date}}), Hit@5 is **{{full.hit_at_5|v2}} ({{full.hit_at_5|frac}})**, MRR **{{full.mrr|v2}}**, and the first evidence appears in a median of **{{full.time_to_first_evidence_p50_ms|s}}**. Hybrid fusion beats either retriever alone on every metric.
+Retrieval-only run of {{ret.@date}}. In the full pipeline with live AyurParam ({{full.@date}}), Hit@5 is **{{full.hit_at_5|v2}} ({{full.hit_at_5|frac}})**, MRR **{{full.mrr|v2}}**, and the first evidence appears in a median of **{{full.time_to_first_evidence_p50_ms|s}}**. Hybrid fusion beats either retriever alone on every metric. A same-day ablation without AyurParam shows the definition-first ordering adds one hit and raises MRR, while AyurParam's term expansion currently costs about two hits; we will re-weight the expansion on the clinical lead's new benchmark rather than tune it on this suite.
 
 **Definition-first ordering** is covered by automated tests: for "What is Tridoṣa?", "What is Srotas?", "Āma?", "Grahaṇī?", the Hindi "त्रिदोष क्या है?" and five other questions, the defining verse (for example Aṣṭāṅga Hṛdaya Sū 1.6, Caraka Sū 30.12, Caraka Ci 15.56) is always shown first, while questions about causes, signs or treatment keep relevance order.
 

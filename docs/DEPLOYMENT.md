@@ -1,7 +1,21 @@
 # Deployment
 
-**Status: hosting is NOT done.** No authorised hosting target was configured for this build, so no
-public URL exists. A local app does not satisfy the competition's "live hosted app link" deliverable.
+## 0. Live hosting (Phase 2, current)
+| Link | What runs there | When |
+|---|---|---|
+| https://stardustayurveda-kappa.vercel.app/ | Hosted app (Vercel, `vercel.json` + `api/index.py`): retrieval, original verses, citation checks, safety rules, source-only fallback, Integrity Lab. AyurParam off (no GPU on serverless) and labelled as such | Always on; redeploys on every push to `pramaan-prototype` |
+| Team GPU demo via Cloudflare quick tunnel | Full PRAMAAN with live AyurParam (read-only public-demo mode) | While the team machine runs it |
+
+The hosted app's banner shows a **"Live AyurParam demo is up now"** button when the GPU demo is running:
+`GET /api/live-link` reads `deploy/live_link.json` from GitHub and checks that the linked app answers with
+AyurParam live before offering it. One command starts the model server (localhost only), the API and the
+tunnel, then publishes the link:
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts\start_live_demo.ps1        # start
+powershell -ExecutionPolicy Bypass -File scripts\start_live_demo.ps1 -Stop  # stop
+```
+A CPU Hugging Face Space recipe is in `deploy/hf_cpu_space/` (Docker Spaces need a PRO account; AyurParam
+on 2 vCPU is slow, so the Space explains one verse per answer).
 
 ## 1. What was actually tested (build machine, 2026-11-07)
 | Item | Result |
@@ -42,7 +56,7 @@ PRAMAAN_LLM_MODE=off docker compose up --build   # retrieval-only, no GPU
 ```
 The API image builds the corpus at build time and verifies the pinned SARIT checksums.
 
-## 4. Hosting options for the competition link (choose one; none set up)
+## 4. Other hosting options (option A is what §0 uses)
 | Option | AyurParam live? | Cost | Notes |
 |---|---|---|---|
 | A. Team GPU machine + tunnel (e.g. Cloudflare Tunnel) exposing **only** :8600 | Yes | Free | Machine must stay on; set `PRAMAAN_DEPLOY_MODE=public_demo`; keep :8601 bound to localhost. |

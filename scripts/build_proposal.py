@@ -77,7 +77,7 @@ def load_numbers() -> dict[str, str]:
 # generic placeholders: {{source.metric|format}}, e.g. {{full.hit_at_5|frac}}, {{raw.latency_p50_ms|s}}, {{ret.@date}}
 SOURCES = {"full": "eval_full_pramaan_all_*.json", "fulltest": "eval_full_pramaan_test_*.json",
            "ret": "eval_retrieval_ablation_all_*.json", "raw": "eval_raw_ayurparam_test_*.json",
-           "rag": "eval_dense_rag_test_*.json"}
+           "rag": "eval_dense_rag_test_*.json", "agree": "expert_agreement_*.json"}
 
 
 def fill_generic(text: str) -> tuple[str, list[str]]:
